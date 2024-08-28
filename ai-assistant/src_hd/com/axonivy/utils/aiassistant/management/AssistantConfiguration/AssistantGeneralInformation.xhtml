@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:pc="http://xmlns.jcp.org/jsf/composite/components">
+
+ <!-- NAME -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="assistant-name" value="#{ivy.cms.co('/Labels/common/Name')}" />
+</div>
+<div class="ui-g-12 ui-fluid">
+  <p:inputText id="assistant-name" value="#{assistant.name}" required="#{param['skipValidator'] == null}"
+    requiredMessage="#{ivy.cms.co('/Labels/common/Name')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}" />
+</div>
+
+<!-- PERMISSIONS -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="permissions" value="#{ivy.cms.co('/Labels/common/Permissions')}" />
+</div>
+<div class="ui-g-12 ui-fluid">
+  <p:autoComplete id="permissions" scrollHeight="210" dropdown="true"
+    required="#{param['skipValidator'] == null}"
+    completeMethod="#{assistantConfigurationBean.completePermissions}"
+    value="#{assistant.permissionDTOs}" var="responsible"
+    itemValue="#{responsible}" itemLabel="#{responsible.briefDisplayNameWithState}" converter="pojoConverter"
+    cache="true" maxResults="100" multiple="true"
+    dynamic="true" forceSelection="true"
+    moreText="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/More')}..."
+    requiredMessage="#{ivy.cms.co('/Labels/common/Permissions')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}">
+    <p:ajax event="itemSelect" listener="#{assistantConfigurationBean.onSelectPermission}"
+      update="permissions" global="false" process="@this"/>
+    <p:ajax event="itemUnselect" listener="#{assistantConfigurationBean.onUnSelectPermission}"
+      global="false" process="@this" />
+    <f:param name="skipValidator" value="true" />
+    <p:column>
+      <pc:securityMemberNameAndAvatar
+        displayName="#{portalComponentDisplayNameFormatBean.generateBriefDisplayNameForSecurityMember(responsible)}"
+        securityMember="#{responsible}">
+        <f:facet name="alternativeAvatar">
+          <h:outputText rendered="#{not avatarBean.isShowAvatar()}" styleClass="u-mar-right-5" />
+        </f:facet>
+      </pc:securityMemberNameAndAvatar>
+    </p:column>
+  </p:autoComplete>
+</div>
+
+<!-- MODEL -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="model" value="#{ivy.cms.co('/Labels/common/Model')}" />
+</div>
+<div class="ui-g-12 ui-fluid">
+  <p:selectOneMenu id="model" value="#{assistant.aiModelName}" required="#{param['skipValidator'] == null}"
+    requiredMessage="#{ivy.cms.co('/Labels/common/Model')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}">
+    <f:selectItem itemLabel="" itemValue="#{null}" />
+    <f:selectItems value="#{assistantConfigurationBean.models}"
+      var="model" itemValue="#{model.name}" itemLabel="#{model.displayName}" />
+    <p:ajax event="change" process="@this" listener="#{assistantConfigurationBean.onSelectModel}"
+      update="model-info ai-assistant-messages" />
+  </p:selectOneMenu>
+  <h:panelGroup layout="block" id="model-info" 
+    styleClass="ui-g-12 selected-model-info">
+    <h:panelGroup styleClass="model-info small u-margin-0" rendered="#{not empty assistant.aiModelName}">
+      <ic:com.axonivy.utils.aiassistant.component.AIModelItem isReadOnly="true" model="#{assistant.aiModel}" />
+    </h:panelGroup>
+  </h:panelGroup>
+</div>
+
+<!-- AVATAR -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="avatar-upload-panel" value="#{ivy.cms.co('/Labels/common/Avatar')}" />
+</div>
+<h:panelGroup id="avatar-upload-panel"
+  layout="block" styleClass="ui-g-12 ui-g ui-fluid u-padding-0">
+    <div class="ui-g-12 ui-fluid">
+      <p:fileUpload id="avatar-upload"
+        rendered="#{empty assistant.avatarLocation}"
+        listener="#{assistantConfigurationBean.handleAvatarUpload}"
+        chooseIcon="si si-add-small" label="Select"
+        dragDropSupport="true" auto="true"
+        update="avatar-upload-panel" process="@this"
+        allowTypes="/(\.|\/)(png|jpg|jpeg)$/i" accept=".png,.jpg,.jpeg" />
+
+      <h:panelGroup layout="block" styleClass="avatar-upload-panel"
+        rendered="#{not empty assistant.avatarLocation}">
+        <p:graphicImage width="150" height="150"
+          rendered="#{not empty assistant.avatarLocation}"
+          library="ivy-cms" name="#{assistant.avatarLocation}" />
+        
+        <h:panelGroup
+          class="avatar-preview-image-overlay-panel"
+          rendered="#{not empty assistant.avatarLocation}">
+          <p:commandButton
+            id="delete-avatar-button"
+            actionListener="#{assistantConfigurationBean.removeImage()}"
+            update="avatar-upload-panel"
+            rendered="#{not empty assistant.avatarLocation}"
+            styleClass="delete-avatar-button"
+            icon="si si-bin-1">
+            <f:param name="skipValidator" value="true" />
+          </p:commandButton>
+        </h:panelGroup>
+      </h:panelGroup>
+    </div>
+</h:panelGroup>
+
+<!-- INFO -->
+<div class="ui-g-12">
+  <h:outputText styleClass="assistant-label"
+    value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Information')}" />
+</div>
+<div id="assistant-info" class="ui-g-12 ui-fluid">
+  <p class="assistant-info-paragraph">#{assistant.info}</p>
+</div>
+
+<!-- ETHICAL RULES -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="assistant-ethical-rules"
+    value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/EthicalGuideline')}" />
+</div>
+<div class="ui-g-12 ui-fluid ethical-rules-container">
+  <ui:repeat id="assistant-ethical-rules" var="rule" value="#{assistant.ethicalRules}">
+    <div class="ethical-rule-item">
+      <span class="si si-check-circle-1" />
+      <h:outputText value="#{rule}" />
+    </div>
+  </ui:repeat>
+</div>
+
+<!-- EMAIL -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="contact-email" value="#{ivy.cms.co('/Labels/common/ContactEmail')}" />
+</div>
+<div class="ui-g-12 ui-fluid">
+  <p:inputText id="contact-email" value="#{assistant.contactEmail}">
+    <f:validator validatorId="emailValidator" disabled="#{param['skipValidator'] != null}" />
+  </p:inputText>
+</div>
+
+<!-- WEBSITE -->
+<div class="ui-g-12">
+  <p:outputLabel styleClass="assistant-label" for="contact-website" value="#{ivy.cms.co('/Labels/common/ContactWebsite')}" />
+</div>
+<div class="ui-g-12 ui-fluid">
+  <p:inputText id="contact-website" value="#{assistant.contactWebsite}">
+    <f:validator validatorId="urlValidator" disabled="#{param['skipValidator'] != null}" />
+  </p:inputText>
+</div>
+</html>

@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:pc="http://xmlns.jcp.org/jsf/composite/components">
+<h:body>
+  <ui:composition template="/layouts/frame-10-full-width.xhtml">
+    <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Title')}</ui:define>
+    <ui:define name="content">
+      <h:outputStylesheet library="css" name="ai-management.css" />
+      <h:outputStylesheet library="css" name="utility.css" />
+
+      <script type="text/javascript">
+        window.isWorkingOnATask = false;
+        window.isHideCaseInfo = true;
+        window.isHideTaskName = true;
+        window.isHideTaskAction = true;
+
+        function clickCancel() {
+          $("[id $= 'close-link']").click();
+        }
+
+        function scrollToTop() {
+          window.scrollTo(0, 0);
+        }
+      </script>
+
+      <f:event listener="#{assistantConfigurationBean.init(data.assistantId)}" type="preRenderComponent" />
+      <c:set var="assistant" value="#{assistantConfigurationBean.selectedAssistant}" />
+
+      <div class="ui-g ai-management-main-panel card">
+        <h:form id="assistant-details-form" styleClass="ui-g-12 assistant-details-form">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <p:messages id="ai-assistant-messages" />
+            </div>
+            <div class="ui-g-12">
+              <h3>#{assistantConfigurationBean.pageTitle}</h3>
+              <div class="create-from-template-container">
+              <p:commandButton id="use-template-button"
+                value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/UseTemplate')}"
+                onclick="PF('choose-assistant-template-dialog').show(); return false;" />
+              </div>
+            </div>
+            <div class="ui-g-5 ui-g">
+              <div class="ui-g-12">
+                <h3>#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Settings')}</h3>
+              </div>
+              <ui:include src="AssistantGeneralInformation.xhtml">
+                <ui:param name="assistant" value="#{assistant}" />
+              </ui:include>
+            </div>
+
+            <div class="ui-g-1" />
+            <div class="ui-g-6 ui-g function-container">
+              <div class="ui-g-12">
+                <h3>#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Functions')}</h3>
+              </div>
+              <ui:include src="Functions.xhtml">
+                <ui:param name="assistant" value="#{assistant}" />
+              </ui:include>
+            </div>
+
+            <div class="ui-g-12 assistant-configuration-footer">
+              <p:commandButton id="save-button"
+                value="#{ivy.cms.co('/Labels/common/Save')}"
+                actionListener="#{assistantConfigurationBean.save()}"
+                process="@form" update="@form ai-assistant-messages"
+                icon="si si-floppy-disk" oncomplete="scrollToTop();" />
+
+              <p:commandLink id="close-link" widgetVar="close-link"
+                value="#{ivy.cms.co('/Labels/common/Close')}"
+                immediate="true" global="false"
+                actionListener="#{assistantConfigurationBean.navigateBack()}" />
+
+              <div class="delete-button-container">
+                <p:commandButton id="delete-button"
+                  rendered="#{assistantConfigurationBean.isPersisted()}"
+                  value="#{ivy.cms.co('/Labels/common/Delete')}" onclick="PF('remove-assistant-dialog').show(); return false;"
+                  styleClass="ui-button-danger" icon="si si-bin-1" />
+              </div>
+            </div>
+          </div>
+        </h:form>
+
+        <ui:decorate template="/layouts/decorator/dialog-with-icon.xhtml">
+          <ui:param name="id" value="remove-assistant-dialog" />
+          <ui:param name="widgetVar" value="remove-assistant-dialog" />
+          <ui:param name="appendTo" value="@(body)" />
+          <ui:param name="iconClass" value="si si-delete-1" />
+          <ui:param name="iconStyleClass" value="portal-dialog-error-icon portal-dialog-icon" />
+          <ui:param name="headerText"
+            value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/RemoveDialogHeader', [assistant.name])}" />
+          <ui:param name="dialogContent" value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/RemoveDialogMessage')}" />
+      
+          <ui:define name="dialogFooter">
+            <p:link href="#" value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Cancel')}"
+              onclick="PF('remove-assistant-dialog').hide();" styleClass="u-mar-right-15" />
+            <p:commandButton id="remove-assistant-button"
+              value="#{ivy.cms.co('/Labels/common/Remove')}"
+              icon="si si-remove-circle">
+              <p:ajax event="click" listener="#{assistantConfigurationBean.delete()}"
+                update="#{p:resolveFirstComponentWithId('assistant-details-form', view).clientId}"
+                oncomplete="clickCancel();" />
+            </p:commandButton>
+          </ui:define>
+        </ui:decorate>
+        
+        <p:dialog id="choose-assistant-template-dialog" widgetVar="choose-assistant-template-dialog"
+          modal="true" appendTo="@(body)"
+          width="70%" responsive="true"
+          header="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/AssistantTemplates')}">
+          <div class="ui-g">
+            <ui:repeat var="template" value="#{assistantConfigurationBean.assistantTemplates}">
+              <div class="ui-g-6">
+                <ic:com.axonivy.utils.aiassistant.component.AIAssistantTemplateItem template="#{template}" isReadOnly="false"
+                  clickEventListener="#{assistantConfigurationBean.createAssistantFromTemplate(template)}"
+                  clickEventOnComplete="PF('choose-assistant-template-dialog').hide();"
+                  clickEventUpdate="assistant-details-form" />
+              </div>
+            </ui:repeat>
+          </div>
+          </p:dialog>
+      </div>
+    </ui:define>
+  </ui:composition>
+</h:body>
+</html>

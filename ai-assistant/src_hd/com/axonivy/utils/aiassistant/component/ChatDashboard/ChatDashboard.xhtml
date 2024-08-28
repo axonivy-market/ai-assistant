@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="/layouts/frame-10-full-width.xhtml">
+    <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/Title')}</ui:define>
+    <ui:define name="content">
+
+      <h:outputScript library="js" name="chatbot-utils.js" />
+      <h:outputScript library="js" name="ai-assistant.js" />
+      <h:outputStylesheet library="css" name="chatbot.css" />
+      <h:outputStylesheet library="css" name="utility.css" />
+
+      <!-- Highlight JS -->
+      <h:outputScript library="js" name="highlightJS/highlight.min.js" />
+      <h:outputStylesheet library="css" name="atom-one-dark.min.css" />
+
+      <h:panelGroup id="assistant-main-panel" layout="block" styleClass="ui-g assistant-main-panel">
+        <div class="ui-g-12 chat-container js-chat-container card">
+          <h:form id="chat-form">
+            <script type="text/javascript">
+              window.isWorkingOnATask = false;
+              window.isHideCaseInfo = true;
+              window.isHideTaskName = true;
+              window.isHideTaskAction = true;
+              
+              var userName = "#{ivy.session.getSessionUserName()}";
+              var contextPath = "#{ivy.task.getApplication().getContextPath()}";
+              var ivyResource = new IvyUri().rest() + "/assistant/";
+              var view = new ViewAI(ivyResource);
+              var chatbot = new Assistant(ivyResource, '', view, `#{assistantBean.assistant.getId()}`, `#{assistantBean.getConversationId()}`, userName);
+
+              $(document).ready(function(){
+                hljs.configure({
+                  ignoreUnescapedHTML: true
+                });
+
+                view.init();
+                chatbot.init();
+                chatbot.bindEvents();
+              });
+            </script>
+    
+            <div id="chat-panel" class="chatbot-panel js-chatbot-panel">
+              <div class="message-list js-message-list ui-g">
+                <div class="ui-g-9 ui-sm-12 assistant-header-wrapper">
+                  <div class="assistant-header-panel">
+                    <p:inplace id="assistant-name" styleClass="assistant-name" widgetVar="assistant-name"
+                      toggleable="true" disabled="#{!assistantBean.canChangeAssistant()}">
+                      <f:facet name="output">
+                        <div class="assistant-info-output">
+                          <p:graphicImage id="assistant-image"
+                            styleClass="ai-assistant-avatar"
+                            width="40" height="40"
+                            rendered="#{not empty assistantBean.assistant.avatarLocation}"
+                            alt="#{assistantBean.assistant.name}"
+                            name="#{assistantBean.assistant.avatarLocation}" library="ivy-cms" />
+    
+                          <p:graphicImage styleClass="ai-assistant-avatar"
+                            rendered="#{empty assistantBean.assistant.avatarLocation}"
+                            name="#{assistantBean.getDefaultLogoName()}"
+                            width="40" height="40"
+                            library="ivy-cms" />
+    
+                          <h:outputText value="#{assistantBean.assistant.name}" />
+                        </div>
+                      </f:facet>
+                      <f:facet name="input">
+                        <div class="assistant-info-input">
+                          <p:selectOneMenu value="#{assistantBean.assistantId}">
+                            <f:selectItems value="#{assistantBean.availableAssistants}" var="availableAssistant"
+                              itemLabel="#{availableAssistant.name}" itemValue="#{availableAssistant.id}"
+                              itemDescription="#{availableAssistant.info}" />
+                            <p:ajax listener="#{assistantBean.chooseAssistant}"
+                              process="@this" partialSubmit="true" update="@form" />
+                          </p:selectOneMenu>
+                        </div>
+                      </f:facet>
+                    </p:inplace>
+                    <div>
+                      <p:commandButton id="ai-management"
+                        icon="si si-cog"
+                        styleClass="rounded-button ui-button-outlined action-column-icon-button u-mar-right-5"
+                        title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}"
+                        actionListener="#{assistantBean.navigateToAIManagement()}" />
+                      <p:commandButton id="clear-history-button"
+                        icon="si si-messages-bubble-square-sync"
+                        styleClass="rounded-button ui-button-outlined action-column-icon-button"
+                        title="#{ivy.cms.co('/ClearHistory')}"
+                        process="@this" update="@form"
+                        actionListener="#{assistantBean.clearHistory}" oncomplete="chatbot.onClearHistory();" />
+                    </div>
+                  </div>
+                </div>
+
+                <h:panelGroup id="chat-message-list" layout="block"
+                  styleClass="chatbot-message-list js-chatbot-message-list ui-g-9 ui-sm-12">
+
+                  <ui:include src="WelcomeSection.xhtml" />
+
+                </h:panelGroup>
+                <p:scrollTop target="chat-message-list" styleClass="chatbot-message-list-scrolltop" />
+              </div>
+              <div class="ui-g">
+                <h:panelGroup id="chat-send-form-container" layout="block"
+                  styleClass="ui-g-9 ui-sm-10 ui-g chatbot-send-form js-chat-send-form">
+                  <div class="chat-send-form-input-field">
+                    <textarea id="message-input-field"
+                      placeholder="#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/chat/typeMessage')}"
+                      class="message-list-content-send-input js-chatbot-input-message ui-inputfield ui-inputtextarea ui-widget ui-state-default" />
+                  </div>
+                  <div class="chat-send-form-button">
+                    <p:commandButton icon="si si-send-email" onclick="chatbot.onClickSendMessage()"
+                      styleClass="rounded-button" global="false" type="button" />
+                  </div>
+                </h:panelGroup>
+              </div>
+            </div>
+      
+            <div class="js-message-template u-hidden chat-message-container ui-g-12 ui-g">
+              <div class="chatbot-meta ui-g-9 ui-sm-12">
+                <div class="message-block">
+                  <div class="chat-message js-message" />
+                </div>
+              </div>
+
+            </div>
+            <div class="js-message-components u-hidden">
+              <p:link styleClass="external-link js-external-link" href="" target="_blank" />
+            </div>
+          </h:form>
+        </div>
+      </h:panelGroup>
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>

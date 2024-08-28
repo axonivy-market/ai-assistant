@@ -1,0 +1,231 @@
+.ui-outputlabel .ui-outputlabel-rfi {
+  color: #f03369;
+}
+
+.ai-assistant-card {
+  height: 150px;
+  border: solid 1px var(--surface-d);
+  width: 98%;
+  cursor: default;
+  align-content: center;
+  justify-content: center;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+}
+
+.ai-assistant-card .avatar-container {
+  display: flex;
+  justify-content: center;
+  transform: translateY(30px);
+}
+
+.ai-assistant-card.active {
+  cursor: pointer;
+}
+
+.ai-assistant-card.assistant-template-item {
+  padding: 1em;
+}
+
+.ai-assistant-card.active:hover {
+  background: rgba(144, 221, 233, 0.24);
+  border: 1px solid #90DDE9;
+}
+
+.ai-assistant-card .avatar-container .ai-assistant-avatar {
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.ai-assistant-card .ai-assistant-info {
+  padding-right: 1.5em;
+  height: 6rem;
+    display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-left: 0;
+}
+
+.ai-assistant-card.assistant-template-item .ai-assistant-info {
+  padding-right: 0;
+}
+
+.ai-assistant-card .ai-assistant-info ul {
+  padding-inline-start: 1.2rem;
+}
+
+.ai-assistant-card .assistant-name {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+
+.ai-assistant-card .assistant-name .name {
+  font-size: 1.17em;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.ai-assistant-card .assistant-name h3 {
+  flex: 1 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-assistant-card .assistant-name h3 {
+  margin: 0;
+}
+
+.assistant-configuration-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.assistant-configuration-footer > button,
+body .assistant-configuration-footer .ui-button ~ .ui-button {
+  margin-left: 10px;
+}
+
+.assistant-configuration-footer .delete-button-container {
+  flex: 1;
+}
+
+.assistant-details-form .model-info {
+  margin-top: 15px;
+  width: 45%;
+  min-width: 300px;
+}
+
+.assistant-details-form .selected-model-info {
+  padding: 15px 0 0 0;
+}
+
+.assistant-details-form h3 {
+  display: inline;
+}
+
+.assistant-details-form .create-from-template-container {
+  float: right;
+}
+
+.assistant-details-form .model-info.small {
+  width: 40%;
+  min-width: 200px;
+}
+
+.assistant-details-form .assistant-info-paragraph {
+  text-align: justify;
+}
+
+.assistant-details-form .model-info.small .ai-assistant-card {
+  height: 130px;
+}
+
+.assistant-details-form .model-info.small .ai-assistant-card .assistant-name {
+  padding-top: 0.5rem;
+}
+
+.assistant-details-form .model-info.small .ai-assistant-card .avatar-container {
+  transform: translateY(20px);
+}
+
+.assistant-details-form .model-info.small .ai-assistant-card .avatar-container .ai-assistant-avatar {
+  width: 80px;
+  height: 80px;
+}
+
+.assistant-details-form .model-info.small .ai-assistant-card .ai-assistant-info {
+  padding-top: 0;
+}
+
+.assistant-details-form .assistant-label {
+  font-weight: 600;
+}
+
+.assistant-details-form .function-container {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.ai-action-panel {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.avatar-upload-panel {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-upload-panel .avatar-preview-image-overlay-panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(27, 27, 27, 0) 21.68%,
+    rgba(27, 27, 27, 1) 100%);
+  display: none;
+  object-fit: contain;
+  top: 0;
+  left: 0;
+}
+
+.avatar-upload-panel:hover .avatar-preview-image-overlay-panel {
+  display: block;
+}
+
+.avatar-upload-panel .delete-avatar-button {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.empty-message-container {
+  text-align: center;
+  margin: 70px 0px;
+  padding: 0 20px;
+}
+
+.empty-message-container .empty-message-icon {
+  font-size: 6rem;
+  margin-bottom: 10px;
+}
+
+.empty-message-container .empty-message-icon,
+.empty-message-container .empty-message-text {
+  color: var(--ivy-primary-color);
+}
+
+.ethical-rules-container .ethical-rule-item {
+  padding-bottom: 5px;
+}
+
+.ethical-rules-container .ethical-rule-item span.si {
+  margin-right: 5px;
+  font-weight: 600;
+  color: var(--green-600);
+}
+
+.function-table .tool-type.FLOW {
+  background: var(--green-500);
+}
+
+.function-table .tool-type.RETRIEVAL_QA {
+  background: var(--blue-700);
+}
+
+.function-table .tool-type.IVY {
+  background: var(--yellow-500);
+}

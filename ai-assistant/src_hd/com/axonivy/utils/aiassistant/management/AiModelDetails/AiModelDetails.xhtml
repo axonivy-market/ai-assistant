@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:body>
+  <ui:composition template="/layouts/frame-10-full-width.xhtml">
+    <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/Title')}</ui:define>
+    <ui:define name="content">
+      <h:outputStylesheet library="css" name="ai-management.css" />
+      <h:outputStylesheet library="css" name="utility.css" />
+
+      <script type="text/javascript">
+        window.isWorkingOnATask = false;
+        window.isHideCaseInfo = true;
+        window.isHideTaskName = true;
+        window.isHideTaskAction = true;
+
+        function clickCancel() {
+          $("[id $= 'close-link']").click();
+        }
+
+        function scrollToTop() {
+          window.scrollTo(0, 0);
+        }
+      </script>
+
+      <f:event listener="#{aiModelDetailsBean.init(data.modelName)}" type="preRenderComponent" />
+      <c:set var="model" value="#{aiModelDetailsBean.selectedModel}" />
+
+      <div class="ui-g ai-management-main-panel card">
+        <h:form id="model-details-form" styleClass="ui-g-12">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <p:messages id="ai-model-messages" />
+            </div>
+            <div class="ui-g-12">
+              <h3>#{aiModelDetailsBean.pageTitle}</h3>
+            </div>
+            <div class="ui-g-2">
+              <p:outputLabel for="name" value="#{ivy.cms.co('/Labels/common/Name')}" />
+            </div>
+            <div class="ui-g-10 ui-fluid">
+              <h:outputText id="name" value="#{aiModelDetailsBean.selectedModel.displayName}" />
+            </div>
+            <div class="ui-g-2">
+              <p:outputLabel for="model-type" value="#{ivy.cms.co('/Labels/common/ModelType')}" />
+            </div>
+            <div class="ui-g-10 ui-fluid">
+              <h:outputText id="model-type" value="#{aiModelDetailsBean.selectedModel.modelType.displayName}" />
+            </div>
+            <div class="ui-g-2">
+              <p:outputLabel for="model-select" value="#{ivy.cms.co('/Labels/common/Model')}" />
+            </div>
+            <div class="ui-g-10 ui-fluid">
+              <h:outputText id="model-select" value="#{aiModelDetailsBean.selectedModel.model}" />
+            </div>
+            <div class="ui-g-2">
+              <p:outputLabel for="embedding-model" value="#{ivy.cms.co('/Labels/common/EmbeddingModel')}" />
+            </div>
+            <div class="ui-g-10 ui-fluid">
+              <h:outputText id="embedding-model" value="#{aiModelDetailsBean.selectedModel.embeddingModel}" />
+            </div>
+            <div class="ui-g-2">
+              <p:outputLabel for="api-key" value="#{ivy.cms.co('/Labels/common/ApiKey')}" />
+            </div>
+            <div class="ui-g-10 ui-fluid">
+              <p:inputText type="password" id="api-key" required="true"
+                value="#{model.apiKey}"
+                requiredMessage="#{ivy.cms.co('/Labels/common/ApiKey')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}" />
+            </div>
+            <h:panelGroup layout="block" styleClass="ui-g-12"
+              rendered="#{aiModelDetailsBean.canShowUsingByAssistant()}">
+              <h:outputText value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/UsingBy')}" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="ui-g ui-g-12 ui-fluid u-"
+              rendered="#{aiModelDetailsBean.canShowUsingByAssistant()}">
+              <ui:repeat value="#{aiModelDetailsBean.usingByAssistants}" var="assistant">
+                <div class="ui-g-4">
+                  <ic:com.axonivy.utils.aiassistant.component.AIAssistantItem assistant="#{assistant}" isReadOnly="true" />
+                </div>
+              </ui:repeat>
+            </h:panelGroup>
+            <div class="ui-g-12 assistant-configuration-footer MarTop10">
+              <p:commandButton id="save-button"
+                icon="si si-floppy-disk"
+                value="#{ivy.cms.co('/Labels/common/Save')}"
+                actionListener="#{aiModelDetailsBean.save()}"
+                process="@form" update="@form" oncomplete="scrollToTop();" />
+              <p:commandButton id="test-connection-button"
+                icon="si si-button-refresh-arrows"
+                value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/TestConnection')}"
+                actionListener="#{aiModelDetailsBean.testConnection()}" 
+                update="ai-model-messages" oncomplete="scrollToTop();" />
+
+              <p:commandLink id="close-link" widgetVar="close-link"
+                value="#{ivy.cms.co('/Labels/common/Close')}"
+                immediate="true" global="false"
+                actionListener="#{aiModelDetailsBean.navigateBack()}" />
+            </div>
+          </div>
+        </h:form>
+      </div>
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>

@@ -6,6 +6,39 @@
   <artifactId>ai-assistant</artifactId>
   <version>11.4.0-SNAPSHOT</version>
   <packaging>iar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.axonivy.portal</groupId>
+      <artifactId>portal-components</artifactId>
+      <version>9.1.0.0-SNAPSHOT</version>
+      <type>iar</type>
+    </dependency>
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-open-ai</artifactId>
+      <version>0.31.0</version>
+    </dependency>
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-ollama</artifactId>
+      <version>0.31.0</version>
+    </dependency>
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-elasticsearch</artifactId>
+      <version>0.31.0</version>
+    </dependency>
+    <dependency>
+        <groupId>co.elastic.clients</groupId>
+        <artifactId>elasticsearch-java</artifactId>
+        <version>8.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>2.0.27</version>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>

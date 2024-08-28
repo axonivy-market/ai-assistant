@@ -1,0 +1,210 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "19198CAD6D9F2F9E",
+  "config" : {
+    "data" : "com.axonivy.utils.aiassistant.AiStartData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "AssistantDashboard",
+      "config" : {
+        "signature" : "AssistantDashboard",
+        "input" : {
+          "map" : { },
+          "code" : [
+            "import com.axonivy.utils.aiassistant.service.AssistantService;",
+            "import org.apache.commons.collections4.CollectionUtils;",
+            "",
+            "",
+            "out.hasAssistants = CollectionUtils.isNotEmpty(AssistantService.getInstance().findAvailableAssistantForUser(ivy.session.getSessionUserName()));"
+          ]
+        },
+        "request" : {
+          "isVisibleOnStartList" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 120 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f10" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 120 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "DialogCall",
+      "name" : "ChatDashboard",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.component.ChatDashboard:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 416, "y" : 120 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "RequestStart",
+      "name" : "AiManagement",
+      "config" : {
+        "signature" : "AiManagement",
+        "request" : {
+          "isVisibleOnStartList" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 216 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "DialogCall",
+      "name" : "AI Management",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.management.AiManagement:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 288, "y" : 216 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "RequestStart",
+      "name" : "AssistantConfiguration",
+      "config" : {
+        "signature" : "AssistantConfiguration",
+        "input" : {
+          "params" : [
+            { "name" : "assistantId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.targetId" : "param.assistantId"
+          }
+        },
+        "request" : {
+          "isVisibleOnStartList" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 320 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f17" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "DialogCall",
+      "name" : "Assistant Configuration",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.management.AssistantConfiguration:start(String)",
+        "call" : {
+          "map" : {
+            "param.assistantId" : "in.targetId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 320 },
+        "size" : { "width" : 160, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f20", "to" : "f19" }
+      ]
+    }, {
+      "id" : "f19",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 320 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f21",
+      "type" : "RequestStart",
+      "name" : "AiModelConfiguration",
+      "config" : {
+        "signature" : "AiModelConfiguration",
+        "input" : {
+          "params" : [
+            { "name" : "modelId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.targetId" : "param.modelId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 408 }
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f23" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 408 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f23",
+      "type" : "DialogCall",
+      "name" : "AI Model Configuration",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.management.AiModelDetails:start(String)",
+        "call" : {
+          "map" : {
+            "param.modelName" : "in.targetId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 408 },
+        "size" : { "width" : 160, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f25", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 216 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f10",
+      "type" : "Alternative",
+      "name" : "has assistant?",
+      "config" : {
+        "conditions" : {
+          "f11" : "in.hasAssistants"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 288, "y" : 120 },
+        "labelOffset" : { "y" : -16 }
+      },
+      "connect" : [
+        { "id" : "f11", "to" : "f3", "label" : {
+            "name" : "yes",
+            "offset" : { "x" : -3, "y" : 6 }
+          }, "color" : "default" },
+        { "id" : "f12", "to" : "f6", "label" : {
+            "name" : "no",
+            "offset" : { "x" : 9, "y" : -3 }
+          } }
+      ]
+    } ]
+}

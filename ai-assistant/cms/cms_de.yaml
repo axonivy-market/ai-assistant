@@ -1,0 +1,73 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          component:
+            ChatDashboard:
+              AiManagement: AI-Management
+              Title: Assistent Dashboard
+          management:
+            AiManagement:
+              AIManagementDescription: Auf dieser Seite können Sie alles verwalten, was mit AI zu tun hat
+              AiModels: AI-Modelle
+            AiModelConfiguration:
+              Connected: Erfolgreich mit dem AI-Anbieter verbunden
+              ModelSavedMessage: Modell "{0}" wurde erfolgreich gespeichert
+              TestConnection: Verbindung testen
+              Title: AI-Modell Konfiguration
+              UsingBy: Assistenten, die dieses Modell verwenden
+            AssistantConfiguration:
+              AssistantSavedMessage: Assistent "{0}" wurde erfolgreich gespeichert
+              AssistantTemplates: Assistentenvorlagen
+              CreateAssistant: Assistent erstellen
+              EthicalGuideline: Ethische Richtlinien, denen der Assistent folgen muss
+              Functions: Funktionen
+              Information: Informationen
+              RemoveDialogHeader: Entfernen Sie den "{0}"-Assistenten
+              RemoveDialogMessage: |-
+                Alle Chat-Unterhaltungen werden ebenfalls gelöscht.
+                Sind Sie sicher, dass Sie diesen Assistenten löschen möchten?
+              Settings: Einstellungen
+              Title: Assistent Konfiguration
+              UseTemplate: Vorlage verwenden
+Labels:
+  Enums:
+    ToolType:
+      FLOW: Ivy-Fluss
+      IVY: Ivy-Tool
+      RETRIEVAL_QA: Wissensdatenbank
+  Message:
+    InvalidEmailFormat: Ungültiges E-Mail-Format
+    InvalidUrl: "Ungültige URL\t"
+    SelectedToolMessage:
+      FLOW: 'Verwende Ivy Flow: <{0}>'
+      IVY: 'Verwende Ivy-Tool: <{0}>'
+      RETRIEVAL_QA: 'Verwende Wissensdatenbank: <{0}>'
+  Model:
+    OpenAI:
+      PrimaryModel: Primäres Open AI-Modell
+      SecondaryModel: Sekundäres Open AI-Modell
+  common:
+    AIFunctions: AI-Funktionen
+    ApiKey: API-Schlüssel
+    Assistants: Assistenten
+    Avatar: Avatar
+    Close: Schließen
+    ConfirmationHeaderText: Sind Sie sicher?
+    Contact: Kontakt
+    ContactEmail: Kontakt E-Mail
+    ContactWebsite: Kontakt Website
+    Delete: Löschen
+    Description: Beschreibung
+    EmbeddingModel: Einbettungsmodell
+    Model: Modell
+    ModelType: Modell Typ
+    Name: Name
+    New: Neu
+    Permissions: Berechtigungen
+    Remove: entfernen
+    RemoveMessage: Wollen Sie ihn wirklich entfernen?
+    Save: Speichern
+    Type: Typ
+    Usage: Verwendung

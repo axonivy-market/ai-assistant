@@ -1,0 +1,29 @@
+.portal-dialog-icon {
+  font-size: 5rem !important;
+}
+
+.portal-dialog-info-icon {
+  color: var(--primary-color);
+}
+
+.portal-dialog-warning-icon {
+  color: var(--ivy-tertinary-color-yellow-dark);
+}
+
+.portal-dialog-error-icon {
+  color: var(--ivy-tertinary-color-red-medium);
+}
+
+.portal-dialog-content {
+  margin:20px 0;
+  text-align: center;
+}
+
+.icon-content {
+  text-align: center;
+}
+
+:root {
+  --ivy-tertinary-color-red-medium: hsl(357, 83%, 61%);
+  --ivy-tertinary-color-yellow-dark: hsl(46, 100%, 58%);
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "version" : "11.4.0",
+    "id" : "suggestion-1",
+    "icon" : "si-bulb",
+    "headerText" : "Explore",
+    "descriptionText" : "What are the key features of the Axon Ivy Portal?",
+    "message" : "What are the key features of the Axon Ivy Portal?"
+  } , {
+    "version" : "11.4.0",
+    "id" : "suggestion-2",
+    "icon" : "si-touch-finger_1",
+    "headerText" : "Tutorial",
+    "descriptionText" : "Where can I find the documentation or tutorials for the Axon Ivy Portal?",
+    "message" : "Where can I find the documentation or tutorials for the Axon Ivy Portal?"
+  } , {
+    "version" : "11.4.0",
+    "id" : "suggestion-3",
+    "icon" : "si-cog",
+    "headerText" : "Interact",
+    "descriptionText" : "List me all the tasks that need completion within the current week",
+    "message" : "List me all the tasks that need completion within the current week"
+  }
+]

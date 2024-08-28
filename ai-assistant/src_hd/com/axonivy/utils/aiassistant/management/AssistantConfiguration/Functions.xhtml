@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:pc="http://xmlns.jcp.org/jsf/composite/components">
+<p:dataTable id="function-table" styleClass="function-table"
+  value="#{assistant.toolkit}" var="tool" rowKey="#{tool.id}">
+  <p:column headerText="#{ivy.cms.co('/Labels/common/Name')}" width="150">
+    <h:outputText value="#{tool.name}" />
+  </p:column>
+  <p:column headerText="#{ivy.cms.co('/Labels/common/Type')}" styleClass="u-text-align-center" width="100">
+    <p:tag rounded="true" value="#{assistantConfigurationBean.getToolType(tool.type.name())}"
+      styleClass="tool-type #{tool.type.name()}" />
+  </p:column>
+  <p:column headerText="#{ivy.cms.co('/Labels/common/Description')}">
+    <h:outputText value="#{tool.description}" />
+  </p:column>
+  <p:column width="20">
+    <p:rowToggler />
+  </p:column>
+  <p:rowExpansion>
+    <div class="ui-g">
+      <div class="ui-g-2">
+        <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Permissions')}" />
+      </div>
+      <div class="ui-g-10">
+        <h:outputText value="#{assistantConfigurationBean.generatePermisisonForDisplay(tool)}" />
+      </div>
+      <div class="ui-g-2">
+        <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Description')}" />
+      </div>
+      <div class="ui-g-10">
+        <h:outputText value="#{tool.description}" />
+      </div>
+      <div class="ui-g-2">
+        <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Usage')}" />
+      </div>
+      <div class="ui-g-10">
+        <h:outputText value="#{tool.usage}" />
+      </div>
+    </div>
+  </p:rowExpansion>
+</p:dataTable>
+
+</html>

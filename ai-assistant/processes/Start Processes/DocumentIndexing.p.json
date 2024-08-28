@@ -1,0 +1,49 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "19198CB939975B2E",
+  "config" : {
+    "data" : "com.axonivy.utils.aiassistant.DocumentIndexingData"
+  },
+  "elements" : [ {
+      "id" : "f10",
+      "type" : "RequestStart",
+      "name" : "createIndex",
+      "config" : {
+        "signature" : "createIndex",
+        "request" : {
+          "name" : "Create Index",
+          "description" : "Create index for uploaded documents. The index will be stored in Elastic Search as a dense_vector index"
+        },
+        "permission" : {
+          "anonymous" : false,
+          "role" : "AXONIVY_PORTAL_ADMIN"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 184, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "DialogCall",
+      "name" : "UploadPortalDocument",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.helper.UploadPortalDocument:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 520, "y" : 208 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    } ]
+}

@@ -1,0 +1,73 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          component:
+            ChatDashboard:
+              AiManagement: Gestión de la IA
+              Title: Cuadro de mandos auxiliar
+          management:
+            AiManagement:
+              AIManagementDescription: En esta página puedes gestionar todo lo relacionado con la IA
+              AiModels: Modelos de IA
+            AiModelConfiguration:
+              Connected: Conectado correctamente al proveedor de AI
+              ModelSavedMessage: El modelo "{0}" se ha guardado correctamente
+              TestConnection: Conexión de prueba
+              Title: Configuración del modelo AI
+              UsingBy: Asistentes que utilizan este modelo
+            AssistantConfiguration:
+              AssistantSavedMessage: El asistente "{0}" se ha guardado correctamente
+              AssistantTemplates: Plantillas de asistente
+              CreateAssistant: Crear Asistente
+              EthicalGuideline: Normas éticas que el asistente debe cumplir
+              Functions: Funciones
+              Information: Información
+              RemoveDialogHeader: Eliminar el asistente "{0}
+              RemoveDialogMessage: |-
+                También se eliminarán todas las conversaciones de chat.
+                ¿Estás seguro de que quieres borrar este asistente?
+              Settings: Configuración
+              Title: Asistente de configuración
+              UseTemplate: Usar plantilla
+Labels:
+  Enums:
+    ToolType:
+      FLOW: Flujo Ivy
+      IVY: Herramienta Ivy
+      RETRIEVAL_QA: Base de conocimientos
+  Message:
+    InvalidEmailFormat: Formato de Email inválido
+    InvalidUrl: URL no válida
+    SelectedToolMessage:
+      FLOW: 'Usar Ivy Flow: <{0}>'
+      IVY: 'Usar Ivy Tool: <{0}>'
+      RETRIEVAL_QA: 'Usar la base de conocimientos: <{0}>'
+  Model:
+    OpenAI:
+      PrimaryModel: Modelo principal de Open AI
+      SecondaryModel: Modelo secundario de Open AI
+  common:
+    AIFunctions: Funciones AI
+    ApiKey: Clave API
+    Assistants: Asistentes
+    Avatar: Avatar
+    Close: Cerrar
+    ConfirmationHeaderText: ¿Está seguro?
+    Contact: Póngase en contacto con
+    ContactEmail: Email de contacto
+    ContactWebsite: Sitio web de contacto
+    Delete: Borrar
+    Description: Descripción
+    EmbeddingModel: Modelo de incrustación
+    Model: Modelo
+    ModelType: Tipo de modelo
+    Name: Nombre
+    New: Nuevo
+    Permissions: Permisos
+    Remove: Eliminar
+    RemoveMessage: ¿De verdad quieres quitarlo?
+    Save: Guardar
+    Type: Tipo
+    Usage: Uso
