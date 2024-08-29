@@ -8,9 +8,9 @@
   <packaging>iar</packaging>
   <dependencies>
     <dependency>
-      <groupId>com.axon.market</groupId>
-      <artifactId>ai-assistant</artifactId>
-      <version>${project.version}</version>
+      <groupId>com.axonivy.portal</groupId>
+      <artifactId>portal-components</artifactId>
+      <version>9.1.0.0-SNAPSHOT</version>
       <type>iar</type>
     </dependency>
   </dependencies>

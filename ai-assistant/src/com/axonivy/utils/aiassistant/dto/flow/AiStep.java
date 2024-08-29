@@ -66,7 +66,6 @@ public abstract class AiStep implements Serializable, Cloneable {
 
   public static AiResultDTO createSomethingWentWrongError() {
     AiResultDTO result = new AiResultDTO();
-    result.setIsMemory(false);
     result.setResult(Ivy.cms().co("/Labels/AI/Error/SomethingWentWrong"));
     result.setState(AIState.ERROR);
     return result;

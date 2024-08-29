@@ -10,38 +10,25 @@
   xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <cc:interface componentType="IvyComponent">
-  <cc:attribute name="assistant" />
+  <cc:attribute name="template" />
   <cc:attribute name="clickEventListener" />
   <cc:attribute name="isReadOnly" default="false" />
+  <cc:attribute name="clickEventOnComplete" />
+  <cc:attribute name="clickEventUpdate" />
 </cc:interface>
 
 <cc:implementation>
-  <c:set var="assistant" value="#{cc.attrs.assistant}" />
-  <h:panelGroup styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'}">
-    <h:panelGroup layout="block" styleClass="ui-g-3 ui-xl-2 avatar-container" rendered="#{not empty assistant.avatarLocation}">
-      <p:graphicImage name="#{assistant.avatarLocation}" alt="#{assistant.name}" library="ivy-cms"
-        width="80" height="80" styleClass="ai-assistant-avatar" />
-    </h:panelGroup>
-    <h:panelGroup layout="block" styleClass="ui-g-3 ui-xl-2 avatar-container" rendered="#{empty assistant.avatarLocation}">
-      <p:graphicImage styleClass="ai-assistant-avatar"
-        name="#{assistantBean.getDefaultLogoName()}"
-        width="80" height="80"
-        library="ivy-cms" />
-    </h:panelGroup>
-    
-    <div class="ui-g-9 ui-xl-10 ui-g">
-      <div class="ui-g-12 assistant-name">
-        <h3>#{assistant.name}</h3>
-        <div class="assistant-action-panel">
-          <cc:renderFacet name="actions" />
-        </div>
-      </div>
-      <h:panelGroup layout="block" class="ui-g-12 ai-assistant-info">
-        <span>#{assistant.info}</span>
-      </h:panelGroup>
+  <c:set var="template" value="#{cc.attrs.template}" />
+  <h:panelGroup id="template-card" styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'} assistant-template-item">
+    <div class="ui-g-12 assistant-name">
+      <h3>#{template.name}</h3>
     </div>
+    <h:panelGroup layout="block" class="ui-g-12 ai-assistant-info">
+      <h:outputText value="#{template.description}" escape="false" />
+    </h:panelGroup>
 
-    <p:ajax event="click" listener="#{cc.attrs.clickEventListener}" disabled="#{cc.attrs.isReadOnly}" />
+    <p:ajax event="click" listener="#{cc.attrs.clickEventListener}" disabled="#{cc.attrs.isReadOnly}"
+      oncomplete="#{cc.attrs.clickEventOnComplete}" update="#{cc.attrs.clickEventUpdate}" />
   </h:panelGroup>
 </cc:implementation>
 </html>

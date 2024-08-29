@@ -48,7 +48,6 @@ public class TextStep extends AiStep {
 
   private void getResult(AiResultDTO resultToDisplay) {
     setResult(new AiResultDTO());
-    getResult().setIsMemory(true);
     getResult().setResult(this.getText().concat(System.lineSeparator())
         .concat(System.lineSeparator())
         .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)
@@ -63,7 +62,6 @@ public class TextStep extends AiStep {
       Map<String, String> metadatas, List<ChatMessage> memory,
       AbstractAIBot bot) {
     setResult(new AiResultDTO());
-    getResult().setIsMemory(true);
 
     Map<String, Object> params = new HashMap<>();
     params.put("metadata", getFormattedMetadatas(metadatas));

@@ -110,7 +110,6 @@ public abstract class AiFunction extends AbstractConfiguration
   @JsonIgnore
   protected AiResultDTO createNoPermisisonError() {
     AiResultDTO result = new AiResultDTO();
-    result.setIsMemory(false);
     result
         .setResult("Sorry, you don't have permission to proceed this request.");
     result.setState(AIState.ERROR);
@@ -120,7 +119,6 @@ public abstract class AiFunction extends AbstractConfiguration
   @JsonIgnore
   protected AiResultDTO createSomethingWentWrongError() {
     AiResultDTO result = new AiResultDTO();
-    result.setIsMemory(false);
     result.setResult(
         "Something went wrong when proceed your request. Please try again later.");
     result.setState(AIState.ERROR);

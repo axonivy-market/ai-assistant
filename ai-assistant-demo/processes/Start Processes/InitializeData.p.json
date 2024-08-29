@@ -1,0 +1,97 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "1919CEDEF7828B77",
+  "config" : {
+    "data" : "com.axon.market.ai.assistant.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "createTestData",
+      "config" : {
+        "signature" : "createTestData",
+        "request" : {
+          "name" : "Create test data"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 672, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "Script",
+      "name" : "Create Employee data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "EmployeeService employeeService = new EmployeeService();",
+            "employeeService.createData();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f5", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "Create Meeting Room data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "MeetingRoomService meetingRoomService = new MeetingRoomService();",
+            "meetingRoomService.createData();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 384, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f7", "color" : "default" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.elasticsearch.index.IndexInfo;",
+            "import ch.ivyteam.ivy.elasticsearch.client.IndexName;",
+            "import ch.ivyteam.ivy.elasticsearch.IElasticsearchManager;",
+            "",
+            "for (int i = 0; i < IElasticsearchManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = IElasticsearchManager.instance().indices(0, 1000).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  IElasticsearchManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f1", "color" : "default" }
+      ]
+    } ]
+}

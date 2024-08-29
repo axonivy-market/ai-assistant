@@ -424,6 +424,10 @@
   width: 100%;
 }
 
+.assistant-header-wrapper .action-panel {
+  display: flex;
+}
+
 .assistant-header-wrapper .assistant-header-panel .assistant-name {
   display: flex;
   font-size: 1.5rem;

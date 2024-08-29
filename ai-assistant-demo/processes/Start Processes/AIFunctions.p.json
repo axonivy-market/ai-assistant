@@ -1,0 +1,144 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "1919D0051F656423",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axon.market.ai.assistant.demo.AIFunctionsData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "findMeetingRooms(String,String, String)",
+      "config" : {
+        "signature" : "findMeetingRooms",
+        "input" : {
+          "params" : [
+            { "name" : "meetingRoomName", "type" : "String", "desc" : "name of meeting room" },
+            { "name" : "meetingRoomFloor", "type" : "String", "desc" : "floor of the meeting room. Must be an integer" },
+            { "name" : "onlyAvailable", "type" : "String", "desc" : "Boolean field. If user want to find available room, set to \"true\"" }
+          ],
+          "map" : {
+            "out.meetingRoomFloor" : "param.meetingRoomFloor",
+            "out.meetingRoomName" : "param.meetingRoomName",
+            "out.onlyAvailable" : "param.onlyAvailable"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 208 },
+        "description" : "Function to find meeting rooms by name, floor, or status"
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 208 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "Script",
+      "name" : "Find meeting room",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "MeetingRoomService service = new MeetingRoomService();",
+            "in.result = service.findByAI(in.meetingRoomName, in.meetingRoomFloor, in.onlyAvailable);"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "findEmployees(String,String,String,String)",
+      "config" : {
+        "signature" : "findEmployees",
+        "input" : {
+          "params" : [
+            { "name" : "employeeNames", "type" : "String", "desc" : "List of employee name. Must be separated by comma. Example: 'peter,alex,Johann Schmidt'" },
+            { "name" : "employeeRoles", "type" : "String", "desc" : "List of employee roles. valid value: SOFTWARE_ENGINEER, WEB_DESIGNER, TESTER, PROJECT_MANAGER. The value must be separated by comma. Example: 'SOFTWARE_ENGINEER,TESTER'" },
+            { "name" : "employeeRanks", "type" : "String", "desc" : "List of employee ranks. Valid value: SENIOR, JUNIOR, PROFESSIONAL. The value must be separated by comma. Example: 'SENIOR,JUNIOR'" },
+            { "name" : "employeeTechstacks", "type" : "String", "desc" : "List of technologies. Must be seperated by comma. Example: 'Java,HTML'" }
+          ],
+          "map" : {
+            "out.employeeNames" : "param.employeeNames",
+            "out.employeeRanks" : "param.employeeRanks",
+            "out.employeeRoles" : "param.employeeRoles",
+            "out.employeeTechstacks" : "param.employeeTechstacks"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 336 },
+        "description" : "function to find employee by name, role, rank, or technology stack"
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 720, "y" : 336 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "Find employees",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "EmployeeService service = new EmployeeService();",
+            "",
+            "in.result = service.findByAI(in.employeeNames, in.employeeRoles, in.employeeRanks, in.employeeTechstacks);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 560, "y" : 336 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "ProcessAnnotation",
+      "name" : "Simple Ivy function to query data",
+      "visual" : {
+        "at" : { "x" : 199, "y" : 95 },
+        "size" : { "width" : 275, "height" : 75 }
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f0" }
+      ]
+    } ]
+}

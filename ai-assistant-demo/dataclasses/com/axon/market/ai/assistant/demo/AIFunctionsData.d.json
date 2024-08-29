@@ -1,0 +1,31 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/11.4.0/data-class.json",
+  "simpleName" : "AIFunctionsData",
+  "namespace" : "com.axon.market.ai.assistant.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "result",
+    "type" : "com.axonivy.portal.components.dto.AiResultDTO"
+  }, {
+    "name" : "meetingRoomName",
+    "type" : "String"
+  }, {
+    "name" : "meetingRoomFloor",
+    "type" : "String"
+  }, {
+    "name" : "onlyAvailable",
+    "type" : "String"
+  }, {
+    "name" : "employeeTechstacks",
+    "type" : "String"
+  }, {
+    "name" : "employeeNames",
+    "type" : "String"
+  }, {
+    "name" : "employeeRoles",
+    "type" : "String"
+  }, {
+    "name" : "employeeRanks",
+    "type" : "String"
+  } ]
+}
