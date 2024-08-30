@@ -117,6 +117,6 @@ public class AiFlowPromptTemplates {
 
       - {{customInstruction}}
       - ONLY use English
-      - ONLY show the message inside <>. Example: <a message>
+      - Show all result inside <>. Example: <customer report: \n**name: Peter**>
       """;
 }

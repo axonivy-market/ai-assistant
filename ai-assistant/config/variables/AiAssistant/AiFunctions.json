@@ -164,7 +164,7 @@
         {
           "stepNo": 2,
           "type": "TEXT",
-          "useAi": true,
+          "useAI": true,
           "customInstruction": "Generate a question similar to 'I have rephrased your request to find user. Could you please confirm if it is correct?'", 
           "showResultOfStep": 0,
           "onSuccess": 3
@@ -365,7 +365,7 @@
         {
           "stepNo": 2,
           "type": "TEXT",
-          "useAi": true,
+          "useAI": true,
           "customInstruction": "Generate a question similar to 'I have rephrased your request as follows. Could you please confirm if it is correct?'",
           "showResultOfStep": 0,
           "onSuccess": 3
@@ -387,7 +387,7 @@
         {
           "stepNo": 4,
           "type": "TEXT",
-          "useAi": true,
+          "useAI": true,
           "customInstruction": "Generate a question similar to 'Sorry, something went wrong when processing your request. Could you please provide more details or clarify your request?'",
           "onSuccess": 5
         },
@@ -998,5 +998,243 @@
             "description": "List of technologies. Must be seperated by comma. Example: 'Java,HTML'"
           }
         ]
-      }
+      },
+      {
+  "version": "11.4.0",
+  "id": "plan-software-project-flow",
+  "name": "Plan Software Project",
+  "type": "FLOW",
+  "permissions": [
+    "Everybody"
+  ],
+  "description": "Gather details to plan a software development project, including description, technologies, and team composition.",
+  "usage": "Use this tool when a user wants to plan a software development project.",
+  "steps": [
+    {
+      "stepNo": 0,
+      "type": "SWITCH",
+      "useConversationMemory": true,
+      "cases": [
+        {
+          "action": 2,
+          "case": "User has already defined description"
+        },
+        {
+          "action": 1,
+          "case": "User has not defined description"
+        }
+      ]
+    },
+    {
+      "stepNo": 1,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Ask the user to provide a description of the project.",
+      "onSuccess": 2,
+      "onError": 7
+    },
+    {
+      "stepNo": 2,
+      "type": "SWITCH",
+      "cases": [
+        {
+          "action": 4,
+          "case": "User has already defined technologies"
+        },
+        {
+          "action": 3,
+          "case": "User has not defined technologies"
+        }
+      ]
+    },
+    {
+      "stepNo": 3,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Ask the user to specify the technologies that will be used in the project (e.g., programming languages, frameworks, tools).",
+      "onSuccess": 4,
+      "onError": 7
+    },
+    {
+      "stepNo": 4,
+      "type": "SWITCH",
+      "cases": [
+        {
+          "action": 6,
+          "case": "User has already mentioned number of software engineers"
+        },
+        {
+          "action": 5,
+          "case": "User has not mentioned number of software engineers"
+        }
+      ]
+    },
+    {
+      "stepNo": 5,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Ask the user for the number of software engineers needed for the project.",
+      "onSuccess": 6,
+      "onError": 7
+    },
+    {
+      "stepNo": 6,
+      "type": "SWITCH",
+      "cases": [
+        {
+          "action": 8,
+          "case": "User has already mentioned number of testers"
+        },
+        {
+          "action": 7,
+          "case": "User has not mentioned number of testers"
+        }
+      ]
+    },
+    {
+      "stepNo": 7,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Ask the user for the number of testers required for the project.",
+      "onSuccess": 8,
+      "onError": 9
+    },
+    {
+      "stepNo": 8,
+      "type": "SWITCH",
+      "cases": [
+        {
+          "action": 11,
+          "case": "User has already mentioned number of web designers"
+        },
+        {
+          "action": 9,
+          "case": "User has not mentioned number of web designers"
+        }
+      ]
+    },
+    {
+      "stepNo": 9,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Ask the user for the number of web designers needed for the project.",
+      "onSuccess": 11,
+      "onError": 10
+    },
+    {
+      "stepNo": 10,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Generate a question similar to 'Sorry, something went wrong when processing your request. Could you please provide more details or clarify your request?'",
+      "onSuccess": 0
+    },
+    {
+      "stepNo": 11,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Summarize information of the planned project based on the conversation above in the format of a report and add a line to ask if need some update.",
+      "onSuccess": 12
+    } , {
+      "stepNo": 12,
+      "type": "SWITCH",
+      "cases": [
+        {
+          "action": 13,
+          "case": "User provide some update"
+        },
+        {
+          "action": 14,
+          "case": "User don't want to update"
+        }
+      ]
+    } , {
+      "stepNo": 13,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "User made some update, Please adapt the report about the project with those updates.",
+      "onSuccess": -1
+    } , {
+      "stepNo": 14,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Do you want choose members for the project?",
+      "onSuccess": 15
+    } ,  {
+      "stepNo": 15,
+      "type": "SWITCH",
+      "cases": [
+        {
+          "action": 16,
+          "case": "User agree"
+        },
+        {
+          "action": -1,
+          "case": "User don't agree"
+        }
+      ]
+    } , {
+      "stepNo": 16,
+      "type": "TRIGGER_FLOW",
+      "flowId" : "choose-member-flow",
+      "triggerMessage" : "I want to choose members for my project described above"
+    }
   ]
+} , {
+  "version": "11.4.0",
+  "id": "choose-member-flow",
+  "name": "Choose member for a project",
+  "type": "FLOW",
+  "permissions": [
+    "Everybody"
+  ],
+  "description": "Use this flow when user want to choose member for a project.",
+  "usage": "Use this tool when a user wants to plan a software development project.",
+  "steps": [
+    {
+      "stepNo": 0,
+      "type": "SWITCH",
+      "useConversationMemory": true,
+      "cases": [
+        {
+          "action": 1,
+          "case": "You can find the details about project"
+        },
+        {
+          "action": -1,
+          "case": "You cannot find project details"
+        }
+      ]
+    }, {
+      "stepNo": 1,
+      "type": "RE_PHRASE",
+      "useConversationMemory": true,
+      "toolId": "find-employees",
+      "onRephrase": 2,
+      "onSuccess": 2,
+      "saveToHistory": false,
+      "customInstruction" : "Use the technologies as criteria. And only focus on software engineer (developer)"
+    }, {
+      "stepNo": 2,
+      "type": "IVY_TOOL",
+      "toolId": "find-employees",
+      "onSuccess": 4,
+      "onError": 3,
+      "useConversationMemory": true
+    }, {
+      "stepNo": 3,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "generate message to inform that cannot find any software engineer matched the requirements.",
+      "onSuccess": -1
+    },{
+      "stepNo": 4,
+      "type": "TEXT",
+      "useAI": true,
+      "customInstruction": "Generate message: I found these software engineer matched the requirement. Then show all founded employees above. Format in a readble format.",
+      "useConversationMemory": true,
+      "onSuccess": -1
+    }
+  ]
+}
+
+]

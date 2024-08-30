@@ -25,7 +25,8 @@ import ch.ivyteam.ivy.environment.Ivy;
 @JsonSubTypes({ @Type(value = IvyToolStep.class, name = "IVY_TOOL"),
     @Type(value = SwitchStep.class, name = "SWITCH"),
     @Type(value = TextStep.class, name = "TEXT"),
-    @Type(value = RephraseStep.class, name = "RE_PHRASE") })
+    @Type(value = RephraseStep.class, name = "RE_PHRASE"),
+    @Type(value = TriggerFlowStep.class, name = "TRIGGER_FLOW") })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class AiStep implements Serializable, Cloneable {
 

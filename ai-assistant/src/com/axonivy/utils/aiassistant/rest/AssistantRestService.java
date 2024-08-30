@@ -211,7 +211,21 @@ public class AssistantRestService {
     // Fill the AI flow
     AiFlow flow = (AiFlow) selectedTool;
     flow.proceed(message, conversation, assistant);
-    response.resume(BusinessEntityConverter.entityToJsonValue(flow));
+    if (flow.getState() == AIState.TRIGGER) {
+
+      initTriggerToolMessage(conversation, flow, assistant);
+      AssistantChatPayload payload = new AssistantChatPayload();
+      payload.setAssistantId(assistant.getId());
+      payload.setConversationId(conversation.getId());
+      payload.setMessage(flow.getFinalResult().getResult());
+      payload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
+      payload.setSelectedFunctionMessage(
+          flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+
+      response.resume(payload);
+    } else {
+      response.resume(BusinessEntityConverter.entityToJsonValue(flow));
+    }
   }
 
   @POST
@@ -230,9 +244,32 @@ public class AssistantRestService {
     ChatMessageManager.saveConversation(payload.getAssistantId(), conversation);
     AiFlow flow = BusinessEntityConverter.jsonValueToEntity(payload.getAiFlow(),
         AiFlow.class);
-    flow.proceed(payload.getMessage(), conversation,
-        AssistantService.getInstance().findById(payload.getAssistantId()));
-    response.resume(BusinessEntityConverter.entityToJsonValue(flow));
+    Assistant assistant = AssistantService.getInstance()
+        .findById(payload.getAssistantId());
+    flow.proceed(payload.getMessage(), conversation, assistant);
+    if (flow.getState() == AIState.TRIGGER) {
+      initTriggerToolMessage(conversation, flow, assistant);
+      AssistantChatPayload chatPayload = new AssistantChatPayload();
+      chatPayload.setAssistantId(assistant.getId());
+      chatPayload.setConversationId(conversation.getId());
+      chatPayload.setMessage(flow.getFinalResult().getResult());
+      chatPayload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
+      chatPayload.setSelectedFunctionMessage(
+          flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+
+      response.resume(chatPayload);
+    } else {
+      response.resume(BusinessEntityConverter.entityToJsonValue(flow));
+    }
+  }
+
+  private void initTriggerToolMessage(Conversation conversation, AiFlow flow,
+      Assistant assistant) {
+    ChatMessage systemMessage = ChatMessage.newSystemMessage(
+        flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+    conversation.getHistory().add(systemMessage);
+    conversation.getMemory().add(systemMessage);
+    ChatMessageManager.saveConversation(assistant.getId(), conversation);
   }
 
   private void handleRetrievalQATool(AsyncResponse response, String message,

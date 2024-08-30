@@ -7,7 +7,7 @@ const RETRIEVAL_QA = 'RETRIEVAL_QA';
 const VALIDATE_ERROR = 'ERROR';
 var streamingValue = '';
 
-var workkingFlow = null;
+var workingFlow = null;
 
 const ajaxHeader = {
   'Content-Type': 'application/json',
@@ -192,7 +192,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
   // Function to start a user request
   async function request(ivyUri, view, request, conversationId) {
-    if (workkingFlow) {
+    if (workingFlow) {
       resumeFlow(ivyUri, view, request, conversationId, assistantId);
       return;
     }
@@ -320,7 +320,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
     const uri = ivyUri + conversationId + '/resume';
     const content = JSON.stringify({
       'message': request,
-      'aiFlow': JSON.stringify(workkingFlow),
+      'aiFlow': JSON.stringify(workingFlow),
       'assistantId': assistantId
     });
 
@@ -335,35 +335,46 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   }
 
   function handleWorkingFlow(ivyUri, view, result, conversationId) {
-    workkingFlow = result;
+    workingFlow = result;
+
+	// Handle trigger another flow
+    if (!workingFlow.state && workingFlow?.selectedFunctionId) {
+        view.renderSystemMessage(result.selectedFunctionMessage, true);
+        continueRequest(conversationId, JSON.stringify(workingFlow));
+        return;
+    }
 
     // If error occurred, send the request back to the default flow
-    if (workkingFlow.state == 'error') {
-      const message = workkingFlow.finalResult.result;
-      workkingFlow = null;
+    if (workingFlow.state == 'error') {
+      const message = workingFlow.finalResult.result;
+      workingFlow = null;
       request(ivyUri, view, message, conversationId);
       return;
     }
 
-    if (workkingFlow.state == 'done') {
-      executeResult(workkingFlow.finalResult.resultForAI);
-      streaming = true;
-      view.renderMessage(workkingFlow.finalResult.result);
-      streaming = false;
-      view.removeStreamingClassFromMessage();
+    if (workingFlow.state == 'done') {
+      if (workingFlow?.finalResult?.resultForAI) {
+        executeResult(workingFlow.finalResult.resultForAI);
+        streaming = true;
+        view.renderMessage(workingFlow.finalResult.result);
+        streaming = false;
+        view.removeStreamingClassFromMessage();
+      }
+
       view.enableSendButton();
-      workkingFlow = null;
+      workingFlow = null;
       return;
     }
+    
 
-    const workingStep = workkingFlow.runSteps[workkingFlow.runSteps.length - 1];
+    const workingStep = workingFlow.runSteps[workingFlow.runSteps.length - 1];
     executeResult(workingStep.result.resultForAI);
     view.renderAiFlowMessage(workingStep.result.result);
 
     view.enableSendButton();
 
-    if (workkingFlow.state != 'in_progress') {
-      workkingFlow = null;
+    if (workingFlow.state != 'in_progress') {
+      workingFlow = null;
     }
   }
 
@@ -375,7 +386,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   }
 
   this.onClearHistory = function () {
-    workkingFlow = null;
+    workingFlow = null;
   }
 }
 
@@ -465,7 +476,7 @@ function ViewAI(uri) {
     chatMessage.addClass('system');
 
     if (useAnimation) {
-		chatMessage.hide();
+        chatMessage.hide();
         chatMessage.fadeToggle('slow');
     }
 

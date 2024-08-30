@@ -17,6 +17,9 @@ import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 
+import ch.ivyteam.ivy.environment.Ivy;
+import dev.langchain4j.model.input.PromptTemplate;
+
 public class TextStep extends AiStep {
 
   private static final long serialVersionUID = 2717808782004150609L;
@@ -69,8 +72,13 @@ public class TextStep extends AiStep {
     params.put("customInstruction",
         Optional.ofNullable(getCustomInstruction()).orElse(""));
 
+    Ivy.log().error(PromptTemplate.from(AiFlowPromptTemplates.TEXT_STEP_USE_AI)
+        .apply(params).text());
+
     String resultFromAI = bot.chat(params,
         AiFlowPromptTemplates.TEXT_STEP_USE_AI);
+
+    Ivy.log().error(resultFromAI);
 
     String extractedText = extractTextInsideTag(resultFromAI)
         .concat(System.lineSeparator()).concat(System.lineSeparator())

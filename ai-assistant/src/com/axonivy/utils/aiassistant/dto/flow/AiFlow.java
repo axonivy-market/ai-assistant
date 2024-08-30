@@ -44,6 +44,9 @@ public class AiFlow extends AiFunction {
   private AiResultDTO finalResult;
 
   @JsonIgnore
+  private AiFunction functionToTrigger;
+
+  @JsonIgnore
   private Map<String, String> metadatas;
 
   @JsonIgnore
@@ -56,7 +59,7 @@ public class AiFlow extends AiFunction {
 
     }
 
-    if (getWorkingStep() == null || getWorkingStep() < 0) {
+    if (getWorkingStep() == null) {
       setWorkingStep(0);
     }
 
@@ -76,6 +79,11 @@ public class AiFlow extends AiFunction {
 
     assistant = workingAssistant;
     init();
+    if (getWorkingStep() == DEFAULT_DONE_STEP) {
+      state = AIState.DONE;
+      return;
+    }
+
     memory.add(ChatMessage.newUserMessage(request));
 
     // If user cancel the flow or input something meaningless, just cancel the
@@ -164,8 +172,16 @@ public class AiFlow extends AiFunction {
               BooleanUtils.isNotFalse(rephraseStep.getSaveToHistory()));
         }
       }
+
+      case TRIGGER_FLOW -> {
+        TriggerFlowStep flowStep = (TriggerFlowStep) step;
+        flowStep.run(request, memoryToRun, metadatas, workingAssistant);
+        state = flowStep.getResult().getState();
+        finalResult = flowStep.getResult();
+        functionToTrigger = flowStep.getFunction();
+        return;
       }
-      ;
+    };
 
       updateWorkingStep(step);
 
@@ -175,7 +191,6 @@ public class AiFlow extends AiFunction {
       }
     }
   }
-
   /**
    * Get result of the step defined by the field "showResultOfStep"
    * 
@@ -332,5 +347,13 @@ public class AiFlow extends AiFunction {
   @JsonIgnore
   public void setAssistant(Assistant assistant) {
     this.assistant = assistant;
+  }
+
+  public AiFunction getFunctionToTrigger() {
+    return functionToTrigger;
+  }
+
+  public void setFunctionToTrigger(AiFunction functionToTrigger) {
+    this.functionToTrigger = functionToTrigger;
   }
 }
