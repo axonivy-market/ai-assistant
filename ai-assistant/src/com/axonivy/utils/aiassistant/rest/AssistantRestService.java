@@ -49,6 +49,7 @@ import com.axonivy.utils.aiassistant.service.AssistantService;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISecurityConstants;
 
 @Singleton
@@ -113,7 +114,7 @@ public class AssistantRestService {
     payload.setSelectedFunctionMessage(selectedFunctionMessage);
 
     ChatMessage systemMessage = ChatMessage
-        .newSystemMessage(selectedFunctionMessage);
+        .newNotificationMessage(selectedFunctionMessage);
     conversation.getHistory().add(systemMessage);
     conversation.getMemory().add(systemMessage);
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
@@ -138,11 +139,18 @@ public class AssistantRestService {
       conversation.setId(conversationId);
     }
 
+    Ivy.log().error(payload.getSelectedFunctionId());
     String message = payload.getMessage();
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
+    String selectedFunctionId = payload.getSelectedFunctionId();
+
+    if (StringUtils.isBlank(selectedFunctionId)) {
+      selectedFunctionId = chooseFunction(assistant, conversation);
+    }
+
     AiFunction selectedFunction = AiFunctionService.getInstance()
-        .findById(chooseFunction(assistant, conversation));
+        .findById(selectedFunctionId);
 
     switch (selectedFunction.getType()) {
     case IVY -> handleIvyTool(response, message, conversation, assistant,
@@ -163,7 +171,16 @@ public class AssistantRestService {
     AiStreamingMessageHandler messageHandler = initStreamingMessageHandler(
         conversation);
 
+    Map<String, Object> languageParam = new HashMap<>();
+    languageParam.put("input", request);
+    String language = Optional
+        .ofNullable(AiStep.extractTextInsideTag(assistant.getAiModel()
+            .getAiBot()
+            .chat(languageParam, BasicPromptTemplates.DETECT_LANGUAGE)))
+        .orElse("English");
+
     Map<String, Object> params = new HashMap<>();
+    params.put("language", language);
     params.put("tools", BusinessEntityConverter.getObjectMapper()
         .writeValueAsString(assistant.getToolkit()));
     params.put("ethicalRules", assistant.formatEthicalRules());
@@ -265,7 +282,7 @@ public class AssistantRestService {
 
   private void initTriggerToolMessage(Conversation conversation, AiFlow flow,
       Assistant assistant) {
-    ChatMessage systemMessage = ChatMessage.newSystemMessage(
+    ChatMessage systemMessage = ChatMessage.newNotificationMessage(
         flow.getFunctionToTrigger().generateSelectedFunctionMessage());
     conversation.getHistory().add(systemMessage);
     conversation.getMemory().add(systemMessage);

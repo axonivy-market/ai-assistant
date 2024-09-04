@@ -17,9 +17,6 @@ import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 
-import ch.ivyteam.ivy.environment.Ivy;
-import dev.langchain4j.model.input.PromptTemplate;
-
 public class TextStep extends AiStep {
 
   private static final long serialVersionUID = 2717808782004150609L;
@@ -27,6 +24,7 @@ public class TextStep extends AiStep {
   private String text;
   private Integer showResultOfStep;
   private Boolean useAI;
+  private Boolean isHidden;
 
   @Override
   public StepType getType() {
@@ -51,10 +49,12 @@ public class TextStep extends AiStep {
 
   private void getResult(AiResultDTO resultToDisplay) {
     setResult(new AiResultDTO());
-    getResult().setResult(this.getText().concat(System.lineSeparator())
-        .concat(System.lineSeparator())
-        .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)
-            .orElse("")));
+    if (!BooleanUtils.isTrue(isHidden)) {
+      getResult().setResult(this.getText().concat(System.lineSeparator())
+          .concat(System.lineSeparator())
+          .concat(Optional.ofNullable(resultToDisplay)
+              .map(AiResultDTO::getResult).orElse("")));
+    }
     getResult().setResultForAI(this.getText().concat(System.lineSeparator())
         .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)
             .orElse("")));
@@ -72,21 +72,16 @@ public class TextStep extends AiStep {
     params.put("customInstruction",
         Optional.ofNullable(getCustomInstruction()).orElse(""));
 
-    Ivy.log().error(PromptTemplate.from(AiFlowPromptTemplates.TEXT_STEP_USE_AI)
-        .apply(params).text());
-
-    String resultFromAI = bot.chat(params,
-        AiFlowPromptTemplates.TEXT_STEP_USE_AI);
-
-    Ivy.log().error(resultFromAI);
-
-    String extractedText = extractTextInsideTag(resultFromAI)
+    String extractedText = extractTextInsideTag(
+        bot.chat(params, AiFlowPromptTemplates.TEXT_STEP_USE_AI))
         .concat(System.lineSeparator()).concat(System.lineSeparator())
         .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)
             .orElse(""));
 
     if (StringUtils.isNotBlank(extractedText)) {
-      getResult().setResult(extractedText);
+      if (!BooleanUtils.isTrue(isHidden)) {
+        getResult().setResult(extractedText);
+      }
       getResult().setResultForAI(extractedText);
       getResult().setState(AIState.DONE);
     }
@@ -114,6 +109,14 @@ public class TextStep extends AiStep {
 
   public void setUseAI(Boolean useAI) {
     this.useAI = useAI;
+  }
+
+  public Boolean getIsHidden() {
+    return isHidden;
+  }
+
+  public void setIsHidden(Boolean isHidden) {
+    this.isHidden = isHidden;
   }
 
 }

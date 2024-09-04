@@ -18,6 +18,8 @@ import com.axonivy.utils.aiassistant.demo.enums.Role;
 
 public class EmployeeService extends BusinessDataService<Employee> {
 
+  private static final String RESULT_FORMAT = "Name:%s (%s), role: %s";
+
   @Override
   public Class<Employee> getType() {
     return Employee.class;
@@ -125,10 +127,19 @@ public class EmployeeService extends BusinessDataService<Employee> {
     }
 
     List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
-    String dataJson = BusinessEntityConverter.entityToJsonValue(data);
+    String resultStr = "Found employees:".concat(System.lineSeparator());
+    for (Employee emp : data) {
+      resultStr = resultStr
+          .concat(
+              String
+                  .format(RESULT_FORMAT, emp.getDisplayName(),
+                      emp.getUsername(), emp.getRole().getRoleName())
+                  .concat(System.lineSeparator()));
+    }
+
     AiResultDTO result = new AiResultDTO();
-    result.setResult(dataJson);
-    result.setResultForAI(dataJson);
+    result.setResult(resultStr);
+    result.setResultForAI(resultStr);
     result.setState(AIState.DONE);
     return result;
   }

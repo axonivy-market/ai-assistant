@@ -82,8 +82,8 @@ public class IvyTool extends AiFunction {
       Assistant assistant, IvyTool selectedIvyTool, AbstractAIBot bot,
       String metadata) {
     try {
-      selectedIvyTool = selectedIvyTool.fullfilIvyTool(message,
-          conversation.getMemory(), bot, metadata);
+      selectedIvyTool = selectedIvyTool.fullfilIvyTool(conversation.getMemory(),
+          bot, metadata);
 
       String result = generateFinalResultFromIvyTool(selectedIvyTool,
           assistant);
@@ -114,13 +114,12 @@ public class IvyTool extends AiFunction {
   }
 
   @JsonIgnore
-  public IvyTool fullfilIvyTool(String request, List<ChatMessage> memory,
+  public IvyTool fullfilIvyTool(List<ChatMessage> memory,
       AbstractAIBot bot, String metadata) throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
     params.put("toolJson", BusinessEntityConverter.getObjectMapper()
         .writeValueAsString(BusinessEntityConverter.entityToJsonNode(this)));
 
-    params.put("request", request);
     params.put("memory", getFormattedMemory(memory));
     params.put("metadata", metadata);
 

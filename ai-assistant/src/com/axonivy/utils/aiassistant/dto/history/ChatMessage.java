@@ -9,6 +9,7 @@ public class ChatMessage {
   private static final String AI = "AI";
   private static final String ERROR = "Error";
   private static final String SYSTEM = "System";
+  private static final String NOTIFICATION = "Notification";
   private static final String CHAT_MESSAGE_FORMAT = "%s: %s";
 
   private String content;
@@ -76,6 +77,15 @@ public class ChatMessage {
     return result;
   }
 
+  public static ChatMessage newNotificationMessage(String content) {
+    ChatMessage result = new ChatMessage();
+    result.setContent(content);
+    result.setRole(NOTIFICATION);
+    result.setTime((new DateTime()).toString());
+    result.setIsAiFlowMessage(false);
+    return result;
+  }
+
   public static ChatMessage newSystemMessage(String content) {
     ChatMessage result = new ChatMessage();
     result.setContent(content);
@@ -99,5 +109,14 @@ public class ChatMessage {
 
   public boolean isSystemMessage() {
     return Optional.ofNullable(this.role).orElse("").contentEquals(SYSTEM);
+  }
+
+  public boolean isNotificationMessage() {
+    return Optional.ofNullable(this.role).orElse("")
+        .contentEquals(NOTIFICATION);
+  }
+
+  public boolean isUserMessage() {
+    return Optional.ofNullable(this.role).orElse("").contentEquals(USER);
   }
 }

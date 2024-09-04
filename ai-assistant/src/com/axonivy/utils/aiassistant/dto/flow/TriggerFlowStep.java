@@ -18,6 +18,7 @@ public class TriggerFlowStep extends AiStep {
   private String flowId;
   private AiFunction function;
   private String triggerMessage;
+  private Integer showResultOfStep;
 
   @Override
   public StepType getType() {
@@ -63,4 +64,11 @@ public class TriggerFlowStep extends AiStep {
     this.triggerMessage = triggerMessage;
   }
 
+  public Integer getShowResultOfStep() {
+    return showResultOfStep;
+  }
+
+  public void setShowResultOfStep(Integer showResultOfStep) {
+    this.showResultOfStep = showResultOfStep;
+  }
 }

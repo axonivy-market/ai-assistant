@@ -2,8 +2,13 @@ package com.axonivy.utils.aiassistant.demo.dto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Project {
+  private String projectId;
   private String projectName;
   private String description;
   private Date startDate;
@@ -11,16 +16,16 @@ public class Project {
   private List<Employee> teamMembers;
   private List<String> techStack;
 
-  // Constructor
-  public Project(String projectName, String description, Date startDate,
-      Date endDate, List<Employee> teamMembers,
+  public void initProject(String projectName, String description,
+      Date startDate,
+      List<Employee> teamMembers,
       List<String> techStack) {
     this.projectName = projectName;
     this.description = description;
     this.startDate = startDate;
-    this.endDate = endDate;
     this.teamMembers = teamMembers;
     this.techStack = techStack;
+    this.projectId = UUID.randomUUID().toString();
   }
 
   // Getters and Setters
@@ -70,5 +75,13 @@ public class Project {
 
   public void setTechStack(List<String> techStack) {
     this.techStack = techStack;
+  }
+
+  public String getProjectId() {
+    return projectId;
+  }
+
+  public void setProjectId(String projectId) {
+    this.projectId = projectId;
   }
 }

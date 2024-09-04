@@ -146,7 +146,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
                 view.removeStreamingClassFromMessage();
               } else if (message.role == 'Error') {
                 view.renderErrorMessage(message.content);
-              } else if (message.role == 'System') {
+              } else if (message.role == 'Notification') {
                 view.renderSystemMessage(message.content, false);
               } else {
                 view.renderMyMessage({ 'message': message.content });

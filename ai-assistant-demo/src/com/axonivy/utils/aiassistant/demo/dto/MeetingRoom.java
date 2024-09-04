@@ -2,10 +2,14 @@ package com.axonivy.utils.aiassistant.demo.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MeetingRoom {
   private String roomName;
+  private String roomId;
   private int floor;
-  private boolean isAvailable;
+  private Boolean isAvailable;
   private List<Meeting> scheduledMeetings;
 
   // Getters and Setters
@@ -17,11 +21,11 @@ public class MeetingRoom {
     this.roomName = roomName;
   }
 
-  public boolean isAvailable() {
+  public Boolean isAvailable() {
     return isAvailable;
   }
 
-  public void setAvailable(boolean available) {
+  public void setAvailable(Boolean available) {
     isAvailable = available;
   }
 
@@ -61,5 +65,13 @@ public class MeetingRoom {
     }
   }
 
-  public static final String DATA = "[{\"roomName\":\"Room A\",\"floor\":1,\"isAvailable\":true},{\"roomName\":\"Room B\",\"floor\":2,\"isAvailable\":true},{\"roomName\":\"Room C\",\"floor\":3,\"isAvailable\":true},{\"roomName\":\"Room D\",\"floor\":4,\"isAvailable\":true},{\"roomName\":\"Room E\",\"floor\":5,\"isAvailable\":true}]";
+  public String getRoomId() {
+    return roomId;
+  }
+
+  public void setRoomId(String roomId) {
+    this.roomId = roomId;
+  }
+
+  public static final String DATA = "[{\"roomId\":\"room_a\",\"roomName\":\"Room A\",\"floor\":1,\"isAvailable\":true},{\"roomId\":\"room_b\",\"roomName\":\"Room B\",\"floor\":2,\"isAvailable\":true},{\"roomId\":\"room_c\",\"roomName\":\"Room C\",\"floor\":3,\"isAvailable\":true},{\"roomId\":\"room_d\",\"roomName\":\"Room D\",\"floor\":4,\"isAvailable\":true},{\"roomId\":\"room_e\",\"roomName\":\"Room E\",\"floor\":5,\"isAvailable\":true}]";
 }

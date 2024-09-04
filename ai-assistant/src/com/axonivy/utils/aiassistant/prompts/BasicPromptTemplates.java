@@ -29,6 +29,7 @@ public class BasicPromptTemplates {
       {{input}}
 
       I want you to detect language of the message and response it inside <>. Example: <English>
+      If the message could be in multiple languages, prefer the more popular language, and always prefer English over other languages.
       """;
 
   public static final String RAG_PROMPT_TEMPLATE = """
@@ -91,10 +92,9 @@ public class BasicPromptTemplates {
        Instructions:
        1. Detect if the message is a question or a request to do something.
 
-       This is the chat history. The message you should use to choose tool is the last message of this chat history:
+       The last message of this chat history is the request you should use to choose tool:
 
        AI: Hello User
-       User: Hi AI
        {{memory}}
 
        2. After that, use tool usage to choose a tool from above tools to fulfill the message
@@ -119,29 +119,29 @@ public class BasicPromptTemplates {
       Metadata:
       {{metadata}}
 
-      You are a computer, you can only respond in JSON format.
-      Now, I have a tool in JSON format.
-      Please read the tool carefully.
+      I have a tool in JSON format. Read it carefully:
 
       {{toolJson}}
 
-      Instruction:
-      1. Try to fulfill value of the tool's attributes by using the request.
-      2. If the request is empty or a confirmation such as 'yes', 'agree',... use the history to fulfill the tool.
-      3. If the request is not empty and it synchronized with the chat history, try to fulfill the request from history. Otherwise, just use the request.
-      4. Adapt the full version of the JSON above with fulfilled values.
-      5. Characters inside the fulfilled JSON should be parseable.
-      6. Wrap the result inside '<' and '>' characters. Example: <{"name" : "value"}>
-      7. Does the result of the above step wrapped correctly? If not, try to wrap the result then respond it.
-
-      This is chat history:
+      And, chat history:
 
       {{memory}}
+
+      Instruction:
+      1. The request is the last message of the chat history above.
+      2. Fulfill value of the tool's attributes from the JSON above by using the request.
+      3. If the request is a confirmation such as 'yes', 'agree',... use other message in the history to fulfill the tool.
+      4. Adapt the full version of the JSON above with fulfilled values.
+      5. Characters inside the fulfilled JSON should be parseable.
+      6. Wrap the result inside '<' and '>' characters. Example: <{"name" : "value"}>. DO NOT RETURN THIS FORMAT: '''json {"name" : "value"}''''
+      7. Does the result of the above step wrapped correctly? If not, try to wrap the result then respond it.
       """;
 
   public static final String DEFAULT_ANSWER = """
-      This is information about the person you should act as:
+      Your info:
       {{info}}
+
+      MUST answer in this language: {{language}}
 
       And as an assistant, you MUST STRICTLY follow these ethical rules:
       {{ethicalRules}}
@@ -150,16 +150,16 @@ public class BasicPromptTemplates {
 
       {{request}}
 
-      I want you to say say sorry and tell him you cannot fulfill his request. Please response in the same language as the request above.
+      I want you to say sorry and tell him you cannot fulfill his request.
 
-      After that, I want you to take a look at these tool:
+      After that, take a look at these tool:
 
       {{tools}}
 
       IF the tools are empty: Don't need to say anything else. Don't tell them that there are no tools.
 
       Otherwise:
-      Read the tools above, especially the description and attributes.
+      Read the description and attributes of tools above.
       List them out as your functions, what you can do.
       ONLY show attributes and descriptions of tools.
       you can modify descriptions of tools to make it easier to understand.

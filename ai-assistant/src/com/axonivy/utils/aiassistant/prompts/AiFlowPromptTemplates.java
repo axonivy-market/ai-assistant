@@ -2,18 +2,16 @@ package com.axonivy.utils.aiassistant.prompts;
 
 public class AiFlowPromptTemplates {
   public static final String FULFILL_CONDITIONAL_STEP = """
-      I have chat history between two people, "User" and "AI":
+      Chat history between "User" and "AI":
 
       AI: Hello User
-      User: Hi AI
       {{memory}}
 
-      Conditions to decide how to continue the conversation like this:
-
+      Conditions:
       {{conditions}}
 
       Instruction:
-      1. Read the chat history carefully. The lastest message of "User" is the request that "AI" should handle
+      1. Read the chat history carefully. The last message of "User" is the request.
       2. Choose the right condition.
       3. ONLY show the value of the "action" field from the selected condition as a tag <>.
          Example: If the correct action is "2", then you should show "<2>"
@@ -23,48 +21,38 @@ public class AiFlowPromptTemplates {
       Instructions:
 
       Show <0> when:
-      User's last message indicates they want to cancel the conversation or request.
+      User's last message indicates cancellation or disinterest.
       Examples:
-        - The message of AI is not a question but the last message of User is a message similar to "cancel" or "never mind".
-          AI: I found some tasks for you
-          User: Nevermind
+        - AI doesn't ask a question, but User replies with "cancel" or "never mind." or User's answer doesn't make sense.
 
-        - The message ò AI is a question but the answer of User not make sense.
-          AI: Could you provide me some infomation about the user you are looking for?
-          User: No
-
-        - User said he want to cancel.
+        - User explicitly states they want to cancel.
           AI: Do you want to start this task?
           User: No, let's cancel.
 
       Show <1> when:
-      User's last message is not in the same context or aligned with the chat history.
-      Examples:
-        - If the chat history is about "cases" and the user's last message is about "process," they are not aligned.
-          AI: Can you provide me info about this case?
-          User: This process name is 'XYZ'
-
-        - The chat history is about "weather" and the user's last message is about "sports."
+      User's last message is off-topic or unrelated to the chat history.
+      Examples: The context is about "cases," but User mentions "process."
 
       Show <2> when:
-      User's last message is aligned with and continues the context of the chat history.
+      User's last message continues the context of the chat.
       Examples:
-        - If the chat history is about "cases" and the user's last message continues to discuss "cases"
-          AI: Can you provide me info about this case?
-          User: The case name is 'XYZ'
+        - Chat is about "cases," and User continues discussing "cases."
 
-        - If the in the chat history, AI asked something and User don't agree but the answer make sense.
+        - AI asks a question, and User's reply makes sense.
           AI: Do you want to start this process now?
           User: No
 
-        - User's last message agrees with a question from the AI
+        - User agrees with AI's question.
           AI: Do you want to proceed?
           User: Yes
 
-      This is the chat history you should use to give the result:
+        - AI asks for updates, and User declines.
+          AI: I updated your info. Do you want anything else updated?
+          User: No
+
+      This is the chat history:
 
       AI: Hello User
-      User: Hi AI
       {{memory}}
       """;
 
@@ -107,16 +95,17 @@ public class AiFlowPromptTemplates {
       Metadata:
       {{metadata}}
 
-      I have chat history between two people, "User" and "AI":
+      Chat history:
 
       AI: Hello User
-      User: Hi AI
       {{memory}}
 
-      Please follow the instructions to generate a message:
+      Instructions to generate a message:
 
       - {{customInstruction}}
       - ONLY use English
-      - Show all result inside <>. Example: <customer report: \n**name: Peter**>
+      - Show all result inside <>. Examples: <**name: Peter**\n\nDo you want something else?>
+
+      Check the result, does it put inside <> properly? if not, please correct.
       """;
 }

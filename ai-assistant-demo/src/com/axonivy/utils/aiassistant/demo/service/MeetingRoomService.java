@@ -33,7 +33,8 @@ public class MeetingRoomService extends BusinessDataService<MeetingRoom> {
     List<MeetingRoom> allRooms = findAll();
 
     if (BooleanUtils.toBoolean(isOnlyAvaliable)) {
-      allRooms = allRooms.stream().filter(MeetingRoom::isAvailable)
+      allRooms = allRooms.stream()
+          .filter(room -> BooleanUtils.isNotFalse(room.isAvailable()))
           .collect(Collectors.toList());
     }
 

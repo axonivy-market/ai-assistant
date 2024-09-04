@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
@@ -133,12 +134,15 @@ public class AiFlow extends AiFunction {
       // run as text step
       case TEXT -> {
         TextStep text = (TextStep) step;
-        text.run(getResultOfStep(text), metadatas, memoryToRun, assistant);
+        text.run(getResultOfStep(text.getShowResultOfStep()), metadatas,
+            memoryToRun, assistant);
 
         updateStepResultToMemory(text.getResult(), conversation,
             BooleanUtils.isNotFalse(text.getSaveToHistory()));
         updateWorkingStep(text);
-        return;
+        if (!BooleanUtils.isTrue(text.getIsHidden())) {
+          return;
+        }
       }
 
       // run as Ivy Tool step
@@ -175,6 +179,10 @@ public class AiFlow extends AiFunction {
 
       case TRIGGER_FLOW -> {
         TriggerFlowStep flowStep = (TriggerFlowStep) step;
+        if (StringUtils.isBlank(flowStep.getTriggerMessage())) {
+          flowStep.setTriggerMessage(
+              getResultOfStep(flowStep.getShowResultOfStep()).getResultForAI());
+        }
         flowStep.run(request, memoryToRun, metadatas, workingAssistant);
         state = flowStep.getResult().getState();
         finalResult = flowStep.getResult();
@@ -191,19 +199,20 @@ public class AiFlow extends AiFunction {
       }
     }
   }
+
   /**
    * Get result of the step defined by the field "showResultOfStep"
    * 
    * @param text the textStep
    * @return
    */
-  private AiResultDTO getResultOfStep(TextStep text) {
-    if (text.getShowResultOfStep() == null || text.getShowResultOfStep() < 0) {
+  private AiResultDTO getResultOfStep(Integer stepToShow) {
+    if (stepToShow == null || stepToShow < 0) {
       return null;
     }
 
     List<AiStep> filteredSteps = runSteps.stream()
-        .filter(s -> s.getStepNo() == text.getShowResultOfStep()).toList();
+        .filter(s -> s.getStepNo() == stepToShow).toList();
     AiStep targetStep = filteredSteps.get(filteredSteps.size() - 1);
     return Optional.ofNullable(targetStep).map(AiStep::getResult).orElse(null);
   }
@@ -304,8 +313,13 @@ public class AiFlow extends AiFunction {
   }
 
   private Integer runCheckMessageStep() {
+    if ((memory.stream().filter(ChatMessage::isUserMessage).count() == 0)
+        || !memory.getLast().isUserMessage()) {
+      return 2;
+    }
     Map<String, Object> params = new HashMap<>();
-    params.put("memory", AiFunction.getFormattedMemory(memory));
+    params.put("memory",
+        AiFunction.getFormattedMemoryForValidateMessage(memory));
 
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
         AiFlowPromptTemplates.CHECK_USER_MESSAGE_STEP);

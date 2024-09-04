@@ -43,7 +43,7 @@
       "id" : "f1",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 560, "y" : 208 },
+        "at" : { "x" : 584, "y" : 208 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -61,7 +61,7 @@
         "sudo" : true
       },
       "visual" : {
-        "at" : { "x" : 400, "y" : 208 }
+        "at" : { "x" : 424, "y" : 208 }
       },
       "connect" : [
         { "id" : "f4", "to" : "f1", "color" : "default" }
@@ -106,7 +106,7 @@
       "id" : "f6",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 560, "y" : 336 },
+        "at" : { "x" : 584, "y" : 336 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -124,7 +124,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 400, "y" : 336 }
+        "at" : { "x" : 424, "y" : 336 }
       },
       "connect" : [
         { "id" : "f9", "to" : "f6" }
@@ -139,6 +139,265 @@
       },
       "connect" : [
         { "id" : "f13", "to" : "f0" }
+      ]
+    }, {
+      "id" : "f10",
+      "type" : "CallSubStart",
+      "name" : "createProjectKickoffMeeting(String,String,String,String,String,String)",
+      "config" : {
+        "signature" : "createProjectKickoffMeeting",
+        "input" : {
+          "params" : [
+            { "name" : "projectId", "type" : "String", "desc" : "" },
+            { "name" : "host", "type" : "String", "desc" : "" },
+            { "name" : "meetingRoomId", "type" : "String", "desc" : "" },
+            { "name" : "time", "type" : "String", "desc" : "" },
+            { "name" : "title", "type" : "String", "desc" : "" },
+            { "name" : "agenda", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.meetingAgenda" : "param.agenda",
+            "out.meetingHost" : "param.host",
+            "out.meetingName" : "param.title",
+            "out.meetingRoom" : "param.meetingRoomId",
+            "out.meetingTime" : "param.time",
+            "out.projectId" : "param.projectId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 896, "y" : 456 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f19",
+      "type" : "CallSubStart",
+      "name" : "createProject(String,String,String,String,String)",
+      "config" : {
+        "signature" : "createProject",
+        "input" : {
+          "params" : [
+            { "name" : "projectName", "type" : "String", "desc" : "" },
+            { "name" : "projectDescription", "type" : "String", "desc" : "" },
+            { "name" : "members", "type" : "String", "desc" : "" },
+            { "name" : "technologies", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.employeeNames" : "param.members",
+            "out.projectDescription" : "param.projectDescription",
+            "out.projectName" : "param.projectName",
+            "out.technologies" : "param.technologies"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 208, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f21" }
+      ]
+    }, {
+      "id" : "f20",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 1112, "y" : 568 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f21",
+      "type" : "Script",
+      "name" : "Validate",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.portal.components.dto.AiResultDTO;",
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "",
+            "EmployeeService service = new EmployeeService();",
+            "in.result = service.findByAI(in.employeeNames, null, null, null);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "Alternative",
+      "name" : "is valid?",
+      "config" : {
+        "conditions" : {
+          "f26" : "in.result.state != com.axonivy.portal.components.enums.AIState.ERROR"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 568 },
+        "labelOffset" : { "y" : -16 }
+      },
+      "connect" : [
+        { "id" : "f26", "to" : "f25", "label" : {
+            "name" : "yes",
+            "offset" : { "x" : -3, "y" : -10 }
+          } },
+        { "id" : "f30", "to" : "f20", "via" : [ { "x" : 512, "y" : 672 }, { "x" : 1112, "y" : 672 } ], "label" : {
+            "name" : "no",
+            "segment" : 1.4,
+            "offset" : { "x" : -150, "y" : -58 }
+          } }
+      ]
+    }, {
+      "id" : "f25",
+      "type" : "Script",
+      "name" : "Persist to business data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.ProjectService;",
+            "ProjectService service = new ProjectService();",
+            "in.projectId = service.createProject(in.projectName, in.projectDescription, in.employeeNames, in.technologies);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 672, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f28", "to" : "f27" }
+      ]
+    }, {
+      "id" : "f27",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.elasticsearch.index.IndexInfo;",
+            "import ch.ivyteam.ivy.elasticsearch.client.IndexName;",
+            "import ch.ivyteam.ivy.elasticsearch.IElasticsearchManager;",
+            "",
+            "for (int i = 0; i < IElasticsearchManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = IElasticsearchManager.instance().indices(0, 1000).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  IElasticsearchManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 824, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f31" }
+      ]
+    }, {
+      "id" : "f31",
+      "type" : "Script",
+      "name" : "Create result for AI",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.portal.components.enums.AIState;",
+            "import com.axonivy.portal.components.dto.AiResultDTO;",
+            "in.result = new AiResultDTO();",
+            "in.result.setResult(String.format( \"Project %s was saved successfully.\", in.projectName));",
+            "in.result.setResultForAI(String.format(\"Project %s (ID: %s) was saved successfully.\", in.projectName, in.projectId));",
+            "in.result.setState(AIState.DONE);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 984, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f20", "color" : "default" }
+      ]
+    }, {
+      "id" : "f33",
+      "type" : "TriggerCall",
+      "config" : {
+        "processCall" : "Start Processes/ComplexDemo:kickOffProject(String,String)",
+        "call" : {
+          "map" : {
+            "param.projectId" : "in.projectId",
+            "param.meetingId" : "in.meetingId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 784, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f34", "to" : "f11", "color" : "default" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "Script",
+      "name" : "Persist to business data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
+            "MeetingService service = new MeetingService();",
+            "in.meetingId = service.createProjectMeeting(in.meetingName, in.meetingAgenda, in.meetingRoom, in.projectId, in.meetingHost, in.meetingTime);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f17", "color" : "default" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.elasticsearch.index.IndexInfo;",
+            "import ch.ivyteam.ivy.elasticsearch.client.IndexName;",
+            "import ch.ivyteam.ivy.elasticsearch.IElasticsearchManager;",
+            "",
+            "for (int i = 0; i < IElasticsearchManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = IElasticsearchManager.instance().indices(0, 1000).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  IElasticsearchManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f33", "color" : "default" }
       ]
     } ]
 }

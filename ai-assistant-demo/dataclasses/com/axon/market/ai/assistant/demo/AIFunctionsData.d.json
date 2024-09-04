@@ -27,5 +27,44 @@
   }, {
     "name" : "employeeRanks",
     "type" : "String"
+  }, {
+    "name" : "meetingName",
+    "type" : "String"
+  }, {
+    "name" : "meetingDescription",
+    "type" : "String"
+  }, {
+    "name" : "meetingHost",
+    "type" : "String"
+  }, {
+    "name" : "meetingParticipants",
+    "type" : "String"
+  }, {
+    "name" : "meetingRoom",
+    "type" : "String"
+  }, {
+    "name" : "meetingTime",
+    "type" : "String"
+  }, {
+    "name" : "isValidated",
+    "type" : "Boolean"
+  }, {
+    "name" : "projectName",
+    "type" : "String"
+  }, {
+    "name" : "projectDescription",
+    "type" : "String"
+  }, {
+    "name" : "technologies",
+    "type" : "String"
+  }, {
+    "name" : "projectId",
+    "type" : "String"
+  }, {
+    "name" : "meetingAgenda",
+    "type" : "String"
+  }, {
+    "name" : "meetingId",
+    "type" : "String"
   } ]
 }

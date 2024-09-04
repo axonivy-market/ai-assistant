@@ -1,6 +1,7 @@
 package com.axonivy.utils.aiassistant.dto.tool;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -133,10 +134,41 @@ public abstract class AiFunction extends AbstractConfiguration
 
     String result = "";
     for (ChatMessage message : memory) {
-      if (!message.isSystemMessage()) {
+      if (!message.isNotificationMessage()) {
         result = result.concat(message.getFormattedMessage())
             .concat(System.lineSeparator());
       }
+    }
+
+    return result;
+  }
+
+  @JsonIgnore
+  public static String getFormattedMemoryForValidateMessage(
+      List<ChatMessage> memory) {
+    if (CollectionUtils.isEmpty(memory)) {
+      return "";
+    }
+
+    String result = "";
+    List<ChatMessage> checkMemory = new ArrayList<>();
+
+    // Only check 3 latest chat messages
+
+    for (ChatMessage message : memory) {
+      if (!message.isNotificationMessage()) {
+        checkMemory.add(message);
+      }
+
+      // Only check 3 latest chat messages
+      if (checkMemory.size() > 3) {
+        checkMemory.remove(0);
+      }
+    }
+
+    for (ChatMessage message : checkMemory) {
+      result = result.concat(message.getFormattedMessage())
+          .concat(System.lineSeparator());
     }
 
     return result;

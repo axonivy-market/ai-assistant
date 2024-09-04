@@ -16,12 +16,11 @@ Variables:
         # The secondary Open AI model. This instance use the 'GPT 4 Omni Mini' and 'text-embedding-3-small' models by default
         SecondaryModel:
           # Open AI model 'GPT 4 Omni Mini'
-          Model: gpt-4o-mini
+          Model: gpt-4o-2024-08-06
           # Open AI text embedding model 'text-embedding-3-small'
           EmbeddingModel: text-embedding-3-small
           #[password]
           ApiKey: ${decrypt:}
-
     # [file: json]
     Assistants:
 
