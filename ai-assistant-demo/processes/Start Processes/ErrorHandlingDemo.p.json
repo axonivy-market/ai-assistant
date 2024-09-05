@@ -1,0 +1,128 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "191C18CEB181BABE",
+  "config" : {
+    "data" : "com.axon.market.ai.assistant.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "createTestDataForErrorHandlingDemo",
+      "config" : {
+        "signature" : "createTestDataForErrorHandlingDemo"
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 264 },
+        "labelOffset" : { "x" : 41, "y" : 49 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f4" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 816, "y" : 264 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "name" : "Initialize demo assistant",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.enums.DemoVariables;",
+            "String demoFunctions = ivy.var.get(DemoVariables.ERROR_HANDLING_DEMO_FUNCTIONS.key);",
+            "ivy.var.set(DemoVariables.AI_FUNCTIONS.key, demoFunctions);",
+            "",
+            "String demoAssistant = ivy.var.get(DemoVariables.ERROR_HANDLING_DEMO_ASSISTANT.key);",
+            "ivy.var.set(DemoVariables.AI_ASSISTANT.key,demoAssistant);"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 688, "y" : 264 }
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "Script",
+      "name" : "Delete all meeting rooms",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "MeetingRoomService service = new MeetingRoomService();",
+            "service.deleteAll();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 360, "y" : 264 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f7", "color" : "default" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.elasticsearch.index.IndexInfo;",
+            "import ch.ivyteam.ivy.elasticsearch.client.IndexName;",
+            "import ch.ivyteam.ivy.elasticsearch.IElasticsearchManager;",
+            "",
+            "for (int i = 0; i < IElasticsearchManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = IElasticsearchManager.instance().indices(0, 1000).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  IElasticsearchManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 520, "y" : 264 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f11", "color" : "default" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "DATA PREPARATION:",
+        "     - Delete all meeting room data",
+        "     - Create an assistant with:",
+        "          + ivy tool: find meeting room",
+        "          + ivy flow: find meeting room flow",
+        "",
+        "HOW TO USE: Run this process then try to find meeting room."
+      ],
+      "visual" : {
+        "at" : { "x" : 200, "y" : 120 },
+        "size" : { "width" : 367, "height" : 143 },
+        "description" : [
+          "DATA PREPARATION:",
+          "     - Delete all meeting room data",
+          "     - Create an assistant with:",
+          "          + ivy tool: find meeting room",
+          "          + ivy flow: find meeting room flow",
+          "",
+          "HOW TO USE: Run this process then try to find meeting room."
+        ],
+        "color" : "default"
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f0" }
+      ]
+    } ]
+}

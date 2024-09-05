@@ -66,5 +66,13 @@
   }, {
     "name" : "meetingId",
     "type" : "String"
+  }, {
+    "name" : "counter",
+    "type" : "Integer",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "meeting",
+    "type" : "com.axonivy.utils.aiassistant.demo.dto.Meeting",
+    "modifiers" : [ "PERSISTENT" ]
   } ]
 }

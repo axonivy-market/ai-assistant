@@ -42,4 +42,10 @@ public class MeetingService extends BusinessDataService<Meeting> {
     save(meeting);
     return meeting.getMeetingId();
   }
+
+  public Meeting findByMeetingId(String id) {
+    return findAll().stream()
+        .filter(meeting -> meeting.getMeetingId().contentEquals(id)).findFirst()
+        .orElse(null);
+  }
 }

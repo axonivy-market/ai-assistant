@@ -130,17 +130,6 @@
         { "id" : "f9", "to" : "f6" }
       ]
     }, {
-      "id" : "f12",
-      "type" : "ProcessAnnotation",
-      "name" : "Simple Ivy function to query data",
-      "visual" : {
-        "at" : { "x" : 199, "y" : 95 },
-        "size" : { "width" : 275, "height" : 75 }
-      },
-      "connect" : [
-        { "id" : "f13", "to" : "f0" }
-      ]
-    }, {
       "id" : "f10",
       "type" : "CallSubStart",
       "name" : "createProjectKickoffMeeting(String,String,String,String,String,String)",
@@ -163,6 +152,14 @@
             "out.meetingTime" : "param.time",
             "out.projectId" : "param.projectId"
           }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
         }
       },
       "visual" : {
@@ -175,7 +172,7 @@
       "id" : "f11",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 896, "y" : 456 },
+        "at" : { "x" : 1592, "y" : 456 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -337,20 +334,22 @@
     }, {
       "id" : "f33",
       "type" : "TriggerCall",
+      "name" : "Trigger Meeting Invitation process",
       "config" : {
-        "processCall" : "Start Processes/ComplexDemo:kickOffProject(String,String)",
+        "processCall" : "Start Processes/ComplexDemo:CreateMeetingInvitation(String,String,String)",
         "call" : {
           "map" : {
             "param.projectId" : "in.projectId",
-            "param.meetingId" : "in.meetingId"
+            "param.meetingId" : "in.meetingId",
+            "param.employeeName" : "in.meeting.participants.get(in.counter)"
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 784, "y" : 456 }
+        "at" : { "x" : 1048, "y" : 456 }
       },
       "connect" : [
-        { "id" : "f34", "to" : "f11", "color" : "default" }
+        { "id" : "f34", "to" : "f39", "color" : "default" }
       ]
     }, {
       "id" : "f15",
@@ -397,7 +396,108 @@
         "at" : { "x" : 584, "y" : 456 }
       },
       "connect" : [
-        { "id" : "f18", "to" : "f33", "color" : "default" }
+        { "id" : "f18", "to" : "f36" }
+      ]
+    }, {
+      "id" : "f36",
+      "type" : "Script",
+      "name" : "Init counter & case details",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
+            "import com.axonivy.utils.aiassistant.demo.dto.Meeting;",
+            "import ch.ivyteam.ivy.security.IUser;",
+            "in.counter = 0;",
+            "",
+            "MeetingService service = new MeetingService();",
+            "in.meeting = service.findByMeetingId(in.meetingId);",
+            "",
+            "IUser host = ivy.security.users().find(in.meeting.hostUsername);",
+            "",
+            "ivy.case.name = in.meeting.title;",
+            "ivy.case.description = in.meeting.agenda;",
+            "",
+            "// Add note that this case created by AI",
+            "ivy.case.createNote(ivy.session,",
+            "    String.format(\"Created by AI on behalf of %s(%s)\",",
+            "      host.getDisplayName(), host.getMemberName()));"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 784, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f38", "to" : "f35" }
+      ]
+    }, {
+      "id" : "f35",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 912, "y" : 456 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f37", "to" : "f33", "color" : "default" }
+      ]
+    }, {
+      "id" : "f39",
+      "type" : "Script",
+      "name" : "Counter++",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.lang.Thread;",
+            "in.counter++;",
+            "Thread.sleep(1000);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1208, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f40", "to" : "f41", "color" : "default" }
+      ]
+    }, {
+      "id" : "f41",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f42" : "in.counter == in.meeting.participants.size()",
+          "f43" : ""
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1336, "y" : 456 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f43", "to" : "f35", "via" : [ { "x" : 1336, "y" : 360 }, { "x" : 912, "y" : 360 } ] },
+        { "id" : "f42", "to" : "f44", "color" : "default" }
+      ]
+    }, {
+      "id" : "f44",
+      "type" : "Script",
+      "name" : "Create result for AI",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.portal.components.enums.AIState;",
+            "import com.axonivy.portal.components.dto.AiResultDTO;",
+            "in.result = new AiResultDTO();",
+            "in.result.setResult(\"I sent invitations tasks to project members.\");",
+            "in.result.setResultForAI(\"I sent invitations tasks to project members.\");",
+            "in.result.setState(AIState.DONE);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1464, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f45", "to" : "f11", "color" : "default" }
       ]
     } ]
 }

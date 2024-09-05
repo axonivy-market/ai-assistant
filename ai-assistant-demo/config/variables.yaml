@@ -1,2 +1,14 @@
 # yaml-language-server: $schema=https://json-schema.axonivy.com/app/11.4.1/variables.json
 Variables:
+  AiAssistantDemo:
+    # [file: json]
+    ComplexDemoAssistant:
+
+    # [file: json]
+    ComplexDemoFunctions:
+
+    # [file: json]
+    ErrorHandlingDemoAssistant:
+
+    # [file: json]
+    ErrorHandlingDemoFunctions:

@@ -119,6 +119,8 @@ public class BasicPromptTemplates {
       Metadata:
       {{metadata}}
 
+      You're a computer, don't have ability to talk or explain.
+
       I have a tool in JSON format. Read it carefully:
 
       {{toolJson}}
@@ -131,10 +133,10 @@ public class BasicPromptTemplates {
       1. The request is the last message of the chat history above.
       2. Fulfill value of the tool's attributes from the JSON above by using the request.
       3. If the request is a confirmation such as 'yes', 'agree',... use other message in the history to fulfill the tool.
-      4. Adapt the full version of the JSON above with fulfilled values.
-      5. Characters inside the fulfilled JSON should be parseable.
-      6. Wrap the result inside '<' and '>' characters. Example: <{"name" : "value"}>. DO NOT RETURN THIS FORMAT: '''json {"name" : "value"}''''
-      7. Does the result of the above step wrapped correctly? If not, try to wrap the result then respond it.
+      4. Adapt the full version of the JSON above with fulfilled value
+      5. Characters inside the fulfilled JSON should be parseable. Remove all descriptions from the fulfilled Json.
+      6. Wrap the Json result inside '<' and '>' characters. Example: <{"name" : "value"}>
+      7. Does the result of the above step wrapped correctly? If not, wrap the Json result.
       """;
 
   public static final String DEFAULT_ANSWER = """

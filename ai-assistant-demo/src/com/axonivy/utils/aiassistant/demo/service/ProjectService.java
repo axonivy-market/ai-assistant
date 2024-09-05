@@ -26,4 +26,10 @@ public class ProjectService extends BusinessDataService<Project> {
     save(result);
     return result.getProjectId();
   }
+
+  public Project findByProjectId(String projectId) {
+    return findAll().stream()
+        .filter(project -> project.getProjectId().contentEquals(projectId))
+        .findFirst().orElse(null);
+  }
 }

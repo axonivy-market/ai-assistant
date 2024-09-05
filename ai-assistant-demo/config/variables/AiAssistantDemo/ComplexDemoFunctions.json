@@ -1,0 +1,683 @@
+[
+  {
+    "version": "11.4.0",
+    "id": "find-meeting-room",
+    "name": "Find meeting room",
+    "type": "IVY",
+    "signature": "findMeetingRooms(String,String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find meeting room by name, floor, or available status",
+    "usage": "This tool is helpful when user want to find for a meeting room",
+    "attributes": [
+      {
+        "name": "meetingRoomFloor",
+        "description": "floor of the meeting room. Must be an integer"
+      },
+      {
+        "name": "meetingRoomName",
+        "description": "name of meeting room"
+      },
+      {
+        "name": "onlyAvailable",
+        "description": "Boolean field. If user want to find available room, set to 'true"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "find-employees",
+    "name": "Find employees",
+    "type": "IVY",
+    "signature": "findEmployees(String,String,String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find employees room by name, role, rank, or technology stack",
+    "usage": "This tool is helpful when user want to find employees",
+    "attributes": [
+      {
+        "name": "employeeNames",
+        "description": "List of employee name. Must be separated by comma. Example: 'peter,alex,Johann Schmidt'"
+      },
+      {
+        "name": "employeeRoles",
+        "description": "List of employee roles. valid value: SOFTWARE_ENGINEER, WEB_DESIGNER, TESTER, PROJECT_MANAGER. The value must be separated by comma. Example: 'SOFTWARE_ENGINEER,TESTER'"
+      },
+      {
+        "name": "employeeRanks",
+        "description": "List of employee ranks. Valid value: SENIOR, JUNIOR, PROFESSIONAL. The value must be separated by comma. Example: 'SENIOR,JUNIOR'"
+      },
+      {
+        "name": "employeeTechstacks",
+        "description": "List of technologies. Must be seperated by comma. Example: 'Java,HTML'"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "create-project",
+    "name": "Create project",
+    "type": "IVY",
+    "signature": "createProject(String,String,String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Create a project",
+    "usage": "This tool is helpful when user want to create a project",
+    "attributes": [
+      {
+        "name": "projectName",
+        "description": "Name of the project"
+      },
+      {
+        "name": "projectDescription",
+        "description": "description of the project"
+      },
+      {
+        "name": "members",
+        "description": "Usernames of members of the project. Must be seperated by comma. Example: 'user_001,user_002'"
+      },
+      {
+        "name": "technologies",
+        "description": "List of technologies. Must be seperated by comma. Example: 'Java,HTML'"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "create-project-kickoff-meeting",
+    "name": "Create project kick-off meeting",
+    "type": "IVY",
+    "signature": "createProjectKickoffMeeting(String,String,String,String,String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Create a project kick-off meeting",
+    "usage": "This tool is helpful when user want to create a meeting to start a project",
+    "attributes": [
+      {
+        "name": "projectId",
+        "description": "ID of the project"
+      },
+      {
+        "name": "host",
+        "description": "name of the employee who want to create the meeting"
+      },
+      {
+        "name": "meetingRoomId",
+        "description": "ID of the meeting room for the meeting"
+      },
+      {
+        "name": "time",
+        "description": "The start date of the meeting"
+      },
+      {
+        "name": "title",
+        "description": "name of the meeting"
+      },
+      {
+        "name": "agenda",
+        "description": "The agenda of the meeting"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "plan-software-project-flow",
+    "name": "Plan Software Project",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Gather details to plan a software development project, including description, technologies, and team composition.",
+    "usage": "Use this tool when a user wants to plan a project or he input a project details.",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 2,
+            "case": "User has already defined description"
+          },
+          {
+            "action": 1,
+            "case": "User has not defined description"
+          },
+          {
+            "action": 10,
+            "case": "User defined all necessary information: name, description, technologies, number of software engineers, testers, and web designers."
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TEXT",
+        "text": "Please provide description for the project.",
+        "onSuccess": 0
+      },
+      {
+        "stepNo": 2,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 4,
+            "case": "User provided technologies for the project"
+          },
+          {
+            "action": 3,
+            "case": "User didn't provide technologies for the project"
+          }
+        ]
+      },
+      {
+        "stepNo": 3,
+        "type": "TEXT",
+        "text": "Please let me know the technologies that will be used in the project (e.g., programming languages, frameworks, tools).",
+        "onSuccess": 2
+      },
+      {
+        "stepNo": 4,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 6,
+            "case": "User has already mentioned number of software engineers"
+          },
+          {
+            "action": 5,
+            "case": "User has not mentioned number of software engineers"
+          }
+        ]
+      },
+      {
+        "stepNo": 5,
+        "type": "TEXT",
+        "text": "How many software engineers needed for this project?",
+        "onSuccess": 4
+      },
+      {
+        "stepNo": 6,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 8,
+            "case": "User has already mentioned number of testers"
+          },
+          {
+            "action": 7,
+            "case": "User has not mentioned number of testers"
+          }
+        ]
+      },
+      {
+        "stepNo": 7,
+        "type": "TEXT",
+        "text": "How many testers needed for this project?",
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 8,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 10,
+            "case": "User has already mentioned number of web designers"
+          },
+          {
+            "action": 9,
+            "case": "User has not mentioned number of web designers"
+          }
+        ]
+      },
+      {
+        "stepNo": 9,
+        "type": "TEXT",
+        "text": "How many web designers needed for the project?",
+        "onSuccess": 8
+      },
+      {
+        "stepNo": 10,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Use the conversation above to summarize information of the planned project in a structured format. If user didn't provide a name for the project generete the project name based on description of the project. Example: '**Project name:** ProjectA\n**Project description:** description of projectA\n**Technologies:** tech stack\n**Members:** show member information'. Then add a line to ask if need some update",
+        "onSuccess": 11
+      },
+      {
+        "stepNo": 11,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 12,
+            "case": "User provide some update"
+          },
+          {
+            "action": 13,
+            "case": "User don't want to update"
+          }
+        ]
+      },
+      {
+        "stepNo": 12,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "User made some update, Please adapt the report about the project with those updates and add a line to ask if need other updates",
+        "onSuccess": 13
+      },
+      {
+        "stepNo": 13,
+        "type": "TEXT",
+        "text": "Do you want choose members for the project?",
+        "onSuccess": 14
+      },
+      {
+        "stepNo": 14,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 15,
+            "case": "User agree"
+          },
+          {
+            "action": -1,
+            "case": "User don't agree"
+          }
+        ]
+      },
+      {
+        "stepNo": 15,
+        "type": "TRIGGER_FLOW",
+        "flowId": "choose-member-flow",
+        "triggerMessage": "I want to choose members for my project described above"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "choose-member-flow",
+    "name": "Choose member for a project",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Use this flow when user want to choose member for a project.",
+    "usage": "Use this tool when a user wants to plan a software development project.",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 1,
+            "case": "You can find the details about project"
+          },
+          {
+            "action": -1,
+            "case": "You cannot find project details"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "IVY_TOOL",
+        "toolId": "find-employees",
+        "onSuccess": 3,
+        "onError": 2,
+        "systemMessage" : "Find employees has the tech stack are the technologies above.",
+        "useConversationMemory": true,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "generate message to inform that cannot find any software engineer, web designer, and tester matched the requirements.",
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 3,
+        "type": "TEXT",
+        "text": "I found these suitable employees matched the requirement. Do you want to choose some of them for the project?",
+        "showResultOfStep" : 1,
+        "useConversationMemory": false,
+        "onSuccess": 4
+      },
+      {
+        "stepNo": 4,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 5,
+            "case": "in the last message, user choose some employees from the list"
+          },
+          {
+            "action": -1,
+            "case": "In the last message, user don't choose any employee or he want to skip."
+          },
+          {
+            "action": 10,
+            "case": "User want you to suggest members."
+          }
+        ]
+      },
+      {
+        "stepNo": 5,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Update the project plan. Format for employee details that you should add to the project plan: display name (username: username), example: 'John (user_001)'. Then ask user if he want to update something else.",
+        "useConversationMemory": true,
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 6,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 7,
+            "case": "User agree but don't provide any update"
+          },
+          {
+            "action": 5,
+            "case": "User update project name or description"
+          },
+          {
+            "action": 8,
+            "case": "User update members of the project and those members not in the list above"
+          },
+          {
+            "action": 5,
+            "case": "User update members of the project and those members are in the list above"
+          },
+          {
+            "action": 9,
+            "case": "User don't want any update or he said that he updated enough"
+          },
+          {
+            "action": 10,
+            "case": "User want you to suggest members."
+          }
+        ]
+      },
+      {
+        "stepNo": 7,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a message like 'Please provide updates for the project. I am please to help' with a warm and professional tone.",
+        "useConversationMemory": true,
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "useAI": true,
+        "text": "The employee you want doesn't exist. Please check the employee list above and update again.",
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 9,
+        "type": "TEXT",
+        "text": "Do you want to create the project?",
+        "onSuccess": 11
+      },
+      {
+        "stepNo": 10,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Update the project plan.\nRead the number of members carefully.\nIf there are still some members to select, add member from the list above then add to the project plan. prefer member with higher rank\nIf the number of selected members is more than the project plan, remove some to make the selected members same as the project plan. Prefer to remove member has lower rank.\nFormat for employee details that you should add to the project plan: display name (username: username), example: 'John (user_001)'. Recheck if number of selected members matched with the number of original project plan, if not then correct selected members. Then add a new line, and generate a message to ask user if he want to update something else to the result.",
+        "useConversationMemory": true,
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 11,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 13,
+            "case": "User agree"
+          },
+          {
+            "action": 12,
+            "case": "User don't agree"
+          }
+        ]
+      },
+      {
+        "stepNo": 12,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a message like 'Then please let me know if you have any request.' with a friendly tone.",
+        "useConversationMemory": true,
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 13,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Just show the project plan above.",
+        "useConversationMemory": true,
+        "onSuccess": 14,
+        "isHidden": true
+      },
+      {
+        "stepNo": 14,
+        "type": "TRIGGER_FLOW",
+        "flowId": "create-project-flow",
+        "showResultOfStep": 13,
+        "useConversationMemory": false
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "create-project-flow",
+    "name": "Create Project",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Use this flow when user want to create a project.",
+    "usage": "Use this flow when user want to create a project.",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "IVY_TOOL",
+        "toolId": "create-project",
+        "onSuccess": 2,
+        "onError": 1,
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 1,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "The project didn't saved successfully. Please read the message above from AI and tell user why it was not saved successful.",
+        "useConversationMemory": false,
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a message: 'Project **project_name** (ID: project_id) was created successfully.\nDo you want to start the kick-off meeting for it?'. Replace project_name with the project name, project_id with the ID from the latest AI message above",
+        "useConversationMemory": false,
+        "onSuccess": 3
+      },
+      {
+        "stepNo": 3,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 4,
+            "case": "User agree"
+          },
+          {
+            "action": -1,
+            "case": "User don't agree"
+          }
+        ]
+      },
+      {
+        "stepNo": 4,
+        "type": "TRIGGER_FLOW",
+        "flowId": "book-project-meeting-flow",
+        "showResultOfStep": 2,
+        "useConversationMemory": false
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "book-project-meeting-flow",
+    "name": "Create project's kick-off meeting",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Use this flow when user want to book a meeting for a project.",
+    "usage": "Use this flow when user want to make a meeting for a project.",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a message like 'When you want to start the meeting?'",
+        "useConversationMemory": false,
+        "onSuccess": 1
+      },
+      {
+        "stepNo": 1,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 3,
+            "case": "User mentioned a date and it's valid for a future meeting."
+          },
+          {
+            "action": 2,
+            "case": "User doesn't mention about a date or the date he mentioned is not valid for a future meeting."
+          }
+        ]
+      } , {
+        "stepNo": 2,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "User mentioned an invalid date for a future meeting. Please pointed out why the date is not correct and ask user to suggest another date.",
+        "useConversationMemory": false,
+        "onSuccess": 1
+      },
+      {
+        "stepNo": 3,
+        "type": "IVY_TOOL",
+        "toolId": "find-meeting-room",
+        "onSuccess": 5,
+        "onError": 4,
+        "systemMessage" : "Find only available meeting room",
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 4,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Genereate a message with content: I cannot find any available meeting room for you.",
+        "useConversationMemory": false,
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 5,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Genereate a message with content: 'I found free meeting rooms. Please choose one of them'. Then show info about the meeting rooms found above. Format them in a readable format.",
+        "useConversationMemory": false,
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 6,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 8,
+            "case": "User choose a meeting room from the list AI suggest above"
+          },
+          {
+            "action": 7,
+            "case": "User doesn't choose a meeting room or the room he choose is not in the list AI suggest above"
+          }
+        ]
+      },
+      {
+        "stepNo": 7,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a message like 'Sorry I cannot continue to help you if you don't choose a meeting room'",
+        "useConversationMemory": false,
+        "onSuccess": 6
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Summarize information of the meeting based on the conversation above in a structured format:\nTitle: 'Kick off meeting for project' + name of the planned project\nAgenda: Discuss about details of the project\nHost: username in the metadata\nTime: the date user choose above\nMeeting room: The name and floor of the meeting room user choose above\nParticipants: members of the planned project' and add a line to ask if need some update, note that user can only update time or meeting room.",
+        "useConversationMemory": false,
+        "onSuccess": 9
+      },
+      {
+        "stepNo": 9,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 10,
+            "case": "User make some update for the meeting"
+          },
+          {
+            "action": -1,
+            "case": "User want to cancel"
+          },
+          {
+            "action": 11,
+            "case": "User don't want to make other update, or he said it's good."
+          }
+        ]
+      },
+      {
+        "stepNo": 10,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "User updated information for the meeting, please update it and show him. Then add a line to ask if need some update.",
+        "useConversationMemory": false,
+        "onSuccess": 9
+      },
+      {
+        "stepNo": 11,
+        "type": "IVY_TOOL",
+        "toolId": "create-project-kickoff-meeting",
+        "onSuccess": 12,
+        "onError": 13,
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 12,
+        "type": "TEXT",
+        "text": "Your project kick-off meeting has been booked. I sent invitation tasks to all members.",
+        "useConversationMemory": false,
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 13,
+        "type": "TEXT",
+        "text": "Something went wrong when create the kick-off meeting for project. Please try again later.",
+        "useConversationMemory": false,
+        "onSuccess": -1
+      }
+    ]
+  }
+]

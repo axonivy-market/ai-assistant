@@ -426,6 +426,10 @@ function ViewAI(uri) {
 
   // Rendering message from AI flow
   this.renderAiFlowMessage = function (message) {
+    if (!message) {
+        return;
+	}
+
     var messages = message.split('\r\n\r\n');
     messages.forEach(line => {
       if (line.trim() != '') {

@@ -2,7 +2,9 @@ package com.axonivy.utils.aiassistant.demo.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -16,9 +18,12 @@ import com.axonivy.utils.aiassistant.demo.dto.Employee;
 import com.axonivy.utils.aiassistant.demo.enums.Ranking;
 import com.axonivy.utils.aiassistant.demo.enums.Role;
 
+import ch.ivyteam.ivy.application.IApplication;
+
 public class EmployeeService extends BusinessDataService<Employee> {
 
   private static final String RESULT_FORMAT = "Name:%s (%s), role: %s";
+  private static final String EMPLOYEE_LIST_PROCESS_PATH = "/ai-assistant-demo/Processes/Start Processes/InteractiveIframeDemo/employeeList.ivp";
 
   @Override
   public Class<Employee> getType() {
@@ -142,5 +147,124 @@ public class EmployeeService extends BusinessDataService<Employee> {
     result.setResultForAI(resultStr);
     result.setState(AIState.DONE);
     return result;
+  }
+
+  public AiResultDTO findByAIForInteraction(String names, String roles,
+      String ranks, String techStack) {
+    List<String> nameList = new ArrayList<>();
+    if (StringUtils.isNotBlank(names)) {
+      nameList = Arrays.asList(names.split(","));
+    }
+
+    List<Role> roleList = new ArrayList<>();
+    if (StringUtils.isNotBlank(roles)) {
+      List<String> rolesStr = Arrays.asList(roles.split(","));
+      for (String childRole : rolesStr) {
+        Role role = Role.valueOf(childRole.strip());
+
+        if (role == null) {
+          return AiAssistantAPI.generateErrorAiResult(
+              String.format("Role %s is not valid", childRole.strip()));
+        }
+        roleList.add(role);
+      }
+    }
+
+    List<Ranking> rankList = new ArrayList<>();
+    if (StringUtils.isNotBlank(ranks)) {
+      List<String> ranksStr = Arrays.asList(ranks.split(","));
+      for (String childRank : ranksStr) {
+        Ranking rank = Ranking.valueOf(childRank.strip());
+
+        if (rank == null) {
+          return AiAssistantAPI.generateErrorAiResult(
+              String.format("Rank %s is not valid", childRank.strip()));
+        }
+        rankList.add(rank);
+      }
+    }
+
+    List<String> techs = new ArrayList<>();
+    if (StringUtils.isNotBlank(techStack)) {
+      techs = Arrays.asList(techStack.split(","));
+    }
+
+    List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
+    String resultStr = "Found employees:".concat(System.lineSeparator());
+    for (Employee emp : data) {
+      resultStr = resultStr
+          .concat(
+              String
+                  .format(RESULT_FORMAT, emp.getDisplayName(),
+                      emp.getUsername(), emp.getRole().getRoleName())
+                  .concat(System.lineSeparator()));
+    }
+
+    AiResultDTO result = new AiResultDTO();
+
+    Map<String, String> params = new HashMap<>();
+
+    if (StringUtils.isNotBlank(names)) {
+      params.put("employeeNames", names);
+    }
+
+    if (StringUtils.isNotBlank(roles)) {
+      params.put("employeeRoles", roles);
+    }
+
+    if (StringUtils.isNotBlank(ranks)) {
+      params.put("employeeRanks", ranks);
+    }
+
+    if (StringUtils.isNotBlank(techStack)) {
+      params.put("employeeTechstacks", techStack);
+    }
+
+    String processPath = IApplication.current().getName()
+        .concat(EMPLOYEE_LIST_PROCESS_PATH);
+
+    AiAssistantAPI.addIframeIvyProcessLinkToAiResult(processPath, params,
+        result);
+
+    result.setResultForAI(resultStr);
+    result.setState(AIState.DONE);
+    return result;
+  }
+
+  public List<Employee> findByUser(String names, String roles, String ranks,
+      String techStack) {
+    List<String> nameList = new ArrayList<>();
+    if (StringUtils.isNotBlank(names)) {
+      nameList = Arrays.asList(names.split(","));
+    }
+
+    List<Role> roleList = new ArrayList<>();
+    if (StringUtils.isNotBlank(roles)) {
+      List<String> rolesStr = Arrays.asList(roles.split(","));
+      for (String childRole : rolesStr) {
+        Role role = Role.valueOf(childRole.strip());
+        if (role != null) {
+          roleList.add(role);
+        }
+      }
+    }
+
+    List<Ranking> rankList = new ArrayList<>();
+    if (StringUtils.isNotBlank(ranks)) {
+      List<String> ranksStr = Arrays.asList(ranks.split(","));
+      for (String childRank : ranksStr) {
+        Ranking rank = Ranking.valueOf(childRank.strip());
+        if (rank != null) {
+          rankList.add(rank);
+        }
+      }
+    }
+
+    List<String> techs = new ArrayList<>();
+    if (StringUtils.isNotBlank(techStack)) {
+      techs = Arrays.asList(techStack.split(","));
+    }
+
+    return findByCriteria(nameList, roleList, rankList, techs);
   }
 }

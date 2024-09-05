@@ -3,6 +3,7 @@ package com.axonivy.utils.aiassistant.demo.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -58,12 +59,33 @@ public class MeetingRoomService extends BusinessDataService<MeetingRoom> {
 
   public AiResultDTO findByAI(String name, String floor,
       String isOnlyAvaliable) {
-    List<MeetingRoom> data = findByCriteria(name, floor, isOnlyAvaliable);
-    String dataJson = BusinessEntityConverter.entityToJsonValue(data);
     AiResultDTO result = new AiResultDTO();
+    List<MeetingRoom> data = findByCriteria(name, floor, isOnlyAvaliable);
+    if (CollectionUtils.isEmpty(data)) {
+      result.setResult("No avaiable room.");
+      result.setResultForAI("No avaiable room.");
+      result.setState(AIState.ERROR);
+      return result;
+    }
+
+    String dataJson = BusinessEntityConverter.entityToJsonValue(data);
     result.setResult(dataJson);
     result.setResultForAI(dataJson);
     result.setState(AIState.DONE);
     return result;
+  }
+
+  public MeetingRoom findByMeetingRoomId(String id) {
+    return findAll().stream().filter(room -> room.getRoomId().contentEquals(id))
+        .findFirst().orElse(null);
+  }
+
+  public void deleteAll() {
+    List<MeetingRoom> found = findAll();
+    if (CollectionUtils.isNotEmpty(found)) {
+      for (var room : found) {
+        repo().delete(room);
+      }
+    }
   }
 }
