@@ -1,0 +1,27 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/11.4.0/data-class.json",
+  "simpleName" : "IssueReportFormData",
+  "namespace" : "com.axon.market.ai.assistant.demo.IssueReportForm",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "ticket",
+    "type" : "com.axonivy.utils.aiassistant.demo.dto.ReportTicket",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "reporterDisplayname",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "reporterUsername",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "types",
+    "type" : "java.util.List<com.axonivy.utils.aiassistant.demo.enums.ReportType>",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "isSubmitted",
+    "type" : "Boolean",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}
