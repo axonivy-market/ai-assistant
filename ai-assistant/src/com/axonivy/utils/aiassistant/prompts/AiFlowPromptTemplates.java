@@ -19,36 +19,8 @@ public class AiFlowPromptTemplates {
 
   public static final String CHECK_USER_MESSAGE_STEP = """
       Instructions:
-
-      Show <0> when:
-      User's last message indicates cancellation or disinterest.
-      Examples:
-        - AI doesn't ask a question, but User replies with "cancel" or "never mind." or User's answer doesn't make sense.
-
-        - User explicitly states they want to cancel.
-          AI: Do you want to start this task?
-          User: No, let's cancel.
-
-      Show <1> when:
-      User's last message is off-topic or unrelated to the chat history.
-      Examples: The context is about "cases," but User mentions "process."
-
-      Show <2> when:
-      User's last message continues the context of the chat.
-      Examples:
-        - Chat is about "cases," and User continues discussing "cases."
-
-        - AI asks a question, and User's reply makes sense.
-          AI: Do you want to start this process now?
-          User: No
-
-        - User agrees with AI's question.
-          AI: Do you want to proceed?
-          User: Yes
-
-        - AI asks for updates, and User declines.
-          AI: I updated your info. Do you want anything else updated?
-          User: No
+      - Show <1> when: User's last message is off-topic or unrelated to the chat history.
+      - Show <2> when: User's last message continues the context of the chat.
 
       This is the chat history:
 

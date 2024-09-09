@@ -23,15 +23,6 @@ public class BasicPromptTemplates {
       - Website: {{contactWebsite}}
       """;
 
-  public static final String DETECT_LANGUAGE = """
-      I have a message:
-
-      {{input}}
-
-      I want you to detect language of the message and response it inside <>. Example: <English>
-      If the message could be in multiple languages, prefer the more popular language, and always prefer English over other languages.
-      """;
-
   public static final String RAG_PROMPT_TEMPLATE = """
       This is information about the person you should act as:
       {{info}}
@@ -65,27 +56,11 @@ public class BasicPromptTemplates {
       Answer:
       """;
 
-  public static final String EXTRACT_KEYWORD = """
-      You are a perfect search engine, and text analyst.
-      You are capable of extracting meaningful keywords from documents so later I can find correct document based on the mentioned keywords.
-      Please help me extract keywords from this document. Keywords should matched criteria:
-      - Ignore "\n" character
-      - Keywords should have meaning, or a field name. Don't just get meaningless characters
-      - If you cannot find keywords, show "NA", don't try to create a new keyword that not existed in the given document.
-
-      If there are many keywords, only get top 5 keywords which most relevant to the document.
-      Please don't chat, just show keywords separated by comma.
-
-      This is the document you need to analyze:
-
-      user message: {{doc}}
-      """;
-
   public static final String CHOOSE_FUNCTION = """
-       You are a professional assistant. Your job is categorize message is a question or a request to do something.
+       Categorize message is a question or a request to do something.
        Then you will choose a tool from a list of tools to handle the message.
 
-       These are the tools you can use:
+       Tool list:
 
       {{functions}}
 
@@ -133,10 +108,10 @@ public class BasicPromptTemplates {
       1. The request is the last message of the chat history above.
       2. Fulfill value of the tool's attributes from the JSON above by using the request.
       3. If the request is a confirmation such as 'yes', 'agree',... use other message in the history to fulfill the tool.
-      4. Adapt the full version of the JSON above with fulfilled value
-      5. Characters inside the fulfilled JSON should be parseable. Remove all descriptions from the fulfilled Json.
-      6. Wrap the Json result inside '<' and '>' characters. Example: <{"name" : "value"}>
-      7. Does the result of the above step wrapped correctly? If not, wrap the Json result.
+      4. Characters inside the fulfilled JSON should be parseable. Remove all descriptions from the fulfilled Json.
+      5. Wrap the Json result inside '<' and '>' characters. Show the result exactly same as the below format
+
+      <[{"name":"attr_1","value":"1"},{"name":"attr_2","value":null}]}>
       """;
 
   public static final String DEFAULT_ANSWER = """

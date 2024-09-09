@@ -139,7 +139,6 @@ public class AssistantRestService {
       conversation.setId(conversationId);
     }
 
-    Ivy.log().error(payload.getSelectedFunctionId());
     String message = payload.getMessage();
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
@@ -173,14 +172,10 @@ public class AssistantRestService {
 
     Map<String, Object> languageParam = new HashMap<>();
     languageParam.put("input", request);
-    String language = Optional
-        .ofNullable(AiStep.extractTextInsideTag(assistant.getAiModel()
-            .getAiBot()
-            .chat(languageParam, BasicPromptTemplates.DETECT_LANGUAGE)))
-        .orElse("English");
 
     Map<String, Object> params = new HashMap<>();
-    params.put("language", language);
+    params.put("language",
+        Ivy.session().getContentLocale().getDisplayCountry());
     params.put("tools", BusinessEntityConverter.getObjectMapper()
         .writeValueAsString(assistant.getToolkit()));
     params.put("ethicalRules", assistant.formatEthicalRules());
@@ -311,12 +306,8 @@ public class AssistantRestService {
     Map<String, Object> params = new HashMap<>();
     params.put("input", message);
 
-    String language = Optional
-        .ofNullable(AiStep.extractTextInsideTag(assistant.getAiModel()
-            .getAiBot().chat(params, BasicPromptTemplates.DETECT_LANGUAGE)))
-        .orElse("English");
-
-    params.put("language", language);
+    params.put("language",
+        Ivy.session().getContentLocale().getDisplayCountry());
     params.put("info", assistant.getInfo());
     params.put("ethicalRules",
         Optional.ofNullable(assistant.formatEthicalRules()).orElse("<None>"));
@@ -383,8 +374,7 @@ public class AssistantRestService {
   private String chooseFunction(Assistant assistant, Conversation conversation)
       throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
-    params.put("functions", BusinessEntityConverter.getObjectMapper()
-        .writeValueAsString(assistant.getToolkit()));
+    params.put("functions", assistant.formatFunctionsForChoose());
     params.put("memory",
         AiFunction.getFormattedMemory(conversation.getMemory()));
 

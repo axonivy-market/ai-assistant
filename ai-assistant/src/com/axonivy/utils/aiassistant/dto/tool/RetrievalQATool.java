@@ -1,8 +1,6 @@
 package com.axonivy.utils.aiassistant.dto.tool;
 
-import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
 import com.axonivy.utils.aiassistant.enums.ToolType;
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class RetrievalQATool extends AiFunction {
 
@@ -25,10 +23,5 @@ public class RetrievalQATool extends AiFunction {
   @Override
   public ToolType getType() {
     return ToolType.RETRIEVAL_QA;
-  }
-
-  @Override
-  public JsonNode buildJsonNode() {
-    return BusinessEntityConverter.entityToJsonNode(this);
   }
 }

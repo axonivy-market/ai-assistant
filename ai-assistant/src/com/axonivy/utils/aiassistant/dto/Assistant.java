@@ -24,6 +24,7 @@ public class Assistant extends AbstractConfiguration implements Serializable {
 
   private static final String DEFAULT_INFO = "You are a professional, helpful, and kind assistant for a business management process called Axon Ivy. You have the duty to answer questions from customers.";
   public static final String DEFAULT_AVATAR_URI = "/Logo/DefaultLogo";
+  private static final String CHOOSE_FUNCTION_PATTERN = "ID: %s\r\n   -Type: %s\r\n   - Usage: %s";
 
   private String templateId;
   private String aiModelName;
@@ -208,6 +209,20 @@ public class Assistant extends AbstractConfiguration implements Serializable {
       return result;
     }
     return "";
+  }
+
+  public String formatFunctionsForChoose() {
+    if (CollectionUtils.isEmpty(toolkit)) {
+      return "";
+    }
+    String result = "";
+    for (AiFunction function : toolkit) {
+      result = result
+          .concat(String.format(CHOOSE_FUNCTION_PATTERN, function.getId(),
+              function.getType().name(), function.getUsage()))
+          .concat(System.lineSeparator());
+    }
+    return result;
   }
 
   public String getAiModelName() {

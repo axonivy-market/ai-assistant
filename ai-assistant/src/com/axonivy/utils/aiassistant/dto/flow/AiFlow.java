@@ -12,7 +12,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
-import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.history.Conversation;
@@ -23,7 +22,6 @@ import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
@@ -81,7 +79,15 @@ public class AiFlow extends AiFunction {
     assistant = workingAssistant;
     init();
     if (getWorkingStep() == DEFAULT_DONE_STEP) {
+      if (finalResult == null) {
+        initDefaultFinalResult();
+      }
       state = AIState.DONE;
+      conversation.getHistory()
+          .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
+      conversation.getMemory()
+          .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
+      ChatMessageManager.saveConversation(assistant.getId(), conversation);
       return;
     }
 
@@ -263,11 +269,6 @@ public class AiFlow extends AiFunction {
     return ToolType.FLOW;
   }
 
-  @Override
-  public JsonNode buildJsonNode() {
-    return BusinessEntityConverter.entityToJsonNode(this);
-  }
-
   public List<AiStep> getSteps() {
     return steps;
   }
@@ -343,6 +344,15 @@ public class AiFlow extends AiFunction {
     result.setResultForAI(request);
     result.setState(AIState.DONE);
     return result;
+  }
+
+  private void initDefaultFinalResult() {
+    finalResult = new AiResultDTO();
+    finalResult.setState(AIState.DONE);
+    finalResult
+        .setResult("Please let me know if you have any further requests.");
+    finalResult
+        .setResultForAI("Please let me know if you have any further requests.");
   }
 
   public Map<String, String> getMetadatas() {

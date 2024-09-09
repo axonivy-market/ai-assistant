@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
@@ -21,6 +23,7 @@ import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
@@ -117,21 +120,52 @@ public class IvyTool extends AiFunction {
   public IvyTool fullfilIvyTool(List<ChatMessage> memory,
       AbstractAIBot bot, String metadata) throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
-    params.put("toolJson", BusinessEntityConverter.getObjectMapper()
-        .writeValueAsString(BusinessEntityConverter.entityToJsonNode(this)));
+    params.put("toolJson", buildJsonNodeForFulfillRequest().toString());
 
     params.put("memory", getFormattedMemory(memory));
     params.put("metadata", metadata);
 
-    return BusinessEntityConverter.jsonValueToEntity(
-        AiStep.extractTextInsideTag(
-            bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL)),
-        IvyTool.class);
+    List<IvyToolAttribute> fulfilled = BusinessEntityConverter
+        .jsonValueToEntities(
+            AiStep.extractTextInsideTag(
+                bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL)),
+            IvyToolAttribute.class);
+
+    if (CollectionUtils.isEmpty(fulfilled)) {
+      return this;
+    }
+
+    for (IvyToolAttribute fulfilledAttribute : fulfilled) {
+      attributes.stream()
+          .filter(attr -> attr.getName()
+              .contentEquals(fulfilledAttribute.getName()))
+          .findFirst().get().setValue(fulfilledAttribute.getValue());
+    }
+
+    return this;
   }
 
-  @Override
-  public JsonNode buildJsonNode() {
-    return BusinessEntityConverter.entityToJsonNode(this);
+  /**
+   * Remove unnecessary fields when fulfill values for attributes to reduce
+   * number of tokens and make the request more clean, simple.
+   * 
+   * @return
+   */
+  private JsonNode buildJsonNodeForFulfillRequest() {
+    ObjectNode current = (ObjectNode) BusinessEntityConverter
+        .entityToJsonNode(this);
+    current.remove("type");
+    current.remove("version");
+    current.remove("name");
+    current.remove("usage");
+    current.remove("permissions");
+    current.remove("signature");
+    current.remove("default");
+    current.get("attributes").forEach(attr -> {
+      ObjectNode attribute = (ObjectNode) attr;
+      attribute.remove("required");
+    });
+    return current;
   }
 
   public String getUseTool() {

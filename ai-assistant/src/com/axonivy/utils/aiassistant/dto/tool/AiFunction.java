@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
@@ -83,8 +82,6 @@ public abstract class AiFunction extends AbstractConfiguration
   }
 
   public abstract ToolType getType();
-
-  public abstract JsonNode buildJsonNode();
 
   @JsonIgnore
   protected boolean hasPermision() {

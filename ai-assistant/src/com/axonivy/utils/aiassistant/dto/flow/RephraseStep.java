@@ -18,11 +18,11 @@ import com.axonivy.utils.aiassistant.dto.tool.IvyTool;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
-
 public class RephraseStep extends AiStep {
 
   private static final long serialVersionUID = -4106563714989416129L;
 
+  private static final String EXAMPLE_FORMAT = "before: %s ; after: %s";
   private String toolId;
   private Integer onRephrase;
   private List<RephraseExample> examples;
@@ -89,9 +89,9 @@ public class RephraseStep extends AiStep {
     if (CollectionUtils.isNotEmpty(examples)) {
       String result = "";
       for (RephraseExample example : examples) {
-        String line = "before: " + example.getBefore() + System.lineSeparator()
-            + "after: " + example.getAfter();
-        result = result.concat(line);
+        result = result.concat(String.format(EXAMPLE_FORMAT,
+            example.getBefore(), example.getAfter()))
+            .concat(System.lineSeparator());
       }
       return result;
     }

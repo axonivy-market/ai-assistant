@@ -137,7 +137,6 @@
       {
         "stepNo": 0,
         "type": "RE_PHRASE",
-        "useConversationMemory": true,
         "toolId": "find-users",
         "onRephrase": 2,
         "onSuccess": 1,
@@ -164,8 +163,7 @@
       {
         "stepNo": 2,
         "type": "TEXT",
-        "useAi": true,
-        "customInstruction": "Generate a question similar to 'I have rephrased your request to find user. Could you please confirm if it is correct?'", 
+        "text": "I have rephrased your request to find user. Could you please confirm if it is correct?", 
         "showResultOfStep": 0,
         "onSuccess": 3
       },
@@ -359,8 +357,9 @@
         "stepNo": 1,
         "type": "IVY_TOOL",
         "toolId": "find-tasks",
-        "onSuccess": -1,
-        "onError": 4
+        "onSuccess": 6,
+        "onError": 4,
+        "saveToHistory": false
       },
       {
         "stepNo": 2,
@@ -402,8 +401,19 @@
           {
             "action": 0,
             "case": "User say he want to cancel or he make another request that irrelevant to the find task function"
+          },
+          {
+            "action": 6,
+            "case": "User say good or thank you."
           }
         ]
+      },
+      {
+        "stepNo": 6,
+        "type": "TEXT",
+        "text": "I'm glad to help. Please let me know if you have any further requests.",
+        "onSuccess": -1,
+        "showResultOfStep": 1
       }
     ]
   },
@@ -428,7 +438,6 @@
       {
         "stepNo": 1,
         "type": "RE_PHRASE",
-        "useConversationMemory": true,
         "toolId": "find-processes",
         "onRephrase": 2,
         "onSuccess": 0,
@@ -454,8 +463,7 @@
       {
         "stepNo": 2,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'I have rephrased your request as follows. Could you please confirm if it is correct?'",
+        "text": "I have rephrased your request as follows. Could you please confirm if it is correct?",
         "showResultOfStep": 1,
         "onSuccess": 3
       },
@@ -482,13 +490,12 @@
         "type": "IVY_TOOL",
         "toolId": "find-processes",
         "onSuccess": -1,
-        "onError": 3
+        "onError": 5
       },
       {
-        "stepNo": 3,
+        "stepNo": 5,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'No matching processes.'",
+        "text": "Sorry I cannot find any process matched your request",
         "onSuccess": -1
       }
     ]
