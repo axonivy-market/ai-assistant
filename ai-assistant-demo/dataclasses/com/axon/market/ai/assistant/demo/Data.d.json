@@ -59,13 +59,5 @@
     "name" : "employees",
     "type" : "List<com.axonivy.utils.aiassistant.demo.dto.Employee>",
     "modifiers" : [ "PERSISTENT" ]
-  }, {
-    "name" : "reporterUsername",
-    "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
-  }, {
-    "name" : "reportTicket",
-    "type" : "com.axonivy.utils.aiassistant.demo.dto.ReportTicket",
-    "modifiers" : [ "PERSISTENT" ]
   } ]
 }
