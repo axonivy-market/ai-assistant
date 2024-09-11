@@ -7,7 +7,7 @@
         "projects": [
           {
             "groupId": "MY-GROUP-ID",
-            "artifactId": "MY-PRODUCT-NAME-demo",
+            "artifactId": "ai-assistant-demo",
             "version": "${version}",
             "type": "iar"
           }
@@ -29,7 +29,7 @@
         "dependencies": [
           {
             "groupId": "MY-GROUP-ID",
-            "artifactId": "MY-PRODUCT-NAME",
+            "artifactId": "ai-assistant",
             "version": "${version}",
             "type": "iar"
           }
@@ -51,7 +51,7 @@
         "dependencies": [
           {
             "groupId": "MY-GROUP-ID",
-            "artifactId": "MY-PRODUCT-NAME",
+            "artifactId": "ai-assistant",
             "version": "${version}"
           }
         ],
