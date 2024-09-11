@@ -10,13 +10,17 @@ import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TriggerFlowStep extends AiStep {
 
   private static final long serialVersionUID = 7837813829785223781L;
 
   private String flowId;
+
+  @JsonIgnore
   private AiFunction function;
+
   private String triggerMessage;
   private Integer showResultOfStep;
 

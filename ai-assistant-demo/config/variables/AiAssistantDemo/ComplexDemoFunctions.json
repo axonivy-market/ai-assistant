@@ -327,7 +327,7 @@
         "toolId": "find-employees",
         "onSuccess": 3,
         "onError": 2,
-        "systemMessage" : "Find employees has the tech stack are the technologies above.",
+        "customInstruction" : "Find employees has the tech stack are the technologies above.",
         "useConversationMemory": true,
         "saveToHistory": false
       },
@@ -579,7 +579,7 @@
         "toolId": "find-meeting-room",
         "onSuccess": 5,
         "onError": 4,
-        "systemMessage" : "Find only available meeting room",
+        "customInstruction" : "Find only available meeting room",
         "useConversationMemory": false
       },
       {

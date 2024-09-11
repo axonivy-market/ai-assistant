@@ -17,7 +17,6 @@ public class IvyToolStep extends AiStep {
   private static final long serialVersionUID = 3979398095155133272L;
 
   private String toolId;
-  private String systemMessage;
 
   @Override
   public StepType getType() {
@@ -35,8 +34,8 @@ public class IvyToolStep extends AiStep {
   @Override
   public void run(String message, List<ChatMessage> memory,
       Map<String, String> metadatas, Assistant assistant) {
-    if (StringUtils.isNotBlank(systemMessage)) {
-      memory.add(ChatMessage.newSystemMessage(systemMessage));
+    if (StringUtils.isNotBlank(getCustomInstruction())) {
+      memory.add(ChatMessage.newSystemMessage(getCustomInstruction()));
     }
     IvyTool tool = (IvyTool) AiFunctionService.getInstance()
         .findById(this.toolId);
@@ -47,13 +46,5 @@ public class IvyToolStep extends AiStep {
     } catch (JsonProcessingException e) {
       setResult(createSomethingWentWrongError());
     }
-  }
-
-  public String getSystemMessage() {
-    return systemMessage;
-  }
-
-  public void setSystemMessage(String systemMessage) {
-    this.systemMessage = systemMessage;
   }
 }
