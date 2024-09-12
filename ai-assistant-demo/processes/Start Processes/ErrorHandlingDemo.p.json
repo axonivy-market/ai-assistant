@@ -22,7 +22,7 @@
       "id" : "f1",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 816, "y" : 264 },
+        "at" : { "x" : 1048, "y" : 264 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -43,7 +43,7 @@
         "sudo" : true
       },
       "visual" : {
-        "at" : { "x" : 688, "y" : 264 }
+        "at" : { "x" : 920, "y" : 264 }
       },
       "connect" : [
         { "id" : "f3", "to" : "f1", "color" : "default" }
@@ -93,12 +93,14 @@
         "at" : { "x" : 520, "y" : 264 }
       },
       "connect" : [
-        { "id" : "f6", "to" : "f11", "color" : "default" }
+        { "id" : "f6", "to" : "f16", "color" : "default" }
       ]
     }, {
       "id" : "f8",
       "type" : "ProcessAnnotation",
       "name" : [
+        "RUN THIS PROCESS TO START THE DEMO",
+        "",
         "DATA PREPARATION:",
         "     - Delete all meeting room data",
         "     - Create an assistant with:",
@@ -123,6 +125,20 @@
       },
       "connect" : [
         { "id" : "f9", "to" : "f0" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "SubProcessCall",
+      "name" : "Back up assistant and functions variables",
+      "config" : {
+        "processCall" : "CallableProcesses/BackupDataUtils:backupAssistantAndFunctions()"
+      },
+      "visual" : {
+        "at" : { "x" : 720, "y" : 264 },
+        "size" : { "width" : 176, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f11", "color" : "default" }
       ]
     } ]
 }

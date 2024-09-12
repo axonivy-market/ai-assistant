@@ -12,3 +12,9 @@ Variables:
 
     # [file: json]
     ErrorHandlingDemoFunctions:
+
+    # [file: json]
+    BackupForDemoAssistant:
+
+    # [file: json]
+    BackupForDemoFunctions:

@@ -1,0 +1,42 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "191E5C957E67EF99",
+  "config" : {
+    "data" : "com.axon.market.ai.assistant.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "restoreData",
+      "config" : {
+        "signature" : "restoreData"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 392, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "SubProcessCall",
+      "name" : "Restore assistant and functions variables",
+      "config" : {
+        "processCall" : "CallableProcesses/BackupDataUtils:restoreAssistantAndFunctions()"
+      },
+      "visual" : {
+        "at" : { "x" : 244, "y" : 65 },
+        "size" : { "width" : 136, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    } ]
+}

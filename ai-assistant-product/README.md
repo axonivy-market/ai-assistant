@@ -10,6 +10,9 @@ YOUR DESCRIPTION GOES HERE: Please just give a short description here without fu
 
 In the **ai-assistant-demo** Ivy project, we created demo assistants which can help you understand and develop your own AI assistant more effeciency.
 
+> [!IMPORTANT]
+> Whenever you run any demo below, we backup your current functions and assistants then replace them with functions and assistant of the demo. Therefore, after you finish using the demo, run the process `restoreData` to get back the original assistants and functions.
+
 #### Complex Demo
 
 **Use case**
