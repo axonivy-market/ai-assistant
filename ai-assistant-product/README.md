@@ -132,34 +132,34 @@ And this is the AI flow:
 Below is an example how the conversation look like when user using the `find-employees-flow`:
 
 **legends:**
-$\textcolor{orange}{{User}}$: User message
 
-$\textcolor{blue}{{AI}}$: The message that AI show on the screen
-
-$\textcolor{green}{{AI}}$: The message that AI talking to itself and don't show to user
+😄: User message
+🐼: The message that AI show on the screen
+✨: The message that AI talking to itself and don't show to user
 
 **conversation:**
-$\textcolor{orange}{{User: Hello AI}}$
 
-$\textcolor{blue}{{AI: Hi User}}$
+😄: Hello AI
 
-$\textcolor{orange}{{User: I want to find Sandy, she is a web developer work for our Munich office}}$
+🐼: Hi User
 
-$\textcolor{green}{{AI: find employee has name ‘Sandy’, position ‘web developer’, and work at branch ‘Munich’}}$
+😄: I want to find Sandy, she is a web developer work for our Munich office
 
-$\textcolor{green}{{AI: <use Ivy Tool find-employees to find employees>}}$
+✨ `find employee has name ‘Sandy’, position ‘web developer’, and work at branch ‘Munich’`
 
-$\textcolor{green}{{AI: [ {“name”: “Sandy Williams“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Senior”, “email”: “sandyw@localhost.com”}]}}$
+✨: `<use Ivy Tool find-employees to find employees>`
 
-$\textcolor{green}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
+✨: `[ {“name”: “Sandy Williams“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Senior”, “email”: “sandyw@localhost.com”}]`
 
-$\textcolor{blue}{{AI: I found 2 employees matched your request:}}$
+✨: `[ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]`
 
-$\textcolor{blue}{{Sandy Williams: Senior Web developer, email: sandyw@localhost.com,  branch: Munich}}$
+🐼: I found 2 employees matched your request:
 
-$\textcolor{blue}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
+🐼: Sandy Williams: Senior Web developer, email: sandyw@localhost.com,  branch: Munich
 
-$\textcolor{green}{{AI: <end the flow>}}$
+🐼: Sandy Brown: Junior Web developer, email: sandyb@localhost.com,  branch: Munich.
+
+✨: `<end the flow>`
 
 ## Setup
 
