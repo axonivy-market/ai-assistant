@@ -132,22 +132,34 @@ And this is the AI flow:
 Below is an example how the conversation look like when user using the `find-employees-flow`:
 
 **legends:**
-$\textcolor{#fedec8}{{User}}$: User message
-$\textcolor{#c6edfb}{{AI}}$: The message that AI show on the screen
-$\textcolor{#d3f1a7}{{AI}}$: The message that AI talking to itself and don't show to user
+$\textcolor{orange}{{User}}$: User message
+
+$\textcolor{blue}{{AI}}$: The message that AI show on the screen
+
+$\textcolor{green}{{AI}}$: The message that AI talking to itself and don't show to user
 
 **conversation:**
-$\textcolor{#fedec8}{{User: Hello AI}}$
-$\textcolor{#c6edfb}{{AI: Hi User}}$
-$\textcolor{#fedec8}{{User: I want to find Sandy, she is a web developer work for our Munich office}}$
-$\textcolor{#d3f1a7}{{AI: find employee has name ‘Sandy’, position ‘web developer’, and work at branch ‘Munich’}}$
-$\textcolor{#d3f1a7}{{AI: <use Ivy Tool find-employees to find employees>}}$
-$\textcolor{#d3f1a7}{{AI: [ {“name”: “Sandy Williams“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Senior”, “email”: “sandyw@localhost.com”}]}}$
-$\textcolor{#d3f1a7}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
-$\textcolor{#c6edfb}{{AI: I found 2 employees matched your request:}}$
-$\textcolor{#c6edfb}{{Sandy Williams: Senior Web developer, email: sandyw@localhost.com,  branch: Munich}}$
-$\textcolor{#c6edfb}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
-$\textcolor{#d3f1a7}{{AI: <end the flow>}}$
+$\textcolor{orange}{{User: Hello AI}}$
+
+$\textcolor{blue}{{AI: Hi User}}$
+
+$\textcolor{orange}{{User: I want to find Sandy, she is a web developer work for our Munich office}}$
+
+$\textcolor{green}{{AI: find employee has name ‘Sandy’, position ‘web developer’, and work at branch ‘Munich’}}$
+
+$\textcolor{green}{{AI: <use Ivy Tool find-employees to find employees>}}$
+
+$\textcolor{green}{{AI: [ {“name”: “Sandy Williams“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Senior”, “email”: “sandyw@localhost.com”}]}}$
+
+$\textcolor{green}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
+
+$\textcolor{blue}{{AI: I found 2 employees matched your request:}}$
+
+$\textcolor{blue}{{Sandy Williams: Senior Web developer, email: sandyw@localhost.com,  branch: Munich}}$
+
+$\textcolor{blue}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
+
+$\textcolor{green}{{AI: <end the flow>}}$
 
 ## Setup
 
