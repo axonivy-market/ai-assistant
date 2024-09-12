@@ -104,6 +104,149 @@ Basic attributes of an AI Flows:
 
 To learn more about the AI Steps, please refer to [AI Step](#ai-step)
 
+##### Solve the real world problem
+
+To solve the real world problem above, please follow these steps:
+
+1. Create an Ivy Callable process which has input parameters are the criteria to find employee
+
+| Name | Type | Decription |
+| --- | --- | --- |
+| `name` | String | Name of the employee |
+| `birthday` | String | Employee's date of birth |
+| `branch` | String | Company branch which the employee working at |
+| `position` | String | Position of the employee in the company |
+
+And output result must be an AI Result DTO object
+
+| Name | Type | Decription |
+| --- | --- | --- |
+| `result` | com.axonivy.portal.components.dto.AiResultDTO | Result for the AI Assistant |
+
+2. In the variable file **AiFunctions.json** add an Ivy tool which will interact with the callable process above to query for list of employees
+
+```json
+{
+    "version": "11.4.0",
+    "id": "find-employess",
+    "name": "Find employees",
+    "type": "IVY",
+    "signature": "findEmployees(String,String,String,String)",
+    "permissions": [ "HR_employees" ],
+    "description": "Find employess by name, date of birth, branch, position.",
+    "usage": "This tool is helpful when user want to find employess by name, date of birth, branch, position.",
+    "attributes": [
+        {
+            "name": "name",
+            "description": "Name of the employee"
+        },
+        {
+            "name": "birthday",
+            "description": "Employee's date of birth"
+        },
+        {
+            "name": "branch",
+            "description": "Company branch which the employee working at."
+        },
+        {
+            "name": "position",
+            "description": "position of the employee in the company."
+        }
+    ]
+}
+```
+
+> [!IMPORTANT]
+> Please keep in mind:
+> - the name of the attributes must be same as name of parameters of the callable process above.
+> - `signature` attribute in the JSON object is the signature of the callable process.
+
+3. In the variable file **AiFunctions.json** add an AI Flow to handle the request to find employees from user.
+
+This is an example of a simple AI Flow with 4 steps:
+- Step 0: Rephrase the request of user to make it align with the Ivy tool `find-employees`
+- Step 1: Call the Ivy Tool, using the rephrased request at **Step 0** as input
+    - If has error or cannot find any employee matched the request, show an error (**Step 2**)
+    - If success: Show the result (**Step 3**)
+- Step 2: Show an message to user then end the flow.
+- Step 3: Show information of found employees in a well-structured format then end the flow.
+
+And this is the AI flow:
+
+```json
+{
+    "version": "11.4.0",
+    "id": "find-employees-flow",
+    "name": "Find employees information",
+    "type": "FLOW",
+    "permissions": [ "HR_Employee" ],
+    "description": "Find employees information",
+    "usage": "Use this flow when user want to find information of employees",
+    "steps": [
+        {
+            "stepNo": 0,
+            "type": "RE_PHRASE",
+            "toolId": "find-employees",
+            "onRephrase": 1,
+            "onSuccess": 1,
+            "examples": [
+            {
+                "before": "list all web developers in Boston",
+                "after": "find employees in branch 'Boston'"
+            },
+            {
+                "before": "find the info of Sandy, who has a birthday this Thursday",
+                "after": "find employees has firstName = 'Sandy' and dateOfBirth = '12/09/2024'"
+            }
+            ]
+        },
+        {
+            "stepNo": 1,
+            "type": "IVY_TOOL",
+            "toolId": "find-employees",
+            "onSuccess": 3,
+            "onError": 2
+        },
+    {
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any employee matched your request.",
+        "useConversationMemory": false,
+        "onSuccess": -1
+    },
+    {
+        "stepNo": 3,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "AI found employees, please read and show them to user with a well-structured format.",
+        "onSuccess": -1
+    }
+    ]
+}
+```
+
+4. Add the `find-employees-flow` to the toolkit of your AI Assistant and use it.
+
+Below is an example how the conversation look like when user using the `find-employees-flow`:
+
+**legends:**
+$\colorbox{#fedec8}{{\space\space}}$: User message
+$\colorbox{#c6edfb}{{\space\space}}$: The message that AI show on the screen
+$\colorbox{#d3f1a7}{{\space\space}}$: The message that AI talking to itself and don't show to user
+
+**conversation:**
+$\colorbox{#fedec8}{{User: Hello AI}}$
+$\colorbox{#c6edfb}{{AI: Hi User}}$
+$\colorbox{#fedec8}{{User: I want to find Sandy, she is a web developer work for our Munich office}}$
+$\colorbox{#d3f1a7}{{AI: find employee has name ‘Sandy’, position ‘web developer’, and work at branch ‘Munich’}}$
+$\colorbox{#d3f1a7}{{AI: <use Ivy Tool find-employees to find employees>}}$
+$\colorbox{#d3f1a7}{{AI: [ {“name”: “Sandy Williams“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Senior”, “email”: “sandyw@localhost.com”}]}}$
+$\colorbox{#d3f1a7}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
+$\colorbox{#c6edfb}{{AI: I found 2 employees matched your request:}}$
+$\colorbox{#c6edfb}{{Sandy Williams: Senior Web developer, email: sandyw@localhost.com,  branch: Munich}}$
+$\colorbox{#c6edfb}{{AI: [ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”, “rank”:“Junior”, “email”: “sandyb@localhost.com”}]}}$
+$\colorbox{#d3f1a7}{{AI: <end the flow>}}$
+
 ##### AI Step
 
 ###### Attributes
@@ -294,8 +437,7 @@ The **Rephrase step** is designed to help AI refine user input before executing 
     "toolId": "find-processes",
     "onRephrase": 3,
     "onSuccess": 1,
-    "customInstruction": "If in the message has an abstract date such as today, tomorrow,...,
-    please format it. Example: today = 31, July 2024",
+    "customInstruction": "If in the message has an abstract date such as today, tomorrow,..., please format it. Example: today = 31, July 2024",
     "examples": [
         {
             "before": "find leve request process",
@@ -357,8 +499,8 @@ The Result DTO ensures that the AI Assistant provides reliable and consistent re
 
 **Attributes**
 
-| Name        | Type                                        | Decription                        |
-| ----------- | ------------------------------------------- | --------------------------------- |
-| result      | String                                      | result to show for user           |
-| resultForAI | String                                      | result for AI model               |
-| state       | com.axonivy.portal.components.enums.AIState | state of the result (DONE, ERROR) |
+| Name | Type | Decription |
+| --- | --- | --- |
+| result | String | result to show for user |
+| resultForAI | String | result for AI model |
+| state | com.axonivy.portal.components.enums.AIState | state of the result (DONE, ERROR) |
