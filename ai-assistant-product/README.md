@@ -6,6 +6,52 @@ YOUR DESCRIPTION GOES HERE: Please just give a short description here without fu
 
 ## Demo
 
+### Demo project
+
+In the **ai-assistant-demo** Ivy project, we created demo assistants which can help you understand and develop your own AI assistant more effeciency.
+
+#### Complex Demo
+
+**Use case**
+
+User can plan a software project with AI Assistant. The AI Assistant enables users to efficiently plan a software project by organizing information into a structured format. It can:
+
+- Create the project and persist it in the database
+- Assist in finding and selecting suitable team members for the project
+- Help users prepare for the project kick-off meeting
+- Create and assign tasks to invite team members to the meeting
+
+**How to use**
+
+1. Run the process `startComplexDemo` to create test data and replace the original AI Assistant with the **Complex Demo Assistant**
+
+2. From **Portal**, open the AI Assistant app
+
+3. Now you can use the assistant to plan and create an software project by input the details of the project, and maybe number of members, or technologies.
+
+Example:
+
+`The XYZ Solutions Web Development Project aims to build a state-of-the-art web application that enhances user experience and supports the company's growth objectives. Mainly use basic web technologies such as HTML and CSS, the project will deliver a secure, scalable, and efficient platform that aligns with industry standards and best practices. We need 3 engineer, 1 web designer and 2 tester for it.`
+
+#### Eror Handling Demo
+
+**Use case**
+
+There are no data for meeting room. Therefore whenever user find for meeting room, AI Assitant will show error.
+This is an simple example how to help AI Assistant handle error properly.
+
+**How to use**
+
+1. Run the process `startErrorHandlingDemo` to create test data and replace the original AI Assistant with the **Error Handling Demo Assistant**
+
+2. From **Portal**, open the AI Assistant app
+
+3. Now you can run the demo by request to information of some room with **Error Handling Demo Assistant**.
+
+Example:
+
+`I want to find meeting room C`
+
 ### AI Flow Demo
 
 In this demo section, we will explain how you can develop your own AI Flow using the use case of [Real world problem](#real-world-problem).
@@ -134,7 +180,9 @@ Below is an example how the conversation look like when user using the `find-emp
 **legends:**
 
 😄: User message
+
 🐼: The message that AI show on the screen
+
 ✨: The message that AI talking to itself and don't show to user
 
 **conversation:**
@@ -253,10 +301,10 @@ Basic attributes of an AI Flows:
    - **Re-phrase**: help AI refine user input before executing specific actions or using tools.
    - **Trigger Flow**: initiates a new flow within the AI process, either by passing a specific trigger message or using the result of a previous step. This allows for seamless transitions between different workflows and the ability to pass relevant data between them.
 
-> [|TIP]
+> [!TIP]
 > To learn more about the AI Steps, please refer to [AI Step](#ai-step)
 
-> [|TIP]
+> [!TIP]
 > To learn how to create your own AI Flow, please refer to [AI Flow Demo](#ai-flow-demo)
 
 ##### AI Step
@@ -266,8 +314,8 @@ Basic attributes of an AI Flows:
 - **stepType**: type of step. Valid values:
    - IVY_TOOL: [Ivy tool step](#ivy-tool-step).
    - SWITCH: [Switch step](#switch-step).
-   - TEXT: Text step.
-   - RE_PHRASE: Rephrase step.
+   - TEXT: [Text step](#text-step).
+   - RE_PHRASE: [Rephrase step](#re-phrase-step).
    - TRIGGER_FLOW: Trigger flow step.
 
 - **stepNo**: Number of step in the flow.

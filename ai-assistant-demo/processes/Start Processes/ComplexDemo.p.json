@@ -7,9 +7,9 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "createTestData",
+      "name" : "startComplexDemo",
       "config" : {
-        "signature" : "createTestData",
+        "signature" : "startComplexDemo",
         "request" : {
           "name" : "Create test data"
         }

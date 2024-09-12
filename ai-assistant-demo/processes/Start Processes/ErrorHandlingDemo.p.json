@@ -7,9 +7,9 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "createTestDataForErrorHandlingDemo",
+      "name" : "startErrorHandlingDemo",
       "config" : {
-        "signature" : "createTestDataForErrorHandlingDemo"
+        "signature" : "startErrorHandlingDemo"
       },
       "visual" : {
         "at" : { "x" : 200, "y" : 264 },
