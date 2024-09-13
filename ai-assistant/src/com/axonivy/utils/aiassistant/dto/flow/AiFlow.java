@@ -42,6 +42,8 @@ public class AiFlow extends AiFunction {
 
   private AiResultDTO finalResult;
 
+  private String notificationMessage;
+
   @JsonIgnore
   private AiFunction functionToTrigger;
 
@@ -65,6 +67,7 @@ public class AiFlow extends AiFunction {
     if (memory == null) {
       memory = new ArrayList<>();
     }
+    setNotificationMessage(null);
   }
 
   @JsonIgnore
@@ -91,7 +94,9 @@ public class AiFlow extends AiFunction {
       return;
     }
 
-    memory.add(ChatMessage.newUserMessage(request));
+    if (StringUtils.isNotBlank(request)) {
+      memory.add(ChatMessage.newUserMessage(request));
+    }
 
     // If user cancel the flow or input something meaningless, just cancel the
     // flow.
@@ -195,14 +200,17 @@ public class AiFlow extends AiFunction {
         functionToTrigger = flowStep.getFunction();
         return;
       }
-    };
+      }
+      ;
 
       updateWorkingStep(step);
+      setNotificationMessage(step.getNotificationMessage());
 
       if (getWorkingStep() == DEFAULT_DONE_STEP) {
         state = AIState.DONE;
         finalResult = step.getResult();
       }
+      return;
     }
   }
 
@@ -379,5 +387,13 @@ public class AiFlow extends AiFunction {
 
   public void setFunctionToTrigger(AiFunction functionToTrigger) {
     this.functionToTrigger = functionToTrigger;
+  }
+
+  public String getNotificationMessage() {
+    return notificationMessage;
+  }
+
+  public void setNotificationMessage(String notificationMessage) {
+    this.notificationMessage = notificationMessage;
   }
 }

@@ -247,18 +247,27 @@ public class AssistantRestService {
       @PathParam("conversationId") String conversationId, AiFlowPayload payload)
       throws WebApplicationException, IOException, InterruptedException {
 
-    Conversation conversation = ChatMessageManager
-        .loadConversation(payload.getAssistantId(), conversationId);
-    conversation.getMemory()
-        .add(ChatMessage.newUserMessage(payload.getMessage()));
-    conversation.getHistory()
-        .add(ChatMessage.newUserMessage(payload.getMessage()));
-    ChatMessageManager.saveConversation(payload.getAssistantId(), conversation);
     AiFlow flow = BusinessEntityConverter.jsonValueToEntity(payload.getAiFlow(),
         AiFlow.class);
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
-    flow.proceed(payload.getMessage(), conversation, assistant);
+    Conversation conversation = ChatMessageManager
+        .loadConversation(payload.getAssistantId(), conversationId);
+
+    if (payload.getIsSkipMessage()) {
+      flow.proceed(null, conversation, assistant);
+    } else {
+      conversation.getMemory()
+          .add(ChatMessage.newUserMessage(payload.getMessage()));
+      conversation.getHistory()
+          .add(ChatMessage.newUserMessage(payload.getMessage()));
+      ChatMessageManager.saveConversation(payload.getAssistantId(),
+          conversation);
+
+      flow.proceed(payload.getMessage(), conversation, assistant);
+    }
+
+
     if (flow.getState() == AIState.TRIGGER) {
       initTriggerToolMessage(conversation, flow, assistant);
       AssistantChatPayload chatPayload = new AssistantChatPayload();

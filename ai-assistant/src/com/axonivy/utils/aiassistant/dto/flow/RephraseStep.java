@@ -58,6 +58,8 @@ public class RephraseStep extends AiStep {
       resultDto.setResultForAI(extractedRephrasedText);
       resultDto.setState(AIState.DONE);
       setResult(resultDto);
+
+      setNotificationMessage("Rephrasing");
     }
   }
 

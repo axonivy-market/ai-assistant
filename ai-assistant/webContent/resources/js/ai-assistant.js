@@ -193,7 +193,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   // Function to start a user request
   async function request(ivyUri, view, request, conversationId) {
     if (workingFlow) {
-      resumeFlow(ivyUri, view, request, conversationId, assistantId);
+      resumeFlow(ivyUri, view, request, conversationId, assistantId, false);
       return;
     }
 
@@ -313,7 +313,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       });
   }
 
-  async function resumeFlow(ivyUri, view, request, conversationId, assistantId) {
+  async function resumeFlow(ivyUri, view, request, conversationId, assistantId, isSkipMessage) {
     view.disableSendButton();
 
     // Send AJAX request to the chatbot server
@@ -321,7 +321,8 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
     const content = JSON.stringify({
       'message': request,
       'aiFlow': JSON.stringify(workingFlow),
-      'assistantId': assistantId
+      'assistantId': assistantId,
+      'isSkipMessage' : isSkipMessage
     });
 
     fetch(uri, {
@@ -352,6 +353,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       return;
     }
 
+    // If the flow is done, show final result
     if (workingFlow.state == 'done') {
       if (workingFlow?.finalResult?.resultForAI) {
         executeResult(workingFlow.finalResult.resultForAI);
@@ -363,6 +365,13 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
       view.enableSendButton();
       workingFlow = null;
+      return;
+    }
+    
+    // Show notification
+    if (workingFlow.notificationMessage) {
+      view.renderSystemMessage(workingFlow.notificationMessage, true);
+      resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
       return;
     }
     
