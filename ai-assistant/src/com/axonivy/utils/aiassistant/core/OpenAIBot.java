@@ -152,9 +152,15 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String chat(Map<String, Object> variables, String promptTemplate) {
     try {
-      return getModel().generate(
+      Ivy.log().error("Input");
+      Ivy.log()
+          .error(PromptTemplate.from(promptTemplate).apply(variables).text());
+      Ivy.log().error("Output");
+      String result = getModel().generate(
           PromptTemplate.from(promptTemplate).apply(variables).toUserMessage())
           .content().text();
+      Ivy.log().error(result);
+      return result;
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);

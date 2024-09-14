@@ -296,8 +296,7 @@
       {
         "stepNo": 5,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'I found some tasks that match your request. Which one would you like to start?'",
+        "text": "I found some tasks that match your request. Which one would you like to start?",
         "showResultOfStep": 3,
         "onSuccess": 1,
         "saveToHistory": true
@@ -386,8 +385,7 @@
       {
         "stepNo": 4,
         "type": "TEXT",
-        "useAi": true,
-        "customInstruction": "Generate a question similar to 'Sorry, something went wrong when processing your request. Could you please provide more details or clarify your request?'",
+        "text": "Sorry, something went wrong when processing your request. Could you please provide more details or clarify your request?",
         "onSuccess": 5
       },
       {
@@ -718,8 +716,7 @@
       {
         "stepNo": 6,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'I found some processes that match your request. Which one would you like to start?'",
+        "text": "I found some processes that match your request. Which one would you like to start?",
         "showResultOfStep": 4,
         "onSuccess": 3
       },
@@ -771,15 +768,13 @@
       {
         "stepNo": 10,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'Sorry, I couldn't find any processes that match your request. Could you please provide more details?'",
+        "text": "Sorry, I couldn't find any processes that match your request. Could you please provide more details?",
         "onSuccess": 4
       },
       {
         "stepNo": 11,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a message similar to 'Something went wrong when start the process you requested. Please try again later.'",
+        "text": "Something went wrong when start the process you requested. Please try again later.",
         "onSuccess": -1
       },
       {

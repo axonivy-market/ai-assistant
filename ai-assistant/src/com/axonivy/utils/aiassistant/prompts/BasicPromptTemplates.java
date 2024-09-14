@@ -96,23 +96,26 @@ public class BasicPromptTemplates {
 
       You're a computer, don't have ability to talk or explain.
 
-      I have a tool in JSON format. Read it carefully:
+      Function:
+      ---------
+      {{tool}}
 
-      {{toolJson}}
-
-      And, chat history:
-
+      Chat history:
+      -------------
       {{memory}}
 
-      Instruction:
-      1. The request is the last message of the chat history above.
-      2. Fulfill value of the tool's attributes from the JSON above by using the request.
-      3. If the request is a confirmation such as 'yes', 'agree',... use other message in the history to fulfill the tool.
-      4. Characters inside the fulfilled JSON should be parseable. Remove all descriptions from the fulfilled Json.
-      5. Wrap the Json result inside '<' and '>' characters. Show the result exactly same as the below format
+      If the last message of the chat history is a confirmation such as 'yes', 'agree', use all messages as the request.
+      Otherwise, only use the last message in the chat history as the request.
 
-      <[{"name":"attr_1","value":"1"},{"name":"attr_2","value":null}]}>
+      Instruction:
+      I want to use the request and the tool to generate a json array inside '<' and '>' characters.
+      This is the template:
+      <[{"name" : "attribute1", "value": "attribute1_value"},{"name" : "attribute2", "value": "attribute2_value"}]>
+
+      Show the result exactly same as the above format.
       """;
+
+  
 
   public static final String DEFAULT_ANSWER = """
       Your info:
