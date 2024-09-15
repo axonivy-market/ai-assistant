@@ -40,6 +40,7 @@ public abstract class AiStep implements Serializable, Cloneable {
   private Boolean saveToHistory;
   private String customInstruction;
   private String notificationMessage;
+  private Boolean isHidden;
 
   public AiStep clone() throws CloneNotSupportedException {
     return (AiStep) super.clone();
@@ -103,6 +104,14 @@ public abstract class AiStep implements Serializable, Cloneable {
 
   public void setSaveToHistory(Boolean saveToHistory) {
     this.saveToHistory = saveToHistory;
+  }
+
+  public Boolean getIsHidden() {
+    return isHidden;
+  }
+
+  public void setIsHidden(Boolean isHidden) {
+    this.isHidden = isHidden;
   }
 
   public static String getFormattedMetadatas(Map<String, String> metadatas) {

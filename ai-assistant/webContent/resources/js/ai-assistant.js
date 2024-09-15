@@ -360,8 +360,9 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         streaming = true;
         view.renderMessage(workingFlow.finalResult.result);
         streaming = false;
-        view.removeStreamingClassFromMessage();
       }
+	  view.removeStreamingClassFromMessage();
+	  view.renderSystemMessage(workingFlow.notificationMessage, true);
 
       view.enableSendButton();
       workingFlow = null;
@@ -377,8 +378,16 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
     
 
     const workingStep = workingFlow.runSteps[workingFlow.runSteps.length - 1];
-    executeResult(workingStep.result.resultForAI);
-    view.renderAiFlowMessage(workingStep.result.result);
+    if (workingStep.result) {
+        executeResult(workingStep.result.resultForAI);
+		if (workingStep.isHidden) {
+			resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+			return;
+		}
+        view.renderAiFlowMessage(workingStep.result.result);
+        return;
+	}
+    
 
     view.enableSendButton();
 
@@ -388,7 +397,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   }
 
   function executeResult(resultForAI) {
-    if (resultForAI.startsWith('<execute>') && resultForAI.endsWith('</execute>')) {
+    if (resultForAI && resultForAI.startsWith('<execute>') && resultForAI.endsWith('</execute>')) {
       let link = resultForAI.replace('<execute>', '').replace('</execute>', '');
       parent.redirectToUrlCommand([{ name: 'url', value: link }]);
     }
@@ -590,12 +599,12 @@ function ViewAI(uri) {
   this.removeStreamingClassFromMessage = function (isDisableChat) {
     if (typeof jsMessageList !== 'undefined') {
       const messageList = $(jsMessageList);
-      const streamingMessage = messageList.find('.chat-message-container.streaming');
+      const streamingMessage = messageList.find('.chat-message-container.streaming').not('.my-message');
       if (streamingMessage.length > 0) {
         streamingMessage.removeClass('streaming');
         $(streamingMessage).find('.js-message').get(0).innerHTML = parseFinalMessage(streamingValue);
       } else {
-        const messages = messageList.find('.chat-message-container .js-message');
+        const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
         messages.get(messages.length - 1).innerHTML = parseFinalMessage(streamingValue);
       }
 

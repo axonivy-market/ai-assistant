@@ -51,16 +51,19 @@ public class RephraseStep extends AiStep {
         AiFlowPromptTemplates.RE_PHRASE_STEP);
     String extractedRephrasedText = extractTextInsideTag(resultFromAI);
 
+    AiResultDTO resultDto = new AiResultDTO();
     if (StringUtils.isNotBlank(extractedRephrasedText)) {
       setOnSuccess(onRephrase);
-      AiResultDTO resultDto = new AiResultDTO();
       resultDto.setResult(extractedRephrasedText);
       resultDto.setResultForAI(extractedRephrasedText);
-      resultDto.setState(AIState.DONE);
-      setResult(resultDto);
 
-      setNotificationMessage("Rephrasing");
+    } else {
+      resultDto.setResult(memory.getLast().getContent());
+      resultDto.setResultForAI(memory.getLast().getContent());
     }
+    setResult(resultDto);
+    resultDto.setState(AIState.DONE);
+    setNotificationMessage("Rephrasing");
   }
 
   public String getToolId() {

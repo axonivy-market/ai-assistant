@@ -24,7 +24,6 @@ public class TextStep extends AiStep {
   private String text;
   private Integer showResultOfStep;
   private Boolean useAI;
-  private Boolean isHidden;
 
   @Override
   public StepType getType() {
@@ -49,7 +48,7 @@ public class TextStep extends AiStep {
 
   private void getResult(AiResultDTO resultToDisplay) {
     setResult(new AiResultDTO());
-    if (!BooleanUtils.isTrue(isHidden)) {
+    if (!BooleanUtils.isTrue(getIsHidden())) {
       getResult().setResult(this.getText().concat(System.lineSeparator())
           .concat(System.lineSeparator())
           .concat(Optional.ofNullable(resultToDisplay)
@@ -79,7 +78,7 @@ public class TextStep extends AiStep {
             .orElse(""));
 
     if (StringUtils.isNotBlank(extractedText)) {
-      if (!BooleanUtils.isTrue(isHidden)) {
+      if (!BooleanUtils.isTrue(getIsHidden())) {
         getResult().setResult(extractedText);
       }
       getResult().setResultForAI(extractedText);
@@ -110,13 +109,4 @@ public class TextStep extends AiStep {
   public void setUseAI(Boolean useAI) {
     this.useAI = useAI;
   }
-
-  public Boolean getIsHidden() {
-    return isHidden;
-  }
-
-  public void setIsHidden(Boolean isHidden) {
-    this.isHidden = isHidden;
-  }
-
 }

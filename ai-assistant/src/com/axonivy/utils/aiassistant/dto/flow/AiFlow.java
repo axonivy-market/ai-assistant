@@ -82,15 +82,15 @@ public class AiFlow extends AiFunction {
     assistant = workingAssistant;
     init();
     if (getWorkingStep() == DEFAULT_DONE_STEP) {
-      if (finalResult == null) {
-        initDefaultFinalResult();
-      }
+      setNotificationMessage(generateFinishedFunctionMessage());
       state = AIState.DONE;
-      conversation.getHistory()
-          .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
-      conversation.getMemory()
-          .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      if (finalResult != null) {
+        conversation.getHistory()
+            .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
+        conversation.getMemory()
+            .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
+        ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      }
       return;
     }
 
@@ -352,15 +352,6 @@ public class AiFlow extends AiFunction {
     result.setResultForAI(request);
     result.setState(AIState.DONE);
     return result;
-  }
-
-  private void initDefaultFinalResult() {
-    finalResult = new AiResultDTO();
-    finalResult.setState(AIState.DONE);
-    finalResult
-        .setResult("Please let me know if you have any further requests.");
-    finalResult
-        .setResultForAI("Please let me know if you have any further requests.");
   }
 
   public Map<String, String> getMetadatas() {

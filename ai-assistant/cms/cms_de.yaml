@@ -38,6 +38,10 @@ Labels:
       IVY: Ivy-Tool
       RETRIEVAL_QA: Wissensdatenbank
   Message:
+    FinishedToolMessage:
+      FLOW: 'Hör auf, Ivy Flow zu verwenden: <{0}>'
+      IVY: 'Hör auf, Ivy Tool zu verwenden: <{0}>'
+      RETRIEVAL_QA: 'Hör auf, die Wissensdatenbank zu verwenden: <{0}>'
     InvalidEmailFormat: Ungültiges E-Mail-Format
     InvalidUrl: "Ungültige URL\t"
     SelectedToolMessage:
