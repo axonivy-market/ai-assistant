@@ -597,6 +597,10 @@ function ViewAI(uri) {
   // Function to remove the 'streaming' class from a message
   // after the streaming process is done.
   this.removeStreamingClassFromMessage = function (isDisableChat) {
+    if (streamingValue == '') {
+        return;
+	}
+
     if (typeof jsMessageList !== 'undefined') {
       const messageList = $(jsMessageList);
       const streamingMessage = messageList.find('.chat-message-container.streaming').not('.my-message');

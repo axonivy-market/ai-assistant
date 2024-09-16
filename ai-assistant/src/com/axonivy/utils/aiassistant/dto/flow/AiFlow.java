@@ -79,10 +79,14 @@ public class AiFlow extends AiFunction {
       return;
     }
 
+    if (state == AIState.DONE) {
+      return;
+    }
+
     assistant = workingAssistant;
     init();
     if (getWorkingStep() == DEFAULT_DONE_STEP) {
-      setNotificationMessage(generateFinishedFunctionMessage());
+      proceedFinishedFlowMessage(conversation);
       state = AIState.DONE;
       if (finalResult != null) {
         conversation.getHistory()
@@ -212,6 +216,15 @@ public class AiFlow extends AiFunction {
       }
       return;
     }
+  }
+
+  private void proceedFinishedFlowMessage(Conversation conversation) {
+    setNotificationMessage(generateFinishedFunctionMessage());
+    conversation.getHistory()
+        .add(ChatMessage.newAIFlowMessage(getNotificationMessage()));
+    conversation.getMemory()
+        .add(ChatMessage.newAIFlowMessage(getNotificationMessage()));
+    ChatMessageManager.saveConversation(assistant.getId(), conversation);
   }
 
   /**
