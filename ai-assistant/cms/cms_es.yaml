@@ -39,9 +39,9 @@ Labels:
       RETRIEVAL_QA: Base de conocimientos
   Message:
     FinishedToolMessage:
-      FLOW: 'Deja de usar Ivy Flow: <{0}>'
-      IVY: 'Deja de usar Ivy Tool: <{0}>'
-      RETRIEVAL_QA: 'Deja de usar la base de conocimientos: <{0}>'
+      FLOW: 'Stop using Ivy Flow: **{0}**'
+      IVY: 'Stop using Ivy Tool: **{0}**'
+      RETRIEVAL_QA: 'Stop using Ivy Tool: **{0}**'
     InvalidEmailFormat: Formato de Email inválido
     InvalidUrl: URL no válida
     SelectedToolMessage:

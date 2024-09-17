@@ -203,6 +203,24 @@
   },
   {
     "version": "11.4.0",
+    "id": "find-task-details-by-id",
+    "name": "Generate task details page by ID",
+    "type": "IVY",
+    "signature": "findTaskDetails(String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find task details by ID",
+    "usage": "This tool is helpful when user want to find task details by ID",
+    "attributes": [
+      {
+        "name": "taskId",
+        "description": "ID of the task"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
     "id": "start-task-flow",
     "name": "Start task",
     "type": "FLOW",
@@ -232,7 +250,7 @@
         "type": "IVY_TOOL",
         "toolId": "start-task-by-id",
         "onSuccess": -1,
-        "onError": 2,
+        "onError": 7,
         "useConversationMemory": true
       },
       {
@@ -304,9 +322,25 @@
       {
         "stepNo": 6,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'Sorry, I couldn't find any tasks that match your request. Could you please provide more details?'",
-        "onSuccess": 1
+        "text": "Sorry, I couldn't find any tasks that match your request.",
+        "onSuccess": -1
+      },
+      { 
+        "stepNo": 7,
+        "type": "IVY_TOOL",
+        "toolId": "find-task-details-by-id",
+        "onSuccess": 8,
+        "onError": 6,
+        "useConversationMemory": false,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "text": "You cannot start the requested task. Please check the task details.",
+        "showResultOfStep": 7,
+        "onSuccess": -1,
+        "saveToHistory": true
       }
     ]
   },

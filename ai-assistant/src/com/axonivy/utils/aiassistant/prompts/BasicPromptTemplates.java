@@ -104,7 +104,7 @@ public class BasicPromptTemplates {
       -------------
       {{memory}}
 
-      If the last message of the chat history is a confirmation such as 'yes', 'agree', use all messages as the request.
+      If the last message of the chat history is a confirmation such as 'yes', 'agree', or you don't understand the request of the last message, use all messages as the request.
       Otherwise, only use the last message in the chat history as the request.
 
       Instruction:

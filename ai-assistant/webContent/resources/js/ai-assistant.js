@@ -288,7 +288,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       method: 'GET'
     }).then(response => response.json())
       .then(result => {
-        if(result.error) {
+        if (result.error) {
           view.renderErrorMessage(result.error);
           return;
         }
@@ -322,7 +322,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       'message': request,
       'aiFlow': JSON.stringify(workingFlow),
       'assistantId': assistantId,
-      'isSkipMessage' : isSkipMessage
+      'isSkipMessage': isSkipMessage
     });
 
     fetch(uri, {
@@ -338,11 +338,11 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   function handleWorkingFlow(ivyUri, view, result, conversationId) {
     workingFlow = result;
 
-	// Handle trigger another flow
+    // Handle trigger another flow
     if (!workingFlow.state && workingFlow?.selectedFunctionId) {
-        view.renderSystemMessage(result.selectedFunctionMessage, true);
-        continueRequest(conversationId, JSON.stringify(workingFlow));
-        return;
+      view.renderSystemMessage(result.selectedFunctionMessage, true);
+      continueRequest(conversationId, JSON.stringify(workingFlow));
+      return;
     }
 
     // If error occurred, send the request back to the default flow
@@ -361,33 +361,39 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         view.renderMessage(workingFlow.finalResult.result);
         streaming = false;
       }
-	  view.removeStreamingClassFromMessage();
-	  view.renderSystemMessage(workingFlow.notificationMessage, true);
+      view.removeStreamingClassFromMessage();
+      view.renderSystemMessage(workingFlow.notificationMessage, true);
 
       view.enableSendButton();
       workingFlow = null;
       return;
     }
-    
+
     // Show notification
     if (workingFlow.notificationMessage) {
       view.renderSystemMessage(workingFlow.notificationMessage, true);
       resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
       return;
     }
-    
+
 
     const workingStep = workingFlow.runSteps[workingFlow.runSteps.length - 1];
     if (workingStep.result) {
-        executeResult(workingStep.result.resultForAI);
-		if (workingStep.isHidden) {
-			resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
-			return;
-		}
-        view.renderAiFlowMessage(workingStep.result.result);
+      executeResult(workingStep.result.resultForAI);
+      if (workingStep.isHidden) {
+        resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
         return;
-	}
-    
+      }
+      view.renderAiFlowMessage(workingStep.result.result);
+
+      if (workingFlow.workingStep == -1) {
+        resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+        return;
+      }
+
+      return;
+    }
+
 
     view.enableSendButton();
 
@@ -445,8 +451,8 @@ function ViewAI(uri) {
   // Rendering message from AI flow
   this.renderAiFlowMessage = function (message) {
     if (!message) {
-        return;
-	}
+      return;
+    }
 
     var messages = message.split('\r\n\r\n');
     messages.forEach(line => {
@@ -482,10 +488,10 @@ function ViewAI(uri) {
     streamingMessage.addClass('error-response');
     streamingMessage.find('.chat-message').addClass('error');
     this.removeStreamingClassFromMessage();
-    
+
   }
-  
-  this.renderSystemMessage = function(message, useAnimation) {
+
+  this.renderSystemMessage = function (message, useAnimation) {
     streaming = true;
     const icon = `<span class="si si-cog-double-2"></span>`;
     this.renderMessage(icon + message.replace(/<([^>]+)>/g, "<strong>$1</strong>"));
@@ -498,8 +504,8 @@ function ViewAI(uri) {
     chatMessage.addClass('system');
 
     if (useAnimation) {
-        chatMessage.hide();
-        chatMessage.fadeToggle('slow');
+      chatMessage.hide();
+      chatMessage.fadeToggle('slow');
     }
 
     this.removeStreamingClassFromMessage(true);
@@ -598,8 +604,8 @@ function ViewAI(uri) {
   // after the streaming process is done.
   this.removeStreamingClassFromMessage = function (isDisableChat) {
     if (streamingValue == '') {
-        return;
-	}
+      return;
+    }
 
     if (typeof jsMessageList !== 'undefined') {
       const messageList = $(jsMessageList);
@@ -612,11 +618,11 @@ function ViewAI(uri) {
         messages.get(messages.length - 1).innerHTML = parseFinalMessage(streamingValue);
       }
 
-    if (!isDisableChat) {
+      if (!isDisableChat) {
         this.enableSendButton();
-    }
+      }
 
-    streamingValue = '';
+      streamingValue = '';
     }
   }
 
