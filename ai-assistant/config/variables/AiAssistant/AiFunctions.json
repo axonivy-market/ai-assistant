@@ -418,7 +418,7 @@
       {
         "stepNo": 4,
         "type": "TEXT",
-        "text": "Sorry, something went wrong when processing your request. Could you please provide more details or clarify your request?",
+        "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
         "onSuccess": 5
       },
       {
@@ -434,8 +434,8 @@
             "case": "User say he want to cancel or he make another request that irrelevant to the find task function"
           },
           {
-            "action": 6,
-            "case": "User say good or thank you."
+            "action": -1,
+            "case": "User say good or thank you or seem that he don't want to find task anymore."
           }
         ]
       },
