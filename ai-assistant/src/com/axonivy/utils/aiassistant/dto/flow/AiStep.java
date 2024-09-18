@@ -39,6 +39,8 @@ public abstract class AiStep implements Serializable, Cloneable {
   private Boolean useConversationMemory;
   private Boolean saveToHistory;
   private String customInstruction;
+  private String notificationMessage;
+  private Boolean isHidden;
 
   public AiStep clone() throws CloneNotSupportedException {
     return (AiStep) super.clone();
@@ -104,6 +106,14 @@ public abstract class AiStep implements Serializable, Cloneable {
     this.saveToHistory = saveToHistory;
   }
 
+  public Boolean getIsHidden() {
+    return isHidden;
+  }
+
+  public void setIsHidden(Boolean isHidden) {
+    this.isHidden = isHidden;
+  }
+
   public static String getFormattedMetadatas(Map<String, String> metadatas) {
     if (CollectionUtils.isEmpty(metadatas.entrySet())) {
       return "";
@@ -146,5 +156,13 @@ public abstract class AiStep implements Serializable, Cloneable {
 
   public void setCustomInstruction(String customInstruction) {
     this.customInstruction = customInstruction;
+  }
+
+  public String getNotificationMessage() {
+    return notificationMessage;
+  }
+
+  public void setNotificationMessage(String notificationMessage) {
+    this.notificationMessage = notificationMessage;
   }
 }

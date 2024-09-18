@@ -42,6 +42,8 @@ public class AiFlow extends AiFunction {
 
   private AiResultDTO finalResult;
 
+  private String notificationMessage;
+
   @JsonIgnore
   private AiFunction functionToTrigger;
 
@@ -65,6 +67,7 @@ public class AiFlow extends AiFunction {
     if (memory == null) {
       memory = new ArrayList<>();
     }
+    setNotificationMessage(null);
   }
 
   @JsonIgnore
@@ -76,22 +79,28 @@ public class AiFlow extends AiFunction {
       return;
     }
 
-    assistant = workingAssistant;
-    init();
-    if (getWorkingStep() == DEFAULT_DONE_STEP) {
-      if (finalResult == null) {
-        initDefaultFinalResult();
-      }
-      state = AIState.DONE;
-      conversation.getHistory()
-          .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
-      conversation.getMemory()
-          .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+    if (state == AIState.DONE) {
       return;
     }
 
-    memory.add(ChatMessage.newUserMessage(request));
+    assistant = workingAssistant;
+    init();
+    if (getWorkingStep() == DEFAULT_DONE_STEP) {
+      proceedFinishedFlowMessage(conversation);
+      state = AIState.DONE;
+      if (finalResult != null) {
+        conversation.getHistory()
+            .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
+        conversation.getMemory()
+            .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
+        ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      }
+      return;
+    }
+
+    if (StringUtils.isNotBlank(request)) {
+      memory.add(ChatMessage.newUserMessage(request));
+    }
 
     // If user cancel the flow or input something meaningless, just cancel the
     // flow.
@@ -195,15 +204,27 @@ public class AiFlow extends AiFunction {
         functionToTrigger = flowStep.getFunction();
         return;
       }
-    };
+      }
+      ;
 
       updateWorkingStep(step);
+      setNotificationMessage(step.getNotificationMessage());
 
       if (getWorkingStep() == DEFAULT_DONE_STEP) {
         state = AIState.DONE;
         finalResult = step.getResult();
       }
+      return;
     }
+  }
+
+  private void proceedFinishedFlowMessage(Conversation conversation) {
+    setNotificationMessage(generateFinishedFunctionMessage());
+    conversation.getHistory()
+        .add(ChatMessage.newAIFlowMessage(getNotificationMessage()));
+    conversation.getMemory()
+        .add(ChatMessage.newAIFlowMessage(getNotificationMessage()));
+    ChatMessageManager.saveConversation(assistant.getId(), conversation);
   }
 
   /**
@@ -346,15 +367,6 @@ public class AiFlow extends AiFunction {
     return result;
   }
 
-  private void initDefaultFinalResult() {
-    finalResult = new AiResultDTO();
-    finalResult.setState(AIState.DONE);
-    finalResult
-        .setResult("Please let me know if you have any further requests.");
-    finalResult
-        .setResultForAI("Please let me know if you have any further requests.");
-  }
-
   public Map<String, String> getMetadatas() {
     return metadatas;
   }
@@ -379,5 +391,13 @@ public class AiFlow extends AiFunction {
 
   public void setFunctionToTrigger(AiFunction functionToTrigger) {
     this.functionToTrigger = functionToTrigger;
+  }
+
+  public String getNotificationMessage() {
+    return notificationMessage;
+  }
+
+  public void setNotificationMessage(String notificationMessage) {
+    this.notificationMessage = notificationMessage;
   }
 }

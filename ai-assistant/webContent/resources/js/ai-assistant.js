@@ -193,7 +193,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   // Function to start a user request
   async function request(ivyUri, view, request, conversationId) {
     if (workingFlow) {
-      resumeFlow(ivyUri, view, request, conversationId, assistantId);
+      resumeFlow(ivyUri, view, request, conversationId, assistantId, false);
       return;
     }
 
@@ -288,7 +288,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       method: 'GET'
     }).then(response => response.json())
       .then(result => {
-        if(result.error) {
+        if (result.error) {
           view.renderErrorMessage(result.error);
           return;
         }
@@ -313,7 +313,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       });
   }
 
-  async function resumeFlow(ivyUri, view, request, conversationId, assistantId) {
+  async function resumeFlow(ivyUri, view, request, conversationId, assistantId, isSkipMessage) {
     view.disableSendButton();
 
     // Send AJAX request to the chatbot server
@@ -321,7 +321,8 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
     const content = JSON.stringify({
       'message': request,
       'aiFlow': JSON.stringify(workingFlow),
-      'assistantId': assistantId
+      'assistantId': assistantId,
+      'isSkipMessage': isSkipMessage
     });
 
     fetch(uri, {
@@ -337,11 +338,11 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   function handleWorkingFlow(ivyUri, view, result, conversationId) {
     workingFlow = result;
 
-	// Handle trigger another flow
+    // Handle trigger another flow
     if (!workingFlow.state && workingFlow?.selectedFunctionId) {
-        view.renderSystemMessage(result.selectedFunctionMessage, true);
-        continueRequest(conversationId, JSON.stringify(workingFlow));
-        return;
+      view.renderSystemMessage(result.selectedFunctionMessage, true);
+      continueRequest(conversationId, JSON.stringify(workingFlow));
+      return;
     }
 
     // If error occurred, send the request back to the default flow
@@ -352,24 +353,47 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       return;
     }
 
+    // If the flow is done, show final result
     if (workingFlow.state == 'done') {
       if (workingFlow?.finalResult?.resultForAI) {
         executeResult(workingFlow.finalResult.resultForAI);
         streaming = true;
         view.renderMessage(workingFlow.finalResult.result);
         streaming = false;
-        view.removeStreamingClassFromMessage();
       }
+      view.removeStreamingClassFromMessage();
+      view.renderSystemMessage(workingFlow.notificationMessage, true);
 
       view.enableSendButton();
       workingFlow = null;
       return;
     }
-    
+
+    // Show notification
+    if (workingFlow.notificationMessage) {
+      view.renderSystemMessage(workingFlow.notificationMessage, true);
+      resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+      return;
+    }
+
 
     const workingStep = workingFlow.runSteps[workingFlow.runSteps.length - 1];
-    executeResult(workingStep.result.resultForAI);
-    view.renderAiFlowMessage(workingStep.result.result);
+    if (workingStep.result) {
+      executeResult(workingStep.result.resultForAI);
+      if (workingStep.isHidden) {
+        resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+        return;
+      }
+      view.renderAiFlowMessage(workingStep.result.result);
+
+      if (workingFlow.workingStep == -1) {
+        resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+        return;
+      }
+
+      return;
+    }
+
 
     view.enableSendButton();
 
@@ -379,7 +403,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
   }
 
   function executeResult(resultForAI) {
-    if (resultForAI.startsWith('<execute>') && resultForAI.endsWith('</execute>')) {
+    if (resultForAI && resultForAI.startsWith('<execute>') && resultForAI.endsWith('</execute>')) {
       let link = resultForAI.replace('<execute>', '').replace('</execute>', '');
       parent.redirectToUrlCommand([{ name: 'url', value: link }]);
     }
@@ -427,8 +451,8 @@ function ViewAI(uri) {
   // Rendering message from AI flow
   this.renderAiFlowMessage = function (message) {
     if (!message) {
-        return;
-	}
+      return;
+    }
 
     var messages = message.split('\r\n\r\n');
     messages.forEach(line => {
@@ -464,10 +488,10 @@ function ViewAI(uri) {
     streamingMessage.addClass('error-response');
     streamingMessage.find('.chat-message').addClass('error');
     this.removeStreamingClassFromMessage();
-    
+
   }
-  
-  this.renderSystemMessage = function(message, useAnimation) {
+
+  this.renderSystemMessage = function (message, useAnimation) {
     streaming = true;
     const icon = `<span class="si si-cog-double-2"></span>`;
     this.renderMessage(icon + message.replace(/<([^>]+)>/g, "<strong>$1</strong>"));
@@ -480,8 +504,8 @@ function ViewAI(uri) {
     chatMessage.addClass('system');
 
     if (useAnimation) {
-        chatMessage.hide();
-        chatMessage.fadeToggle('slow');
+      chatMessage.hide();
+      chatMessage.fadeToggle('slow');
     }
 
     this.removeStreamingClassFromMessage(true);
@@ -579,22 +603,26 @@ function ViewAI(uri) {
   // Function to remove the 'streaming' class from a message
   // after the streaming process is done.
   this.removeStreamingClassFromMessage = function (isDisableChat) {
+    if (streamingValue == '') {
+      return;
+    }
+
     if (typeof jsMessageList !== 'undefined') {
       const messageList = $(jsMessageList);
-      const streamingMessage = messageList.find('.chat-message-container.streaming');
+      const streamingMessage = messageList.find('.chat-message-container.streaming').not('.my-message');
       if (streamingMessage.length > 0) {
         streamingMessage.removeClass('streaming');
         $(streamingMessage).find('.js-message').get(0).innerHTML = parseFinalMessage(streamingValue);
       } else {
-        const messages = messageList.find('.chat-message-container .js-message');
+        const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
         messages.get(messages.length - 1).innerHTML = parseFinalMessage(streamingValue);
       }
 
-    if (!isDisableChat) {
+      if (!isDisableChat) {
         this.enableSendButton();
-    }
+      }
 
-    streamingValue = '';
+      streamingValue = '';
     }
   }
 

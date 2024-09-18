@@ -46,5 +46,7 @@ public class IvyToolStep extends AiStep {
     } catch (JsonProcessingException e) {
       setResult(createSomethingWentWrongError());
     }
+    setNotificationMessage(
+        String.format("Processing Ivy tool: **%s**", tool.getName()));
   }
 }

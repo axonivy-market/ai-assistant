@@ -22,14 +22,15 @@ import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
 public class IvyTool extends AiFunction {
 
   private static final long serialVersionUID = -5362479525475837795L;
+
+  private static final String TOOL_TO_FULFILL_FORMAT = "name: %s \r\n description: %s \r\n attributes: \r\n";
+  private static final String ATTRIBUTE_LINE_FORMAT = "    - name: %s ; description: %s";
 
   private List<IvyToolAttribute> attributes;
   private String signature;
@@ -120,7 +121,7 @@ public class IvyTool extends AiFunction {
   public IvyTool fullfilIvyTool(List<ChatMessage> memory,
       AbstractAIBot bot, String metadata) throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
-    params.put("toolJson", buildJsonNodeForFulfillRequest().toString());
+    params.put("tool", buildDataFulfillRequest());
 
     params.put("memory", getFormattedMemory(memory));
     params.put("metadata", metadata);
@@ -145,27 +146,20 @@ public class IvyTool extends AiFunction {
     return this;
   }
 
-  /**
-   * Remove unnecessary fields when fulfill values for attributes to reduce
-   * number of tokens and make the request more clean, simple.
-   * 
-   * @return
-   */
-  private JsonNode buildJsonNodeForFulfillRequest() {
-    ObjectNode current = (ObjectNode) BusinessEntityConverter
-        .entityToJsonNode(this);
-    current.remove("type");
-    current.remove("version");
-    current.remove("name");
-    current.remove("usage");
-    current.remove("permissions");
-    current.remove("signature");
-    current.remove("default");
-    current.get("attributes").forEach(attr -> {
-      ObjectNode attribute = (ObjectNode) attr;
-      attribute.remove("required");
-    });
-    return current;
+  private String buildDataFulfillRequest() {
+    String result = String.format(TOOL_TO_FULFILL_FORMAT, getName(),
+        getDescription());
+    String attributesStr = "";
+    if (CollectionUtils.isNotEmpty(attributes)) {
+      for (IvyToolAttribute attr : attributes) {
+        attributesStr = attributesStr
+            .concat(String.format(ATTRIBUTE_LINE_FORMAT, attr.getName(),
+                attr.getDescription()))
+            .concat(System.lineSeparator());
+      }
+      result = result.concat(attributesStr);
+    }
+    return result;
   }
 
   public String getUseTool() {

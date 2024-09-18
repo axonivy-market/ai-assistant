@@ -37,7 +37,7 @@
       },
       {
         "name": "onlyMyTask",
-        "description": "when user want to find his tasks, set to 'true'. Otherwise, don't change this attribute."
+        "description": "when user mentions words similiar to 'my task' set to 'true'. Otherwise, don't change this attribute."
       }
     ]
   },
@@ -203,6 +203,24 @@
   },
   {
     "version": "11.4.0",
+    "id": "find-task-details-by-id",
+    "name": "Generate task details page by ID",
+    "type": "IVY",
+    "signature": "findTaskDetails(String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find task details by ID",
+    "usage": "This tool is helpful when user want to find task details by ID",
+    "attributes": [
+      {
+        "name": "taskId",
+        "description": "ID of the task"
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
     "id": "start-task-flow",
     "name": "Start task",
     "type": "FLOW",
@@ -210,7 +228,7 @@
       "Everybody"
     ],
     "description": "Automatically finds relevant information then start the task whenever user want to start one",
-    "usage": "Use this tool when user want to start task",
+    "usage": "Use this tool when user want to start 'task'. Example: 'I want to start approval task assigned to me'",
     "steps": [
       {
         "stepNo": 0,
@@ -232,7 +250,7 @@
         "type": "IVY_TOOL",
         "toolId": "start-task-by-id",
         "onSuccess": -1,
-        "onError": 2,
+        "onError": 7,
         "useConversationMemory": true
       },
       {
@@ -296,8 +314,7 @@
       {
         "stepNo": 5,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'I found some tasks that match your request. Which one would you like to start?'",
+        "text": "I found some tasks that match your request. Which one would you like to start?",
         "showResultOfStep": 3,
         "onSuccess": 1,
         "saveToHistory": true
@@ -305,9 +322,25 @@
       {
         "stepNo": 6,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'Sorry, I couldn't find any tasks that match your request. Could you please provide more details?'",
-        "onSuccess": 1
+        "text": "Sorry, I couldn't find any tasks that match your request.",
+        "onSuccess": -1
+      },
+      { 
+        "stepNo": 7,
+        "type": "IVY_TOOL",
+        "toolId": "find-task-details-by-id",
+        "onSuccess": 8,
+        "onError": 6,
+        "useConversationMemory": false,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "text": "You cannot start the requested task. Please check the task details.",
+        "showResultOfStep": 7,
+        "onSuccess": -1,
+        "saveToHistory": true
       }
     ]
   },
@@ -320,7 +353,7 @@
       "Everybody"
     ],
     "description": "Find tasks by name, description, priority, state, and expiry date",
-    "usage": "Please use this tool when the user wants to find a task or mentions a task, but it's unclear what he want to do with it.",
+    "usage": "Please use this tool when the user wants to find a task or mentions a task, but it's unclear what he want to do with it. Example: 'i want to find task has name submit'",
     "steps": [
       {
         "stepNo": 0,
@@ -364,8 +397,7 @@
       {
         "stepNo": 2,
         "type": "TEXT",
-        "useAi": true,
-        "customInstruction": "Generate a question similar to 'I have rephrased your request as follows. Could you please confirm if it is correct?'",
+        "text": "I have rephrased your request as follows. Could you please confirm if it is correct?",
         "showResultOfStep": 0,
         "onSuccess": 3
       },
@@ -386,8 +418,7 @@
       {
         "stepNo": 4,
         "type": "TEXT",
-        "useAi": true,
-        "customInstruction": "Generate a question similar to 'Sorry, something went wrong when processing your request. Could you please provide more details or clarify your request?'",
+        "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
         "onSuccess": 5
       },
       {
@@ -403,15 +434,15 @@
             "case": "User say he want to cancel or he make another request that irrelevant to the find task function"
           },
           {
-            "action": 6,
-            "case": "User say good or thank you."
+            "action": -1,
+            "case": "User say good or thank you or seem that he don't want to find task anymore."
           }
         ]
       },
       {
         "stepNo": 6,
         "type": "TEXT",
-        "text": "I'm glad to help. Please let me know if you have any further requests.",
+        "text": "I found tasks matched your request.",
         "onSuccess": -1,
         "showResultOfStep": 1
       }
@@ -643,7 +674,7 @@
             "case": "In the chat history, AI already found a process with information(ID, name, description,...) that could fulfill the request of user."
           },
           {
-            "action": 4,
+            "action": 26,
             "case": "In the chat history, AI didn't metion any process"
           }
         ]
@@ -694,7 +725,7 @@
         "toolId": "find-processes",
         "onSuccess": 5,
         "onError": 7,
-        "useConversationMemory": true,
+        "useConversationMemory": false,
         "saveToHistory": false
       },
       {
@@ -718,15 +749,14 @@
       {
         "stepNo": 6,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'I found some processes that match your request. Which one would you like to start?'",
+        "text": "I found some processes that match your request. Which one would you like to start?",
         "showResultOfStep": 4,
         "onSuccess": 3
       },
       {
         "stepNo": 7,
         "type": "RE_PHRASE",
-        "useConversationMemory": true,
+        "useConversationMemory": false,
         "toolId": "find-processes",
         "onRephrase": 8,
         "onSuccess": 4,
@@ -745,8 +775,7 @@
       {
         "stepNo": 8,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'Sorry, I cannot find any process matched your request. Therefore I changed it as below, could you please confirm if it is correct?'",
+        "customInstruction": "Sorry, I cannot find any process matched your request. Therefore I changed it as below, could you please confirm if it is correct?",
         "showResultOfStep": 7,
         "onSuccess": 9
       },
@@ -771,15 +800,13 @@
       {
         "stepNo": 10,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'Sorry, I couldn't find any processes that match your request. Could you please provide more details?'",
+        "text": "Sorry, I couldn't find any processes that match your request. Could you please provide more details?",
         "onSuccess": 4
       },
       {
         "stepNo": 11,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a message similar to 'Something went wrong when start the process you requested. Please try again later.'",
+        "text": "Something went wrong when start the process you requested. Please try again later.",
         "onSuccess": -1
       },
       {
@@ -804,8 +831,7 @@
       {
         "stepNo": 13,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "You found a process and its information. Generate a message said that you found information of the process user requested, you want user to take a look and confirm if user want to start the process. But don't mention information of the process in the message.",
+        "text": "I found information of the requested process. Do you want to start it?",
         "showResultOfStep": 3,
         "onSuccess": 14
       },
@@ -838,8 +864,7 @@
       {
         "stepNo": 16,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a message similar to 'I found a process matched your request. However, it required some parameters in order to start. Please provide some information for these parameters:'",
+        "customInstruction": "I found a process matched your request. However, it required some parameters in order to start. Please provide some information for these parameters:",
         "showResultOfStep": 3,
         "onSuccess": 17
       },
@@ -918,8 +943,7 @@
       {
         "stepNo": 22,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a message similar to 'You has cancelled the request. Please let me know if you have other requests or quesitons. Thank you.'",
+        "text": "You has cancelled the request. Please let me know if you have other requests or quesitons. Thank you.",
         "onSuccess": -1
       },
       {
@@ -949,6 +973,25 @@
         "useAI": true,
         "customInstruction": "Ask user which parameter he want to update? Just describle what you want, you will update for him.",
         "onSuccess": 21
+      },
+      {
+        "stepNo": 26,
+        "type": "RE_PHRASE",
+        "useConversationMemory": false,
+        "toolId": "find-processes",
+        "onRephrase": 4,
+        "onSuccess": 4,
+        "saveToHistory": false,
+        "examples": [
+          {
+            "before": "submit leave request",
+            "after": "start process has name or description contains 'leave request'"
+          },
+          {
+            "before": "I want to start process has name 'leave request'",
+            "after": "start process has name contains 'leave request'"
+          }
+        ]
       }
     ]
   }

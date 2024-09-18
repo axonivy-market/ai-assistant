@@ -1,5 +1,6 @@
 // Constants
 const URL_PATTERN = /\b(?:https?:\/\/www\.|https?:\/\/|www\.)[a-z0-9]+(?:[.\-][a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/[^()\s]*)?(?:(?:\([^()]*\))*)\b/ig;
+const LOCALHOST_URL_PATTERN = /\b(?:https?:\/\/(?:www\.)?|https?:\/\/|www\.)[a-z0-9]+(?:[.\-][a-z0-9]+)*(:[0-9]{1,5})?(?:\/[^()\s]*)?(?:(?:\([^()]*\))*)\b/ig;
 const IMAGE_PATTERN = /\.(jpg|jpeg|png|webp|avif|gif|svg)$/;
 const HAS_HTTP_PATTERN = /^https?:\/\//i;
 const CODE_TAG = '```';
@@ -199,7 +200,7 @@ const convertParagraph = paragraph => {
 const correctUrl = url => url.match(URL_PATTERN);
 
 // Checks if a word matches the URL pattern.
-const isUrl = word => word.match(URL_PATTERN);
+const isUrl = word => (word.match(URL_PATTERN) || word.match(LOCALHOST_URL_PATTERN));
 
 // Parse Functions
 

@@ -4,6 +4,7 @@ public class AiFlowPayload {
   private String message;
   private String assistantId;
   private String aiFlow;
+  private Boolean isSkipMessage;
 
   public String getMessage() {
     return message;
@@ -27,5 +28,13 @@ public class AiFlowPayload {
 
   public void setAssistantId(String assistantId) {
     this.assistantId = assistantId;
+  }
+
+  public Boolean getIsSkipMessage() {
+    return isSkipMessage;
+  }
+
+  public void setIsSkipMessage(Boolean isSkipMessage) {
+    this.isSkipMessage = isSkipMessage;
   }
 }

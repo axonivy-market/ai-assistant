@@ -76,7 +76,7 @@ public class AiFlowPromptTemplates {
 
       - {{customInstruction}}
       - ONLY use English
-      - Show all result inside <>. Examples: <**name: Peter**\n\nDo you want something else?>
+      - Wrap result inside '<' and '>' characters. Examples: <**name: Peter**\n\nDo you want something else?>
 
       Check the result, does it put inside <> properly? if not, please correct.
       """;

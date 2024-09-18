@@ -177,4 +177,11 @@ public abstract class AiFunction extends AbstractConfiguration
         "/Labels/Message/SelectedToolMessage/".concat(this.getType().name()),
         Arrays.asList(this.getName()));
   }
+
+  @JsonIgnore
+  public String generateFinishedFunctionMessage() {
+    return Ivy.cms().co(
+        "/Labels/Message/FinishedToolMessage/".concat(this.getType().name()),
+        Arrays.asList(this.getName()));
+  }
 }
