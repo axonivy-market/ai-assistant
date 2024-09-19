@@ -9,7 +9,11 @@
       "type" : "RequestStart",
       "name" : "restoreData",
       "config" : {
-        "signature" : "restoreData"
+        "signature" : "restoreData",
+        "request" : {
+          "name" : "Restore data",
+          "description" : "Clean up demo data and recover AI Assistants, AI Functions to the state before the demo"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }

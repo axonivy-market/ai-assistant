@@ -9,7 +9,11 @@
       "type" : "RequestStart",
       "name" : "startErrorHandlingDemo",
       "config" : {
-        "signature" : "startErrorHandlingDemo"
+        "signature" : "startErrorHandlingDemo",
+        "request" : {
+          "name" : "Start Error Handling Demo",
+          "description" : "Start the error handling demo of AI Assistant"
+        }
       },
       "visual" : {
         "at" : { "x" : 200, "y" : 264 },

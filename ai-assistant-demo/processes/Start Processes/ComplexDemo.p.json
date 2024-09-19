@@ -7,11 +7,12 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "startComplexDemo",
+      "name" : "Start Complex Demo",
       "config" : {
         "signature" : "startComplexDemo",
         "request" : {
-          "name" : "Create test data"
+          "name" : "Start Complex Demo",
+          "description" : "Start the complex demo of AI Assistant"
         }
       },
       "visual" : {
