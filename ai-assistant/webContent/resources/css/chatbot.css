@@ -510,15 +510,28 @@ body.light .chatbot-send-form .message-list-content-send-input {
 
 body.dark .chatbot-panel .chatbot-send-form,
 body.dark .assistant-header-wrapper {
-  background-color: var(--dark-background-color);
+  background-color: var(--ai-assistant-background-color-dark);
 }
 
 body.light .chatbot-panel .chatbot-send-form,
 body.light .assistant-header-wrapper {
-  background-color: var(--light-background-color);
+  background-color: var(--ai-assistant-background-color-light);
+}
+
+body.dark.in-portal .chatbot-panel .chatbot-send-form,
+body.dark.in-portal .assistant-header-wrapper {
+  background-color: var(--portal-ai-assistant-background-color-dark);
+}
+
+body.light.in-portal .chatbot-panel .chatbot-send-form,
+body.light.in-portal .assistant-header-wrapper {
+  background-color: var(--portal-ai-assistant-background-color-light);
 }
 
 :root {
-  --dark-background-color: #3E4754;
-  --light-background-color: #F2F4F6;
+  --ai-assistant-background-color-light: #ffffff;
+  --ai-assistant-background-color-dark: #2c2c2c;
+  
+  --portal-ai-assistant-background-color-light: #f3f3f3;
+  --portal-ai-assistant-background-color-dark: #202020;
 }

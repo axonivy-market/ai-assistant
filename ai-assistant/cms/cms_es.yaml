@@ -64,6 +64,7 @@ Labels:
     ContactWebsite: Sitio web de contacto
     Delete: Borrar
     Description: Descripción
+    DisabledFlow: Este AI Flow está deshabilitado
     EmbeddingModel: Modelo de incrustación
     Model: Modelo
     ModelType: Tipo de modelo

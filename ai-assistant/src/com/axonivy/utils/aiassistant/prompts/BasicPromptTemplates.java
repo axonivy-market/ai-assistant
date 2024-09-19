@@ -115,8 +115,6 @@ public class BasicPromptTemplates {
       Show the result exactly same as the above format.
       """;
 
-  
-
   public static final String DEFAULT_ANSWER = """
       Your info:
       {{info}}

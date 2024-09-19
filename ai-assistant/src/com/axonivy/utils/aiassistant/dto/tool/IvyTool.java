@@ -20,6 +20,7 @@ import com.axonivy.utils.aiassistant.dto.payload.ErrorPayload;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -54,6 +55,7 @@ public class IvyTool extends AiFunction {
 
   @Override
   public void init() {
+    setDisabled(!AiFunctionUtils.checkIvyToolInSecurityContext(signature));
   }
 
   @Override
@@ -63,6 +65,10 @@ public class IvyTool extends AiFunction {
 
   @JsonIgnore
   public AiResultDTO getResult() {
+    if (isDisabled()) {
+      return createIvyToolNotFoundError();
+    }
+
     if (!hasPermision()) {
       return createNoPermisisonError();
     }
@@ -159,6 +165,16 @@ public class IvyTool extends AiFunction {
       }
       result = result.concat(attributesStr);
     }
+    return result;
+  }
+
+  @JsonIgnore
+  private AiResultDTO createIvyToolNotFoundError() {
+    AiResultDTO result = new AiResultDTO();
+    result
+        .setResult(String.format(
+            "Cannot find any callable process with signature %s.", signature));
+    result.setState(AIState.ERROR);
     return result;
   }
 

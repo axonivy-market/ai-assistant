@@ -4,9 +4,11 @@
   xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core"
   xmlns:pc="http://xmlns.jcp.org/jsf/composite/components">
 <p:dataTable id="function-table" styleClass="function-table"
-  value="#{assistant.toolkit}" var="tool" rowKey="#{tool.id}">
+  value="#{assistant.allTools}" var="tool" rowKey="#{tool.id}">
   <p:column headerText="#{ivy.cms.co('/Labels/common/Name')}" width="150">
+    <h:outputText id="disabled-icon" styleClass="si si-delete disabled-icon" rendered="#{tool.disabled}" />
     <h:outputText value="#{tool.name}" />
+    <p:tooltip for="disabled-icon" value="#{ivy.cms.co('/Labels/common/DisabledFlow')}" trackMouse="true" />
   </p:column>
   <p:column headerText="#{ivy.cms.co('/Labels/common/Type')}" styleClass="u-text-align-center" width="100">
     <p:tag rounded="true" value="#{assistantConfigurationBean.getToolType(tool.type.name())}"
@@ -20,6 +22,9 @@
   </p:column>
   <p:rowExpansion>
     <div class="ui-g">
+      <h:panelGroup layout="block" rendered="#{tool.disabled}" styleClass="ui-g-12">
+        <span class="error-message">#{ivy.cms.co('/Labels/common/DisabledFlow')}</span>
+      </h:panelGroup>
       <div class="ui-g-2">
         <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Permissions')}" />
       </div>

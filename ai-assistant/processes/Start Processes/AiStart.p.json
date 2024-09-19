@@ -7,7 +7,7 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "RequestStart",
-      "name" : "AssistantDashboard",
+      "name" : "AI Assistant Dashboard",
       "config" : {
         "signature" : "AssistantDashboard",
         "input" : {
@@ -21,7 +21,14 @@
           ]
         },
         "request" : {
-          "isVisibleOnStartList" : false
+          "name" : "AI Assistant Dashboard",
+          "description" : "Dashboard of the AI Assistant",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si si-headphones-customer-support-human-1" }
+          ]
+        },
+        "permission" : {
+          "anonymous" : false
         }
       },
       "visual" : {

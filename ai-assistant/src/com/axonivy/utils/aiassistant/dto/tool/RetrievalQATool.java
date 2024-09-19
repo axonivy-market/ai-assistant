@@ -18,6 +18,7 @@ public class RetrievalQATool extends AiFunction {
 
   @Override
   public void init() {
+    setDisabled(false);
   }
 
   @Override

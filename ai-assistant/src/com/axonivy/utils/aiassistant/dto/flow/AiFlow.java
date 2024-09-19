@@ -16,6 +16,7 @@ import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.history.Conversation;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
+import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
@@ -68,6 +69,11 @@ public class AiFlow extends AiFunction {
       memory = new ArrayList<>();
     }
     setNotificationMessage(null);
+
+    setDisabled(
+        getSteps().stream().filter(step -> step.getType() == StepType.IVY_TOOL)
+            .map(step -> (IvyToolStep) step).filter(step -> step.isDisabled())
+            .count() > 0);
   }
 
   @JsonIgnore

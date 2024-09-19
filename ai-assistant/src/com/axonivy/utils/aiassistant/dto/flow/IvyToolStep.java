@@ -10,6 +10,7 @@ import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.tool.IvyTool;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class IvyToolStep extends AiStep {
@@ -48,5 +49,13 @@ public class IvyToolStep extends AiStep {
     }
     setNotificationMessage(
         String.format("Processing Ivy tool: **%s**", tool.getName()));
+  }
+
+  @JsonIgnore
+  public Boolean isDisabled() {
+    IvyTool tool = (IvyTool) AiFunctionService.getInstance()
+        .findById(this.toolId);
+    tool.init();
+    return tool.isDisabled();
   }
 }

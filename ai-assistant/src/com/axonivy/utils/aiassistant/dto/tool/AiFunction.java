@@ -36,6 +36,9 @@ public abstract class AiFunction extends AbstractConfiguration
   private List<String> permissions;
   private boolean isDefault;
 
+  @JsonIgnore
+  private boolean isDisabled;
+
   public AiFunction() {
   }
 
@@ -183,5 +186,13 @@ public abstract class AiFunction extends AbstractConfiguration
     return Ivy.cms().co(
         "/Labels/Message/FinishedToolMessage/".concat(this.getType().name()),
         Arrays.asList(this.getName()));
+  }
+
+  public boolean isDisabled() {
+    return isDisabled;
+  }
+
+  public void setDisabled(boolean isDisabled) {
+    this.isDisabled = isDisabled;
   }
 }

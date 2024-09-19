@@ -48,6 +48,11 @@ public class Assistant extends AbstractConfiguration implements Serializable {
 
   @JsonIgnore
   private List<AiFunction> toolkit;
+
+  // toolkit including all disabled tools
+  @JsonIgnore
+  private List<AiFunction> allTools;
+
   @JsonIgnore
   private AiModel aiModel;
   @JsonIgnore
@@ -153,10 +158,17 @@ public class Assistant extends AbstractConfiguration implements Serializable {
       this.tools = new ArrayList<>();
     }
 
-    List<AiFunction> allTools = AiFunctionService.getInstance()
+    List<AiFunction> foundTools = AiFunctionService.getInstance()
         .getPublicConfig();
-    this.toolkit = allTools.stream()
+
+    this.allTools = foundTools.stream()
         .filter(tool -> this.tools.contains(tool.getId()))
+        .collect(Collectors.toList());
+    for (AiFunction tool : allTools) {
+      tool.init();
+    }
+
+    this.toolkit = allTools.stream().filter(tool -> !tool.isDisabled())
         .collect(Collectors.toList());
   }
 
@@ -231,5 +243,13 @@ public class Assistant extends AbstractConfiguration implements Serializable {
 
   public void setAiModelName(String aiModelName) {
     this.aiModelName = aiModelName;
+  }
+
+  public List<AiFunction> getAllTools() {
+    return allTools;
+  }
+
+  public void setAllTools(List<AiFunction> allTools) {
+    this.allTools = allTools;
   }
 }

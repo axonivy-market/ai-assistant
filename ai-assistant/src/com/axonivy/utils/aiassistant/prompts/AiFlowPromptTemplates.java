@@ -20,7 +20,7 @@ public class AiFlowPromptTemplates {
   public static final String CHECK_USER_MESSAGE_STEP = """
       Instructions:
       - Show <1> when: User's last message is off-topic or unrelated to the chat history.
-      - Show <2> when: User's last message continues the context of the chat.
+      - Show <2> when: User's last message continues the context of the chat, even when AI asked something and user say no or don't agree.
 
       This is the chat history:
 

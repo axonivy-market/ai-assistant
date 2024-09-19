@@ -229,3 +229,13 @@ body .assistant-configuration-footer .ui-button ~ .ui-button {
 .function-table .tool-type.IVY {
   background: var(--yellow-500);
 }
+
+.function-table .disabled-icon {
+  color: var(--red-600);
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.function-table .error-message {
+  color: var(--red-600);
+}

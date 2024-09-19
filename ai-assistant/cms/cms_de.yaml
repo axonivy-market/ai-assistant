@@ -64,6 +64,7 @@ Labels:
     ContactWebsite: Kontakt Website
     Delete: Löschen
     Description: Beschreibung
+    DisabledFlow: Dieser AI Flow ist deaktiviert
     EmbeddingModel: Einbettungsmodell
     Model: Modell
     ModelType: Modell Typ

@@ -213,10 +213,19 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       body: content
     }).then(response => response.json())
       .then(result => {
+
+        // Handle error from server
         if (result.error) {
           view.renderErrorMessage(result.error);
           return;
         }
+
+        //Handle request error
+        if (result.statusCode && result.statusCode == 500) {
+          view.renderErrorMessage(result.errorMessage);
+          return;
+        }
+
         if (result.selectedFunctionMessage) {
           view.renderSystemMessage(result.selectedFunctionMessage, true);
           continueRequest(conversationId, JSON.stringify(result));
@@ -700,3 +709,12 @@ function ViewAI(uri) {
     this.scrollToLatestMessage();
   }
 }
+
+$(document).ready(function() {
+  var parent = $(window.parent);
+  if (parent.length > 0) {
+    if (parent.get(0).Portal) {
+      $('body').addClass('in-portal');
+    }
+  }
+});
