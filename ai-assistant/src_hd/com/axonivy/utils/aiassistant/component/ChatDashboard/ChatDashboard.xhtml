@@ -24,7 +24,7 @@
               window.isHideCaseInfo = true;
               window.isHideTaskName = true;
               window.isHideTaskAction = true;
-              
+
               var userName = "#{ivy.session.getSessionUserName()}";
               var contextPath = "#{ivy.task.getApplication().getContextPath()}";
               var ivyResource = new IvyUri().rest() + "/assistant/";
@@ -82,14 +82,16 @@
                       <p:commandButton id="ai-management"
                         icon="si si-cog"
                         styleClass="rounded-button ui-button-outlined action-column-icon-button u-mar-right-5"
-                        title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}"
                         actionListener="#{assistantBean.navigateToAIManagement()}" />
+                      <p:tooltip for="ai-management"
+                        value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}" />
                       <p:commandButton id="clear-history-button"
                         icon="si si-messages-bubble-square-sync"
                         styleClass="rounded-button ui-button-outlined action-column-icon-button"
-                        title="#{ivy.cms.co('/ClearHistory')}"
                         process="@this" update="@form"
                         actionListener="#{assistantBean.clearHistory}" oncomplete="chatbot.onClearHistory();" />
+                      <p:tooltip for="clear-history-button"
+                        value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/ClearConversationHistory')}" />
                     </div>
                   </div>
                 </div>

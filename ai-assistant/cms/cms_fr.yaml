@@ -6,6 +6,7 @@ Dialogs:
           component:
             ChatDashboard:
               AiManagement: Gestion de l'IA
+              ClearConversationHistory: Effacer l'historique de conversation
               Title: Tableau de bord de l'assistant
           helper:
             UploadPortalDocument:

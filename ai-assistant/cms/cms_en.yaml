@@ -6,6 +6,7 @@ Dialogs:
           component:
             ChatDashboard:
               AiManagement: AI Management
+              ClearConversationHistory: Clear conversation history
               Title: Assistant Dashboard
           helper:
             UploadPortalDocument:
