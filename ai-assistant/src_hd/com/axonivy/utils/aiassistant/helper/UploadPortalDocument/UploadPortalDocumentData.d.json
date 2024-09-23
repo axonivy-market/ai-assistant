@@ -2,5 +2,14 @@
   "$schema" : "https://json-schema.axonivy.com/data-class/11.4.0/data-class.json",
   "simpleName" : "UploadPortalDocumentData",
   "namespace" : "com.axonivy.utils.aiassistant.helper.UploadPortalDocument",
-  "isBusinessCaseData" : false
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "type",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "types",
+    "type" : "java.util.List<String>",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
 }

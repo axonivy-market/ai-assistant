@@ -163,6 +163,31 @@ public class AssistantRestService {
 
   }
 
+  private void handleDefaultRetrievalQAAnswer(AsyncResponse response,
+      Conversation conversation, Assistant assistant, String request)
+      throws JsonProcessingException {
+
+    AiStreamingMessageHandler messageHandler = initStreamingMessageHandler(
+        conversation);
+
+    Map<String, Object> params = initParamsForDefaultAnswer(assistant, request);
+    params.put("contactPart", BasicPromptTemplates.generateContactPrompt(
+        assistant.getContactEmail(), assistant.getContactWebsite()));
+
+    response.resume(BusinessEntityConverter.entityToJsonValue(
+        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS, "")));
+
+    String error = assistant.getAiModel().getAiBot().streamChat(params,
+        BasicPromptTemplates.DEFAULT_ANSWER_RETRIEVAL_QA, messageHandler);
+    if (StringUtils.isNotBlank(error)) {
+      conversation.getHistory().add(ChatMessage.newErrorMessage(error));
+      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      response.resume(
+          BusinessEntityConverter.entityToJsonValue(new ErrorPayload(error)));
+      messageHandler = null;
+    }
+  }
+
   private void handleDefaultTool(AsyncResponse response,
       Conversation conversation, Assistant assistant, String request)
       throws JsonProcessingException {
@@ -170,16 +195,7 @@ public class AssistantRestService {
     AiStreamingMessageHandler messageHandler = initStreamingMessageHandler(
         conversation);
 
-    Map<String, Object> languageParam = new HashMap<>();
-    languageParam.put("input", request);
-
-    Map<String, Object> params = new HashMap<>();
-    params.put("language",
-        Ivy.session().getContentLocale().getDisplayCountry());
-    params.put("tools", BusinessEntityConverter.getObjectMapper()
-        .writeValueAsString(assistant.getToolkit()));
-    params.put("ethicalRules", assistant.formatEthicalRules());
-    params.put("request", request);
+    Map<String, Object> params = initParamsForDefaultAnswer(assistant, request);
     params.put("info", assistant.getInfo());
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
@@ -294,7 +310,8 @@ public class AssistantRestService {
   }
 
   private void handleRetrievalQATool(AsyncResponse response, String message,
-      Conversation conversation, Assistant assistant, AiFunction selectedTool) {
+      Conversation conversation, Assistant assistant, AiFunction selectedTool)
+      throws JsonProcessingException {
 
     RetrievalQATool qaTool = (RetrievalQATool) selectedTool;
     AiStreamingMessageHandler messageHandler = initStreamingMessageHandler(
@@ -312,6 +329,15 @@ public class AssistantRestService {
       return;
     }
 
+    String context = assistant.getAiModel().getAiBot()
+        .retrieveDocumentsAsString(qaTool.getCollection(), message).strip();
+
+    if (StringUtils.isBlank(context)) {
+      handleDefaultRetrievalQAAnswer(response, conversation, assistant,
+          message);
+      return;
+    }
+
     Map<String, Object> params = new HashMap<>();
     params.put("input", message);
 
@@ -320,8 +346,7 @@ public class AssistantRestService {
     params.put("info", assistant.getInfo());
     params.put("ethicalRules",
         Optional.ofNullable(assistant.formatEthicalRules()).orElse("<None>"));
-    params.put("context", assistant.getAiModel().getAiBot()
-        .retrieveDocumentsAsString(qaTool.getCollection(), message));
+    params.put("context", context);
     params.put("contactPart", BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
@@ -409,5 +434,17 @@ public class AssistantRestService {
     }
 
     return "";
+  }
+
+  private Map<String, Object> initParamsForDefaultAnswer(Assistant assistant,
+      String request) throws JsonProcessingException {
+    Map<String, Object> params = new HashMap<>();
+    params.put("language",
+        Ivy.session().getContentLocale().getDisplayCountry());
+    params.put("tools", BusinessEntityConverter.getObjectMapper()
+        .writeValueAsString(assistant.getToolkit()));
+    params.put("ethicalRules", assistant.formatEthicalRules());
+    params.put("request", request);
+    return params;
   }
 }

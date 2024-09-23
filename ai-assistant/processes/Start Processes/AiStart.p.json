@@ -149,6 +149,9 @@
           "map" : {
             "out.targetId" : "param.modelId"
           }
+        },
+        "request" : {
+          "isVisibleOnStartList" : false
         }
       },
       "visual" : {

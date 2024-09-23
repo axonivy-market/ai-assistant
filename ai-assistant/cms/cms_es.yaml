@@ -7,6 +7,23 @@ Dialogs:
             ChatDashboard:
               AiManagement: Gestión de la IA
               Title: Cuadro de mandos auxiliar
+          helper:
+            UploadPortalDocument:
+              Information: |-
+                Puedes crear contenido para la herramienta de base de conocimientos subiendo un archivo zip que contenga todos los documentos necesarios.
+                Hay dos tipos de bases de conocimientos que puedes cargar:
+              InvalidFormat: |
+                Formato no válido
+              KnowledgeBaseType: Tipo de base de conocimiento
+              OtherType: <strong>Otros:</strong> Crea una base de conocimientos con el ID del archivo cargado y el contenido generado a partir de todos los archivos 'txt' dentro del archivo 'zip' cargado.
+              OtherTypeImportantNote: |+
+                IMPORTANTE: El nombre del archivo debe estar en formato dash-case (por ejemplo, my-test-file.zip). Si el nombre del archivo no sigue este formato, se producirá un error al crear la base de conocimientos.
+
+              PortalSupportType: <strong>Soporte del portal:</strong> Solo actualiza el contenido de la herramienta integrada llamada Soporte del portal, que puede responder preguntas relacionadas con el portal de Axon Ivy.
+              Title: Crear una base de conocimiento para el asistente AI
+              UploadPortalZipFile: |
+                Subir archivo zip del documento del portal
+              UploadZipFile: Subir archivo zip
           management:
             AiManagement:
               AIManagementDescription: En esta página puedes gestionar todo lo relacionado con la IA
@@ -52,6 +69,8 @@ Labels:
     OpenAI:
       PrimaryModel: Modelo principal de Open AI
       SecondaryModel: Modelo secundario de Open AI
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: Funciones AI
     ApiKey: Clave API

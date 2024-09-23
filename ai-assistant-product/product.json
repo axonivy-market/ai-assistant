@@ -6,7 +6,7 @@
       "data": {
         "projects": [
           {
-            "groupId": "MY-GROUP-ID",
+            "groupId": "com.axonivy.utils.aiassistant",
             "artifactId": "ai-assistant-demo",
             "version": "${version}",
             "type": "iar"
@@ -28,7 +28,7 @@
       "data": {
         "dependencies": [
           {
-            "groupId": "MY-GROUP-ID",
+            "groupId": "com.axonivy.utils.aiassistant",
             "artifactId": "ai-assistant",
             "version": "${version}",
             "type": "iar"
@@ -50,7 +50,7 @@
       "data": {
         "dependencies": [
           {
-            "groupId": "MY-GROUP-ID",
+            "groupId": "com.axonivy.utils.aiassistant",
             "artifactId": "ai-assistant",
             "version": "${version}"
           }

@@ -239,6 +239,37 @@ The AI Management page serves as a central hub for configuring and managing all 
 
 <todo>
 
+#### Create knowledge bases
+
+AI Assistant allows admin users (with has role `AXONIVY_PORTAL_ADMIN`) to create knowledge bases for use by the AI function of type `Knowledge Base`.
+Simply start the process `Create knowledge base for AI Assistant` and follow the instructions there, you can create create knowledge bases which could be use by `Knowledge Base` functions.
+
+![Create Knowledge Base UI](./doc/img/create-knowledge-page-ui.png)
+
+Currently, you can create knowledge base for 2 types: Portal Support and Others.
+
+##### Knowledge base: Portal Support
+The AI Assistant includes a built-in tool called `Portal support` which can answer questions related to the Axon Ivy Portal.
+To generate the knowledge base for this function, please visit the [Portal download page](https://market.axonivy.com/portal) on the Axon Ivy Market and download the latest document, as shown in the image below.
+
+![Download Portal Document](./doc/img/download-portal-doc.png)
+
+Then, just simply upload the downloaded file as instructed in [Create knowledge bases](#create-knowledge-bases) above.
+
+After upload the zip file, please wait for some minutes till the the upload panel closed. It may takes some minutes because it takes time for AI Assistant to do the job.
+
+##### Knowledge base: Others
+
+Before upload other knowledge bases, please keep in mind:
+
+1. The name of the uploaded file will be the ID of an index in the vector store, therefore:
+   - The name must be strictly follow `dash-case`, otherwise you will get errors when AI Assistant create knowledge base.
+   - The name must be unique, otherwise you will override existing knowledge base!
+
+2. All files you put inside the zip file must be a text file (type `.txt`). AI Assistant will skip other file types when reading content to create knowledge base.
+
+After upload the zip file, please wait for some minutes till the the upload panel closed. It may takes some minutes because it takes time for AI Assistant to do the job.
+
 ### Developer guide
 
 #### AI Flow
@@ -289,7 +320,7 @@ Basic attributes of an AI Flows:
 
 - **name**: The name of the AI Flow.
 
-- **type**: Always set to "FLOW". The AI Assistant can access various tools like Ivy tools, Knowledge Base tools, and AI Flows. By defining the type as "FLOW," you indicate that this tool is an AI Flow, allowing the AI Assistant to use it correctly.
+- **type**: Always set to "FLOW". The AI Assistant can access various tools like Ivy tools, Knowledge Base tools, and AI Flows. By defining the type as "FLOW", you indicate that this tool is an AI Flow, allowing the AI Assistant to use it correctly.
 
 - **permissions**: Defines the roles or usernames of users authorized to use this AI Flow.
 

@@ -144,6 +144,23 @@ public class BasicPromptTemplates {
       please answer in readable format, don't show special characters.
       """;
 
+  public static final String DEFAULT_ANSWER_RETRIEVAL_QA = """
+      MUST answer in this language: {{language}}
+
+      And as an assistant, you MUST STRICTLY follow these ethical rules:
+      {{ethicalRules}}
+
+      {{contactPart}}
+
+      User request:
+      {{request}}
+
+      Instruction:
+      Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info
+      Don't format URLs. Example:
+        - Good: https://test.com/configuration.png
+        - Bad: ![Configuration](https://test.com/configuration.png)""";
+
   public static String generateContactPrompt(String email, String website) {
     String emailPart = "";
     String websitePart = "";
@@ -152,14 +169,14 @@ public class BasicPromptTemplates {
       Map<String, Object> emailMap = new HashMap<>();
       emailMap.put("contactEmail", email);
       emailPart = PromptTemplate.from(BasicPromptTemplates.EMAIL_PART)
-          .apply(emailMap).text();
+          .apply(emailMap).text().strip();
     }
 
     if (StringUtils.isNotBlank(website)) {
       Map<String, Object> websiteMap = new HashMap<>();
       websiteMap.put("contactWebsite", website);
       websitePart = PromptTemplate.from(BasicPromptTemplates.WEBSITE_PART)
-          .apply(websiteMap).text();
+          .apply(websiteMap).text().strip();
     }
 
     Map<String, Object> contactMap = new HashMap<>();

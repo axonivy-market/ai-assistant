@@ -31,6 +31,7 @@ import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.AiVariable;
 import com.axonivy.utils.aiassistant.enums.DefaultEthicalRule;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
+import com.axonivy.utils.aiassistant.jsonversion.AssistantJsonVersion;
 import com.axonivy.utils.aiassistant.mapper.SecurityMemberDTOMapper;
 import com.axonivy.utils.aiassistant.navigation.AiNavigator;
 import com.axonivy.utils.aiassistant.service.AiModelService;
@@ -133,6 +134,7 @@ public class AssistantConfigurationBean implements Serializable {
   }
 
   public void save() {
+    selectedAssistant.setVersion(AssistantJsonVersion.LATEST);
     pageTitle = selectedAssistant.getName();
     updatePermissionsBeforeSave();
     if (!assistants.contains(selectedAssistant)) {
