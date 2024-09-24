@@ -11,8 +11,10 @@ Dialogs:
             AiManagement:
               AIManagementDescription: This is the page you can manage everything related to AI
               AiModels: AI Models
+              BackToAssistantDashboard: Back to assistant dashboard
             AiModelConfiguration:
               Connected: Connected to AI provider successfully
+              Disclaimer: Your data will be processed by a third-party company
               ModelSavedMessage: Model "{0}" is saved successfully
               TestConnection: Test Connection
               Title: AI Model Configuration

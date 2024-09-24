@@ -88,7 +88,8 @@ public class AssistantBean implements Serializable {
         && availableAssistants.size() > 1;
   }
 
-  public void chooseAssistant() {
+  public void chooseAssistant(String id) {
+    assistantId = id; // TODO z1 consider to refactor
     assistant = availableAssistants.stream()
         .filter(a -> a.getId().contentEquals(assistantId)).findFirst()
         .orElse(null);
@@ -97,6 +98,12 @@ public class AssistantBean implements Serializable {
     initBean();
   }
 
+  public void chooseAssistant() { // TODO z1 consider to remove
+    assistant = availableAssistants.stream().filter(a -> a.getId().contentEquals(assistantId)).findFirst().orElse(null);
+    assistant.initModel();
+    assistant.initToolkit();
+    initBean();
+  }
   public List<Assistant> getAvailableAssistants() {
     return availableAssistants;
   }

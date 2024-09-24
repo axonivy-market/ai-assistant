@@ -11,8 +11,10 @@ Dialogs:
             AiManagement:
               AIManagementDescription: C'est la page où vous pouvez gérer tout ce qui a trait à l'IA.
               AiModels: Modèles d'IA
+              BackToAssistantDashboard: Retour au tableau de bord de l'assistant
             AiModelConfiguration:
               Connected: Connexion réussie au fournisseur d'IA
+              Disclaimer: TODO Your data will be processed by a third-party company
               ModelSavedMessage: Le modèle "{0}" est sauvegardé avec succès
               TestConnection: Test de connexion
               Title: Configuration du modèle AI

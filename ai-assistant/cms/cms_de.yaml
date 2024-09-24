@@ -11,8 +11,10 @@ Dialogs:
             AiManagement:
               AIManagementDescription: Auf dieser Seite können Sie alles verwalten, was mit AI zu tun hat
               AiModels: AI-Modelle
+              BackToAssistantDashboard: Zurück zum Assistenten-Dashboard
             AiModelConfiguration:
               Connected: Erfolgreich mit dem AI-Anbieter verbunden
+              Disclaimer: TODO Your data will be processed by a third-party company
               ModelSavedMessage: Modell "{0}" wurde erfolgreich gespeichert
               TestConnection: Verbindung testen
               Title: AI-Modell Konfiguration
