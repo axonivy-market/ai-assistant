@@ -20,7 +20,7 @@ import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;
 
 public class PortalDocService {
-  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/11.3.0.2/";
+  private static final String IVY_DOC_HOST = "https://market.axonivy.com/portal/11.3/doc/";
   public static final String USER_GUIDE_DIR = "portal-user-guide";
   public static final String DEVELOPER_GUIDE_DIR = "portal-developer-guide";
   public static final String PORTAL_COMPONENT_GUIDE_DIR = "portal-components";
