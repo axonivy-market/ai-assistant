@@ -184,7 +184,7 @@ Basic attributes of an AI Flows:
 > To learn more about the AI Steps, please refer to [AI Step](#ai-step)
 
 > [!TIP]
-> To learn how to create your own AI Flow, please refer to [AI Flow Demo](#ai-flow-demo)
+> To learn how to create your own AI Flow, please refer to [AI Flow Demo](#create-your-own-ai-flow)
 
 ##### AI Step
 
@@ -468,6 +468,9 @@ The output result of the Ivy Callable process must be an object has name `result
 | --- | --- | --- |
 | `result` | com.axonivy.portal.components.dto.AiResultDTO | Result for the AI Assistant |
 
+> [!TIP]
+> You will need to implement the logic to find employees yourself. For reference, you can examine the code in the [Complex Demo](#complex-demo) within the **ai-assistant-demo** Ivy project.
+
 3. In the variable file **AiFunctions.json** add an Ivy tool which will interact with the callable process above to query for list of employees
 
 ```json
@@ -570,7 +573,7 @@ And this is the AI flow:
 }
 ```
 
-5. Open the variable file **Assistants.json**, add the ID of the AI Flow `Find employees information` above to the attribute `tools` of your AI Assistant as I did with the AI Assistant `Alex` below
+5. Open the variable file **Assistants.json** and add the ID of the AI Flow `Find employees information` to the `tools` attribute of your AI Assistant as shown in the example with the AI Assistant `Alex` below.
 
 ```json
 [
@@ -601,7 +604,7 @@ And this is the AI flow:
 ]
 ```
 
-6. Now the AI Assistant `Alex` has the function to looking for employee information, you can open the chat dashboard and try the new AI function.
+6. The AI Assistant `Alex` now has the functionality to search for employee information. You can open the chat dashboard and try out this new AI feature.
 
 This is an example how the conversation look like when user using the `find-employees-flow` with the assistant `Alex`:
 
