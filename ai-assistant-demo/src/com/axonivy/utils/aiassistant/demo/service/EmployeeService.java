@@ -132,6 +132,10 @@ public class EmployeeService extends BusinessDataService<Employee> {
     }
 
     List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
+    if (CollectionUtils.isEmpty(data)) {
+      return AiAssistantAPI.createSomethingWentWrongError();
+    }
+
     String resultStr = "Found employees:".concat(System.lineSeparator());
     for (Employee emp : data) {
       resultStr = resultStr
