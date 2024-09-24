@@ -11,7 +11,9 @@ YOUR DESCRIPTION GOES HERE: Please just give a short description here without fu
 In the **ai-assistant-demo** Ivy project, we created demo assistants which can help you understand and develop your own AI assistant more effeciency.
 
 > [!IMPORTANT]
-> Whenever you run any demo below, we backup your current functions and assistants then replace them with functions and assistant of the demo. Therefore, after you finish using the demo, run the process `restoreData` to get back the original assistants and functions.
+> This demo project will create Ivy users and roles and override the main variables of the AI Assistant. Therefore, it is HIGHLY RECOMMENDED to run it on an Ivy engine in demo mode to protect your data.
+>
+> If you choose to run this demo in a production environment, please ensure you back up all Ivy variables related to AI Assistant and restore them once the demo is complete.
 
 #### Complex Demo
 
