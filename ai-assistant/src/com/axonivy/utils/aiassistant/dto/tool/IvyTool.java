@@ -80,11 +80,13 @@ public class IvyTool extends AiFunction {
     Map<String, Object> result = IvyAdapterService
         .startSubProcessInApplication(getSignature(), params);
 
+    AiResultDTO resultDTO = null;
+
     if (result != null && !result.isEmpty()) {
-      return (AiResultDTO) result.get("result");
+      resultDTO = (AiResultDTO) result.get("result");
     }
 
-    return createSomethingWentWrongError();
+    return resultDTO == null ? createSomethingWentWrongError() : resultDTO;
   }
 
   @JsonIgnore

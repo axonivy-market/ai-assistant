@@ -6,7 +6,28 @@ Dialogs:
           component:
             ChatDashboard:
               AiManagement: Gestion de l'IA
+              ClearConversationHistory: Effacer l'historique de conversation
               Title: Tableau de bord de l'assistant
+          helper:
+            UploadPortalDocument:
+              Information: |+
+                Vous pouvez créer du contenu pour l'outil de base de connaissances en téléchargeant un fichier zip contenant tous les documents nécessaires.
+                Il existe deux types de bases de connaissances que vous pouvez télécharger :
+
+              InvalidFormat: |
+                Format invalide
+              KnowledgeBaseType: |
+                Type de base de connaissances
+              OtherType: <strong>Autres :</strong> Créez une base de connaissances avec l'ID du fichier téléchargé et le contenu généré à partir de tous les fichiers 'txt' à l'intérieur du fichier 'zip' téléchargé.
+              OtherTypeImportantNote: |+
+                IMPORTANT : Le nom du fichier doit être au format dash-case (par exemple, my-test-file.zip). Si le nom du fichier ne respecte pas ce format, une erreur se produira lors de la création de la base de connaissances.
+
+              PortalSupportType: <strong>Support du portail :</strong> Mettez uniquement à jour le contenu de l'outil intégré appelé Support du portail, qui peut répondre aux questions liées au portail Axon Ivy.
+              Title: |
+                Créer une base de connaissances pour l'assistant AI
+              UploadPortalZipFile: |
+                Télécharger le fichier zip du document portail
+              UploadZipFile: Télécharger un fichier zip
           management:
             AiManagement:
               AIManagementDescription: C'est la page où vous pouvez gérer tout ce qui a trait à l'IA.
@@ -54,6 +75,8 @@ Labels:
     OpenAI:
       PrimaryModel: Modèle Open AI principal
       SecondaryModel: Modèle Open AI secondaire
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: Fonctions AI
     ApiKey: Clé API

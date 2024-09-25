@@ -6,7 +6,21 @@ Dialogs:
           component:
             ChatDashboard:
               AiManagement: AI Management
+              ClearConversationHistory: Clear conversation history
               Title: Assistant Dashboard
+          helper:
+            UploadPortalDocument:
+              Information: |2
+                 You can create content for Knowledge base tool by upload a zip file which contained all documents for it.
+                 There are two type of knowledge base you can upload:
+              InvalidFormat: Invalid format
+              KnowledgeBaseType: Knowledge base type
+              OtherType: <strong>Others:</strong> Create a knowledge base with the ID of the uploaded file with the content generated from all 'txt' files inside the uploaded 'zip' file.
+              OtherTypeImportantNote: 'IMPORTANT: The file name must be in dash-case format (e.g., my-test-file.zip). If the file name does not follow this format, an error will occur when creating the knowledge base.'
+              PortalSupportType: <strong>Portal Support:</strong> Only update the content of the built-in tool called `Portal support` which can answer questions related to the Axon Ivy Portal.
+              Title: Create knowledge base for AI Assistant
+              UploadPortalZipFile: Upload Portal Document zip file
+              UploadZipFile: Upload zip file
           management:
             AiManagement:
               AIManagementDescription: This is the page you can manage everything related to AI
@@ -54,6 +68,8 @@ Labels:
     OpenAI:
       PrimaryModel: Primary Open AI Model
       SecondaryModel: Secondary Open AI Model
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: AI Functions
     ApiKey: API Key

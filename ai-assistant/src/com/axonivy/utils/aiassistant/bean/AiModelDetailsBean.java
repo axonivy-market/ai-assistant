@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.axonivy.portal.components.util.FacesMessageUtils;
 import com.axonivy.utils.aiassistant.dto.AiModel;
 import com.axonivy.utils.aiassistant.dto.Assistant;
+import com.axonivy.utils.aiassistant.jsonversion.AiModelJsonVersion;
 import com.axonivy.utils.aiassistant.navigation.AiNavigator;
 import com.axonivy.utils.aiassistant.service.AiModelService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
@@ -75,6 +76,7 @@ public class AiModelDetailsBean implements Serializable {
   public void save() {
     String error = performTest();
     if (StringUtils.isBlank(error)) {
+      selectedModel.setVersion(AiModelJsonVersion.LATEST);
       AiModelService.getInstance().saveApiKey(selectedModel.getName(),
           selectedModel.getApiKey());
 

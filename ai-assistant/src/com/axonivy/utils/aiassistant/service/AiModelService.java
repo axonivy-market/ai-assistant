@@ -28,7 +28,7 @@ public class AiModelService {
   }
 
   public List<AiModel> findAll() {
-    return Arrays.asList(initPrimaryOpenAIModel(), initSecondaryOpenAIModel());
+    return Arrays.asList(getPrimaryOpenAIModel(), getSecondaryOpenAIModel());
   }
 
   private static String getPropertyOfPrimaryOpenAI(String propery) {
@@ -39,7 +39,7 @@ public class AiModelService {
     return Ivy.var().get(String.join(".", SECONDARY_OPEN_AI_VARIABLE, propery));
   }
 
-  private static AiModel initPrimaryOpenAIModel() {
+  public static AiModel getPrimaryOpenAIModel() {
     AiModel result = new AiModel();
     result.setName(PRIMARY_OPEN_AI_VARIABLE);
     result.setDisplayName(Ivy.cms().co("/Labels/Model/OpenAI/PrimaryModel"));
@@ -50,7 +50,7 @@ public class AiModelService {
     return result;
   }
 
-  private static AiModel initSecondaryOpenAIModel() {
+  public static AiModel getSecondaryOpenAIModel() {
     AiModel result = new AiModel();
     result.setName(SECONDARY_OPEN_AI_VARIABLE);
     result.setDisplayName(Ivy.cms().co("/Labels/Model/OpenAI/SecondaryModel"));
@@ -72,4 +72,5 @@ public class AiModelService {
     return findAll().stream()
         .filter(model -> model.getName().contentEquals(name)).findFirst().get();
   }
+
 }

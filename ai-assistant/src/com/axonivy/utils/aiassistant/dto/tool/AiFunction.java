@@ -153,21 +153,21 @@ public abstract class AiFunction extends AbstractConfiguration
     String result = "";
     List<ChatMessage> checkMemory = new ArrayList<>();
 
-    // Only check 3 latest chat messages
+    // Only check 5 latest chat messages
 
     for (ChatMessage message : memory) {
       if (!message.isNotificationMessage()) {
         checkMemory.add(message);
       }
 
-      // Only check 3 latest chat messages
-      if (checkMemory.size() > 3) {
+      // Only check 5 latest chat messages
+      if (checkMemory.size() > 5) {
         checkMemory.remove(0);
       }
     }
 
     for (ChatMessage message : checkMemory) {
-      result = result.concat(message.getFormattedMessage())
+      result = result.concat(message.getFormattedMessage().strip())
           .concat(System.lineSeparator());
     }
 

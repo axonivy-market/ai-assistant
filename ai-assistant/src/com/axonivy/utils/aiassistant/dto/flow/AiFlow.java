@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -30,6 +31,7 @@ public class AiFlow extends AiFunction {
   private static final long serialVersionUID = 7244844189316469927L;
 
   private static final int DEFAULT_DONE_STEP = -1;
+  private static final int DEFAULT_NUMBER_OF_AI_STEPS_NEED_CHECK = 15;
 
   private List<AiStep> steps;
 
@@ -79,6 +81,13 @@ public class AiFlow extends AiFunction {
   @JsonIgnore
   public void proceed(String request, Conversation conversation,
       Assistant workingAssistant) throws JsonProcessingException {
+
+    if (endlessLogicLoop()) {
+      finalResult = createSomethingWentWrongError();
+      this.state = AIState.ERROR;
+      return;
+    }
+
     if (!hasPermision()) {
       finalResult = createNoPermisisonError();
       this.state = AIState.ERROR;
@@ -371,6 +380,39 @@ public class AiFlow extends AiFunction {
     result.setResultForAI(request);
     result.setState(AIState.DONE);
     return result;
+  }
+
+  /**
+   * Handle endless loop logic problem. If AI run more than 15 steps without
+   * inform user, consider it as an endless logic loop
+   * 
+   * @return
+   */
+  @JsonIgnore
+  private Boolean endlessLogicLoop() {
+    if (CollectionUtils.isEmpty(runSteps)
+        || runSteps.size() < DEFAULT_NUMBER_OF_AI_STEPS_NEED_CHECK) {
+      return false;
+    }
+
+    // Count down from the latest AI step.
+    // If AI Flow run 15 steps without inform to user, consider as endless logic
+    // loop
+    int numberOfNonTextStep = 0;
+    for (int i = runSteps.size() - 1; i >= 0; i--) {
+      AiStep step = runSteps.get(i);
+
+      // If AI Flow has a step that inform user: non-hidden text step
+      // Stop counting
+      if (step.getType() == StepType.TEXT
+          && BooleanUtils.isNotTrue(step.getIsHidden())) {
+        break;
+      }
+
+      numberOfNonTextStep++;
+    }
+
+    return numberOfNonTextStep >= DEFAULT_NUMBER_OF_AI_STEPS_NEED_CHECK;
   }
 
   public Map<String, String> getMetadatas() {

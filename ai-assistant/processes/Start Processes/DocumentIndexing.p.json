@@ -11,8 +11,11 @@
       "config" : {
         "signature" : "createIndex",
         "request" : {
-          "name" : "Create Index",
-          "description" : "Create index for uploaded documents. The index will be stored in Elastic Search as a dense_vector index"
+          "name" : "Create knowledge base for AI Assistant",
+          "description" : "Create knowledge base for AI Assistant by upload zip file of documents",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si si-common-file-text-edit" }
+          ]
         },
         "permission" : {
           "anonymous" : false,

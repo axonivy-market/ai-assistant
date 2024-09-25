@@ -6,7 +6,26 @@ Dialogs:
           component:
             ChatDashboard:
               AiManagement: AI-Management
+              ClearConversationHistory: Gesprächsverlauf löschen
               Title: Assistent Dashboard
+          helper:
+            UploadPortalDocument:
+              Information: |-
+                Sie können Inhalte für das Wissensbasis-Tool erstellen, indem Sie eine Zip-Datei hochladen, die alle relevanten Dokumente enthält.
+                Es gibt zwei Arten von Wissensbasen, die Sie hochladen können:
+              InvalidFormat: |
+                Ungültiges Format
+              KnowledgeBaseType: Wissensbasistyp
+              OtherType: <strong>Andere:</strong> Erstellen Sie eine Wissensbasis mit der ID der hochgeladenen Datei und dem Inhalt, der aus allen 'txt'-Dateien in der hochgeladenen 'zip'-Datei generiert wurde.
+              OtherTypeImportantNote: |+
+                WICHTIG: Der Dateiname muss im dash-case-Format vorliegen (z. B. my-test-file.zip). Wenn der Dateiname dieses Format nicht einhält, tritt ein Fehler bei der Erstellung der Wissensbasis auf.
+
+              PortalSupportType: <strong>Portalsupport:</strong> Aktualisieren Sie nur den Inhalt des integrierten Tools namens Portalsupport, das Fragen zum Axon Ivy Portal beantworten kann.
+              Title: |
+                Wissensbasis für AI-Assistent erstellen
+              UploadPortalZipFile: |
+                Portal-Dokument-Zip-Datei hochladen
+              UploadZipFile: Zip-Datei hochladen
           management:
             AiManagement:
               AIManagementDescription: Auf dieser Seite können Sie alles verwalten, was mit AI zu tun hat
@@ -54,6 +73,8 @@ Labels:
     OpenAI:
       PrimaryModel: Primäres Open AI-Modell
       SecondaryModel: Sekundäres Open AI-Modell
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: AI-Funktionen
     ApiKey: API-Schlüssel

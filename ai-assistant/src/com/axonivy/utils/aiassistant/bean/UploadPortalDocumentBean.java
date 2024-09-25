@@ -25,23 +25,28 @@ import com.axonivy.utils.aiassistant.utils.BotUtils;
 @ViewScoped
 public class UploadPortalDocumentBean {
 
-  public void handleUpload(FileUploadEvent event) throws IOException {
+  private static final String PORTAL_USER_GUIDE = "portal-user-guide";
+
+  public boolean handlePortalDocumentUpload(FileUploadEvent event)
+      throws IOException {
+
     UploadedFile file = event.getFile();
     if (file != null && file.getContent() != null
-        && file.getContent().length > 0 && file.getFileName() != null) {
+        && file.getContent().length > 0 && file.getFileName() != null
+        && file.getFileName().endsWith(".zip")) {
 
       AbstractAIBot bot = BotUtils.getBot();
 
-      String indexName = FilenameUtils.removeExtension(file.getFileName());
       byte[] buffer = new byte[1024];
       ZipInputStream fileStream = new ZipInputStream(file.getInputStream());
       ZipEntry zipEntry = fileStream.getNextEntry();
 
       List<String> result = new ArrayList<>();
-      boolean isTextFiles = false;
       while (zipEntry != null) {
         String fileName = zipEntry.getName();
-        if (fileName.endsWith(".html")) {
+        // Only handle files within "portal-user-guide" folder and ending with ".html"
+        if (fileName.startsWith(PORTAL_USER_GUIDE + "/")
+            && fileName.endsWith(".html")) {
           // Get data from the XHTML file
           String fileContent = extractFileContent(buffer, fileStream);
 
@@ -50,19 +55,42 @@ public class UploadPortalDocumentBean {
           result.add(PortalDocService.convertPortalDocument(fileContent));
           result = result.stream().filter(data -> StringUtils.isNotBlank(data))
               .collect(Collectors.toList());
-        } else if (fileName.endsWith(".txt")) {
-          isTextFiles = true;
+        }
+        zipEntry = fileStream.getNextEntry();
+      }
+
+      // Embed converted contents
+      PortalDocService.createPortalIndex(bot, PORTAL_USER_GUIDE, result);
+
+      return true;
+    }
+    return false;
+  }
+
+  public void handleUpload(FileUploadEvent event) throws IOException {
+    UploadedFile file = event.getFile();
+    if (file != null && file.getContent() != null
+        && file.getContent().length > 0 && file.getFileName() != null) {
+
+      String indexName = FilenameUtils.removeExtension(file.getFileName());
+
+      AbstractAIBot bot = BotUtils.getBot();
+
+      byte[] buffer = new byte[1024];
+      ZipInputStream fileStream = new ZipInputStream(file.getInputStream());
+      ZipEntry zipEntry = fileStream.getNextEntry();
+
+      List<String> result = new ArrayList<>();
+      while (zipEntry != null) {
+        String fileName = zipEntry.getName();
+        if (fileName.endsWith(".txt")) {
           result.add(extractFileContent(buffer, fileStream));
         }
         zipEntry = fileStream.getNextEntry();
       }
 
       // Embed converted contents
-      if (isTextFiles) {
-        PortalDocService.createTextIndex(bot, indexName, result);
-      } else {
-        PortalDocService.createPortalIndex(bot, indexName, result);
-      }
+      PortalDocService.createTextIndex(bot, indexName, result);
     }
   }
 

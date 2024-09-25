@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class AiModel implements Serializable {
+public class AiModel extends AbstractConfiguration implements Serializable {
 
   private static final long serialVersionUID = -4045896164335698506L;
 
