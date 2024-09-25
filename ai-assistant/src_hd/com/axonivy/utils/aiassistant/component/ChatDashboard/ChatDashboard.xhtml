@@ -46,29 +46,9 @@
               <div class="message-list js-message-list ui-g">
                 <div class="ui-g-9 ui-sm-12 assistant-header-wrapper">
                   <div class="assistant-header-panel">
-<!--                         <div class="assistant-info-output"> -->
-<!--                           <p:graphicImage id="assistant-image" -->
-<!--                             styleClass="ai-assistant-avatar" -->
-<!--                             width="40" height="40" -->
-<!--                             rendered="#{not empty assistantBean.assistant.avatarLocation}" -->
-<!--                             alt="#{assistantBean.assistant.name}" -->
-<!--                             name="#{assistantBean.assistant.avatarLocation}" library="ivy-cms" /> -->
-    
-<!--                           <p:graphicImage styleClass="ai-assistant-avatar" -->
-<!--                             rendered="#{empty assistantBean.assistant.avatarLocation}" -->
-<!--                             name="#{assistantBean.getDefaultLogoName()}" -->
-<!--                             width="40" height="40" -->
-<!--                             library="ivy-cms" /> -->
-    
-<!--                           <h:outputText value="#{assistantBean.assistant.name}" /> -->
-<!--                         </div> -->
-                  
-                  
                     <p:commandLink id="assistant-name" disabled="#{!assistantBean.canChangeAssistant()}"
                       onclick="event.stopPropagation(); return false;"
-                      styleClass="assistant-name option-item">
-<!--                       <h:outputText value="#{assistantBean.assistant.name}" -->
-<!--                         styleClass="task-action-item-label" /> -->
+                      styleClass="assistant-name">
                       <div class="assistant-info-output">
                         <p:graphicImage id="assistant-image" styleClass="ai-assistant-avatar" width="40" height="40"
                           rendered="#{not empty assistantBean.assistant.avatarLocation}"
@@ -84,92 +64,32 @@
                       </div>
                     </p:commandLink>
                     <p:overlayPanel id="assistant-selection-panel" widgetVar="assistant-selection-panel"
-                      for="assistant-name" appendTo="@(body)"
-                      styleClass="options-panel #{cc.attrs.sideStepsPanelStyleClass}" dynamic="true"
-                      rendered="#{assistantBean.canChangeAssistant()}" my="right top" at="right bottom" showCloseIcon="true"
-                      dismissable="true">
-<!--                       <div class="ui-g"> -->
-                      
-      <ui:repeat value="#{assistantBean.availableAssistants}" var="availableAssistant">
-<!--       <div class="ui-g-4" > -->
-        <p:commandLink id="assistant-item" styleClass="option-item" global="false"
-          actionListener="#{assistantBean.chooseAssistant(availableAssistant.id)}" process="@this"
-          update="@form" >
-                        <p:graphicImage id="assistant-image" styleClass="ai-assistant-avatar" width="40" height="40"
-                          rendered="#{not empty availableAssistant.avatarLocation}"
-                          alt="#{availableAssistant.name}" name="#{availableAssistant.avatarLocation}"
-                          library="ivy-cms" />
+                      for="assistant-name" appendTo="@(body)" style="width: 25rem"
+                      styleClass="" dynamic="true"
+                      rendered="#{assistantBean.canChangeAssistant()}" my="right top" at="right bottom"
+                      showCloseIcon="true" dismissable="true">
+                      <div class="ui-g">
 
-                        <p:graphicImage styleClass="ai-assistant-avatar"
-                          rendered="#{empty availableAssistant.avatarLocation}"
-                          name="#{assistantBean.getDefaultLogoName()}" width="40" height="40" library="ivy-cms" />
-<!--       </div> -->
-<!--       <div class="ui-g-8"> -->
+                        <ui:repeat value="#{assistantBean.availableAssistants}" var="availableAssistant">
+                          <div class="ui-g-12">
+                            <p:commandLink id="assistant-item" styleClass="" global="false"
+                              actionListener="#{assistantBean.chooseAssistant(availableAssistant.id)}" process="@this"
+                              update="@form">
+                              <p:graphicImage id="assistant-image" styleClass="ai-assistant-avatar" width="40"
+                                height="40" rendered="#{not empty availableAssistant.avatarLocation}"
+                                alt="#{availableAssistant.name}" name="#{availableAssistant.avatarLocation}"
+                                library="ivy-cms" />
 
-                        <h:outputText value="#{availableAssistant.name}" />
-                        </p:commandLink>
-<!--       </div> -->
-      
-      
-      
-<!--         <p:commandLink id="assistant-item" styleClass="option-item" global="false" -->
-<!--           actionListener="#{assistantBean.chooseAssistant(availableAssistant.id)}" process="@this" -->
-<!--           update="@form" > -->
-<!--           <span class="option-item-label option-item-long-label"><h:outputText value="#{availableAssistant.name}" /></span> -->
-<!--         </p:commandLink> -->
-  
-<!--         <p:commandLink id="option-item" styleClass="option-item" value="#{sideStep.name}" global="false" rendered="#{not sideStep.isAdhoc()}" -->
-<!--           actionListener="#{sideStepBean.startSideStep(sideStep)}" process="@this" /> -->
-      </ui:repeat>
-<!--       </div> -->
-<!--                       <p:commandLink id="task-reset-command" onstart="event.stopPropagation();" -->
-<!--                         rendered="#{taskActionBean.showResetTask}" disabled="#{!taskActionBean.canReset(task)}" -->
-<!--                         styleClass="option-item" actionListener="#{logic.resetTask(task)}" -->
-<!--                         update="@parent #{cc.attrs.componentToUpdate}"> -->
-<!--                         <i class="option-action-icon si si-road-sign-u-turn-left" /> -->
-<!--                         <span class="option-item-label">#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/common/reset')}</span> -->
-<!--                       </p:commandLink> -->
+                              <p:graphicImage styleClass="ai-assistant-avatar"
+                                rendered="#{empty availableAssistant.avatarLocation}"
+                                name="#{assistantBean.getDefaultLogoName()}" width="40" height="40" library="ivy-cms" />
 
-<!--                       <p:link id="show-process-viewer-link" target="_blank" -->
-<!--                         styleClass="show-process-viewer-link option-item" -->
-<!--                         href="#{taskActionBean.getProcessViewerPageUri(task)}" -->
-<!--                         rendered="#{taskActionBean.showProcessViewer(task)}"> -->
-<!--                         <i class="option-action-icon si si-hierarchy-6 si-rotate-270" /> -->
-<!--                         <span class="option-item-label">#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/ProcessViewer/ProcessViewerText')}</span> -->
-<!--                       </p:link> -->
+                              <h:outputText value="#{availableAssistant.name}" />
+                            </p:commandLink>
+                          </div>
+                        </ui:repeat>
+                      </div>
                     </p:overlayPanel>
-<!--                     <p:inplace id="assistant-name" styleClass="assistant-name" widgetVar="assistant-name" -->
-<!--                       toggleable="true" disabled="#{!assistantBean.canChangeAssistant()}"> -->
-<!--                       <f:facet name="output"> -->
-<!--                         <div class="assistant-info-output"> -->
-<!--                           <p:graphicImage id="assistant-image" -->
-<!--                             styleClass="ai-assistant-avatar" -->
-<!--                             width="40" height="40" -->
-<!--                             rendered="#{not empty assistantBean.assistant.avatarLocation}" -->
-<!--                             alt="#{assistantBean.assistant.name}" -->
-<!--                             name="#{assistantBean.assistant.avatarLocation}" library="ivy-cms" /> -->
-    
-<!--                           <p:graphicImage styleClass="ai-assistant-avatar" -->
-<!--                             rendered="#{empty assistantBean.assistant.avatarLocation}" -->
-<!--                             name="#{assistantBean.getDefaultLogoName()}" -->
-<!--                             width="40" height="40" -->
-<!--                             library="ivy-cms" /> -->
-    
-<!--                           <h:outputText value="#{assistantBean.assistant.name}" /> -->
-<!--                         </div> -->
-<!--                       </f:facet> -->
-<!--                       <f:facet name="input"> -->
-<!--                         <div class="assistant-info-input"> -->
-<!--                           <p:selectOneMenu value="#{assistantBean.assistantId}"> -->
-<!--                             <f:selectItems value="#{assistantBean.availableAssistants}" var="availableAssistant" -->
-<!--                               itemLabel="#{availableAssistant.name}" itemValue="#{availableAssistant.id}" -->
-<!--                               itemDescription="#{availableAssistant.info}" /> -->
-<!--                             <p:ajax listener="#{assistantBean.chooseAssistant}" -->
-<!--                               process="@this" partialSubmit="true" update="@form" /> -->
-<!--                           </p:selectOneMenu> -->
-<!--                         </div> -->
-<!--                       </f:facet> -->
-<!--                     </p:inplace> -->
                     <div class="action-panel">
                       <p:commandButton id="ai-management"
                         icon="si si-cog"
