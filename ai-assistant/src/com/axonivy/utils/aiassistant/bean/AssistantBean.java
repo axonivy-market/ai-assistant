@@ -1,5 +1,7 @@
 package com.axonivy.utils.aiassistant.bean;
 
+import static com.axonivy.utils.aiassistant.enums.SessionAttribute.SELECTED_ASSISTANT_ID;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -38,7 +40,15 @@ public class AssistantBean implements Serializable {
     availableAssistants = AssistantService.getInstance()
         .findAvailableAssistantForUser(Ivy.session().getSessionUserName());
     if (assistant == null) {
-      assistant = availableAssistants.get(0);
+      String selectedAssistantId = (String) Ivy.session().getAttribute(SELECTED_ASSISTANT_ID.name());
+      if (selectedAssistantId != null) {
+        assistantId = selectedAssistantId;
+        assistant = availableAssistants.stream().filter(assistant -> selectedAssistantId.equals(assistant.getId()))
+            .findFirst().orElse(null);
+      }
+      if (assistant == null) {
+        assistant  = availableAssistants.get(0);
+      }
       assistant.initModel();
       assistant.initToolkit();
     }
@@ -96,6 +106,7 @@ public class AssistantBean implements Serializable {
     assistant.initModel();
     assistant.initToolkit();
     initBean();
+    Ivy.session().setAttribute(SELECTED_ASSISTANT_ID.name(), assistantId);
   }
 
   public void chooseAssistant() { // TODO z1 consider to remove
