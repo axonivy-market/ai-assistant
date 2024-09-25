@@ -33,7 +33,10 @@ Dialogs:
               BackToAssistantDashboard: Zurück zum Assistenten-Dashboard
             AiModelConfiguration:
               Connected: Erfolgreich mit dem AI-Anbieter verbunden
-              Disclaimer: TODO Your data will be processed by a third-party company
+              Disclaimer: |-
+                Unser KI-Assistent verwendet einen API-Schlüssel/eine Zugangsberechtigung eines ausgewählten Drittanbieters, um bestimmte Funktionalitäten bereitzustellen. Bitte beachten Sie, dass Ihre Daten von diesem Drittanbieter in Übereinstimmung mit dessen eigenen Datenschutzrichtlinien und -bestimmungen verarbeitet werden. Wir empfehlen, die Datenschutzrichtlinien des Drittanbieters zu lesen, um zu verstehen, wie Ihre Daten behandelt werden.
+
+                Übersetzt mit DeepL.com (kostenlose Version)
               ModelSavedMessage: Modell "{0}" wurde erfolgreich gespeichert
               TestConnection: Verbindung testen
               Title: AI-Modell Konfiguration

@@ -37,8 +37,8 @@ public class AssistantBean implements Serializable {
 
   @PostConstruct
   public void initBean() {
-    availableAssistants = AssistantService.getInstance()
-        .findAvailableAssistantForUser(Ivy.session().getSessionUserName());
+    availableAssistants =
+        AssistantService.getInstance().findAvailableAssistantForUser(Ivy.session().getSessionUserName());
     if (assistant == null) {
       String selectedAssistantId = (String) Ivy.session().getAttribute(SELECTED_ASSISTANT_ID.name());
       if (selectedAssistantId != null) {
@@ -47,17 +47,16 @@ public class AssistantBean implements Serializable {
             .findFirst().orElse(null);
       }
       if (assistant == null) {
-        assistant  = availableAssistants.get(0);
+        assistant = availableAssistants.get(0);
       }
       assistant.initModel();
       assistant.initToolkit();
     }
 
-    this.conversationId = Conversation.generateConversationId(
-        Ivy.session().getSessionUserName(), assistant.getId());
+    this.conversationId = Conversation.generateConversationId(Ivy.session().getSessionUserName(), assistant.getId());
 
-    this.suggestions = BusinessEntityConverter.jsonValueToEntities(
-        Ivy.var().get(AiVariable.SUGGESTIONS.key), Suggestion.class);
+    this.suggestions =
+        BusinessEntityConverter.jsonValueToEntities(Ivy.var().get(AiVariable.SUGGESTIONS.key), Suggestion.class);
   }
 
   public Assistant getAssistant() {
@@ -94,27 +93,18 @@ public class AssistantBean implements Serializable {
   }
 
   public boolean canChangeAssistant() {
-    return CollectionUtils.isNotEmpty(availableAssistants)
-        && availableAssistants.size() > 1;
+    return CollectionUtils.isNotEmpty(availableAssistants) && availableAssistants.size() > 1;
   }
 
   public void chooseAssistant(String id) {
-    assistantId = id; // TODO z1 consider to refactor
-    assistant = availableAssistants.stream()
-        .filter(a -> a.getId().contentEquals(assistantId)).findFirst()
-        .orElse(null);
+    assistantId = id;
+    assistant = availableAssistants.stream().filter(a -> a.getId().contentEquals(assistantId)).findFirst().orElse(null);
     assistant.initModel();
     assistant.initToolkit();
     initBean();
     Ivy.session().setAttribute(SELECTED_ASSISTANT_ID.name(), assistantId);
   }
 
-  public void chooseAssistant() { // TODO z1 consider to remove
-    assistant = availableAssistants.stream().filter(a -> a.getId().contentEquals(assistantId)).findFirst().orElse(null);
-    assistant.initModel();
-    assistant.initToolkit();
-    initBean();
-  }
   public List<Assistant> getAvailableAssistants() {
     return availableAssistants;
   }

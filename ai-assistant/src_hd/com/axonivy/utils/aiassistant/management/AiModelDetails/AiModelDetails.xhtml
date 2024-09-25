@@ -73,9 +73,9 @@
               <h:outputText
                 value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/Disclaimer')}" />
             </div>
-            <h:panelGroup layout="block" styleClass="ui-g-12"
+            <h:panelGroup layout="block" styleClass="ui-g-12 mt-2"
               rendered="#{aiModelDetailsBean.canShowUsingByAssistant()}">
-              <h:outputText value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/UsingBy')}" />
+              <h4>#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/UsingBy')}</h4>
             </h:panelGroup>
             <h:panelGroup layout="block" styleClass="ui-g ui-g-12 ui-fluid u-"
               rendered="#{aiModelDetailsBean.canShowUsingByAssistant()}">
