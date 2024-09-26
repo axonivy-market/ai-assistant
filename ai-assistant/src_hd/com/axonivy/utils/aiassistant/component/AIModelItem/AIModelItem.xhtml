@@ -17,7 +17,7 @@
 
 <cc:implementation>
   <c:set var="model" value="#{cc.attrs.model}" />
-  <h:panelGroup styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'}">
+  <h:panelGroup id="model-item-panel" styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'}">
     <h:panelGroup layout="block" styleClass="ui-g-3 ui-xl-2 avatar-container">
       <p:graphicImage name="#{model.modelType.logoCms}" alt="#{model.name}" library="ivy-cms"
         width="80" height="80" styleClass="ai-assistant-avatar" rendered="#{ivyFreyaTheme.mode eq 'light'}" />

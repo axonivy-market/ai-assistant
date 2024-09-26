@@ -29,7 +29,7 @@
               <div class="ui-g">
                 <div class="ui-g-12 ai-action-panel">
                   <h:form>
-                  <p:commandButton value="#{ivy.cms.co('/Labels/common/New')}" icon="si si-add"
+                  <p:commandButton id="new-assistant" value="#{ivy.cms.co('/Labels/common/New')}" icon="si si-add"
                     actionListener="#{aiManagementBean.navigateToAssistantConfiguration('')}"
                     global="false" immediate="true" rendered="#{!aiManagementBean.isEmptyModels()}"/>
                   </h:form>
@@ -52,7 +52,7 @@
                 </ui:repeat>
               </div>
             </p:tab>
-            <p:tab menuTitle="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AiModels')}"
+            <p:tab id="model-tab" menuTitle="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AiModels')}"
               title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AiModels')}"
               rendered="#{!aiManagementBean.isEmptyModels()}">
               <div class="ui-g">
@@ -64,7 +64,7 @@
                 </ui:repeat>
               </div>
             </p:tab>
-            <p:tab menuTitle="#{ivy.cms.co('/Labels/common/AIFunctions')}" title="#{ivy.cms.co('/Labels/common/AIFunctions')}">
+            <p:tab id="function-tab" menuTitle="#{ivy.cms.co('/Labels/common/AIFunctions')}" title="#{ivy.cms.co('/Labels/common/AIFunctions')}">
               <div class="ui-g-12" style="height: 200px; background: grey; opacity: 0.2"></div>
             </p:tab>
           </p:tabView>
