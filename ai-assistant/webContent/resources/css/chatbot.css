@@ -432,6 +432,21 @@
   display: flex;
   font-size: 1.5rem;
   font-weight: normal;
+  cursor: pointer;
+  border: solid 1px transparent;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.assistant-selection-panel .assistant-option {
+  border: solid 1px transparent;
+  border-radius: 10px;
+}
+
+.assistant-header-wrapper .assistant-header-panel .assistant-name:hover,
+.assistant-selection-panel .assistant-option:hover {
+  background: rgba(144, 221, 233, 0.24);
+  border: 1px solid #90DDE9;
 }
 
 .assistant-header-wrapper .assistant-header-panel .assistant-name .ui-inplace-display-disabled {
