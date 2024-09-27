@@ -113,6 +113,20 @@ public class BasicPromptTemplates {
       <[{"name" : "attribute1", "value": "attribute1_value"},{"name" : "attribute2", "value": "attribute2_value"}]>
 
       Show the result exactly same as the above format.
+
+      Example:
+
+      we have function
+      name: Find car
+      description: Find information of a process
+      attributes:
+         - name: carName ; description: Name of the car
+         - name: carColor ; description: color of the car
+
+      And user message:
+      find red car
+
+      result should be: <[{"name" : "carColor", "value": "red"}]>
       """;
 
   public static final String DEFAULT_ANSWER = """
