@@ -95,7 +95,7 @@
     "name": "Portal support",
     "type": "RETRIEVAL_QA",
     "description" : "Knowledge base of Portal",
-    "usage": "Helpful when user ask kind of questions related to Portal.",
+    "usage": "Helpful when user ask kind of questions related to Portal or when user need a guide to do something",
     "permissions": [
       "Everybody"
     ],
@@ -540,7 +540,7 @@
       "Everybody"
     ],
     "description": "Find cases by name, description, and states",
-    "usage": "Please use this tool when the user wants to find case or mentions a case, but it's unclear what he want to do with it.",
+    "usage": "Use this tool when the user mentioned 'case'.",
     "steps": [
       {
         "stepNo": 0,
@@ -991,6 +991,96 @@
             "after": "start process has name contains 'leave request'"
           }
         ]
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "handle-tasks-flow",
+    "name": "Handle tasks",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to handle tasks",
+    "usage": "Please use this tool when user mentioned the word 'task'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User want to start, or run the task"
+          },
+          {
+            "action": 2,
+            "case": "User want to find, list out, show, or look up for tasks"
+          },
+          {
+            "action": 2,
+            "case": "User want to do something different from above conditions"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TRIGGER_FLOW",
+        "flowId": "start-task-flow",
+        "triggerMessage": "I want to start task with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 2,
+        "type": "TRIGGER_FLOW",
+        "flowId": "find-tasks-flow",
+        "triggerMessage": "I want to find task with information in the lastest message from User",
+        "useConversationMemory": true
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "handle-process-flow",
+    "name": "Handle process",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to handle processes",
+    "usage": "Use this tool when user make a request",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User want to start, or run a process"
+          },
+          {
+            "action": 2,
+            "case": "User want to find, list out, show, or look up for process"
+          },
+          {
+            "action": 2,
+            "case": "User want to do something different from above conditions"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TRIGGER_FLOW",
+        "flowId": "start-process-flow",
+        "triggerMessage": "I want to start a process with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 2,
+        "type": "TRIGGER_FLOW",
+        "flowId": "find-processes-flow",
+        "triggerMessage": "I want to find process with information in the lastest message from User",
+        "useConversationMemory": true
       }
     ]
   }

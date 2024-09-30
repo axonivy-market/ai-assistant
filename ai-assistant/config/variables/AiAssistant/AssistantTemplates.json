@@ -7,8 +7,7 @@
     "contactWebsite": "https://support.axonivy.com/hc/en-us",
     "tools" : [
       "start-process-flow",
-      "start-task-flow",
-      "find-tasks-flow",
+      "handle-tasks-flow",
       "find-processes-flow",
       "find-cases-flow",
       "portal-support"

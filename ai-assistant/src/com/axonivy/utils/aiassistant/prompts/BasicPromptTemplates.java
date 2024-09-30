@@ -57,37 +57,21 @@ public class BasicPromptTemplates {
       """;
 
   public static final String CHOOSE_FUNCTION = """
-       Categorize message is a question or a request to do something.
-       Then you will choose a tool from a list of tools to handle the message.
-
        Tool list:
 
       {{functions}}
 
-       Instructions:
-       1. Detect if the message is a question or a request to do something.
 
-       The last message of this chat history is the request you should use to choose tool:
+      Chat history:
 
-       AI: Hello User
+      User: Hello
+       AI: Hello
        {{memory}}
 
-       2. After that, use tool usage to choose a tool from above tools to fulfill the message
-          If the message about yourself
-            + respond null.
-          If the message is a question:
-            + ONLY choose tool has type 'RETRIEVAL_QA'.
-          If the message is a request to do something:
-            + ONLY choose the tool if the object in the request same as in the description of the tool.
-              Example: If the subject of the request is to find task, then ONLY choose tool if the request mentioned 'task'.
+       Instructions:
 
-            + ONLY choose the tool if the action in the request same as in the description of the tool.
-              Example: If the action of the request is to find task, then ONLY choose the tool if the request mentioned words similiar to 'find'.
-
-       3. Double-check the result.
-          If the chosen tool is not correct, choose again.
-
-       4. ONLY respond the Id of the selected tool.
+       1. Choose the most suitable tool
+       2. ONLY respond the Id of the selected tool
        """;
 
   public static final String FULFILL_IVY_TOOL = """
@@ -97,11 +81,11 @@ public class BasicPromptTemplates {
       You're a computer, don't have ability to talk or explain.
 
       Function:
-      ---------
+
       {{tool}}
 
       Chat history:
-      -------------
+
       {{memory}}
 
       If the last message of the chat history is a confirmation such as 'yes', 'agree', or you don't understand the request of the last message, use all messages as the request.

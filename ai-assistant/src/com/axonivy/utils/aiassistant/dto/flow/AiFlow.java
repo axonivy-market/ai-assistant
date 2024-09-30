@@ -209,9 +209,20 @@ public class AiFlow extends AiFunction {
 
       case TRIGGER_FLOW -> {
         TriggerFlowStep flowStep = (TriggerFlowStep) step;
-        if (StringUtils.isBlank(flowStep.getTriggerMessage())) {
+
+        // If showResultOfStep is set, get result of that step as input
+        if (flowStep.getShowResultOfStep() != null) {
           flowStep.setTriggerMessage(
               getResultOfStep(flowStep.getShowResultOfStep()).getResultForAI());
+        }
+
+        // If useConversationMemory = true, append set the conversation memory
+        // before the trigger message
+        if (flowStep.getUseConversationMemory()) {
+          String newTriggerMessage = conversation.getFormattedMemory()
+              .concat(System.lineSeparator())
+              .concat(flowStep.getTriggerMessage());
+          flowStep.setTriggerMessage(newTriggerMessage);
         }
         flowStep.run(request, memoryToRun, metadatas, workingAssistant);
         state = flowStep.getResult().getState();
