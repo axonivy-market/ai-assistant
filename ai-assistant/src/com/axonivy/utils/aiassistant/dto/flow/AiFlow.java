@@ -1,7 +1,6 @@
 package com.axonivy.utils.aiassistant.dto.flow;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -9,7 +8,6 @@ import java.util.Optional;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
@@ -20,7 +18,6 @@ import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
-import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -117,29 +114,6 @@ public class AiFlow extends AiFunction {
       memory.add(ChatMessage.newUserMessage(request));
     }
 
-    // If user cancel the flow or input something meaningless, just cancel the
-    // flow.
-    if (memory.size() > 1) {
-      switch (runCheckMessageStep()) {
-      case 0 -> {
-        finalResult = createCancelMessage();
-        updateStepResultToMemory(finalResult, conversation, true);
-        this.state = AIState.DONE;
-        return;
-      }
-      case 1 -> {
-        finalResult = createRestartMessage(request);
-        state = AIState.ERROR;
-        conversation.getHistory().remove(conversation.getHistory().size() - 1);
-        conversation.getMemory().remove(conversation.getMemory().size() - 1);
-        return;
-      }
-      default -> {
-      }
-      }
-      ;
-    }
-
     if (runSteps == null) {
       runSteps = new ArrayList<>();
     }
@@ -212,16 +186,18 @@ public class AiFlow extends AiFunction {
 
         // If showResultOfStep is set, get result of that step as input
         if (flowStep.getShowResultOfStep() != null) {
-          flowStep.setTriggerMessage(
-              getResultOfStep(flowStep.getShowResultOfStep()).getResultForAI());
+          flowStep.setTriggerMessage(ChatMessage.newAIMessage(
+              getResultOfStep(flowStep.getShowResultOfStep()).getResultForAI())
+              .getFormattedMessage());
         }
 
         // If useConversationMemory = true, append set the conversation memory
         // before the trigger message
-        if (flowStep.getUseConversationMemory()) {
+        if (BooleanUtils.isTrue(flowStep.getUseConversationMemory())) {
           String newTriggerMessage = conversation.getFormattedMemory()
               .concat(System.lineSeparator())
-              .concat(flowStep.getTriggerMessage());
+              .concat(ChatMessage.newAIMessage(flowStep.getTriggerMessage())
+                  .getFormattedMessage());
           flowStep.setTriggerMessage(newTriggerMessage);
         }
         flowStep.run(request, memoryToRun, metadatas, workingAssistant);
@@ -358,21 +334,6 @@ public class AiFlow extends AiFunction {
 
   public void setRunSteps(List<AiStep> runSteps) {
     this.runSteps = runSteps;
-  }
-
-  private Integer runCheckMessageStep() {
-    if ((memory.stream().filter(ChatMessage::isUserMessage).count() == 0)
-        || !memory.getLast().isUserMessage()) {
-      return 2;
-    }
-    Map<String, Object> params = new HashMap<>();
-    params.put("memory",
-        AiFunction.getFormattedMemoryForValidateMessage(memory));
-
-    String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
-        AiFlowPromptTemplates.CHECK_USER_MESSAGE_STEP);
-
-    return NumberUtils.toInt(AiStep.extractTextInsideTag(resultFromAI), 0);
   }
 
   @JsonIgnore

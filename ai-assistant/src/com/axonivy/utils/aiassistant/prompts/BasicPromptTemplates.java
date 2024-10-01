@@ -57,22 +57,37 @@ public class BasicPromptTemplates {
       """;
 
   public static final String CHOOSE_FUNCTION = """
-       Tool list:
+      Tool list:
 
       {{functions}}
 
 
-      Chat history:
+      Request
 
-      User: Hello
-       AI: Hello
-       {{memory}}
+      {{request}}
 
-       Instructions:
+      Instructions:
 
-       1. Choose the most suitable tool
-       2. ONLY respond the Id of the selected tool
-       """;
+      1. IF the request seem to be related to other messages such as "start the second task" or "run the fix car process above", show <none>.
+      2. Otherwise, Choose the most suitable tool for the request and ONLY respond the Id of the selected tool""";
+
+  public static final String CHOOSE_FUNCTION_WITH_HISTORY = """
+      Tool list:
+
+     {{functions}}
+
+
+     Chat history:
+
+     User: Hello
+      AI: Hello
+      {{memory}}
+
+      Instructions:
+
+      1. Choose the most suitable tool
+      2. ONLY respond the Id of the selected tool
+      """;
 
   public static final String FULFILL_IVY_TOOL = """
       Metadata:
@@ -93,6 +108,7 @@ public class BasicPromptTemplates {
 
       Instruction:
       I want to use the request and the tool to generate a json array inside '<' and '>' characters.
+      I want to use the request and the attribute info to generate a json array inside '<' and '>' characters.
       This is the template:
       <[{"name" : "attribute1", "value": "attribute1_value"},{"name" : "attribute2", "value": "attribute2_value"}]>
 
@@ -100,17 +116,53 @@ public class BasicPromptTemplates {
 
       Example:
 
-      we have function
+      Function:
       name: Find car
       description: Find information of a process
-      attributes:
-         - name: carName ; description: Name of the car
-         - name: carColor ; description: color of the car
+      Example:
+
+      attribute:
+      - name: carColor ; description: color of the car
+      - name: type; description: type of the car
 
       And user message:
-      find red car
+      find the red sedan car
 
-      result should be: <[{"name" : "carColor", "value": "red"}]>
+      result should be: <[{"name" : "carColor", "value": "red"}, {"name" : "type", "value": "sedan"}]>
+      """;
+
+  public static final String FULFILL_IVY_ATTRIBUTE = """
+      Metadata:
+      {{metadata}}
+
+      You're a computer, don't have ability to talk or explain.
+
+      Attribute:
+
+      {{attribute}}
+
+      Chat history:
+
+      {{memory}}
+
+      If the last message of the chat history is a confirmation such as 'yes', 'agree', or you don't understand the request of the last message, use all messages as the request.
+      Otherwise, only use the last message in the chat history as the request.
+
+      Instruction:
+      I want to use the request and the attribute info to generate a json array inside '<' and '>' characters.
+      This is the template:
+      <{"name" : "attribute_name", "value": "attribute1_value"}>
+      Show the result exactly same as the above format.
+
+      Example:
+
+      attribute:
+      - name: carColor ; description: color of the car
+
+      And user message:
+      find the red sedan car
+
+      result should be: <{"name" : "carColor", "value": "red"}>
       """;
 
   public static final String DEFAULT_ANSWER = """

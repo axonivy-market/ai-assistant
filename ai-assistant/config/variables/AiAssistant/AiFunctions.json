@@ -13,11 +13,11 @@
     "attributes": [
       {
         "name": "taskName",
-        "description": "Name of the task"
+        "description": "Name of the task. Only fill when the request mentioned task name. Example: task name is 'fix car'"
       },
       {
         "name": "taskDescription",
-        "description": "Description of the task"
+        "description": "Description of the task. Only fill when the request mentioned task description. Example: task desciption is 'fix the car YXR-53'"
       },
       {
         "name": "taskPriority",
@@ -232,73 +232,52 @@
     "steps": [
       {
         "stepNo": 0,
-        "type": "SWITCH",
-        "useConversationMemory": true,
-        "cases": [
+        "type": "RE_PHRASE",
+        "useConversationMemory": false,
+        "toolId": "find-tasks",
+        "onRephrase": 1,
+        "onSuccess": 1,
+        "saveToHistory": false,
+        "examples": [
           {
-            "action": 1,
-            "case": "In the latest message, User want to start task and in messages before that, AI already found task matched the request from user"
+            "before": "start my fix car task",
+            "after": "start task has name 'fix car'"
           },
           {
-            "action": 2,
-            "case": "AI cannot found any task"
+            "before": "start top priority task",
+            "after": "start task has high priority"
+          },
+          {
+            "before": "start my running task",
+            "after": "start task has state 'in_progress'"
+          },
+          {
+            "before": "please start tasks I need to finish this week",
+            "after": "start task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>, and the responsible is <username in metadata>"
           }
         ]
       },
       {
         "stepNo": 1,
         "type": "IVY_TOOL",
-        "toolId": "start-task-by-id",
-        "onSuccess": -1,
-        "onError": 7,
-        "useConversationMemory": true
-      },
-      {
-        "stepNo": 2,
-        "type": "RE_PHRASE",
-        "useConversationMemory": true,
         "toolId": "find-tasks",
-        "onRephrase": 3,
         "onSuccess": 3,
-        "saveToHistory": false,
-        "examples": [
-          {
-            "before": "find my fix car task",
-            "after": "find task has name 'fix car'"
-          },
-          {
-            "before": "find top priority task",
-            "after": "find task has high priority"
-          },
-          {
-            "before": "find my running task",
-            "after": "find task has state 'in_progress'"
-          },
-          {
-            "before": "please find tasks I need to finish this week",
-            "after": "find task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>, and the responsible is <username in metadata>"
-          },
-          {
-            "before": "List me all the tasks that need completion within the current week",
-            "after": "find task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>"
-          }
-        ]
-      },
-      {
-        "stepNo": 3,
-        "type": "IVY_TOOL",
-        "toolId": "find-tasks",
-        "onSuccess": 4,
-        "onError": 6,
+        "onError": 2,
         "saveToHistory": false
       },
       {
-        "stepNo": 4,
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
+        "onSuccess": 0
+      },
+      {
+        "stepNo": 3,
         "type": "SWITCH",
         "useConversationMemory": false,
         "cases": [
           {
-            "action": 6,
+            "action": 2,
             "case": "cannot find any tasks"
           },
           {
@@ -306,31 +285,52 @@
             "case": "found multiple tasks"
           },
           {
-            "action": 1,
+            "action": 4,
             "case": "found only one tasks"
           }
         ]
       },
       {
+        "stepNo": 4,
+        "type": "IVY_TOOL",
+        "toolId": "start-task-by-id",
+        "onSuccess": -1,
+        "onError": 6,
+        "useConversationMemory": true
+      },
+      {
         "stepNo": 5,
         "type": "TEXT",
         "text": "I found some tasks that match your request. Which one would you like to start?",
-        "showResultOfStep": 3,
-        "onSuccess": 1,
+        "showResultOfStep": 1,
+        "onSuccess": 6,
         "saveToHistory": true
       },
       {
         "stepNo": 6,
-        "type": "TEXT",
-        "text": "Sorry, I couldn't find any tasks that match your request.",
-        "onSuccess": -1
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 4,
+            "case": "User choose a task from the list to start"
+          },
+          {
+            "action": 10,
+            "case": "User don't want to choose any of them"
+          },
+          {
+            "action": 0,
+            "case": "User provide information to search tasks again"
+          }
+        ]
       },
       { 
         "stepNo": 7,
         "type": "IVY_TOOL",
         "toolId": "find-task-details-by-id",
         "onSuccess": 8,
-        "onError": 6,
+        "onError": 9,
         "useConversationMemory": false,
         "saveToHistory": false
       },
@@ -340,6 +340,20 @@
         "text": "You cannot start the requested task. Please check the task details.",
         "showResultOfStep": 7,
         "onSuccess": -1,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 9,
+        "type": "TEXT",
+        "text": "Something went wrong when I trying to start the task you requested. Please try again later.",
+        "onSuccess": -1,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 10,
+        "type": "TEXT",
+        "text": "Sorry to hear that, can you provide information of the task you want to start?",
+        "onSuccess": 6,
         "saveToHistory": true
       }
     ]
@@ -358,7 +372,7 @@
       {
         "stepNo": 0,
         "type": "RE_PHRASE",
-        "useConversationMemory": true,
+        "useConversationMemory": false,
         "toolId": "find-tasks",
         "onRephrase": 1,
         "onSuccess": 1,
@@ -627,11 +641,13 @@
     "attributes": [
       {
         "name": "processId",
-        "description": "ID of the process"
+        "description": "ID of the process",
+        "isImportant": "true"
       },
       {
         "name": "parameters",
-        "description": "Parameters of the process. This field is a String and its value ONLY accept an array in JSON format with two attribute: name, value. Example: '[{'name': 'leaveType' , 'value' : '1'} , {'name': 'isAdmin' , 'value' : 'true'}]'. Note: replace single quote with double quotes."
+        "description": "Parameters of the process. This field is a String and its value ONLY accept an array in JSON format with two attribute: name, value. Example: '[{'name': 'leaveType' , 'value' : '1'} , {'name': 'isAdmin' , 'value' : 'true'}]'. Note: replace single quote with double quotes.",
+        "isImportant": "true"
       }
     ]
   },
@@ -671,7 +687,7 @@
         "cases": [
           {
             "action": 1,
-            "case": "In the chat history, AI already found a process with information(ID, name, description,...) that could fulfill the request of user."
+            "case": "In the chat history, has an AI message start with 'AI: Found processes', and you can see information (ID, name, description,...) that could fulfill the request of user from those found processes."
           },
           {
             "action": 26,
@@ -763,11 +779,11 @@
         "examples": [
           {
             "before": "submit leave request",
-            "after": "start process has name or description contains 'leave request'"
+            "after": "start process has name contains 'leave request'"
           },
           {
-            "before": "I want to start process has name 'leave request'",
-            "after": "start process has name contains 'leave request'"
+            "before": "I want to start process has description 'leave request'",
+            "after": "start process has description contains 'leave request'"
           }
         ]
       },
@@ -822,7 +838,7 @@
             "case": "The process information doesn't mentioned about parameter"
           },
           {
-            "action": 15,
+            "action": 27,
             "case": "The process information doesn't mentioned about parameter and in the last message of user, he don't want you to ask"
           }
         ]
@@ -830,7 +846,7 @@
       {
         "stepNo": 13,
         "type": "TEXT",
-        "text": "I found information of the requested process. Do you want to start it?",
+        "text": "This is details of the requested process. Please read carefully and confirm if you want to start it.",
         "showResultOfStep": 3,
         "onSuccess": 14
       },
@@ -839,7 +855,7 @@
         "type": "SWITCH",
         "cases": [
           {
-            "action": 15,
+            "action": 27,
             "case": "User agree"
           },
           {
@@ -858,7 +874,7 @@
         "toolId": "start-process",
         "onSuccess": -1,
         "onError": 11,
-        "useConversationMemory": true
+        "useConversationMemory": false
       },
       {
         "stepNo": 16,
@@ -922,7 +938,7 @@
         "type": "SWITCH",
         "cases": [
           {
-            "action": 15,
+            "action": 27,
             "case": "User agree"
           },
           {
@@ -984,13 +1000,27 @@
         "examples": [
           {
             "before": "submit leave request",
-            "after": "start process has name or description contains 'leave request'"
+            "after": "start process has name contains 'leave request'"
           },
           {
-            "before": "I want to start process has name 'leave request'",
-            "after": "start process has name contains 'leave request'"
+            "before": "I want to start process has description 'leave request'",
+            "after": "start process has description contains 'leave request'"
           }
         ]
+      }, {
+        "stepNo": 27,
+        "type": "TEXT",
+        "useAI": true,
+        "isHidden" : true,
+        "customInstruction": "Summarize information of the selected process above with the template: processId: <process_id>\nparameters:<list of parameters and their values>",
+        "onSuccess": 28
+      },
+      {
+        "stepNo": 28,
+        "type": "TRIGGER_FLOW",
+        "flowId": "start-process-with-params-flow",
+        "triggerMessage": "Start process",
+        "showResultOfStep": 27
       }
     ]
   },
@@ -1081,6 +1111,32 @@
         "flowId": "find-processes-flow",
         "triggerMessage": "I want to find process with information in the lastest message from User",
         "useConversationMemory": true
+      }
+    ]
+  }, {
+    "version": "11.4.0",
+    "id": "start-process-with-params-flow",
+    "name": "Handle process",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to start process with parameters",
+    "usage": "Use this tool when user want to start process with parameters",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "IVY_TOOL",
+        "toolId": "start-process",
+        "onSuccess": -1,
+        "onError": 1,
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 1,
+        "type": "TEXT",
+        "text": "Something went wrong when start the process you requested. Please try again later.",
+        "onSuccess": -1
       }
     ]
   }

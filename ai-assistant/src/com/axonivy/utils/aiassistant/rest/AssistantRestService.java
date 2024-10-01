@@ -100,7 +100,7 @@ public class AssistantRestService {
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
     AiFunction selectedFunction = AiFunctionService.getInstance()
-        .findById(chooseFunction(assistant, conversation));
+        .findById(chooseFunction(assistant, conversation, message));
 
     if (selectedFunction == null) {
       handleDefaultTool(response, conversation, assistant, message);
@@ -145,7 +145,7 @@ public class AssistantRestService {
     String selectedFunctionId = payload.getSelectedFunctionId();
 
     if (StringUtils.isBlank(selectedFunctionId)) {
-      selectedFunctionId = chooseFunction(assistant, conversation);
+      selectedFunctionId = chooseFunction(assistant, conversation, message);
     }
 
     AiFunction selectedFunction = AiFunctionService.getInstance()
@@ -405,15 +405,28 @@ public class AssistantRestService {
     }
   }
 
-  private String chooseFunction(Assistant assistant, Conversation conversation)
+  private String chooseFunction(Assistant assistant, Conversation conversation,
+      String request)
       throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
     params.put("functions", assistant.formatFunctionsForChoose());
-    params.put("memory",
-        AiFunction.getFormattedMemory(conversation.getMemory()));
+    params.put("request", request);
 
-    return getFunctionIdFromBotAnswer(assistant.getAiModel().getAiBot().chat(
+    String selectedFunction = getFunctionIdFromBotAnswer(
+        assistant.getAiModel().getAiBot().chat(
         params, BasicPromptTemplates.CHOOSE_FUNCTION), assistant.getTools());
+
+    if (StringUtils.isBlank(selectedFunction)) {
+      params.put("functions", assistant.formatFunctionsForChoose());
+      params.put("memory",
+          AiFunction.getFormattedMemory(conversation.getMemory()));
+      selectedFunction = getFunctionIdFromBotAnswer(
+          assistant.getAiModel().getAiBot().chat(params,
+              BasicPromptTemplates.CHOOSE_FUNCTION_WITH_HISTORY),
+          assistant.getTools());
+    }
+
+    return selectedFunction;
   }
 
   private String getFunctionIdFromBotAnswer(String answer,
