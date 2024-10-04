@@ -4,7 +4,8 @@
   xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
   <ui:composition template="/layouts/frame-10-full-width.xhtml">
-    <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}</ui:define>
+    <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}
+    </ui:define>
     <ui:define name="content">
       <h:outputStylesheet library="css" name="ai-management.css" />
       <h:outputStylesheet library="css" name="utility.css" />
@@ -30,21 +31,22 @@
         <div class="ui-g-12">
           <p:tabView>
             <p:tab id="assistant-tab" menuTitle="#{ivy.cms.co('/Labels/common/Assistants')}"
-              title="#{ivy.cms.co('/Labels/common/Assistants')}" >
+              title="#{ivy.cms.co('/Labels/common/Assistants')}">
               <div class="ui-g">
                 <h:panelGroup layout="block" id="empty-assistant-message-container"
-                  rendered="#{aiManagementBean.isEmptyAssistants()}"
-                  styleClass="empty-message-container ui-g-12">
+                  rendered="#{aiManagementBean.isEmptyAssistants()}" styleClass="empty-message-container ui-g-12">
                   <i class="si si-multiple-actions-add empty-message-icon" />
-                    <br />
-                    <h:outputText value="There are currently no assistants. Let’s create your first AI assistant "
-                      styleClass="empty-message-text" />
+                  <br />
+                  <h:outputText value="There are currently no assistants. Let’s create your first AI assistant "
+                    styleClass="empty-message-text" />
                 </h:panelGroup>
                 <div class="ui-g-4">
                   <h:form styleClass="w-full h-full">
                     <div class="ui-g-12 card ai-assistant-card ai-assistant-add-new active">
                       <i class="si si-add si-lg" />
-                      <div class="mt-2">#{ivy.cms.co("/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AddNewAssistant")}</div>
+                      <div class="mt-2">
+                        #{ivy.cms.co("/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AddNewAssistant")}
+                      </div>
                       <p:ajax event="click" listener="#{aiManagementBean.navigateToAssistantConfiguration('')}"
                         global="false" immediate="true" rendered="#{!aiManagementBean.isEmptyModels()}" />
                     </div>
@@ -58,7 +60,8 @@
                 </ui:repeat>
               </div>
             </p:tab>
-            <p:tab menuTitle="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AiModels')}"
+            <p:tab id="model-tab"
+              menuTitle="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AiModels')}"
               title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AiModels')}"
               rendered="#{!aiManagementBean.isEmptyModels()}">
               <div class="ui-g">
@@ -70,7 +73,8 @@
                 </ui:repeat>
               </div>
             </p:tab>
-            <p:tab menuTitle="#{ivy.cms.co('/Labels/common/AIFunctions')}" title="#{ivy.cms.co('/Labels/common/AIFunctions')}">
+            <p:tab id="function-tab" menuTitle="#{ivy.cms.co('/Labels/common/AIFunctions')}"
+              title="#{ivy.cms.co('/Labels/common/AIFunctions')}">
               <div class="ui-g-12" style="height: 200px; background: grey; opacity: 0.2"></div>
             </p:tab>
           </p:tabView>

@@ -145,10 +145,12 @@ public class IvyTool extends AiFunction {
     }
 
     for (IvyToolAttribute fulfilledAttribute : fulfilled) {
-      attributes.stream()
-          .filter(attr -> attr.getName()
-              .contentEquals(fulfilledAttribute.getName()))
-          .findFirst().get().setValue(fulfilledAttribute.getValue());
+      for (IvyToolAttribute realAttribute : attributes) {
+        if (realAttribute.getName()
+            .contentEquals(fulfilledAttribute.getName())) {
+          realAttribute.setValue(fulfilledAttribute.getValue());
+        }
+      }
     }
 
     return this;
