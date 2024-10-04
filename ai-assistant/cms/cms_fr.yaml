@@ -31,6 +31,7 @@ Dialogs:
           management:
             AiManagement:
               AIManagementDescription: C'est la page où vous pouvez gérer tout ce qui a trait à l'IA.
+              AddNewAssistant: Ajouter un nouvel assistant
               AiModels: Modèles d'IA
               BackToAssistantDashboard: Retour au tableau de bord de l'assistant
             AiModelConfiguration:

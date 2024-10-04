@@ -32,14 +32,6 @@
             <p:tab id="assistant-tab" menuTitle="#{ivy.cms.co('/Labels/common/Assistants')}"
               title="#{ivy.cms.co('/Labels/common/Assistants')}" >
               <div class="ui-g">
-                <div class="ui-g-12 ai-action-panel">
-                  <h:form>
-                  <p:commandButton value="#{ivy.cms.co('/Labels/common/New')}" icon="si si-add"
-                    actionListener="#{aiManagementBean.navigateToAssistantConfiguration('')}"
-                    global="false" immediate="true" rendered="#{!aiManagementBean.isEmptyModels()}"/>
-                  </h:form>
-                </div>
-
                 <h:panelGroup layout="block" id="empty-assistant-message-container"
                   rendered="#{aiManagementBean.isEmptyAssistants()}"
                   styleClass="empty-message-container ui-g-12">
@@ -48,7 +40,16 @@
                     <h:outputText value="There are currently no assistants. Let’s create your first AI assistant "
                       styleClass="empty-message-text" />
                 </h:panelGroup>
-
+                <div class="ui-g-4">
+                  <h:form styleClass="w-full h-full">
+                    <div class="ui-g-12 card ai-assistant-card ai-assistant-add-new active">
+                      <i class="si si-add si-lg" />
+                      <div class="mt-2">#{ivy.cms.co("/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AddNewAssistant")}</div>
+                      <p:ajax event="click" listener="#{aiManagementBean.navigateToAssistantConfiguration('')}"
+                        global="false" immediate="true" rendered="#{!aiManagementBean.isEmptyModels()}" />
+                    </div>
+                  </h:form>
+                </div>
                 <ui:repeat var="assistant" value="#{aiManagementBean.assistants}">
                   <div class="ui-g-4 ui-g">
                     <ic:com.axonivy.utils.aiassistant.component.AIAssistantItem assistant="#{assistant}"

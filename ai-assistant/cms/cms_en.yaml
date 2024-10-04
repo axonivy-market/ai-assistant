@@ -24,6 +24,7 @@ Dialogs:
           management:
             AiManagement:
               AIManagementDescription: This is the page you can manage everything related to AI
+              AddNewAssistant: Add new assistant
               AiModels: AI Models
               BackToAssistantDashboard: Back to assistant dashboard
             AiModelConfiguration:
