@@ -550,3 +550,28 @@ body.light.in-portal .assistant-header-wrapper {
   --portal-ai-assistant-background-color-light: #f3f3f3;
   --portal-ai-assistant-background-color-dark: #202020;
 }
+
+.system-response-container {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-1.1rem);
+  padding: 0 2rem;
+}
+
+.chatbot-panel .system-response-container .chat-message {
+  padding: 0;
+}
+
+body .chatbot-panel .chat-message.system-response-expand-button {
+  display: flex;
+  font-size: 1.1rem;
+  border: none;
+  background: transparent;
+  cursor:pointer;
+  color: var(--gray-500);
+}
+
+body.dark .chatbot-panel .chat-message.system-response-expand-button {
+  color: var(--gray-100);
+}
+
