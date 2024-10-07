@@ -33,7 +33,6 @@ public abstract class AiFunction extends AbstractConfiguration
   private String description;
   private String usage;
   private List<String> permissions;
-  private boolean isDefault;
 
   @JsonIgnore
   private boolean isDisabled;
@@ -67,14 +66,6 @@ public abstract class AiFunction extends AbstractConfiguration
 
   public abstract void init();
 
-  public boolean isDefault() {
-    return isDefault;
-  }
-
-  public void setDefault(boolean isDefault) {
-    this.isDefault = isDefault;
-  }
-
   public String getUsage() {
     return usage;
   }
@@ -86,7 +77,7 @@ public abstract class AiFunction extends AbstractConfiguration
   public abstract ToolType getType();
 
   @JsonIgnore
-  protected boolean hasPermision() {
+  public boolean hasPermision() {
     boolean hasPermission = false;
     for (String permission : getPermissions()) {
 

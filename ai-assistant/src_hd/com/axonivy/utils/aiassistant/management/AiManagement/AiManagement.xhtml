@@ -65,7 +65,11 @@
               </div>
             </p:tab>
             <p:tab id="function-tab" menuTitle="#{ivy.cms.co('/Labels/common/AIFunctions')}" title="#{ivy.cms.co('/Labels/common/AIFunctions')}">
-              <div class="ui-g-12" style="height: 200px; background: grey; opacity: 0.2"></div>
+              <div class="ui-g-12">
+                <h:form>
+                  <ic:com.axonivy.utils.aiassistant.component.AIFunctionList id="functions-list" />
+                </h:form>
+              </div>
             </p:tab>
           </p:tabView>
         </div>

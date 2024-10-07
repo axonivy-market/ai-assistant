@@ -20,6 +20,7 @@ import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import ch.ivyteam.ivy.environment.Ivy;
@@ -43,6 +44,9 @@ public class AiFlow extends AiFunction {
   private AiResultDTO finalResult;
 
   private String notificationMessage;
+
+  @JsonProperty(value = "startable")
+  private boolean startable;
 
   @JsonIgnore
   private AiFunction functionToTrigger;
@@ -69,10 +73,12 @@ public class AiFlow extends AiFunction {
     }
     setNotificationMessage(null);
 
-    setDisabled(
-        getSteps().stream().filter(step -> step.getType() == StepType.IVY_TOOL)
-            .map(step -> (IvyToolStep) step).filter(step -> step.isDisabled())
-            .count() > 0);
+    boolean hasDisabledIvyTool = getSteps().stream()
+        .filter(step -> step.getType() == StepType.IVY_TOOL)
+        .map(step -> (IvyToolStep) step).filter(step -> step.isDisabled())
+        .count() > 0;
+
+    setDisabled(!(BooleanUtils.isTrue(this.startable) && !hasDisabledIvyTool));
   }
 
   @JsonIgnore
@@ -419,5 +425,13 @@ public class AiFlow extends AiFunction {
 
   public void setNotificationMessage(String notificationMessage) {
     this.notificationMessage = notificationMessage;
+  }
+
+  public boolean isStartable() {
+    return startable;
+  }
+
+  public void setStartable(boolean startable) {
+    this.startable = startable;
   }
 }

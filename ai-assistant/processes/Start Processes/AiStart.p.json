@@ -216,5 +216,52 @@
             "offset" : { "x" : 9, "y" : -3 }
           } }
       ]
+    }, {
+      "id" : "f13",
+      "type" : "RequestStart",
+      "name" : "FunctionConfiguration",
+      "config" : {
+        "signature" : "FunctionConfiguration",
+        "input" : {
+          "params" : [
+            { "name" : "functionId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.targetId" : "param.functionId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 528 }
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f14" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "DialogCall",
+      "name" : "AI Function Configuration",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.management.FunctionConfiguration:start(String)",
+        "call" : {
+          "map" : {
+            "param.functionId" : "in.targetId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 528 },
+        "size" : { "width" : 160, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f27", "to" : "f26" }
+      ]
+    }, {
+      "id" : "f26",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 528 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
     } ]
 }
