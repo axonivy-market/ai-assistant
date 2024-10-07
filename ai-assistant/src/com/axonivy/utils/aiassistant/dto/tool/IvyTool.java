@@ -1,10 +1,14 @@
 package com.axonivy.utils.aiassistant.dto.tool;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
@@ -30,8 +34,10 @@ public class IvyTool extends AiFunction {
 
   private static final long serialVersionUID = -5362479525475837795L;
 
-  private static final String TOOL_TO_FULFILL_FORMAT = "name: %s \r\n description: %s \r\n attributes: \r\n";
+  private static final String TOOL_TO_FULFILL_FORMAT = "name: %s \r\ndescription: %s \r\nattributes: \r\n";
   private static final String ATTRIBUTE_LINE_FORMAT = "    - name: %s ; description: %s";
+
+  private static final String FULFILL_ATTRIBUTE_LINE_FORMAT = "name: %s ; description: %s";
 
   private List<IvyToolAttribute> attributes;
   private String signature;
@@ -129,47 +135,108 @@ public class IvyTool extends AiFunction {
   public IvyTool fullfilIvyTool(List<ChatMessage> memory,
       AbstractAIBot bot, String metadata) throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
+    String fulfillRequestData = buildDataFulfillRequest();
+
+    if (StringUtils.isNotBlank(fulfillRequestData)) {
+      fulfillNormalAttributes(memory, bot, metadata, params);
+    }
+
+    fulfillImportantAttributes(memory, bot, metadata);
+
+    return this;
+  }
+
+  private boolean fulfillNormalAttributes(List<ChatMessage> memory,
+      AbstractAIBot bot, String metadata, Map<String, Object> params) {
     params.put("tool", buildDataFulfillRequest());
 
     params.put("memory", getFormattedMemory(memory));
     params.put("metadata", metadata);
 
-    List<IvyToolAttribute> fulfilled = BusinessEntityConverter
+    List<IvyToolAttribute> fulfilled = new ArrayList<>();
+
+    try {
+      fulfilled = BusinessEntityConverter
         .jsonValueToEntities(
-            AiStep.extractTextInsideTag(
-                bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL)),
+            AiStep.extractJsonArray(AiStep.extractTextInsideTag(
+                bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL))),
             IvyToolAttribute.class);
+    } catch (Exception e) {
+      return false;
+    }
 
     if (CollectionUtils.isEmpty(fulfilled)) {
-      return this;
+      return false;
     }
 
     for (IvyToolAttribute fulfilledAttribute : fulfilled) {
       for (IvyToolAttribute realAttribute : attributes) {
         if (realAttribute.getName()
-            .contentEquals(fulfilledAttribute.getName())) {
-          realAttribute.setValue(fulfilledAttribute.getValue());
+            .contentEquals(Optional.ofNullable(fulfilledAttribute)
+                .map(IvyToolAttribute::getName).orElse(""))) {
+          realAttribute.setValue(Optional.ofNullable(fulfilledAttribute)
+              .map(IvyToolAttribute::getValue).orElse(""));
         }
       }
     }
 
-    return this;
+    return true;
   }
 
-  private String buildDataFulfillRequest() {
-    String result = String.format(TOOL_TO_FULFILL_FORMAT, getName(),
-        getDescription());
-    String attributesStr = "";
+  private void fulfillImportantAttributes(List<ChatMessage> memory,
+      AbstractAIBot bot, String metadata) throws JsonProcessingException {
+    for (IvyToolAttribute realAttribute : attributes) {
+      if (BooleanUtils
+          .isTrue(BooleanUtils.toBoolean(realAttribute.getIsImportant()))) {
+       IvyToolAttribute newAttribute = fulfillIvyToolAttribute(memory, bot, metadata, realAttribute);
+       attributes.stream()
+           .filter(
+               attr -> attr.getName().contentEquals(realAttribute.getName()))
+           .findFirst().get().setValue(newAttribute.getValue());
+      }
+    }
+  }
+
+  public IvyToolAttribute fulfillIvyToolAttribute(List<ChatMessage> memory,
+      AbstractAIBot bot, String metadata, IvyToolAttribute attr)
+      throws JsonProcessingException {
+      Map<String, Object> params = new HashMap<>();
+      params.put("attribute", buildDataFulfillAttributeRequest(attr));
+      params.put("memory", getFormattedMemory(memory));
+      params.put("metadata", metadata);
+
+      return BusinessEntityConverter.jsonValueToEntity(
+          AiStep.extractTextInsideTag(
+              bot.chat(params, BasicPromptTemplates.FULFILL_IVY_ATTRIBUTE)),
+          IvyToolAttribute.class);
+
+  }
+
+  public String buildDataFulfillRequest() {
     if (CollectionUtils.isNotEmpty(attributes)) {
+      String result = String.format(TOOL_TO_FULFILL_FORMAT, getName(),
+          getDescription());
+      String attributesStr = "";
       for (IvyToolAttribute attr : attributes) {
+        if (BooleanUtils
+            .isTrue(BooleanUtils.toBoolean(attr.getIsImportant()))) {
+          continue;
+        }
         attributesStr = attributesStr
             .concat(String.format(ATTRIBUTE_LINE_FORMAT, attr.getName(),
                 attr.getDescription()))
             .concat(System.lineSeparator());
       }
-      result = result.concat(attributesStr);
+      return result.concat(attributesStr);
     }
-    return result;
+    return "";
+  }
+
+  private String buildDataFulfillAttributeRequest(
+      IvyToolAttribute attributeToFill) {
+    return String.format(FULFILL_ATTRIBUTE_LINE_FORMAT,
+        attributeToFill.getName(),
+        attributeToFill.getDescription());
   }
 
   @JsonIgnore

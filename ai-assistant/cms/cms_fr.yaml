@@ -4,6 +4,18 @@ Dialogs:
       utils:
         aiassistant:
           component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Ouvrir la page des détails de la fonction d'IA "{0}"
+              OpenFunctionDetailsWarningDialogMessage: Les modifications non enregistrées seront perdues. Voulez-vous continuer?
+              RemoveFunctionDialogHeader: Supprimer la fonction AI « {0} »
+              RemoveFunctionForAssistantMessage: Êtes-vous sûr de vouloir supprimer cette fonction d'IA de {0}?
+              RemoveFunctionMessage: |-
+                Cette fonction AI est utilisée par les assistants AI :
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Êtes-vous sûr de vouloir supprimer cette fonction AI ?
+              ToggleNonStartableAiFunction: Afficher les fonctions d'IA non démarrables
             ChatDashboard:
               AiManagement: Gestion de l'IA
               ClearConversationHistory: Effacer l'historique de conversation
@@ -45,6 +57,7 @@ Dialogs:
               Title: Configuration du modèle AI
               UsingBy: Assistants utilisant ce modèle
             AssistantConfiguration:
+              AddFunction: Ajouter une fonction
               AssistantSavedMessage: L'assistant "{0}" est sauvegardé avec succès
               AssistantTemplates: Modèles d'assistant
               CreateAssistant: Créer un assistant
@@ -83,6 +96,8 @@ Labels:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: Fonctions AI
+    Actions: Actions
+    Add: Ajouter
     ApiKey: Clé API
     Assistants: Assistants
     Avatar: Avatar
@@ -93,7 +108,8 @@ Labels:
     ContactWebsite: Contacter le site web
     Delete: Supprimer
     Description: Description
-    DisabledFlow: Ce AI Flow est désactivé
+    Details: Détails
+    DisabledFlow: Ce flux d'IA ne peut pas être démarré directement ou est désactivé
     EmbeddingModel: Modèle d'intégration
     Model: Modèle
     ModelType: Type de modèle

@@ -13,6 +13,7 @@ public class AiNavigator extends BaseNavigator {
 
   private static final String AI_MANAGEMENT_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AiManagement.ivp";
   private static final String ASSISTANT_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AssistantConfiguration.ivp";
+  private static final String FUNCTION_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/FunctionConfiguration.ivp";
   private static final String AI_MODEL_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AiModelConfiguration.ivp";
   private static final String ASSISTANT_DASHBOARD_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AssistantDashboard.ivp";
 
@@ -32,6 +33,17 @@ public class AiNavigator extends BaseNavigator {
       params.put("assistantId", assistantId);
       ProcessStartUtils.redirect(buildAbsoluteUrl(
           ASSISTANT_CONFIGURATION_FRIENDLY_REQUEST_PATH, params));
+    } catch (IOException e) {
+      throw new AiChatException(e);
+    }
+  }
+
+  public static void navigateToFunctionConfiguration(String functionId) {
+    try {
+      Map<String, String> params = new HashMap<>();
+      params.put("functionId", functionId);
+      ProcessStartUtils.redirect(buildAbsoluteUrl(
+          FUNCTION_CONFIGURATION_FRIENDLY_REQUEST_PATH, params));
     } catch (IOException e) {
       throw new AiChatException(e);
     }

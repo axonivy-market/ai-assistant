@@ -4,6 +4,18 @@ Dialogs:
       utils:
         aiassistant:
           component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Öffne die Detailseite der KI-Funktion "{0}"
+              OpenFunctionDetailsWarningDialogMessage: Nicht gespeicherte Änderungen gehen verloren. Möchten Sie fortfahren?
+              RemoveFunctionDialogHeader: Entfernen Sie die „{0}“ AI-Funktion
+              RemoveFunctionForAssistantMessage: Sind Sie sicher, dass Sie diese KI-Funktion von {0} entfernen möchten?
+              RemoveFunctionMessage: |-
+                Diese AI-Funktion wird von AI-Assistenten verwendet:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Sind Sie sicher, dass Sie diese AI-Funktion löschen möchten?
+              ToggleNonStartableAiFunction: Nicht startbare KI-Funktionen anzeigen
             ChatDashboard:
               AiManagement: AI-Management
               ClearConversationHistory: Gesprächsverlauf löschen
@@ -43,6 +55,7 @@ Dialogs:
               Title: AI-Modell Konfiguration
               UsingBy: Assistenten, die dieses Modell verwenden
             AssistantConfiguration:
+              AddFunction: Funktion hinzufügen
               AssistantSavedMessage: Assistent "{0}" wurde erfolgreich gespeichert
               AssistantTemplates: Assistentenvorlagen
               CreateAssistant: Assistent erstellen
@@ -81,6 +94,8 @@ Labels:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: AI-Funktionen
+    Actions: Aktionen
+    Add: Hinzufügen
     ApiKey: API-Schlüssel
     Assistants: Assistenten
     Avatar: Avatar
@@ -91,7 +106,8 @@ Labels:
     ContactWebsite: Kontakt Website
     Delete: Löschen
     Description: Beschreibung
-    DisabledFlow: Dieser AI Flow ist deaktiviert
+    Details: Einzelheiten
+    DisabledFlow: Dieser KI-Flow kann nicht direkt gestartet werden oder ist deaktiviert
     EmbeddingModel: Einbettungsmodell
     Model: Modell
     ModelType: Modell Typ

@@ -1,7 +1,6 @@
 package com.axonivy.utils.aiassistant.dto.flow;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -9,7 +8,6 @@ import java.util.Optional;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
@@ -20,9 +18,9 @@ import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
-import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import ch.ivyteam.ivy.environment.Ivy;
@@ -46,6 +44,9 @@ public class AiFlow extends AiFunction {
   private AiResultDTO finalResult;
 
   private String notificationMessage;
+
+  @JsonProperty(value = "startable")
+  private boolean startable;
 
   @JsonIgnore
   private AiFunction functionToTrigger;
@@ -72,10 +73,12 @@ public class AiFlow extends AiFunction {
     }
     setNotificationMessage(null);
 
-    setDisabled(
-        getSteps().stream().filter(step -> step.getType() == StepType.IVY_TOOL)
-            .map(step -> (IvyToolStep) step).filter(step -> step.isDisabled())
-            .count() > 0);
+    boolean hasDisabledIvyTool = getSteps().stream()
+        .filter(step -> step.getType() == StepType.IVY_TOOL)
+        .map(step -> (IvyToolStep) step).filter(step -> step.isDisabled())
+        .count() > 0;
+
+    setDisabled(!(BooleanUtils.isTrue(this.startable) && !hasDisabledIvyTool));
   }
 
   @JsonIgnore
@@ -115,29 +118,6 @@ public class AiFlow extends AiFunction {
 
     if (StringUtils.isNotBlank(request)) {
       memory.add(ChatMessage.newUserMessage(request));
-    }
-
-    // If user cancel the flow or input something meaningless, just cancel the
-    // flow.
-    if (memory.size() > 1) {
-      switch (runCheckMessageStep()) {
-      case 0 -> {
-        finalResult = createCancelMessage();
-        updateStepResultToMemory(finalResult, conversation, true);
-        this.state = AIState.DONE;
-        return;
-      }
-      case 1 -> {
-        finalResult = createRestartMessage(request);
-        state = AIState.ERROR;
-        conversation.getHistory().remove(conversation.getHistory().size() - 1);
-        conversation.getMemory().remove(conversation.getMemory().size() - 1);
-        return;
-      }
-      default -> {
-      }
-      }
-      ;
     }
 
     if (runSteps == null) {
@@ -209,9 +189,22 @@ public class AiFlow extends AiFunction {
 
       case TRIGGER_FLOW -> {
         TriggerFlowStep flowStep = (TriggerFlowStep) step;
-        if (StringUtils.isBlank(flowStep.getTriggerMessage())) {
-          flowStep.setTriggerMessage(
-              getResultOfStep(flowStep.getShowResultOfStep()).getResultForAI());
+
+        // If showResultOfStep is set, get result of that step as input
+        if (flowStep.getShowResultOfStep() != null) {
+          flowStep.setTriggerMessage(ChatMessage.newAIMessage(
+              getResultOfStep(flowStep.getShowResultOfStep()).getResultForAI())
+              .getFormattedMessage());
+        }
+
+        // If useConversationMemory = true, append set the conversation memory
+        // before the trigger message
+        if (BooleanUtils.isTrue(flowStep.getUseConversationMemory())) {
+          String newTriggerMessage = conversation.getFormattedMemory()
+              .concat(System.lineSeparator())
+              .concat(ChatMessage.newAIMessage(flowStep.getTriggerMessage())
+                  .getFormattedMessage());
+          flowStep.setTriggerMessage(newTriggerMessage);
         }
         flowStep.run(request, memoryToRun, metadatas, workingAssistant);
         state = flowStep.getResult().getState();
@@ -349,21 +342,6 @@ public class AiFlow extends AiFunction {
     this.runSteps = runSteps;
   }
 
-  private Integer runCheckMessageStep() {
-    if ((memory.stream().filter(ChatMessage::isUserMessage).count() == 0)
-        || !memory.getLast().isUserMessage()) {
-      return 2;
-    }
-    Map<String, Object> params = new HashMap<>();
-    params.put("memory",
-        AiFunction.getFormattedMemoryForValidateMessage(memory));
-
-    String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
-        AiFlowPromptTemplates.CHECK_USER_MESSAGE_STEP);
-
-    return NumberUtils.toInt(AiStep.extractTextInsideTag(resultFromAI), 0);
-  }
-
   @JsonIgnore
   protected AiResultDTO createCancelMessage() {
     AiResultDTO result = new AiResultDTO();
@@ -447,5 +425,13 @@ public class AiFlow extends AiFunction {
 
   public void setNotificationMessage(String notificationMessage) {
     this.notificationMessage = notificationMessage;
+  }
+
+  public boolean isStartable() {
+    return startable;
+  }
+
+  public void setStartable(boolean startable) {
+    this.startable = startable;
   }
 }

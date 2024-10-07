@@ -10,7 +10,7 @@ public class ChatMessage {
   private static final String ERROR = "Error";
   private static final String SYSTEM = "System";
   private static final String NOTIFICATION = "Notification";
-  private static final String CHAT_MESSAGE_FORMAT = "%s: %s";
+  private static final String CHAT_MESSAGE_FORMAT = "%s:\n%s\n";
 
   private String content;
   private String role;

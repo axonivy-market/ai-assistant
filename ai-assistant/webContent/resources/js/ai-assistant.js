@@ -626,15 +626,17 @@ function ViewAI(uri) {
       return;
     }
 
+    let converted = isIFrame(streamingValue) ? convertIFrame(streamingValue) : marked.parse(streamingValue);
+
     if (typeof jsMessageList !== 'undefined') {
       const messageList = $(jsMessageList);
       const streamingMessage = messageList.find('.chat-message-container.streaming').not('.my-message');
       if (streamingMessage.length > 0) {
         streamingMessage.removeClass('streaming');
-        $(streamingMessage).find('.js-message').get(0).innerHTML = marked.parse(streamingValue);
+        $(streamingMessage).find('.js-message').get(0).innerHTML = converted;
       } else {
         const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
-        messages.get(messages.length - 1).innerHTML = marked.parse(streamingValue);
+        messages.get(messages.length - 1).innerHTML = converted;
       }
 
       if (!isDisableChat) {
