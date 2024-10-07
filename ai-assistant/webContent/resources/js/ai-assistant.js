@@ -631,10 +631,10 @@ function ViewAI(uri) {
       const streamingMessage = messageList.find('.chat-message-container.streaming').not('.my-message');
       if (streamingMessage.length > 0) {
         streamingMessage.removeClass('streaming');
-        $(streamingMessage).find('.js-message').get(0).innerHTML = parseFinalMessage(streamingValue);
+        $(streamingMessage).find('.js-message').get(0).innerHTML = marked.parse(streamingValue);
       } else {
         const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
-        messages.get(messages.length - 1).innerHTML = parseFinalMessage(streamingValue);
+        messages.get(messages.length - 1).innerHTML = marked.parse(streamingValue);
       }
 
       if (!isDisableChat) {

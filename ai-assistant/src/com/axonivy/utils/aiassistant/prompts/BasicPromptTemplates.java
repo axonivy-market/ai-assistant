@@ -38,14 +38,7 @@ public class BasicPromptTemplates {
 
       1. Don't try to create the answer from your own knowledge.
 
-      2. Keep the tag <image></image>, don't modify it.
-
-      3. Don't format URLs.
-      Example 2:
-        - Good: https://test.com/configuration.png
-        - Bad: ![Configuration](https://test.com/configuration.png)
-
-      4. Double check the answer:
+      2. Double check the answer:
         - remove unnecessary images.
         - restructure the answer to make it easier to understand.
 
