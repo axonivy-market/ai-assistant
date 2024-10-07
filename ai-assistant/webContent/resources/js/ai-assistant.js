@@ -78,16 +78,8 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         return;
       }
 
-      // Ctrl + Enter (or Cmd + Enter on Mac) is pressed
-      if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
-        // Add new line and adjust textarea height
-        view.addNewLineToTextbox(event.srcElement);
-        view.adjustTextareaHeight(event.srcElement);
-        return;
-      }
-
-      // Enter is pressed
-      if (event.key === 'Enter') {
+      // Enter is pressed without other keys, send the message
+      if (event.key === 'Enter' && !(event.ctrlKey || event.altKey || event.shiftKey || event.metaKey)) {
         event.preventDefault();
         this.sendMessage(event.srcElement);
         return;
