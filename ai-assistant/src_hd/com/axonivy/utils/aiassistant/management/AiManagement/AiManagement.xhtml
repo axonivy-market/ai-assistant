@@ -33,13 +33,6 @@
             <p:tab id="assistant-tab" menuTitle="#{ivy.cms.co('/Labels/common/Assistants')}"
               title="#{ivy.cms.co('/Labels/common/Assistants')}">
               <div class="ui-g">
-                <h:panelGroup layout="block" id="empty-assistant-message-container"
-                  rendered="#{aiManagementBean.isEmptyAssistants()}" styleClass="empty-message-container ui-g-12">
-                  <i class="si si-multiple-actions-add empty-message-icon" />
-                  <br />
-                  <h:outputText value="There are currently no assistants. Let’s create your first AI assistant "
-                    styleClass="empty-message-text" />
-                </h:panelGroup>
                 <div class="ui-g-4">
                   <h:form styleClass="w-full h-full">
                     <div class="ui-g-12 card ai-assistant-card ai-assistant-add-new active">

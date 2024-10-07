@@ -129,14 +129,17 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         if (result && result.history) {
           result.history.forEach(message => {
             if (message.isAiFlowMessage) {
+              view.collapseSystemSteps();
               view.renderAiFlowMessage(message.content);
             } else {
               if (message.role == 'AI') {
+                view.collapseSystemSteps();
                 streaming = true;
                 view.renderMessage(message.content);
                 streaming = false;
                 view.removeStreamingClassFromMessage();
               } else if (message.role == 'Error') {
+                view.collapseSystemSteps();
                 view.renderErrorMessage(message.content);
               } else if (message.role == 'Notification') {
                 view.renderSystemMessage(message.content, false);
@@ -268,6 +271,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
           // Handle normal conversation
           if (result.status == 'in_progress') {
             streaming = true;
+            view.collapseSystemSteps();
             streamReply(ivyUri, assistantId, result.conversationId, view);
           } else {
             if (result.status == 'done') {
@@ -455,23 +459,6 @@ function ViewAI(uri) {
       return;
     }
 
-    var numberOfSystemResponse = $('.chatbot-message-list > .chat-message-container.system-response').length;
-    if (numberOfSystemResponse !== 0) {
-      var parentContainer = $('.chat-message-container.system-response').last().parent();
-      // append button and collapsible panel for system responses
-      parentContainer.append("<div class='ui-g-9''><button type='button' class='system-response-expand-button chat-message'>Answered by " 
-        + numberOfSystemResponse + " step(s)<i class='si si-arrow-down-1 si-sm ml-2' /></button></div>");
-      parentContainer.append("<div class='system-response-container ui-g-9 hidden'></div>");
-      // put all new created system responses to the collapsible panel
-      $('.chatbot-message-list > .chat-message-container.system-response').appendTo($('.system-response-container').last());
-      // handle button click action to collapse/expand the panel
-      var systemResponseExpandButton = $('.system-response-expand-button').last();
-      systemResponseExpandButton.click(function () {
-        systemResponseExpandButton.parent().next().first().toggleClass("hidden");
-        systemResponseExpandButton.find("i").toggleClass("si-arrow-down-1").toggleClass("si-arrow-up-1");
-      });
-    }
-
     var messages = message.split('\r\n\r\n');
     messages.forEach(line => {
       if (line.trim() != '') {
@@ -528,6 +515,25 @@ function ViewAI(uri) {
     }
 
     this.removeStreamingClassFromMessage(true);
+  }
+
+  this.collapseSystemSteps = function () {
+    var numberOfSystemResponse = $('.chatbot-message-list > .chat-message-container.system-response').length;
+    if (numberOfSystemResponse !== 0) {
+      var parentContainer = $('.chat-message-container.system-response').last().parent();
+      // append button and collapsible panel for system responses
+      parentContainer.append("<div class='ui-g-9''><button type='button' class='system-response-expand-button chat-message'>Answered by "
+        + numberOfSystemResponse + " step(s)<i class='si si-arrow-down-1 si-sm ml-2' /></button></div>");
+      parentContainer.append("<div class='system-response-container ui-g-9 hidden'></div>");
+      // put all new created system responses to the collapsible panel
+      $('.chatbot-message-list > .chat-message-container.system-response').appendTo($('.system-response-container').last());
+      // handle button click action to collapse/expand the panel
+      var systemResponseExpandButton = $('.system-response-expand-button').last();
+      systemResponseExpandButton.click(function () {
+        systemResponseExpandButton.parent().next().first().toggleClass("hidden");
+        systemResponseExpandButton.find("i").toggleClass("si-arrow-down-1").toggleClass("si-arrow-up-1");
+      });
+    }
   }
 
   // Helper function for rendering messages
