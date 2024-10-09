@@ -141,8 +141,8 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
               } else if (message.role == 'Error') {
                 view.collapseSystemSteps();
                 view.renderErrorMessage(message.content);
-              } else if (message.role == 'Notification') {
-                view.renderSystemMessage(message.content, false);
+              } else if (message.role == 'System') {
+                view.renderSystemMessage(message.content, false, message.type);
               } else {
                 view.renderMyMessage({ 'message': message.content });
               }
@@ -222,7 +222,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         }
 
         if (result.selectedFunctionMessage) {
-          view.renderSystemMessage(result.selectedFunctionMessage, true);
+          view.renderSystemMessage(result.selectedFunctionMessage, true, result.type);
           continueRequest(conversationId, JSON.stringify(result));
           return;
         }
@@ -345,7 +345,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
     // Handle trigger another flow
     if (!workingFlow.state && workingFlow?.selectedFunctionId) {
-      view.renderSystemMessage(result.selectedFunctionMessage, true);
+      view.renderSystemMessage(result.selectedFunctionMessage, true, result.selectedFunctionMessage.type);
       continueRequest(conversationId, JSON.stringify(workingFlow));
       return;
     }
@@ -374,15 +374,24 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       return;
     }
 
+    const workingStep = workingFlow.runSteps.length == 0 ? null : workingFlow.runSteps[workingFlow.runSteps.length - 1];
+
     // Show notification
     if (workingFlow.notificationMessage) {
-      view.renderSystemMessage(workingFlow.notificationMessage, true);
+      const type = workingStep == null ? '' : workingStep.type;
+      view.renderSystemMessage(workingFlow.notificationMessage, true, type);
       resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
       return;
     }
 
-
-    const workingStep = workingFlow.runSteps[workingFlow.runSteps.length - 1];
+    
+    
+    // If step type switch, continue without render message
+    if (workingStep.type == 'SWITCH') {
+      resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+      return;
+    }
+    
     if (workingStep.result) {
       executeResult(workingStep.result.resultForAI);
       if (workingStep.isHidden) {
@@ -459,6 +468,8 @@ function ViewAI(uri) {
       return;
     }
 
+    view.collapseSystemSteps();
+
     var messages = message.split('\r\n\r\n');
     messages.forEach(line => {
       if (line.trim() != '') {
@@ -497,10 +508,34 @@ function ViewAI(uri) {
 
   }
 
-  this.renderSystemMessage = function (message, useAnimation) {
+  this.renderSystemMessage = function (message, useAnimation, type) {
+    if (!message || message.trim() === '') {
+      return;
+	  }
+
+    message = message.replace(/<([^>]+)>/g, "$1");
+
+    let icon = '';
+
+    switch(type) {
+      case 'FLOW':
+        icon = 'si si-lg si-cog-play';
+        break;
+      case 'IVY_TOOL':
+        icon = 'si si-lg si-cog-double-2';
+        break;
+      case 'RE_PHRASE':
+        icon = 'si si-lg si-messages-bubble-check';
+        break;
+      case 'TRIGGER_FLOW':
+        icon = 'si si-lg si-controls-play';
+        break;
+      default:
+        icon = 'si si-lg si-cog-double-2';
+    }
+
     streaming = true;
-    const icon = `<span class="si si-cog-double-2"></span>`;
-    this.renderMessage(icon + message.replace(/<([^>]+)>/g, "<strong>$1</strong>"));
+    this.renderMessage(`<div class="run-step w-full flex flex-row align-items-center ${type}"><div><span class="${icon}"></span></div><p class="ml-3">${message}</p></div>`);
     streaming = false;
 
     var messageList = document.getElementsByClassName('js-chatbot-message-list')[0];
@@ -518,20 +553,54 @@ function ViewAI(uri) {
   }
 
   this.collapseSystemSteps = function () {
-    var numberOfSystemResponse = $('.chatbot-message-list > .chat-message-container.system-response').length;
+    const numberOfSystemResponse = $('.chatbot-message-list > .chat-message-container.system-response').length;
+    
     if (numberOfSystemResponse !== 0) {
-      var parentContainer = $('.chat-message-container.system-response').last().parent();
-      // append button and collapsible panel for system responses
-      parentContainer.append("<div class='ui-g-9''><button type='button' class='system-response-expand-button chat-message'>Answered by "
-        + numberOfSystemResponse + " step(s)<i class='si si-arrow-down-1 si-sm ml-2' /></button></div>");
+      const parentContainer = $('.chat-message-container.system-response').last().parent();
+      
+      // Append button and collapsible panel for system responses
+      parentContainer.append(`
+        <div class='ui-g-9'>
+          <button type='button' class='system-response-expand-button chat-message'>
+            Answered by ${numberOfSystemResponse} step(s)
+            <i class='si si-arrow-down-1 si-sm ml-2'></i>
+          </button>
+        </div>
+      `);
+      
       parentContainer.append("<div class='system-response-container ui-g-9 hidden'></div>");
-      // put all new created system responses to the collapsible panel
-      $('.chatbot-message-list > .chat-message-container.system-response').appendTo($('.system-response-container').last());
-      // handle button click action to collapse/expand the panel
-      var systemResponseExpandButton = $('.system-response-expand-button').last();
-      systemResponseExpandButton.click(function () {
-        systemResponseExpandButton.parent().next().first().toggleClass("hidden");
-        systemResponseExpandButton.find("i").toggleClass("si-arrow-down-1").toggleClass("si-arrow-up-1");
+
+      // Move all system responses into the collapsible panel
+      $('.chatbot-message-list > .chat-message-container.system-response')
+        .appendTo($('.system-response-container').last());
+
+      // Handle button click to collapse/expand the panel
+      const expandButton = $('.system-response-expand-button').last();
+      expandButton.click(function () {
+        const responseContainer = expandButton.parent().next().first();
+        responseContainer.toggleClass("hidden");
+        expandButton.find("i")
+          .toggleClass("si-arrow-down-1")
+          .toggleClass("si-arrow-up-1");
+      });
+
+      parentContainer.find('.system-response-container').each(function() {
+        let level = 0;
+        let runSteps = $(this).find('.run-step');
+        for (var i = 0; i < runSteps.length; i++) {
+          var step = runSteps.get(i);
+          $(step).addClass(`level-${level}`);
+          $(step).find('div').addClass('icon-container border-circle border-1 border-solid flex flex-row align-items-center justify-content-center');
+
+          if ($(step).hasClass('FLOW')) {
+            level ++;
+            $(step).addClass('has-child');
+          }
+          
+          if (i != runSteps.length - 1) {
+            $(step).addClass('draw-line');
+          }
+        }
       });
     }
   }
@@ -540,7 +609,12 @@ function ViewAI(uri) {
   function renderNewMessageFunc(messageWrapper, isMyMessage) {
     // Clone message template
     const cloneTemplate = originalMessageTemplate.cloneNode(true);
-    const message = isMyMessage ? messageWrapper.message : parseMessage(messageWrapper);
+    let message = '';
+    if (isMyMessage) {
+      message = messageWrapper.message.replaceAll('\r\n', '<br/>').replaceAll('\n', '<br/>');
+    } else {
+      message = parseMessage(messageWrapper);
+    }
 
     // Set message content
     cloneTemplate.getElementsByClassName('js-message')[0].innerHTML = message;
@@ -699,7 +773,7 @@ function ViewAI(uri) {
 
   function initTextbox(textbox) {
     // Initial height of the textbox equals to 5 times font size
-    const initialHeight = 5 * parseFloat(getComputedStyle(textbox).fontSize);
+    const initialHeight = 2 * parseFloat(getComputedStyle(textbox).fontSize);
     const paddingTop = parseFloat(getComputedStyle(textbox).paddingTop);
     const paddingBottom = parseFloat(getComputedStyle(textbox).paddingBottom);
     textbox.style.height = initialHeight + paddingTop + paddingBottom + 'px';

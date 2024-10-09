@@ -59,7 +59,7 @@
                           name="#{assistantBean.getDefaultLogoName()}" width="40" height="40" library="ivy-cms" />
 
                         <h:outputText value="#{assistantBean.assistant.name}" />
-                        <i class="si si-arrow-down-1 si-sm ml-2" />
+                        <h:outputText styleClass="si si-arrow-down-1 si-sm ml-2" rendered="#{assistantBean.canChangeAssistant()}" />
                       </div>
 
                     </h:panelGroup>
@@ -89,13 +89,13 @@
                     <div class="action-panel">
                       <p:commandButton id="ai-management"
                         icon="si si-cog"
-                        styleClass="rounded-button ui-button-outlined action-column-icon-button u-mar-right-5"
+                        styleClass="rounded-button ui-button-outlined action-column-icon-button u-mar-right-5 widget-button"
                         actionListener="#{assistantBean.navigateToAIManagement()}" />
                       <p:tooltip for="ai-management"
                         value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}" />
                       <p:commandButton id="clear-history-button"
                         icon="si si-messages-bubble-square-sync"
-                        styleClass="rounded-button ui-button-outlined action-column-icon-button"
+                        styleClass="rounded-button ui-button-outlined action-column-icon-button widget-button"
                         process="@this" update="@form"
                         actionListener="#{assistantBean.clearHistory}" oncomplete="chatbot.onClearHistory();" />
                       <p:tooltip for="clear-history-button"
@@ -120,9 +120,9 @@
                       placeholder="#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/chat/typeMessage')}"
                       class="message-list-content-send-input js-chatbot-input-message ui-inputfield ui-inputtextarea ui-widget ui-state-default" />
                   </div>
-                  <div class="chat-send-form-button">
-                    <p:commandButton id="send-button" icon="si si-send-email" onclick="chatbot.onClickSendMessage()"
-                      styleClass="rounded-button" global="false" type="button" />
+                  <div class="chat-send-form-button ml-3">
+                    <p:commandButton id="send-button" icon="si si-lg si-send-email send-button" onclick="chatbot.onClickSendMessage()"
+                      global="false" type="button" />
                   </div>
                 </h:panelGroup>
               </div>

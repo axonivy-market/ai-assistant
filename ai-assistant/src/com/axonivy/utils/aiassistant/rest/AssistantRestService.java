@@ -42,6 +42,7 @@ import com.axonivy.utils.aiassistant.dto.payload.ErrorPayload;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.dto.tool.IvyTool;
 import com.axonivy.utils.aiassistant.dto.tool.RetrievalQATool;
+import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
@@ -112,9 +113,10 @@ public class AssistantRestService {
 
     payload.setSelectedFunctionId(selectedFunction.getId());
     payload.setSelectedFunctionMessage(selectedFunctionMessage);
+    payload.setType(selectedFunction.getType().name());
 
     ChatMessage systemMessage = ChatMessage
-        .newNotificationMessage(selectedFunctionMessage);
+        .newUseAIFlowSystemMessage(selectedFunctionMessage);
     conversation.getHistory().add(systemMessage);
     conversation.getMemory().add(systemMessage);
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
@@ -146,6 +148,11 @@ public class AssistantRestService {
 
     if (StringUtils.isBlank(selectedFunctionId)) {
       selectedFunctionId = chooseFunction(assistant, conversation, message);
+    }
+
+    if (StringUtils.isBlank(selectedFunctionId)) {
+      handleDefaultTool(response, conversation, assistant, selectedFunctionId);
+      return;
     }
 
     AiFunction selectedFunction = AiFunctionService.getInstance()
@@ -247,6 +254,7 @@ public class AssistantRestService {
       payload.setConversationId(conversation.getId());
       payload.setMessage(flow.getFinalResult().getResult());
       payload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
+      payload.setType(StepType.TRIGGER_FLOW.name());
       payload.setSelectedFunctionMessage(
           flow.getFunctionToTrigger().generateSelectedFunctionMessage());
 
@@ -293,6 +301,7 @@ public class AssistantRestService {
       chatPayload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
       chatPayload.setSelectedFunctionMessage(
           flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+      chatPayload.setType(StepType.TRIGGER_FLOW.name());
 
       response.resume(chatPayload);
     } else {
@@ -302,7 +311,7 @@ public class AssistantRestService {
 
   private void initTriggerToolMessage(Conversation conversation, AiFlow flow,
       Assistant assistant) {
-    ChatMessage systemMessage = ChatMessage.newNotificationMessage(
+    ChatMessage systemMessage = ChatMessage.newUseAIFlowSystemMessage(
         flow.getFunctionToTrigger().generateSelectedFunctionMessage());
     conversation.getHistory().add(systemMessage);
     conversation.getMemory().add(systemMessage);

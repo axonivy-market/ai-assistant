@@ -54,15 +54,15 @@ public class BasicPromptTemplates {
 
       {{functions}}
 
-
       Request
 
       {{request}}
 
       Instructions:
 
-      1. IF the request seem to be related to other messages such as "start the second task" or "run the fix car process above", show <none>.
-      2. Otherwise, Choose the most suitable tool for the request and ONLY respond the Id of the selected tool""";
+      1. If the request seem to be related to other messages such as "start the second task" or "run the fix car process above", show <none>.
+      2. If user just make some casual chatting such as "hello", "how are you?", show <none>
+      3. Otherwise, choose the suitable tool for the request and ONLY respond the Id of the selected tool.""";
 
   public static final String CHOOSE_FUNCTION_WITH_HISTORY = """
       Tool list:
@@ -78,15 +78,14 @@ public class BasicPromptTemplates {
 
       Instructions:
 
-      1. Choose the most suitable tool
-      2. ONLY respond the Id of the selected tool
+      1. If user just make some casual chatting such as "hello", "how are you?", show <none>
+      2. Otherwise, choose the suitable tool
+      3. ONLY respond the Id of the selected tool
       """;
 
   public static final String FULFILL_IVY_TOOL = """
       Metadata:
       {{metadata}}
-
-      You're a computer, don't have ability to talk or explain.
 
       Function:
 
@@ -100,8 +99,8 @@ public class BasicPromptTemplates {
       Otherwise, only use the last message in the chat history as the request.
 
       Instruction:
-      I want to use the request and the tool to generate a json array inside '<' and '>' characters.
-      I want to use the request and the attribute info to generate a json array inside '<' and '>' characters.
+      - Reasoning and anylyze
+      - Use the request and the attribute info to generate a json array inside '<' and '>' characters.
       This is the template:
       <[{"name" : "attribute1", "value": "attribute1_value"},{"name" : "attribute2", "value": "attribute2_value"}]>
 
@@ -167,24 +166,24 @@ public class BasicPromptTemplates {
       And as an assistant, you MUST STRICTLY follow these ethical rules:
       {{ethicalRules}}
 
-      The customer has this request:
-
+      User message:
       {{request}}
 
-      I want you to say sorry and tell him you cannot fulfill his request.
+      Instructions:
+      1. If the user message is casual chatting such as "hello", "how are you?", answer him politely.
+      2. If user asked what you can do, do step 4
+      3. Otherwise, I want you to say sorry and tell him you cannot fulfill his request. After that, do step 4
+      4. Take a look at these tool:
 
-      After that, take a look at these tool:
+        {{tools}}
 
-      {{tools}}
+        IF the tools are empty: Don't need to say anything else. Don't tell them that there are no tools.
 
-      IF the tools are empty: Don't need to say anything else. Don't tell them that there are no tools.
-
-      Otherwise:
-      Read the description and attributes of tools above.
-      List them out as your functions, what you can do.
-      ONLY show attributes and descriptions of tools.
-      you can modify descriptions of tools to make it easier to understand.
-      please answer in readable format, don't show special characters.
+        Otherwise:
+        Read the description and attributes of tools above.
+        List them out as your functions, what you can do.
+        ONLY show attributes and descriptions of tools.
+        you can modify descriptions of tools to make it easier to understand.
       """;
 
   public static final String DEFAULT_ANSWER_RETRIEVAL_QA = """

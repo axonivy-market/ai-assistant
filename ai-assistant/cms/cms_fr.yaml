@@ -78,10 +78,6 @@ Labels:
       IVY: Outil Ivy
       RETRIEVAL_QA: Base de connaissances
   Message:
-    FinishedToolMessage:
-      FLOW: 'Stop using Ivy Flow: **{0}**'
-      IVY: 'Stop using Ivy Tool: **{0}**'
-      RETRIEVAL_QA: 'Stop using Ivy Tool: **{0}**'
     InvalidEmailFormat: Format d'e-mail non valide
     InvalidUrl: URL invalide
     SelectedToolMessage:

@@ -63,21 +63,6 @@
   border-color: var(--ivy-primary-color);
 }
 
-.chatbot-panel .candidate-question-container .candidate-question .candidate-question-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.chatbot-panel .candidate-question-container .candidate-question .candidate-question-header .si {
-  margin-right: 10px;
-}
-
-.chatbot-panel .candidate-question-container .candidate-question .candidate-question-header span {
-  font-size: 1.5rem;
-}
-
 .chat-container.card {
   border-radius: 0;
   padding: 0;
@@ -135,6 +120,10 @@
   box-shadow: none;
 }
 
+.chatbot-panel .system-response {
+  width: 80vw;
+}
+
 .chatbot-panel .system-response .chat-message.system {
   padding-left: 0;
   padding-bottom: 0;
@@ -149,8 +138,48 @@
 }
 
 .chatbot-panel .system-response .chat-message.system p .si {
-  margin-right: 10px;
   font-size: 1.5rem;
+}
+
+.chatbot-panel .system-response .run-step.level-1 {
+  margin-left: 30px;
+}
+
+.chatbot-panel .system-response .run-step.level-2 {
+  margin-left: 60px;
+}
+
+.chatbot-panel .system-response .run-step.level-3 {
+  margin-left: 90px;
+}
+
+.chatbot-panel .system-response .run-step .icon-container {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  position: relative;
+  color: var(--surface-900);
+  border-color: var(--surface-900);
+  background-color: var(--surface-a);
+}
+
+.chatbot-panel .system-response .run-step.draw-line .icon-container:after {
+  position: absolute;
+  content: "";
+  top: 40px;
+  bottom: -35px;
+  border: solid 1px var(--surface-900);
+}
+
+.chatbot-panel .system-response .run-step.draw-line.has-child .icon-container:after {
+  position: absolute;
+  content: "";
+  top: 37px;
+  bottom: -35px;
+  border: solid 1px (--surface-900);
+  transform: skewX(36deg);
+  left: 103%;
 }
 
 .chatbot-panel .chat-message {
@@ -262,7 +291,7 @@
   margin: auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   padding: 25px 0;
   max-width: 1143px;
   position: relative;
@@ -326,10 +355,14 @@
   width: 4%;
 }
 
-.chatbot-send-form .chat-send-form-button button.ui-button.rounded-button {
-  width: 3rem;
-  height: 3rem;
-  margin-left: 15px;
+.chatbot-send-form .chat-send-form-button button.ui-button {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+body .chatbot-send-form .chat-send-form-button button.ui-button.ui-button-icon-only .ui-icon {
+  top: 45%;
+  left: 40%;
 }
 
 .chatbot-send-form .chat-send-form-input-field {
@@ -338,8 +371,10 @@
 
 .chatbot-send-form .message-list-content-send-input {
   height: 100%;
-  padding: 10px;
+  padding: 8px;
   resize: none;
+  font-size: 1.2rem;
+  line-height: 1.8;
 }
 
 .chatbot-panel .background {
@@ -437,19 +472,19 @@
   border-radius: 10px;
 }
 
+.assistant-header-wrapper .assistant-header-panel .assistant-name.disabled {
+  cursor: default;
+}
+
 .assistant-selection-panel .assistant-option {
   border: solid 1px transparent;
   border-radius: 10px;
 }
 
-.assistant-header-wrapper .assistant-header-panel .assistant-name:hover,
+.assistant-header-wrapper .assistant-header-panel .assistant-name:not(.disabled):hover,
 .assistant-selection-panel .assistant-option:hover {
   background: rgba(144, 221, 233, 0.24);
   border: 1px solid #90DDE9;
-}
-
-.assistant-header-wrapper .assistant-header-panel .assistant-name .ui-inplace-display-disabled {
-  cursor: default;
 }
 
 .assistant-header-wrapper .assistant-header-panel .assistant-name .assistant-info-output {
@@ -487,7 +522,6 @@ body.light .chatbot-panel .candidate-question-container .candidate-question:hove
 }
 
 body.light .chatbot-panel .chat-message {
-  color: var(--ivy-primary-color-black);
   background: var(--ivy-primary-text-color);
 }
 
@@ -501,7 +535,7 @@ body.dark .chatbot-panel .candidate-question-container .candidate-question:hover
 }
 
 body.light .chatbot-panel .welcome-container {
-  color: var(--ivy-primary-color-black);
+  color: var(--surface-a);
 }
 
 body.dark .chatbot-panel .my-message .chat-message {
@@ -568,6 +602,11 @@ body .chatbot-panel .chat-message.system-response-expand-button {
   background: transparent;
   cursor:pointer;
   color: var(--gray-500);
+}
+
+body .ui-button.ui-button-outlined.widget-button {
+  color: var(--surface-900);
+  border-color: var(--surface-900);
 }
 
 body.dark .chatbot-panel .chat-message.system-response-expand-button {
