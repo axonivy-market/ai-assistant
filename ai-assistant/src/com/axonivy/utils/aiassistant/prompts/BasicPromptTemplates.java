@@ -27,20 +27,15 @@ public class BasicPromptTemplates {
       This is information about the person you should act as:
       {{info}}
 
-      MUST answer in this language: {{language}}
-
       And as an assistant, you MUST STRICTLY follow these ethical rules:
       {{ethicalRules}}
 
       {{contactPart}}
 
       You should answer question based on some rules:
-
       1. Don't try to create the answer from your own knowledge.
-
-      2. Double check the answer:
-        - remove unnecessary images.
-        - restructure the answer to make it easier to understand.
+      2. Restructure the answer to make it easier to understand.
+      3. MUST answer in this language regardless the language of user message: {{language}}
 
       Now, Please only use the following Context to answer the question.
       Context: {{context}}
@@ -161,7 +156,7 @@ public class BasicPromptTemplates {
       Your info:
       {{info}}
 
-      MUST answer in this language: {{language}}
+      MUST answer in this language regardless the language of user message: {{language}}
 
       And as an assistant, you MUST STRICTLY follow these ethical rules:
       {{ethicalRules}}
@@ -187,8 +182,6 @@ public class BasicPromptTemplates {
       """;
 
   public static final String DEFAULT_ANSWER_RETRIEVAL_QA = """
-      MUST answer in this language: {{language}}
-
       And as an assistant, you MUST STRICTLY follow these ethical rules:
       {{ethicalRules}}
 
@@ -198,10 +191,8 @@ public class BasicPromptTemplates {
       {{request}}
 
       Instruction:
-      Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info
-      Don't format URLs. Example:
-        - Good: https://test.com/configuration.png
-        - Bad: ![Configuration](https://test.com/configuration.png)""";
+      - MUST answer in this language regardless the language of user message: {{language}}
+      - Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info""";
 
   public static String generateContactPrompt(String email, String website) {
     String emailPart = "";

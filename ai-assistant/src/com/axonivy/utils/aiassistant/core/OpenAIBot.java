@@ -165,6 +165,8 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String streamChat(Map<String, Object> variables, String promptTemplate,
       StreamingResponseHandler<AiMessage> handler) {
+    Ivy.log()
+        .error(PromptTemplate.from(promptTemplate).apply(variables).text());
     try {
       getChatModel().generate(
           PromptTemplate.from(promptTemplate).apply(variables).toUserMessage(),

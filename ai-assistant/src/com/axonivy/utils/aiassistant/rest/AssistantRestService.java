@@ -112,12 +112,17 @@ public class AssistantRestService {
         .generateSelectedFunctionMessage();
 
     payload.setSelectedFunctionId(selectedFunction.getId());
-    payload.setSelectedFunctionMessage(selectedFunctionMessage);
+    payload.setSelectedFunctionMessage(selectedFunction.getName());
     payload.setType(selectedFunction.getType().name());
 
     ChatMessage systemMessage = ChatMessage
-        .newUseAIFlowSystemMessage(selectedFunctionMessage);
-    conversation.getHistory().add(systemMessage);
+        .newSystemMessage(selectedFunctionMessage,
+            selectedFunction.getType().name());
+
+    ChatMessage systemMessageHistory = ChatMessage.newSystemMessage(
+        selectedFunction.getName(), selectedFunction.getType().name());
+
+    conversation.getHistory().add(systemMessageHistory);
     conversation.getMemory().add(systemMessage);
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
 
@@ -256,7 +261,7 @@ public class AssistantRestService {
       payload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
       payload.setType(StepType.TRIGGER_FLOW.name());
       payload.setSelectedFunctionMessage(
-          flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+          flow.getFunctionToTrigger().getId());
 
       response.resume(payload);
     } else {
@@ -300,7 +305,7 @@ public class AssistantRestService {
       chatPayload.setMessage(flow.getFinalResult().getResult());
       chatPayload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
       chatPayload.setSelectedFunctionMessage(
-          flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+          flow.getFunctionToTrigger().getName());
       chatPayload.setType(StepType.TRIGGER_FLOW.name());
 
       response.resume(chatPayload);
@@ -347,11 +352,13 @@ public class AssistantRestService {
       return;
     }
 
+    String language = Ivy.session().getContentLocale().toLanguageTag();
+
     Map<String, Object> params = new HashMap<>();
     params.put("input", message);
 
-    params.put("language",
-        Ivy.session().getContentLocale().getDisplayCountry());
+    params.put("language", language
+        );
     params.put("info", assistant.getInfo());
     params.put("ethicalRules",
         Optional.ofNullable(assistant.formatEthicalRules()).orElse("<None>"));

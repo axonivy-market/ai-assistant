@@ -345,7 +345,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
     // Handle trigger another flow
     if (!workingFlow.state && workingFlow?.selectedFunctionId) {
-      view.renderSystemMessage(result.selectedFunctionMessage, true, result.selectedFunctionMessage.type);
+      view.renderSystemMessage(result.selectedFunctionMessage, true, result.type);
       continueRequest(conversationId, JSON.stringify(workingFlow));
       return;
     }
@@ -516,26 +516,40 @@ function ViewAI(uri) {
     message = message.replace(/<([^>]+)>/g, "$1");
 
     let icon = '';
+    let header = '';
 
     switch(type) {
       case 'FLOW':
         icon = 'si si-lg si-cog-play';
+        header = 'Use AI Flow';
         break;
       case 'IVY_TOOL':
         icon = 'si si-lg si-cog-double-2';
+        header = 'Processing Ivy tool';
         break;
       case 'RE_PHRASE':
         icon = 'si si-lg si-messages-bubble-check';
+        header = 'Rephrase message';
         break;
       case 'TRIGGER_FLOW':
-        icon = 'si si-lg si-controls-play';
+        icon = 'si si-lg si-cog-play';
+        header = 'Trigger AI Flow';
+        break;
+      case 'RETRIEVAL_QA':
+        icon = 'si si-common-file-search';
+        header = 'Use knowledge base';
         break;
       default:
         icon = 'si si-lg si-cog-double-2';
+        header = 'Proceeded';
     }
 
     streaming = true;
-    this.renderMessage(`<div class="run-step w-full flex flex-row align-items-center ${type}"><div><span class="${icon}"></span></div><p class="ml-3">${message}</p></div>`);
+
+    const iconPart = `<span class="${icon}"></span>`;
+    const messagePart = `<div class="ml-3 flex flex-column"><span class="font-bold w-fit">${header}</span><p class="w-fit">${message}</p></div>`;
+
+    this.renderMessage(`<div class="run-step w-full flex flex-row align-items-center ${type}"><div class="icon-container">${iconPart}</div>${messagePart}</div>`);
     streaming = false;
 
     var messageList = document.getElementsByClassName('js-chatbot-message-list')[0];
@@ -590,7 +604,7 @@ function ViewAI(uri) {
         for (var i = 0; i < runSteps.length; i++) {
           var step = runSteps.get(i);
           $(step).addClass(`level-${level}`);
-          $(step).find('div').addClass('icon-container border-circle border-1 border-solid flex flex-row align-items-center justify-content-center');
+          $(step).find('.icon-container').addClass('border-circle border-1 border-solid flex flex-row align-items-center justify-content-center');
 
           if ($(step).hasClass('FLOW')) {
             level ++;

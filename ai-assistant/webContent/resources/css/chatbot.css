@@ -153,7 +153,7 @@
   margin-left: 90px;
 }
 
-.chatbot-panel .system-response .run-step .icon-container {
+.chatbot-panel .system-response .run-step .icon-container.border-circle {
   width: 40px;
   height: 40px;
   min-width: 40px;
@@ -164,7 +164,7 @@
   background-color: var(--surface-a);
 }
 
-.chatbot-panel .system-response .run-step.draw-line .icon-container:after {
+.chatbot-panel .system-response .run-step.draw-line .icon-container.border-circle:after {
   position: absolute;
   content: "";
   top: 40px;
@@ -172,7 +172,7 @@
   border: solid 1px var(--surface-900);
 }
 
-.chatbot-panel .system-response .run-step.draw-line.has-child .icon-container:after {
+.chatbot-panel .system-response .run-step.draw-line.has-child .icon-container.border-circle:after {
   position: absolute;
   content: "";
   top: 37px;
