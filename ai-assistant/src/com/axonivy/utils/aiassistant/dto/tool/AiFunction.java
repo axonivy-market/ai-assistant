@@ -147,11 +147,18 @@ public abstract class AiFunction extends AbstractConfiguration
         Arrays.asList(this.getName()));
   }
 
+  @JsonIgnore
   public boolean isDisabled() {
     return isDisabled;
   }
 
+  @JsonIgnore
   public void setDisabled(boolean isDisabled) {
     this.isDisabled = isDisabled;
+  }
+
+  @JsonIgnore
+  public boolean isEnabled() {
+    return !isDisabled;
   }
 }

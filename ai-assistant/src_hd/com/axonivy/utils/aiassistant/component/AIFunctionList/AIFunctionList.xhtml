@@ -28,7 +28,7 @@
 
   <p:dataTable id="function-table" widgetVar="function-table" styleClass="function-table"
     value="#{functionListBean.filteredFunctions}" var="function" rowKey="#{function.id}"
-     scrollHeight="50vh">
+     scrollHeight="50vh" rowStyleClass="#{functionListBean.isStartable(function) ? '' : 'nonstartable'}">
      <p:column rendered="#{functionListBean.assistantFunctionList}" width="25">
        <p:rowToggler  />
      </p:column>
@@ -36,9 +36,9 @@
       sortable="true" sortBy="#{function.name}"
       filterable="true" filterMatchMode="contains" filterBy="#{function.name}">
         <div class="flex flex-wrap align-items-center">
-          <h:outputText value="#{function.name}" />
-          <h:outputText id="disabled-icon" styleClass="si si-alert-circle disabled-icon ml-2" rendered="#{function.disabled}" />
-          <p:tooltip for="disabled-icon" value="#{ivy.cms.co('/Labels/common/DisabledFlow')}" trackMouse="true" />
+          <h:outputText value="#{function.name}" id="function-name" />
+          <p:tooltip for="function-name" value="#{ivy.cms.co('/Labels/common/DisabledFlow')}" trackMouse="true"
+            rendered="#{!functionListBean.isStartable(function) and function.type =='FLOW'}" />
         </div>
     </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Type')}" styleClass="u-text-align-center" width="140"
@@ -138,7 +138,7 @@
         value="#{ivy.cms.co('/Labels/common/Remove')}"
         icon="si si-remove-circle">
         <p:ajax event="click" listener="#{functionListBean.deleteFunction()}"
-          update="@(form)"
+          update="function-table"
           oncomplete="PF('remove-function-dialog').hide();" />
       </p:commandButton>
     </ui:define>

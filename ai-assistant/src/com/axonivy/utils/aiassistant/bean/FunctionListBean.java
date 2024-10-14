@@ -3,6 +3,7 @@ package com.axonivy.utils.aiassistant.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -42,6 +43,7 @@ public class FunctionListBean implements Serializable {
   private boolean showNonStartableAiFunction;
   private List<AiFunction> functionsCanAddToAssistant;
   private List<AiFunction> functionsToAdd;
+  private List<AiFunction> nonStartables;
 
   private Assistant assistant;
 
@@ -56,14 +58,26 @@ public class FunctionListBean implements Serializable {
       assistantFunctionList = true;
     }
 
-    if (assistantFunctionList) {
-      allFunctions = assistant.getAllTools();
-    } else {
-      allFunctions = AiFunctionService.getInstance().findAll();
-      allFunctions.forEach(function -> function.init());
-    }
+    allFunctions = assistantFunctionList ? assistant.getAllTools()
+        : AiFunctionService.getInstance().findAll();
+    allFunctions.forEach(function -> function.init());
 
+    filterAllFunctions();
     toggleNonStartable();
+  }
+
+  private void filterAllFunctions() {
+    List<AiFunction> startables = filterStartableAiFunctions(allFunctions);
+    nonStartables = (List<AiFunction>) CollectionUtils
+        .subtract(allFunctions,
+        startables);
+
+    startables.sort(Comparator.comparing(AiFunction::getName));
+    nonStartables.sort(Comparator.comparing(AiFunction::isEnabled)
+        .thenComparing(AiFunction::getType)
+        .thenComparing(AiFunction::getName));
+    startables.addAll(nonStartables);
+    allFunctions = startables;
   }
 
   /**
@@ -151,11 +165,17 @@ public class FunctionListBean implements Serializable {
       for (String tool : assistant.getTools()) {
         if (tool.contentEquals(selectedFunction.getId())) {
           assistant.getTools().remove(tool);
+          assistant.getAllTools().remove(selectedFunction);
           break;
         }
       }
-      allFunctions.remove(selectedFunction);
-      filteredFunctions.remove(selectedFunction);
+      allFunctions.remove(allFunctions.stream()
+          .filter(func -> func.getId().contentEquals(selectedFunction.getId()))
+          .findFirst().get());
+
+      filteredFunctions.remove(filteredFunctions.stream()
+          .filter(func -> func.getId().contentEquals(selectedFunction.getId()))
+          .findFirst().get());
     } else {
       List<AiFunction> allFunctions = AiFunctionService.getInstance()
           .getPublicConfig();
@@ -252,8 +272,16 @@ public class FunctionListBean implements Serializable {
         .collect(Collectors.toList());
   }
 
+  public boolean isStartable(AiFunction function) {
+    if (CollectionUtils.isEmpty(nonStartables)) {
+      return true;
+    }
+    return !nonStartables.contains(function);
+  }
+
   public void addFunctions() {
     assistant.getAllTools().addAll(functionsToAdd);
+    functionsToAdd.clear();
   }
 
   public List<AiFunction> getFunctionsToAdd() {
