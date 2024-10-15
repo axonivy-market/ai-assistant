@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.axonivy.portal.components.constant.PortalComponentConstants;
 import com.axonivy.utils.aiassistant.demo.enums.Ranking;
 import com.axonivy.utils.aiassistant.demo.enums.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -61,7 +62,7 @@ public class Employee {
     if (CollectionUtils.isEmpty(techStack)) {
       return StringUtils.EMPTY;
     }
-    return String.join(",", this.techStack);
+    return String.join(PortalComponentConstants.COMMA, this.techStack);
   }
 
   /**

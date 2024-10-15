@@ -53,10 +53,11 @@
       "config" : {
         "output" : {
           "code" : [
-            "in.types.add(\"Portal Support\");",
-            "in.types.add(\"Others\");",
+            "import com.axonivy.utils.aiassistant.enums.UploadDocumentType;",
+            "in.types.add(UploadDocumentType.PORTAL_SUPPORT.getValue());",
+            "in.types.add(UploadDocumentType.OTHERS.getValue());",
             "",
-            "in.type = \"Portal Support\";"
+            "in.type = UploadDocumentType.PORTAL_SUPPORT.getValue();"
           ]
         }
       },

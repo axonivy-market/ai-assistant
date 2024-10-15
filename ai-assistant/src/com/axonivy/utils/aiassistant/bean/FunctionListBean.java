@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.axonivy.portal.components.constant.PortalComponentConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.flow.AiFlow;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
@@ -97,7 +98,8 @@ public class FunctionListBean extends AbstractFunctionListBean
     }
 
     List<Assistant> assistants = AssistantService.getInstance().findAssistantByFunctionId(selectedFunction.getId());
-    String formattedUsingAssistants = String.join(",",
+    String formattedUsingAssistants = String.join(
+        PortalComponentConstants.COMMA,
         assistants.stream().map(Assistant::getName).toList());
 
     return Ivy.cms().co(
