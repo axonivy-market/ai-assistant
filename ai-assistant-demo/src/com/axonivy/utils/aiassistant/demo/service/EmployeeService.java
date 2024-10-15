@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.axonivy.portal.components.constant.PortalComponentConstants;
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
 import com.axonivy.portal.components.publicapi.AiAssistantAPI;
+import com.axonivy.utils.aiassistant.demo.constant.AiConstants;
 import com.axonivy.utils.aiassistant.demo.dto.Employee;
 import com.axonivy.utils.aiassistant.demo.enums.Ranking;
 import com.axonivy.utils.aiassistant.demo.enums.Role;
@@ -96,13 +96,13 @@ public class EmployeeService extends BusinessDataService<Employee> {
       String techStack) {
     List<String> nameList = new ArrayList<>();
     if (StringUtils.isNotBlank(names)) {
-      nameList = Arrays.asList(names.split(PortalComponentConstants.COMMA));
+      nameList = Arrays.asList(names.split(AiConstants.COMMA));
     }
 
     List<Role> roleList = new ArrayList<>();
     if (StringUtils.isNotBlank(roles)) {
       List<String> rolesStr = Arrays
-          .asList(roles.split(PortalComponentConstants.COMMA));
+          .asList(roles.split(AiConstants.COMMA));
       for (String childRole : rolesStr) {
         Role role = Role.valueOf(childRole.strip());
 
@@ -117,7 +117,7 @@ public class EmployeeService extends BusinessDataService<Employee> {
     List<Ranking> rankList = new ArrayList<>();
     if (StringUtils.isNotBlank(ranks)) {
       List<String> ranksStr = Arrays
-          .asList(ranks.split(PortalComponentConstants.COMMA));
+          .asList(ranks.split(AiConstants.COMMA));
       for (String childRank : ranksStr) {
         Ranking rank = Ranking.valueOf(childRank.strip());
 
@@ -131,7 +131,7 @@ public class EmployeeService extends BusinessDataService<Employee> {
 
     List<String> techs = new ArrayList<>();
     if (StringUtils.isNotBlank(techStack)) {
-      techs = Arrays.asList(techStack.split(PortalComponentConstants.COMMA));
+      techs = Arrays.asList(techStack.split(AiConstants.COMMA));
     }
 
     List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
@@ -160,13 +160,13 @@ public class EmployeeService extends BusinessDataService<Employee> {
       String ranks, String techStack) {
     List<String> nameList = new ArrayList<>();
     if (StringUtils.isNotBlank(names)) {
-      nameList = Arrays.asList(names.split(PortalComponentConstants.COMMA));
+      nameList = Arrays.asList(names.split(AiConstants.COMMA));
     }
 
     List<Role> roleList = new ArrayList<>();
     if (StringUtils.isNotBlank(roles)) {
       List<String> rolesStr = Arrays
-          .asList(roles.split(PortalComponentConstants.COMMA));
+          .asList(roles.split(AiConstants.COMMA));
       for (String childRole : rolesStr) {
         Role role = Role.valueOf(childRole.strip());
 
@@ -181,7 +181,7 @@ public class EmployeeService extends BusinessDataService<Employee> {
     List<Ranking> rankList = new ArrayList<>();
     if (StringUtils.isNotBlank(ranks)) {
       List<String> ranksStr = Arrays
-          .asList(ranks.split(PortalComponentConstants.COMMA));
+          .asList(ranks.split(AiConstants.COMMA));
       for (String childRank : ranksStr) {
         Ranking rank = Ranking.valueOf(childRank.strip());
 
@@ -195,7 +195,7 @@ public class EmployeeService extends BusinessDataService<Employee> {
 
     List<String> techs = new ArrayList<>();
     if (StringUtils.isNotBlank(techStack)) {
-      techs = Arrays.asList(techStack.split(PortalComponentConstants.COMMA));
+      techs = Arrays.asList(techStack.split(AiConstants.COMMA));
     }
 
     List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
@@ -244,13 +244,13 @@ public class EmployeeService extends BusinessDataService<Employee> {
       String techStack) {
     List<String> nameList = new ArrayList<>();
     if (StringUtils.isNotBlank(names)) {
-      nameList = Arrays.asList(names.split(PortalComponentConstants.COMMA));
+      nameList = Arrays.asList(names.split(AiConstants.COMMA));
     }
 
     List<Role> roleList = new ArrayList<>();
     if (StringUtils.isNotBlank(roles)) {
       List<String> rolesStr = Arrays
-          .asList(roles.split(PortalComponentConstants.COMMA));
+          .asList(roles.split(AiConstants.COMMA));
       for (String childRole : rolesStr) {
         Role role = Role.valueOf(childRole.strip());
         if (role != null) {
@@ -262,7 +262,7 @@ public class EmployeeService extends BusinessDataService<Employee> {
     List<Ranking> rankList = new ArrayList<>();
     if (StringUtils.isNotBlank(ranks)) {
       List<String> ranksStr = Arrays
-          .asList(ranks.split(PortalComponentConstants.COMMA));
+          .asList(ranks.split(AiConstants.COMMA));
       for (String childRank : ranksStr) {
         Ranking rank = Ranking.valueOf(childRank.strip());
         if (rank != null) {
@@ -273,7 +273,7 @@ public class EmployeeService extends BusinessDataService<Employee> {
 
     List<String> techs = new ArrayList<>();
     if (StringUtils.isNotBlank(techStack)) {
-      techs = Arrays.asList(techStack.split(PortalComponentConstants.COMMA));
+      techs = Arrays.asList(techStack.split(AiConstants.COMMA));
     }
 
     return findByCriteria(nameList, roleList, rankList, techs);
