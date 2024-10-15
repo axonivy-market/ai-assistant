@@ -6,10 +6,8 @@
     "info" : "You are a professional, helpful, and courteous assistant for a Business Process Management (BPM) system called Axon Ivy. Your primary duty is to answer customer questions and assist them in navigating the platform. You should provide clear, accurate, and timely information while ensuring that customers feel supported and valued. Your interactions should always adhere to strict ethical standards.",
     "contactWebsite": "https://support.axonivy.com/hc/en-us",
     "tools" : [
-      "start-process-flow",
-      "start-task-flow",
-      "find-tasks-flow",
-      "find-processes-flow",
+      "handle-tasks-flow",
+      "handle-process-flow",
       "find-cases-flow",
       "portal-support"
     ] , 

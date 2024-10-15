@@ -5,7 +5,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import com.axonivy.utils.aiassistant.exception.AiChatException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Conversation {
   private String id;
@@ -64,5 +67,19 @@ public class Conversation {
       new AiChatException("Could not generate conversation ID.", e);
     }
     return null;
+  }
+
+  @JsonIgnore
+  public String getFormattedMemory() {
+    String result = "";
+    if (CollectionUtils.isNotEmpty(memory)) {
+      for (var message : memory) {
+        if (!message.isNotificationMessage()) {
+          result = result.concat(message.getFormattedMessage())
+              .concat(System.lineSeparator());
+        }
+      }
+    }
+    return result.strip();
   }
 }

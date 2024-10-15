@@ -57,38 +57,37 @@ public class BasicPromptTemplates {
       """;
 
   public static final String CHOOSE_FUNCTION = """
-       Categorize message is a question or a request to do something.
-       Then you will choose a tool from a list of tools to handle the message.
-
-       Tool list:
+      Tool list:
 
       {{functions}}
 
-       Instructions:
-       1. Detect if the message is a question or a request to do something.
 
-       The last message of this chat history is the request you should use to choose tool:
+      Request
 
-       AI: Hello User
-       {{memory}}
+      {{request}}
 
-       2. After that, use tool usage to choose a tool from above tools to fulfill the message
-          If the message about yourself
-            + respond null.
-          If the message is a question:
-            + ONLY choose tool has type 'RETRIEVAL_QA'.
-          If the message is a request to do something:
-            + ONLY choose the tool if the object in the request same as in the description of the tool.
-              Example: If the subject of the request is to find task, then ONLY choose tool if the request mentioned 'task'.
+      Instructions:
 
-            + ONLY choose the tool if the action in the request same as in the description of the tool.
-              Example: If the action of the request is to find task, then ONLY choose the tool if the request mentioned words similiar to 'find'.
+      1. IF the request seem to be related to other messages such as "start the second task" or "run the fix car process above", show <none>.
+      2. Otherwise, Choose the most suitable tool for the request and ONLY respond the Id of the selected tool""";
 
-       3. Double-check the result.
-          If the chosen tool is not correct, choose again.
+  public static final String CHOOSE_FUNCTION_WITH_HISTORY = """
+      Tool list:
 
-       4. ONLY respond the Id of the selected tool.
-       """;
+     {{functions}}
+
+
+     Chat history:
+
+     User: Hello
+      AI: Hello
+      {{memory}}
+
+      Instructions:
+
+      1. Choose the most suitable tool
+      2. ONLY respond the Id of the selected tool
+      """;
 
   public static final String FULFILL_IVY_TOOL = """
       Metadata:
@@ -97,11 +96,11 @@ public class BasicPromptTemplates {
       You're a computer, don't have ability to talk or explain.
 
       Function:
-      ---------
+
       {{tool}}
 
       Chat history:
-      -------------
+
       {{memory}}
 
       If the last message of the chat history is a confirmation such as 'yes', 'agree', or you don't understand the request of the last message, use all messages as the request.
@@ -109,6 +108,7 @@ public class BasicPromptTemplates {
 
       Instruction:
       I want to use the request and the tool to generate a json array inside '<' and '>' characters.
+      I want to use the request and the attribute info to generate a json array inside '<' and '>' characters.
       This is the template:
       <[{"name" : "attribute1", "value": "attribute1_value"},{"name" : "attribute2", "value": "attribute2_value"}]>
 
@@ -116,17 +116,53 @@ public class BasicPromptTemplates {
 
       Example:
 
-      we have function
+      Function:
       name: Find car
       description: Find information of a process
-      attributes:
-         - name: carName ; description: Name of the car
-         - name: carColor ; description: color of the car
+      Example:
+
+      attribute:
+      - name: carColor ; description: color of the car
+      - name: type; description: type of the car
 
       And user message:
-      find red car
+      find the red sedan car
 
-      result should be: <[{"name" : "carColor", "value": "red"}]>
+      result should be: <[{"name" : "carColor", "value": "red"}, {"name" : "type", "value": "sedan"}]>
+      """;
+
+  public static final String FULFILL_IVY_ATTRIBUTE = """
+      Metadata:
+      {{metadata}}
+
+      You're a computer, don't have ability to talk or explain.
+
+      Attribute:
+
+      {{attribute}}
+
+      Chat history:
+
+      {{memory}}
+
+      If the last message of the chat history is a confirmation such as 'yes', 'agree', or you don't understand the request of the last message, use all messages as the request.
+      Otherwise, only use the last message in the chat history as the request.
+
+      Instruction:
+      I want to use the request and the attribute info to generate a json array inside '<' and '>' characters.
+      This is the template:
+      <{"name" : "attribute_name", "value": "attribute1_value"}>
+      Show the result exactly same as the above format.
+
+      Example:
+
+      attribute:
+      - name: carColor ; description: color of the car
+
+      And user message:
+      find the red sedan car
+
+      result should be: <{"name" : "carColor", "value": "red"}>
       """;
 
   public static final String DEFAULT_ANSWER = """

@@ -4,6 +4,18 @@ Dialogs:
       utils:
         aiassistant:
           component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Open AI function "{0}" details page
+              OpenFunctionDetailsWarningDialogMessage: Unsaved changes will be lost. Do you want to proceed?
+              RemoveFunctionDialogHeader: Remove the "{0}" AI function
+              RemoveFunctionForAssistantMessage: Are you sure you want to remove this AI function from {0}?
+              RemoveFunctionMessage: |-
+                This AI function is using by AI assistants:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Are you sure you want to delete this AI function?
+              ToggleNonStartableAiFunction: Show non-startable AI functions
             ChatDashboard:
               AiManagement: AI Management
               ClearConversationHistory: Clear conversation history
@@ -32,12 +44,14 @@ Dialogs:
               Title: AI Model Configuration
               UsingBy: Assistants using this model
             AssistantConfiguration:
+              AddFunction: Add function
               AssistantSavedMessage: Assistant "{0}" is saved successfully
               AssistantTemplates: Assistant Templates
               CreateAssistant: Create Assistant
               EthicalGuideline: Ethical guidelines the assistant must adhere to
               Functions: Functions
               Information: Information
+              NoAvaliableAiFunction: There are no AI functions available to be added at this time.
               RemoveDialogHeader: Remove the "{0}" assistant
               RemoveDialogMessage: |-
                 All chat conversations will also be deleted.
@@ -70,6 +84,8 @@ Labels:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: AI Functions
+    Actions: Actions
+    Add: Add
     ApiKey: API Key
     Assistants: Assistants
     Avatar: Avatar
@@ -80,7 +96,8 @@ Labels:
     ContactWebsite: Contact Website
     Delete: Delete
     Description: Description
-    DisabledFlow: This AI Flow is disabled
+    Details: Details
+    DisabledFlow: This AI flow cannot be started directly or is disabled
     EmbeddingModel: Embedding Model
     Model: Model
     ModelType: Model Type

@@ -4,6 +4,18 @@ Dialogs:
       utils:
         aiassistant:
           component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Abrir la página de detalles de la función de IA "{0}"
+              OpenFunctionDetailsWarningDialogMessage: Los cambios no guardados se perderán. ¿Desea continuar?
+              RemoveFunctionDialogHeader: Eliminar la función AI “{0}”
+              RemoveFunctionForAssistantMessage: ¿Está seguro de que desea eliminar esta función de IA de {0}?
+              RemoveFunctionMessage: |-
+                Esta función de AI está siendo utilizada por asistentes de AI:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                ¿Está seguro de que desea eliminar esta función de AI?
+              ToggleNonStartableAiFunction: Mostrar funciones de IA no iniciables
             ChatDashboard:
               AiManagement: Gestión de la IA
               ClearConversationHistory: Borrar el historial de conversaciones
@@ -36,12 +48,14 @@ Dialogs:
               Title: Configuración del modelo AI
               UsingBy: Asistentes que utilizan este modelo
             AssistantConfiguration:
+              AddFunction: Agregar función
               AssistantSavedMessage: El asistente "{0}" se ha guardado correctamente
               AssistantTemplates: Plantillas de asistente
               CreateAssistant: Crear Asistente
               EthicalGuideline: Normas éticas que el asistente debe cumplir
               Functions: Funciones
               Information: Información
+              NoAvaliableAiFunction: No hay funciones de IA disponibles para agregar en este momento.
               RemoveDialogHeader: Eliminar el asistente "{0}
               RemoveDialogMessage: |-
                 También se eliminarán todas las conversaciones de chat.
@@ -74,6 +88,8 @@ Labels:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: Funciones AI
+    Actions: Acciones
+    Add: Agregar
     ApiKey: Clave API
     Assistants: Asistentes
     Avatar: Avatar
@@ -84,7 +100,8 @@ Labels:
     ContactWebsite: Sitio web de contacto
     Delete: Borrar
     Description: Descripción
-    DisabledFlow: Este AI Flow está deshabilitado
+    Details: Detalles
+    DisabledFlow: Este flujo de IA no puede iniciarse directamente o está deshabilitado
     EmbeddingModel: Modelo de incrustación
     Model: Modelo
     ModelType: Tipo de modelo

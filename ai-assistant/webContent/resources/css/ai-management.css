@@ -218,6 +218,11 @@ body .assistant-configuration-footer .ui-button ~ .ui-button {
   color: var(--green-600);
 }
 
+body .function-table.ui-datatable .ui-datatable-data > tr.nonstartable {
+  background: var(--surface-50);
+  color: var(--surface-400);
+}
+
 .function-table .tool-type.FLOW {
   background: var(--green-500);
 }

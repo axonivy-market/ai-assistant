@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
-  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core"
-  xmlns:pc="http://xmlns.jcp.org/jsf/composite/components">
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:body>
   <ui:composition template="/layouts/frame-10-full-width.xhtml">
     <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Title')}</ui:define>
@@ -56,9 +55,25 @@
               <div class="ui-g-12">
                 <h3>#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Functions')}</h3>
               </div>
-              <ui:include src="Functions.xhtml">
-                <ui:param name="assistant" value="#{assistant}" />
-              </ui:include>
+              <div class="ui-g-12">
+                <ic:com.axonivy.utils.aiassistant.component.AIFunctionList id ="functions-list-component" assistant="#{assistant}"
+                  managedBean="#{assistantFunctionListBean}"
+                  componentToUpdateOnDelete="#{p:resolveFirstComponentWithId('add-function-button-container', view).clientId}" />
+              </div>
+              <div class="ui-g-12 flex justify-content-end">
+                <h:panelGroup id="add-function-button-container" layout="block">
+                  <p:commandButton id="add-function-button" value="#{ivy.cms.co('/Labels/common/Add')}" icon="si si-add"
+                    disabled="#{empty assistantFunctionListBean.functionsCanAddToAssistant}">
+                    <p:ajax event="click" listener="#{assistantFunctionListBean.updateFunctionsCanAddToAssistant()}"
+                      update="#{p:resolveFirstComponentWithId('add-function-dialog', view).clientId}"
+                      global="false" partialSubmit="true"
+                      oncomplete="PF('add-function-dialog').show()" />
+                  </p:commandButton>
+                  <p:tooltip for="add-function-button-container" trackMouse="true"
+                    rendered="#{empty assistantFunctionListBean.functionsCanAddToAssistant}"
+                    value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/NoAvaliableAiFunction')}" />
+                </h:panelGroup>
+              </div>
             </div>
 
             <div class="ui-g-12 assistant-configuration-footer">
@@ -92,7 +107,7 @@
           <ui:param name="headerText"
             value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/RemoveDialogHeader', [assistant.name])}" />
           <ui:param name="dialogContent" value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/RemoveDialogMessage')}" />
-      
+
           <ui:define name="dialogFooter">
             <p:link href="#" value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Cancel')}"
               onclick="PF('remove-assistant-dialog').hide();" styleClass="u-mar-right-15" />
@@ -105,10 +120,11 @@
             </p:commandButton>
           </ui:define>
         </ui:decorate>
-        
+
         <p:dialog id="choose-assistant-template-dialog" widgetVar="choose-assistant-template-dialog"
           modal="true" appendTo="@(body)"
           width="70%" responsive="true"
+          resizable="false"
           header="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/AssistantTemplates')}">
           <div class="ui-g">
             <ui:repeat var="template" value="#{assistantConfigurationBean.assistantTemplates}">
@@ -121,6 +137,8 @@
             </ui:repeat>
           </div>
           </p:dialog>
+
+          <ui:include src="AddFunctionDialog.xhtml"></ui:include>
       </div>
     </ui:define>
   </ui:composition>

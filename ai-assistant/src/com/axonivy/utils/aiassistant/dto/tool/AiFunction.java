@@ -1,7 +1,6 @@
 package com.axonivy.utils.aiassistant.dto.tool;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +33,6 @@ public abstract class AiFunction extends AbstractConfiguration
   private String description;
   private String usage;
   private List<String> permissions;
-  private boolean isDefault;
 
   @JsonIgnore
   private boolean isDisabled;
@@ -68,14 +66,6 @@ public abstract class AiFunction extends AbstractConfiguration
 
   public abstract void init();
 
-  public boolean isDefault() {
-    return isDefault;
-  }
-
-  public void setDefault(boolean isDefault) {
-    this.isDefault = isDefault;
-  }
-
   public String getUsage() {
     return usage;
   }
@@ -87,7 +77,7 @@ public abstract class AiFunction extends AbstractConfiguration
   public abstract ToolType getType();
 
   @JsonIgnore
-  protected boolean hasPermision() {
+  public boolean hasPermision() {
     boolean hasPermission = false;
     for (String permission : getPermissions()) {
 
@@ -144,37 +134,6 @@ public abstract class AiFunction extends AbstractConfiguration
   }
 
   @JsonIgnore
-  public static String getFormattedMemoryForValidateMessage(
-      List<ChatMessage> memory) {
-    if (CollectionUtils.isEmpty(memory)) {
-      return "";
-    }
-
-    String result = "";
-    List<ChatMessage> checkMemory = new ArrayList<>();
-
-    // Only check 5 latest chat messages
-
-    for (ChatMessage message : memory) {
-      if (!message.isNotificationMessage()) {
-        checkMemory.add(message);
-      }
-
-      // Only check 5 latest chat messages
-      if (checkMemory.size() > 5) {
-        checkMemory.remove(0);
-      }
-    }
-
-    for (ChatMessage message : checkMemory) {
-      result = result.concat(message.getFormattedMessage().strip())
-          .concat(System.lineSeparator());
-    }
-
-    return result;
-  }
-
-  @JsonIgnore
   public String generateSelectedFunctionMessage() {
     return Ivy.cms().co(
         "/Labels/Message/SelectedToolMessage/".concat(this.getType().name()),
@@ -188,11 +147,18 @@ public abstract class AiFunction extends AbstractConfiguration
         Arrays.asList(this.getName()));
   }
 
+  @JsonIgnore
   public boolean isDisabled() {
     return isDisabled;
   }
 
+  @JsonIgnore
   public void setDisabled(boolean isDisabled) {
     this.isDisabled = isDisabled;
+  }
+
+  @JsonIgnore
+  public boolean isEnabled() {
+    return !isDisabled;
   }
 }

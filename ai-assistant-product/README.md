@@ -152,6 +152,7 @@ Basic attributes of an AI Flows:
     "id": "find-employees-flow",
     "name": "Find employees information",
     "type": "FLOW",
+    "startable": true,
     "permissions": ["HR_Employee"],
     "description": "Find employees information",
     "usage": "Use this flow when user want to find information of employees",
@@ -166,6 +167,8 @@ Basic attributes of an AI Flows:
 - **name**: The name of the AI Flow.
 
 - **type**: Always set to "FLOW". The AI Assistant can access various tools like Ivy tools, Knowledge Base tools, and AI Flows. By defining the type as "FLOW", you indicate that this tool is an AI Flow, allowing the AI Assistant to use it correctly.
+
+- **startable**: When set to "true", the user can start this AI Flow directly. Otherwise, it will remain hidden and can only be triggered by other AI Flows.
 
 - **permissions**: Defines the roles or usernames of users authorized to use this AI Flow.
 
