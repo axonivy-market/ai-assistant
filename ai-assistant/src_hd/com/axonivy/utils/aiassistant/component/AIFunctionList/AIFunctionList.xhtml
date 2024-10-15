@@ -11,15 +11,17 @@
 
 <cc:interface componentType="IvyComponent">
   <cc:attribute name="assistant" />
+  <cc:attribute name="managedBean" />
+  <cc:attribute name="componentToUpdateOnDelete" default="@(this)" />
 </cc:interface>
 
 <cc:implementation>
+  <c:set var="managedBean" value="#{cc.attrs.managedBean}" />
+  <f:event listener="#{managedBean.init(cc.attrs.assistant)}" type="preRenderComponent" />
 
-  <f:event listener="#{functionListBean.init(cc.attrs.assistant)}" type="preRenderComponent" />
-
-  <h:panelGroup rendered="#{!functionListBean.assistantFunctionList}" styleClass="w-full flex align-items-center mb-4">
-    <p:toggleSwitch id="toggle-non-startable-ai-function" value="#{functionListBean.showNonStartableAiFunction}">
-      <p:ajax listener="#{functionListBean.toggleNonStartable()}" update="function-table"
+  <h:panelGroup rendered="#{managedBean.assistant eq null}" styleClass="w-full flex align-items-center mb-4">
+    <p:toggleSwitch id="toggle-non-startable-ai-function" value="#{managedBean.showNonStartableAiFunction}">
+      <p:ajax listener="#{managedBean.toggleNonStartable()}" update="function-table"
         oncomplete="PF('function-table').filter()" />
     </p:toggleSwitch>
     <p:outputLabel value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/ToggleNonStartableAiFunction')}"
@@ -27,9 +29,9 @@
   </h:panelGroup>
 
   <p:dataTable id="function-table" widgetVar="function-table" styleClass="function-table"
-    value="#{functionListBean.filteredFunctions}" var="function" rowKey="#{function.id}"
-     scrollHeight="50vh" rowStyleClass="#{functionListBean.isStartable(function) ? '' : 'nonstartable'}">
-     <p:column rendered="#{functionListBean.assistantFunctionList}" width="25">
+    value="#{managedBean.filteredFunctions}" var="function" rowKey="#{function.id}"
+     scrollHeight="50vh" rowStyleClass="#{managedBean.isStartable(function) ? '' : 'nonstartable'}">
+     <p:column rendered="#{managedBean.assistant ne null}" width="25">
        <p:rowToggler  />
      </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Name')}" width="15%"
@@ -38,28 +40,28 @@
         <div class="flex flex-wrap align-items-center">
           <h:outputText value="#{function.name}" id="function-name" />
           <p:tooltip for="function-name" value="#{ivy.cms.co('/Labels/common/DisabledFlow')}" trackMouse="true"
-            rendered="#{!functionListBean.isStartable(function) and function.type =='FLOW'}" />
+            rendered="#{!managedBean.isStartable(function) and function.type =='FLOW'}" />
         </div>
     </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Type')}" styleClass="u-text-align-center" width="140"
       sortable="true" sortBy="#{function.type.name()}"
-      filterable="true" filterBy="#{functionListBean.getToolType(function.type.name())}">
+      filterable="true" filterBy="#{managedBean.getToolType(function.type.name())}">
 
        <f:facet name="filter">
          <p:selectOneMenu onchange="PF('function-table').filter()" styleClass="ui-custom-filter">
            <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
-           <f:selectItems value="#{functionListBean.functionToolTypes}" />
+           <f:selectItems value="#{managedBean.functionToolTypes}" />
          </p:selectOneMenu>
        </f:facet>
 
-      <p:tag rounded="true" value="#{functionListBean.getToolType(function.type.name())}"
+      <p:tag rounded="true" value="#{managedBean.getToolType(function.type.name())}"
         styleClass="tool-type #{function.type.name()}" />
     </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Permissions')}" width="15%"
-      rendered="#{!functionListBean.assistantFunctionList}"
-      sortable="true" sortBy="#{functionListBean.generatePermisisonForDisplay(function)}"
-      filterable="true" filterMatchMode="contains" filterBy="#{functionListBean.generatePermisisonForDisplay(function)}">
-      <h:outputText value="#{functionListBean.generatePermisisonForDisplay(function)}" />
+      rendered="#{managedBean.assistant eq null}"
+      sortable="true" sortBy="#{managedBean.generatePermisisonForDisplay(function)}"
+      filterable="true" filterMatchMode="contains" filterBy="#{managedBean.generatePermisisonForDisplay(function)}">
+      <h:outputText value="#{managedBean.generatePermisisonForDisplay(function)}" />
     </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Description')}"
       sortable="true" sortBy="#{function.description}"
@@ -70,30 +72,30 @@
       headerText="#{ivy.cms.co('/Labels/common/Actions')}">
       <div class="flex justify-content-center">
         <p:commandButton id="function-info"
-          rendered="#{!functionListBean.assistantFunctionList}"
+          rendered="#{managedBean.assistant eq null}"
           icon="si si-cog"
           styleClass="rounded-button ui-button-outlined u-mar-right-5"
-          actionListener="#{functionListBean.navigateToFunctionDetails(function.id)}"
+          actionListener="#{managedBean.navigateToFunctionDetails(function.id)}"
           title="#{ivy.cms.co('/Labels/common/Details')}" global="false"/>
 
         <p:commandButton id="assistant-function-info"
-          rendered="#{functionListBean.assistantFunctionList}"
+          rendered="#{managedBean.assistant ne null}"
           icon="si si-cog"
           styleClass="rounded-button ui-button-outlined u-mar-right-5"
-          actionListener="#{functionListBean.setSelectedFunction(function)}"
+          actionListener="#{managedBean.setSelectedFunction(function)}"
           title="#{ivy.cms.co('/Labels/common/Details')}" global="false"
           update="#{p:resolveFirstComponentWithId('function-details-navigation-dialog', view).clientId}"
           oncomplete="PF('function-details-navigation-dialog').show();"/>
 
         <p:commandButton id="delete-function" process="@this"
           styleClass="rounded-button ui-button-outlined ui-button-danger" icon="si si-bin-1"
-          actionListener="#{functionListBean.setSelectedFunction(function)}"
+          actionListener="#{managedBean.setSelectedFunction(function)}"
           update="#{p:resolveFirstComponentWithId('remove-function-dialog', view).clientId}"
           title="#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/common/delete')}"
           oncomplete="PF('remove-function-dialog').show();"/>
       </div>
     </p:column>
-    <p:rowExpansion rendered="#{functionListBean.assistantFunctionList}">
+    <p:rowExpansion rendered="#{managedBean.assistant ne null}">
       <div class="ui-g">
         <h:panelGroup layout="block" rendered="#{function.disabled}" styleClass="ui-g-12">
           <span class="error-message">#{ivy.cms.co('/Labels/common/DisabledFlow')}</span>
@@ -102,7 +104,7 @@
           <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Permissions')}" />
         </div>
         <div class="ui-g-10">
-          <h:outputText value="#{functionListBean.generatePermisisonForDisplay(function)}" />
+          <h:outputText value="#{managedBean.generatePermisisonForDisplay(function)}" />
         </div>
         <div class="ui-g-2">
           <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Description')}" />
@@ -128,8 +130,8 @@
     <ui:param name="dynamic" value="true" />
     <ui:param name="iconStyleClass" value="portal-dialog-error-icon portal-dialog-icon" />
     <ui:param name="headerText"
-      value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/RemoveFunctionDialogHeader', [functionListBean.selectedFunction.name])}" />
-    <ui:param name="dialogContent" value="#{functionListBean.getRemoveAiFunctionMessage()}" />
+      value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/RemoveFunctionDialogHeader', [managedBean.selectedFunction.name])}" />
+    <ui:param name="dialogContent" value="#{managedBean.getRemoveAiFunctionMessage()}" />
 
     <ui:define name="dialogFooter">
       <p:link href="#" value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Cancel')}"
@@ -137,8 +139,8 @@
       <p:commandButton id="remove-assistant-button"
         value="#{ivy.cms.co('/Labels/common/Remove')}"
         icon="si si-remove-circle">
-        <p:ajax event="click" listener="#{functionListBean.deleteFunction()}"
-          update="function-table"
+        <p:ajax event="click" listener="#{managedBean.deleteFunction()}"
+          update="function-table #{cc.attrs.componentToUpdateOnDelete}"
           oncomplete="PF('remove-function-dialog').hide();" />
       </p:commandButton>
     </ui:define>
@@ -152,7 +154,7 @@
     <ui:param name="dynamic" value="true" />
     <ui:param name="iconStyleClass" value="portal-dialog-warning-icon portal-dialog-icon" />
     <ui:param name="headerText"
-      value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/OpenFunctionDetailsWarningDialogHeader', [functionListBean.selectedFunction.name])}" />
+      value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/OpenFunctionDetailsWarningDialogHeader', [managedBean.selectedFunction.name])}" />
     <ui:param name="dialogContent" value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/OpenFunctionDetailsWarningDialogMessage')}" />
 
     <ui:define name="dialogFooter">
@@ -160,7 +162,7 @@
         onclick="PF('function-details-navigation-dialog').hide();" styleClass="u-mar-right-15" />
       <p:commandButton id="navigate-function-details-page-button"
         value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Yes')}">
-        <p:ajax event="click" listener="#{functionListBean.navigateToSelectedFunctionDetails()}"
+        <p:ajax event="click" listener="#{managedBean.navigateToSelectedFunctionDetails()}"
           update="@(form)"
           oncomplete="PF('function-details-navigation-dialog').hide();" />
       </p:commandButton>

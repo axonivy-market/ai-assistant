@@ -55,6 +55,11 @@ public class IvyToolStep extends AiStep {
   public Boolean isDisabled() {
     IvyTool tool = (IvyTool) AiFunctionService.getInstance()
         .findById(this.toolId);
+
+    if (tool == null) {
+      return true;
+    }
+
     tool.init();
     return tool.isDisabled();
   }

@@ -58,6 +58,7 @@ Dialogs:
               EthicalGuideline: Les règles éthiques que l'assistant doit suivre
               Functions: Fonctions
               Information: Informations
+              NoAvaliableAiFunction: Aucune fonction d'IA n'est disponible pour être ajoutée pour le moment.
               RemoveDialogHeader: Supprimer l'assistant "{0}".
               RemoveDialogMessage: |-
                 Toutes les conversations de chat seront également supprimées.

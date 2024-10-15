@@ -165,7 +165,9 @@ public class Assistant extends AbstractConfiguration implements Serializable {
         .filter(tool -> this.tools.contains(tool.getId()))
         .collect(Collectors.toList());
     for (AiFunction tool : allTools) {
-      tool.init();
+      if (tool != null) {
+        tool.init();
+      }
     }
 
     this.toolkit = allTools.stream().filter(tool -> !tool.isDisabled())
