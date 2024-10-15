@@ -51,7 +51,7 @@
             </div>
 
             <div class="ui-g-1" />
-            <div class="ui-g-6 ui-g function-container">
+            <h:panelGroup layout="block" id="function-container" styleClass="ui-g-6 ui-g function-container">
               <div class="ui-g-12">
                 <h3>#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/Functions')}</h3>
               </div>
@@ -65,16 +65,17 @@
                   <p:commandButton id="add-function-button" value="#{ivy.cms.co('/Labels/common/Add')}" icon="si si-add"
                     disabled="#{empty assistantFunctionListBean.functionsCanAddToAssistant}">
                     <p:ajax event="click" listener="#{assistantFunctionListBean.updateFunctionsCanAddToAssistant()}"
+                      process="@(none)" global="false"
                       update="#{p:resolveFirstComponentWithId('add-function-dialog', view).clientId}"
-                      global="false" partialSubmit="true"
                       oncomplete="PF('add-function-dialog').show()" />
+                    <f:param name="skipValidator" value="true" />
                   </p:commandButton>
                   <p:tooltip for="add-function-button-container" trackMouse="true"
                     rendered="#{empty assistantFunctionListBean.functionsCanAddToAssistant}"
                     value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/NoAvaliableAiFunction')}" />
                 </h:panelGroup>
               </div>
-            </div>
+            </h:panelGroup>
 
             <div class="ui-g-12 assistant-configuration-footer">
               <p:commandButton id="save-button"

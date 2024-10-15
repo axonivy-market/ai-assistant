@@ -57,12 +57,17 @@ public class AssistantFunctionListBean extends AbstractFunctionListBean
 
   @Override
   public void deleteFunction() {
-    assistant.getAllTools().remove(selectedFunction);
-    selectedFunction = null;
-    updateFunctionsCanAddToAssistant();
+    if (CollectionUtils.isNotEmpty(assistant.getAllTools())) {
+      assistant.getAllTools().remove(selectedFunction);
+      selectedFunction = null;
+      updateFunctionsCanAddToAssistant();
+    }
   }
 
   public void addFunctions() {
+    if (assistant.getAllTools() == null) {
+      assistant.setAllTools(new ArrayList<>());
+    }
     assistant.getAllTools().addAll(functionsToAdd);
     functionsToAdd.clear();
   }
