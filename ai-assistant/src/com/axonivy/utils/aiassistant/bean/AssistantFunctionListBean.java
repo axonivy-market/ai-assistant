@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.ToolType;
@@ -34,11 +36,13 @@ public class AssistantFunctionListBean extends AbstractFunctionListBean
     functionsToAdd = new ArrayList<>();
 
     filteredFunctions = assistant.getAllTools();
-    filteredFunctions.forEach(function -> function.init());
+    if (CollectionUtils.isNotEmpty(filteredFunctions)) {
+      filteredFunctions.forEach(function -> function.init());
 
-    nonStartables = filteredFunctions.stream()
-        .filter(function -> (function == null || function.isDisabled()))
-        .collect(Collectors.toList());
+      nonStartables = filteredFunctions.stream()
+          .filter(function -> (function == null || function.isDisabled()))
+          .collect(Collectors.toList());
+    }
 
     updateFunctionsCanAddToAssistant();
   }
@@ -70,7 +74,8 @@ public class AssistantFunctionListBean extends AbstractFunctionListBean
     };
 
     Predicate<AiFunction> notAddedTool = (func) -> {
-      for (AiFunction existingFunctions : filteredFunctions) {
+      for (AiFunction existingFunctions : Optional.ofNullable(filteredFunctions)
+          .orElse(new ArrayList<>())) {
         if (existingFunctions.getId().contentEquals(func.getId())) {
           return false;
         }
