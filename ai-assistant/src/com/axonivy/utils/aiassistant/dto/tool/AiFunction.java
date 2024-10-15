@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
@@ -118,11 +119,11 @@ public abstract class AiFunction extends AbstractConfiguration
 
   @JsonIgnore
   public static String getFormattedMemory(List<ChatMessage> memory) {
+    String result = StringUtils.EMPTY;
     if (CollectionUtils.isEmpty(memory)) {
-      return "";
+      return result;
     }
 
-    String result = "";
     for (ChatMessage message : memory) {
       if (!message.isNotificationMessage()) {
         result = result.concat(message.getFormattedMessage())

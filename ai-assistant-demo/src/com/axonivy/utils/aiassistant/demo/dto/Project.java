@@ -28,7 +28,6 @@ public class Project {
     this.projectId = UUID.randomUUID().toString();
   }
 
-  // Getters and Setters
   public String getProjectName() {
     return projectName;
   }

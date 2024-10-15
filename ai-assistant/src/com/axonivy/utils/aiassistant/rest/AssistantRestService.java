@@ -175,7 +175,8 @@ public class AssistantRestService {
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
-        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS, "")));
+        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS,
+            StringUtils.EMPTY)));
 
     String error = assistant.getAiModel().getAiBot().streamChat(params,
         BasicPromptTemplates.DEFAULT_ANSWER_RETRIEVAL_QA, messageHandler);
@@ -199,7 +200,8 @@ public class AssistantRestService {
     params.put("info", assistant.getInfo());
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
-        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS, "")));
+        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS,
+            StringUtils.EMPTY)));
 
     String error = assistant.getAiModel().getAiBot().streamChat(params,
         BasicPromptTemplates.DEFAULT_ANSWER, messageHandler);
@@ -351,7 +353,8 @@ public class AssistantRestService {
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
-        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS, "")));
+        new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS,
+            StringUtils.EMPTY)));
 
     assistant.getAiModel().getAiBot().streamChat(params,
         BasicPromptTemplates.RAG_PROMPT_TEMPLATE, messageHandler);
@@ -375,7 +378,8 @@ public class AssistantRestService {
             new StreamingMessage(conversationId, AIState.IN_PROGRESS, null)));
       }
 
-      String result = Optional.ofNullable(queue.poll()).orElse("");
+      String result = Optional.ofNullable(queue.poll())
+          .orElse(StringUtils.EMPTY);
 
       Pattern pattern = Pattern.compile(ERROR_REGEX);
       Matcher matcher = pattern.matcher(result);
@@ -396,7 +400,8 @@ public class AssistantRestService {
         Conversation conversation = ChatMessageManager
             .loadConversation(assistantId, conversationId);
         conversation.getHistory()
-            .add(ChatMessage.newAIMessage(result.replace(conversationId, "")));
+            .add(ChatMessage.newAIMessage(
+                result.replace(conversationId, StringUtils.EMPTY)));
         ChatMessageManager.saveConversation(assistantId, conversation);
       }
 
@@ -446,7 +451,7 @@ public class AssistantRestService {
       }
     }
 
-    return "";
+    return StringUtils.EMPTY;
   }
 
   private Map<String, Object> initParamsForDefaultAnswer(Assistant assistant,

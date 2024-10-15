@@ -52,11 +52,11 @@ public class TextStep extends AiStep {
       getResult().setResult(this.getText().concat(System.lineSeparator())
           .concat(System.lineSeparator())
           .concat(Optional.ofNullable(resultToDisplay)
-              .map(AiResultDTO::getResult).orElse("")));
+              .map(AiResultDTO::getResult).orElse(StringUtils.EMPTY)));
     }
     getResult().setResultForAI(this.getText().concat(System.lineSeparator())
         .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)
-            .orElse("")));
+            .orElse(StringUtils.EMPTY)));
     getResult().setState(AIState.DONE);
   }
 
@@ -69,13 +69,13 @@ public class TextStep extends AiStep {
     params.put("metadata", getFormattedMetadatas(metadatas));
     params.put("memory", AiFunction.getFormattedMemory(memory));
     params.put("customInstruction",
-        Optional.ofNullable(getCustomInstruction()).orElse(""));
+        Optional.ofNullable(getCustomInstruction()).orElse(StringUtils.EMPTY));
 
     String extractedText = extractTextInsideTag(
         bot.chat(params, AiFlowPromptTemplates.TEXT_STEP_USE_AI))
         .concat(System.lineSeparator()).concat(System.lineSeparator())
         .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)
-            .orElse(""));
+            .orElse(StringUtils.EMPTY));
 
     if (StringUtils.isNotBlank(extractedText)) {
       if (!BooleanUtils.isTrue(getIsHidden())) {

@@ -64,12 +64,13 @@ public class AiModelDetailsBean implements Serializable {
       FacesContext.getCurrentInstance().addMessage(null, FacesMessageUtils
           .sanitizedMessage(FacesMessage.SEVERITY_INFO, Ivy.cms().co(
               "/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/Connected"),
-              ""));
+              StringUtils.EMPTY));
       return;
     }
 
     FacesContext.getCurrentInstance().addMessage(null, FacesMessageUtils
-        .sanitizedMessage(FacesMessage.SEVERITY_ERROR, error, ""));
+        .sanitizedMessage(FacesMessage.SEVERITY_ERROR, error,
+            StringUtils.EMPTY));
     FacesContext.getCurrentInstance().isValidationFailed();
   }
 
@@ -83,10 +84,12 @@ public class AiModelDetailsBean implements Serializable {
       FacesContext.getCurrentInstance().addMessage(null, FacesMessageUtils
           .sanitizedMessage(FacesMessage.SEVERITY_INFO, Ivy.cms().co(
               "/Dialogs/com/axonivy/utils/aiassistant/management/AiModelConfiguration/ModelSavedMessage",
-              Arrays.asList(selectedModel.getDisplayName())), ""));
+              Arrays.asList(selectedModel.getDisplayName())),
+              StringUtils.EMPTY));
     } else {
       FacesContext.getCurrentInstance().addMessage(null, FacesMessageUtils
-          .sanitizedMessage(FacesMessage.SEVERITY_ERROR, error, ""));
+          .sanitizedMessage(FacesMessage.SEVERITY_ERROR, error,
+              StringUtils.EMPTY));
       FacesContext.getCurrentInstance().isValidationFailed();
     }
   }

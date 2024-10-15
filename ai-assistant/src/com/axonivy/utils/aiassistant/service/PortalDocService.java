@@ -54,9 +54,9 @@ public class PortalDocService {
 
   private static List<TextSegment> proceedEachContent(String content) {
 
-    List<String> lines = Arrays.asList(content.split("\n"));
-    String headerKeyword = "";
-    String keyword = "";
+    List<String> lines = Arrays.asList(content.split(StringUtils.LF));
+    String headerKeyword = StringUtils.EMPTY;
+    String keyword = StringUtils.EMPTY;
     List<String> blockText = new ArrayList<>();
     List<TextSegment> result = new ArrayList<>();
 
@@ -67,13 +67,13 @@ public class PortalDocService {
       }
 
       if (line.startsWith(HEADER_PREFIX)) {
-        headerKeyword = line.replace(HEADER_PREFIX, "").strip();
+        headerKeyword = line.replace(HEADER_PREFIX, StringUtils.EMPTY).strip();
         handleBlockText(headerKeyword, keyword, blockText, result);
         continue;
       }
 
       if (line.startsWith(SUB_HEADER_PREFIX)) {
-        keyword = line.replace(SUB_HEADER_PREFIX, "").strip();
+        keyword = line.replace(SUB_HEADER_PREFIX, StringUtils.EMPTY).strip();
         handleBlockText(headerKeyword, keyword, blockText, result);
         continue;
       }
@@ -97,7 +97,7 @@ public class PortalDocService {
       blockTextWithHeader.addAll(blockText);
 
       TextSegment parsed = new TextSegment(
-          String.join("\n", blockTextWithHeader), meta);
+          String.join(StringUtils.LF, blockTextWithHeader), meta);
 
       parsedDocuments.add(parsed);
       blockText.clear();
@@ -130,7 +130,8 @@ public class PortalDocService {
     // Add a prefix "Information about" and remove special characters for <h2>
     // tags
     for (Element h2Tag : document.select("h2")) {
-      h2Tag.text("__sub_header: " + h2Tag.text().replace("ïƒ�", ""));
+      h2Tag.text(
+          "__sub_header: " + h2Tag.text().replace("ïƒ�", StringUtils.EMPTY));
     }
 
     // Replace image tags with their source links
@@ -169,13 +170,15 @@ public class PortalDocService {
                                                    // and at least one row of
                                                    // data
 
-        StringBuilder tableBuilder = new StringBuilder("Table content:\n");
+        StringBuilder tableBuilder = new StringBuilder("Table content:")
+            .append(StringUtils.LF);
 
         for (int rowIndex = 1; rowIndex < rows.size(); rowIndex++) { // Skip the
                                                                      // header
                                                                      // row
           Elements dataCols = rows.get(rowIndex).select("td");
-          tableBuilder.append("row ").append(rowIndex).append(":\n");
+          tableBuilder.append("row ").append(rowIndex).append(":")
+              .append(StringUtils.LF);
 
           for (int colIndex = 0; colIndex < headers.size()
               && colIndex < dataCols.size(); colIndex++) {
@@ -187,7 +190,7 @@ public class PortalDocService {
             }
           }
 
-          tableBuilder.append("\n");
+          tableBuilder.append(StringUtils.LF);
         }
 
         tableTag.replaceWith(Jsoup.parse(tableBuilder.toString()));
@@ -203,12 +206,12 @@ public class PortalDocService {
     // Add a new line after each tag for better readability
     for (Element tag : document.getAllElements()) {
       if (!Optional.ofNullable(tag).map(Element::parents).isPresent()) {
-        return "";
+        return StringUtils.EMPTY;
       }
       if (!Optional.ofNullable(tag).map(Element::parents)
           .map(elem -> elem.select(".notranslate"))
           .orElseGet(() -> new Elements()).isEmpty()) {
-        tag.after("\n");
+        tag.after(StringUtils.LF);
       }
     }
 
@@ -216,9 +219,9 @@ public class PortalDocService {
     String htmlStr = document.wholeText().replace("|ivy|", "Axon Ivy");
 
     // Remove all blank lines
-    List<String> lines = Arrays.asList(htmlStr.split("\n")).stream()
+    List<String> lines = Arrays.asList(htmlStr.split(StringUtils.LF)).stream()
         .map(String::stripTrailing).filter(StringUtils::isNotBlank).toList();
-    return String.join("\n", lines);
+    return String.join(StringUtils.LF, lines);
   }
 
   private static void removeElements(Document document, String cssQuery) {

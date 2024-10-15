@@ -215,21 +215,21 @@ public class Assistant extends AbstractConfiguration implements Serializable {
 
   public String formatEthicalRules() {
     if (CollectionUtils.isNotEmpty(ethicalRules)) {
-      String result = "";
+      String result = StringUtils.EMPTY;
       for (String rule : ethicalRules) {
         result = result.concat("   - ").concat(rule)
             .concat(System.lineSeparator());
       }
       return result;
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
   public String formatFunctionsForChoose() {
+    String result = StringUtils.EMPTY;
     if (CollectionUtils.isEmpty(toolkit)) {
-      return "";
+      return result;
     }
-    String result = "";
     for (AiFunction function : toolkit) {
       result = result
           .concat(String.format(CHOOSE_FUNCTION_PATTERN, function.getId(),

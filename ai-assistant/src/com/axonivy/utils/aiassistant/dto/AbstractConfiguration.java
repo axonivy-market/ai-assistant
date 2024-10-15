@@ -2,6 +2,8 @@ package com.axonivy.utils.aiassistant.dto;
 
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public abstract class AbstractConfiguration {
@@ -12,7 +14,7 @@ public abstract class AbstractConfiguration {
   private boolean isPublic;
 
   public AbstractConfiguration() {
-    id = UUID.randomUUID().toString().replace("-", "");
+    id = UUID.randomUUID().toString().replace("-", StringUtils.EMPTY);
   }
 
   public String getId() {

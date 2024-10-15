@@ -2,6 +2,8 @@ package com.axonivy.utils.aiassistant.dto.history;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ch.ivyteam.ivy.scripting.objects.DateTime;
 
 public class ChatMessage {
@@ -108,15 +110,17 @@ public class ChatMessage {
   }
 
   public boolean isSystemMessage() {
-    return Optional.ofNullable(this.role).orElse("").contentEquals(SYSTEM);
+    return Optional.ofNullable(this.role).orElse(StringUtils.EMPTY)
+        .contentEquals(SYSTEM);
   }
 
   public boolean isNotificationMessage() {
-    return Optional.ofNullable(this.role).orElse("")
+    return Optional.ofNullable(this.role).orElse(StringUtils.EMPTY)
         .contentEquals(NOTIFICATION);
   }
 
   public boolean isUserMessage() {
-    return Optional.ofNullable(this.role).orElse("").contentEquals(USER);
+    return Optional.ofNullable(this.role).orElse(StringUtils.EMPTY)
+        .contentEquals(USER);
   }
 }

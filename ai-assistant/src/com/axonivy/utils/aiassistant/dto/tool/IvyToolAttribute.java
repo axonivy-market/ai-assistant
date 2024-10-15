@@ -2,6 +2,8 @@ package com.axonivy.utils.aiassistant.dto.tool;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.ALWAYS)
@@ -26,7 +28,7 @@ public class IvyToolAttribute implements Serializable {
   public IvyToolAttribute(String name, String description) {
     this.name = name;
     this.description = description;
-    this.value = "";
+    this.value = StringUtils.EMPTY;
   }
 
   public String getName() {

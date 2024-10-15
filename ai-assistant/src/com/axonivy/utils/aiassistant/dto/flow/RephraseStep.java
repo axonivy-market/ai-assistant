@@ -50,7 +50,7 @@ public class RephraseStep extends AiStep {
     params.put("tool", dataFulfillRequest);
     params.put("examples", formatExamples());
     params.put("customInstruction",
-        Optional.ofNullable(getCustomInstruction()).orElse(""));
+        Optional.ofNullable(getCustomInstruction()).orElse(StringUtils.EMPTY));
 
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
         AiFlowPromptTemplates.RE_PHRASE_STEP);
@@ -97,7 +97,7 @@ public class RephraseStep extends AiStep {
 
   public String formatExamples() {
     if (CollectionUtils.isNotEmpty(examples)) {
-      String result = "";
+      String result = StringUtils.EMPTY;
       for (RephraseExample example : examples) {
         result = result.concat(String.format(EXAMPLE_FORMAT,
             example.getBefore(), example.getAfter()))
@@ -105,6 +105,6 @@ public class RephraseStep extends AiStep {
       }
       return result;
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 }

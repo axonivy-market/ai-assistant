@@ -22,10 +22,7 @@ public class AiFunctionUtils {
           .setSignature(signature).toFilter();
 
       var subProcessStartList = SubProcessCallStart.find(filter);
-      if (CollectionUtils.isEmpty(subProcessStartList)) {
-        return false;
-      }
-      return true;
+      return CollectionUtils.isNotEmpty(subProcessStartList);
     });
   }
 }

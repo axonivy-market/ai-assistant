@@ -52,7 +52,7 @@ public class AssistantUtils {
 
   public static String generateErrorResult(String error) {
     if (StringUtils.isBlank(error)) {
-      return "";
+      return StringUtils.EMPTY;
     }
     return IvyToolResultType.ERROR.format(error);
   }
@@ -60,7 +60,7 @@ public class AssistantUtils {
   public static String applyAssistantInfoToPromptTemplate(Assistant assistant,
       String promptTemplate) {
     if (assistant == null) {
-      return "";
+      return StringUtils.EMPTY;
     }
     Map<String, Object> params = new HashMap<>();
     params.put("info", assistant.getInfo());

@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.flow.AiFlow;
@@ -92,7 +93,7 @@ public class FunctionListBean extends AbstractFunctionListBean
   public String getRemoveAiFunctionMessage() {
     if (Optional.ofNullable(selectedFunction).map(AiFunction::getId)
         .isEmpty()) {
-      return "";
+      return StringUtils.EMPTY;
     }
 
     List<Assistant> assistants = AssistantService.getInstance().findAssistantByFunctionId(selectedFunction.getId());

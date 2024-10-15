@@ -12,7 +12,6 @@ public class MeetingRoom {
   private Boolean isAvailable;
   private List<Meeting> scheduledMeetings;
 
-  // Getters and Setters
   public String getRoomName() {
     return roomName;
   }
@@ -45,26 +44,6 @@ public class MeetingRoom {
     this.floor = floor;
   }
 
-  // Method to check if the room is available at a specific time
-  public boolean checkAvailability(String dateTime) {
-    for (Meeting meeting : scheduledMeetings) {
-      if (meeting.getDateTime().equals(dateTime)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  // Method to add a meeting to the schedule
-  public boolean scheduleMeeting(Meeting meeting) {
-    if (checkAvailability(meeting.getDateTime())) {
-      scheduledMeetings.add(meeting);
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   public String getRoomId() {
     return roomId;
   }
@@ -73,5 +52,37 @@ public class MeetingRoom {
     this.roomId = roomId;
   }
 
-  public static final String DATA = "[{\"roomId\":\"room_a\",\"roomName\":\"Room A\",\"floor\":1,\"isAvailable\":true},{\"roomId\":\"room_b\",\"roomName\":\"Room B\",\"floor\":2,\"isAvailable\":true},{\"roomId\":\"room_c\",\"roomName\":\"Room C\",\"floor\":3,\"isAvailable\":true},{\"roomId\":\"room_d\",\"roomName\":\"Room D\",\"floor\":4,\"isAvailable\":true},{\"roomId\":\"room_e\",\"roomName\":\"Room E\",\"floor\":5,\"isAvailable\":true}]";
+  public static final String DATA = """
+      [
+        {
+          "roomId": "room_a",
+          "roomName": "Room A",
+          "floor": 1,
+          "isAvailable": true
+        },
+        {
+          "roomId": "room_b",
+          "roomName": "Room B",
+          "floor": 2,
+          "isAvailable": true
+        },
+        {
+          "roomId": "room_c",
+          "roomName": "Room C",
+          "floor": 3,
+          "isAvailable": true
+        },
+        {
+          "roomId": "room_d",
+          "roomName": "Room D",
+          "floor": 4,
+          "isAvailable": true
+        },
+        {
+          "roomId": "room_e",
+          "roomName": "Room E",
+          "floor": 5,
+          "isAvailable": true
+        }
+      ] """;
 }

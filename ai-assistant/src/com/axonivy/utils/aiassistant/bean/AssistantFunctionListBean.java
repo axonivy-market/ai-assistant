@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.ToolType;
@@ -45,7 +47,7 @@ public class AssistantFunctionListBean extends AbstractFunctionListBean
 
   public String getRemoveAiFunctionMessage() {
     String assistantName = Optional.ofNullable(assistant)
-        .map(Assistant::getName).orElse("");
+        .map(Assistant::getName).orElse(StringUtils.EMPTY);
     return Ivy.cms().co(
         "/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/RemoveFunctionForAssistantMessage",
         Arrays.asList(assistantName));

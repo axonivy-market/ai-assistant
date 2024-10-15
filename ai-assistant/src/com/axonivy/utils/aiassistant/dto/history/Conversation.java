@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.utils.aiassistant.exception.AiChatException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -71,7 +72,7 @@ public class Conversation {
 
   @JsonIgnore
   public String getFormattedMemory() {
-    String result = "";
+    String result = StringUtils.EMPTY;
     if (CollectionUtils.isNotEmpty(memory)) {
       for (var message : memory) {
         if (!message.isNotificationMessage()) {

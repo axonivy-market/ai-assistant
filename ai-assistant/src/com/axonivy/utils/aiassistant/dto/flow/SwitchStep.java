@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
@@ -60,7 +61,7 @@ public class SwitchStep extends AiStep {
 
   private String generateConditionsString() {
     if (CollectionUtils.isEmpty(conditions)) {
-      return "";
+      return StringUtils.EMPTY;
     }
     return BusinessEntityConverter.entityToJsonValue(conditions);
   }

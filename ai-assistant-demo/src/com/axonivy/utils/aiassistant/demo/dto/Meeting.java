@@ -14,7 +14,6 @@ public class Meeting {
   private String roomId;
   private String hostUsername;
 
-  // Getters and Setters
   public String getDateTime() {
     return dateTime;
   }

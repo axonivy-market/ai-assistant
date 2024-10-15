@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.util.RoleUtils;
 import com.axonivy.utils.aiassistant.dto.Assistant;
@@ -64,7 +65,7 @@ public abstract class AbstractFunctionListBean implements Serializable {
         .isPresent()
             ? String.join(", ",
                 RoleUtils.getDisplayNameOfRoles(tool.getPermissions()))
-            : "";
+            : StringUtils.EMPTY;
   }
 
   public List<AiFunction> getFilteredFunctions() {

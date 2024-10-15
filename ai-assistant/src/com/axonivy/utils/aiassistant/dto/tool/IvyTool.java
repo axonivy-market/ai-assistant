@@ -173,9 +173,9 @@ public class IvyTool extends AiFunction {
       for (IvyToolAttribute realAttribute : attributes) {
         if (realAttribute.getName()
             .contentEquals(Optional.ofNullable(fulfilledAttribute)
-                .map(IvyToolAttribute::getName).orElse(""))) {
+                .map(IvyToolAttribute::getName).orElse(StringUtils.EMPTY))) {
           realAttribute.setValue(Optional.ofNullable(fulfilledAttribute)
-              .map(IvyToolAttribute::getValue).orElse(""));
+              .map(IvyToolAttribute::getValue).orElse(StringUtils.EMPTY));
         }
       }
     }
@@ -216,7 +216,7 @@ public class IvyTool extends AiFunction {
     if (CollectionUtils.isNotEmpty(attributes)) {
       String result = String.format(TOOL_TO_FULFILL_FORMAT, getName(),
           getDescription());
-      String attributesStr = "";
+      String attributesStr = StringUtils.EMPTY;
       for (IvyToolAttribute attr : attributes) {
         if (BooleanUtils
             .isTrue(BooleanUtils.toBoolean(attr.getIsImportant()))) {
@@ -229,7 +229,7 @@ public class IvyTool extends AiFunction {
       }
       return result.concat(attributesStr);
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
   private String buildDataFulfillAttributeRequest(

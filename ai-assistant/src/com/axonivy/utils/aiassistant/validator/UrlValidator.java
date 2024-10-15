@@ -22,7 +22,7 @@ public class UrlValidator implements Validator {
   @Override
   public void validate(FacesContext context, UIComponent component,
       Object value) throws ValidatorException {
-    String strValue = value == null ? null : value.toString();
+    String strValue = StringUtils.defaultIfBlank(value.toString(), null);
 
     try {
       if (StringUtils.isBlank(strValue)) {

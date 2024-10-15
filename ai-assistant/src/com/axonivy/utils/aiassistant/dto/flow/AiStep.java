@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
@@ -116,9 +117,9 @@ public abstract class AiStep implements Serializable, Cloneable {
 
   public static String getFormattedMetadatas(Map<String, String> metadatas) {
     if (CollectionUtils.isEmpty(metadatas.entrySet())) {
-      return "";
+      return StringUtils.EMPTY;
     }
-    String result = "";
+    String result = StringUtils.EMPTY;
     for (Entry<String, String> entry : metadatas.entrySet()) {
       result += entry.getKey() + ": " + entry.getValue()
           + System.lineSeparator();
@@ -135,7 +136,7 @@ public abstract class AiStep implements Serializable, Cloneable {
     if (matcher.find()) {
       return matcher.group(1); // Return the first captured group
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
   public static String extractJsonArray(String text) {
@@ -148,7 +149,7 @@ public abstract class AiStep implements Serializable, Cloneable {
       return "[" + matcher.group(1) + "]"; // Return the first captured group
                                            // inside array characters
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
 
@@ -161,7 +162,7 @@ public abstract class AiStep implements Serializable, Cloneable {
     if (matcher.find()) {
       return matcher.group(1); // Return the first captured group
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
   public String getCustomInstruction() {

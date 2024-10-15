@@ -174,7 +174,7 @@ public class OpenAIBot extends AbstractAIBot {
           e.getCause().getMessage(), OpenAIErrorResponse.class);
       return error.getError().getMessage();
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
   @Override
@@ -187,7 +187,7 @@ public class OpenAIBot extends AbstractAIBot {
         .searchApproximateKnn(EmbeddingSearchRequest.builder().maxResults(4)
             .minScore(0.8).queryEmbedding(queryEmbedding).build());
 
-    String result = "";
+    String result = StringUtils.EMPTY;
     for (var match : relevant.matches()) {
       result = String.join("\n\n", result, match.embedded().text());
     }
@@ -203,7 +203,7 @@ public class OpenAIBot extends AbstractAIBot {
           e.getCause().getMessage(), OpenAIErrorResponse.class);
       return error.getError().getMessage();
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 
   @Override
@@ -213,6 +213,6 @@ public class OpenAIBot extends AbstractAIBot {
     } catch (Exception e) {
       return e.getCause().getMessage();
     }
-    return "";
+    return StringUtils.EMPTY;
   }
 }
