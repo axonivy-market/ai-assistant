@@ -598,7 +598,7 @@
         "type": "TEXT",
         "text": "I found some processes that match your request. Which one would you like to start?",
         "showResultOfStep": 4,
-        "onSuccess": 3
+        "onSuccess": 29
       },
       {
         "stepNo": 7,
@@ -607,6 +607,7 @@
         "toolId": "find-processes",
         "onRephrase": 8,
         "onSuccess": 4,
+        "customInstruction" : "If user doesn't specify which attributes to find, only field the name attribute",
         "examples": [
           {
             "before": "submit leave request",
@@ -852,6 +853,25 @@
         "flowId": "start-process-with-params-flow",
         "triggerMessage": "Start process",
         "showResultOfStep": 27
+      },
+      {
+        "stepNo": 29,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 3,
+            "case": "User choose a process on the list above"
+          },
+          {
+            "action": 4,
+            "case": "User choose a process not in the list above"
+          },
+          {
+            "action": -1,
+            "case": "User has other request"
+          }
+        ]
       }
     ]
   },

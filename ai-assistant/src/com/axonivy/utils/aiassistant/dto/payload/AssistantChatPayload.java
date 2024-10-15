@@ -6,6 +6,7 @@ public class AssistantChatPayload {
   private String conversationId;
   private String selectedFunctionMessage;
   private String selectedFunctionId;
+  private String type;
 
   public String getMessage() {
     return message;
@@ -45,5 +46,13 @@ public class AssistantChatPayload {
 
   public void setSelectedFunctionId(String selectedFunctionId) {
     this.selectedFunctionId = selectedFunctionId;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 }

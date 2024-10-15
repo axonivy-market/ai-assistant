@@ -104,7 +104,6 @@ public class AiFlow extends AiFunction {
     assistant = workingAssistant;
     init();
     if (getWorkingStep() == DEFAULT_DONE_STEP) {
-      proceedFinishedFlowMessage(conversation);
       state = AIState.DONE;
       if (finalResult != null) {
         conversation.getHistory()
@@ -148,7 +147,8 @@ public class AiFlow extends AiFunction {
             memoryToRun, assistant);
 
         updateStepResultToMemory(text.getResult(), conversation,
-            BooleanUtils.isNotFalse(text.getSaveToHistory()));
+            BooleanUtils.isNotFalse(text.getSaveToHistory()), null,
+            step.getType());
         updateWorkingStep(text);
         if (!BooleanUtils.isTrue(text.getIsHidden())) {
           return;
@@ -160,19 +160,14 @@ public class AiFlow extends AiFunction {
         IvyToolStep ivyStep = (IvyToolStep) step;
         ivyStep.run(request, memoryToRun, metadatas, assistant);
         updateStepResultToMemory(ivyStep.getResult(), conversation,
-            BooleanUtils.isNotFalse(ivyStep.getSaveToHistory()));
+            BooleanUtils.isNotFalse(ivyStep.getSaveToHistory()),
+            ivyStep.getNotificationMessage(), step.getType());
       }
 
       // run as Conditional step
       case SWITCH -> {
         SwitchStep conditionalStep = (SwitchStep) step;
         conditionalStep.run(request, memoryToRun, metadatas, assistant);
-
-        if (Optional.ofNullable(conditionalStep.getResult())
-            .map(AiResultDTO::getResult).isPresent()) {
-          updateStepResultToMemory(conditionalStep.getResult(), conversation,
-              BooleanUtils.isNotFalse(conditionalStep.getSaveToHistory()));
-        }
       }
 
       // run as Re-phrase step
@@ -183,7 +178,8 @@ public class AiFlow extends AiFunction {
         if (Optional.ofNullable(rephraseStep.getResult())
             .map(AiResultDTO::getResult).isPresent()) {
           updateStepResultToMemory(rephraseStep.getResult(), conversation,
-              BooleanUtils.isNotFalse(rephraseStep.getSaveToHistory()));
+              BooleanUtils.isNotFalse(rephraseStep.getSaveToHistory()),
+              rephraseStep.getNotificationMessage(), step.getType());
         }
       }
 
@@ -226,15 +222,6 @@ public class AiFlow extends AiFunction {
     }
   }
 
-  private void proceedFinishedFlowMessage(Conversation conversation) {
-    setNotificationMessage(generateFinishedFunctionMessage());
-    conversation.getHistory()
-        .add(ChatMessage.newAIFlowMessage(getNotificationMessage()));
-    conversation.getMemory()
-        .add(ChatMessage.newAIFlowMessage(getNotificationMessage()));
-    ChatMessageManager.saveConversation(assistant.getId(), conversation);
-  }
-
   /**
    * Get result of the step defined by the field "showResultOfStep"
    * 
@@ -273,7 +260,8 @@ public class AiFlow extends AiFunction {
    * @param saveToHistory
    */
   private void updateStepResultToMemory(AiResultDTO result,
-      Conversation conversation, Boolean saveToHistory) {
+      Conversation conversation, Boolean saveToHistory,
+      String notificationMessage, StepType type) {
     ChatMessage messageForAi = ChatMessage
         .newAIFlowMessage(result.getResultForAI());
     ChatMessage message = ChatMessage.newAIFlowMessage(result.getResult());
@@ -286,6 +274,18 @@ public class AiFlow extends AiFunction {
       conversation.getHistory().add(message);
     }
     conversation.getMemory().add(messageForAi);
+
+    if (StringUtils.isNotBlank(notificationMessage)) {
+      ChatMessage notification = ChatMessage
+          .newSystemMessage(notificationMessage, type.name());
+      conversation.getHistory().add(notification);
+      conversation.getMemory().add(notification);
+    }
+
+    if (StringUtils.isNotBlank(notificationMessage)) {
+      conversation.getMemory()
+          .add(ChatMessage.newSystemMessage(notificationMessage, type.name()));
+    }
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
   }
 

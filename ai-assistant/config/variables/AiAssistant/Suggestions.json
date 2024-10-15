@@ -9,14 +9,14 @@
   } , {
     "version" : "11.4.0",
     "id" : "suggestion-2",
-    "icon" : "si-touch-finger_1",
+    "icon" : "si-pencil-write",
     "headerText" : "Tutorial",
     "descriptionText" : "Where can I find the documentation or tutorials for the Axon Ivy Portal?",
     "message" : "Where can I find the documentation or tutorials for the Axon Ivy Portal?"
   } , {
     "version" : "11.4.0",
     "id" : "suggestion-3",
-    "icon" : "si-cog",
+    "icon" : "si-layout-dashboard",
     "headerText" : "Interact",
     "descriptionText" : "List me all the tasks that need completion within the current week",
     "message" : "List me all the tasks that need completion within the current week"

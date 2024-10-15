@@ -36,9 +36,13 @@ Dialogs:
           management:
             AiManagement:
               AIManagementDescription: This is the page you can manage everything related to AI
+              AddNewAssistant: Add new assistant
               AiModels: AI Models
+              BackToAssistantDashboard: Back to assistant dashboard
             AiModelConfiguration:
               Connected: Connected to AI provider successfully
+              Disclaimer: Our AI Assistant uses an API key/Credentials from a selected third-party provider to deliver certain functionalities. Please note that your data will be processed by this third-party provider in accordance with their own privacy policies and regulations. We recommend reviewing
+                the privacy policies of the third-party provider to understand how your data will be handled.
               ModelSavedMessage: Model "{0}" is saved successfully
               TestConnection: Test Connection
               Title: AI Model Configuration
@@ -66,10 +70,6 @@ Labels:
       IVY: Ivy Tool
       RETRIEVAL_QA: Knowledge Base
   Message:
-    FinishedToolMessage:
-      FLOW: 'Stop using Ivy Flow: **{0}**'
-      IVY: 'Stop using Ivy Tool: **{0}**'
-      RETRIEVAL_QA: 'Stop using Ivy Tool: **{0}**'
     InvalidEmailFormat: Invalid email format
     InvalidUrl: Invalid URL
     SelectedToolMessage:
