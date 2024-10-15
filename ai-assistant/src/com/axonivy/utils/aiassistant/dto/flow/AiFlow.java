@@ -208,6 +208,16 @@ public class AiFlow extends AiFunction {
         functionToTrigger = flowStep.getFunction();
         return;
       }
+      case KNOWLEDGE_BASE -> {
+        KnowledgeBaseStep knowledge = (KnowledgeBaseStep) step;
+        knowledge.setUserMessage(memoryToRun.getLast().getContent());
+        state = AIState.DONE;
+        AiResultDTO result = new AiResultDTO();
+        result.setResultForAI(knowledge.getToolId());
+        finalResult = result;
+      }
+      default -> throw new IllegalArgumentException(
+          "Unexpected value: " + step.getType());
       }
       ;
 
@@ -215,7 +225,7 @@ public class AiFlow extends AiFunction {
       setNotificationMessage(step.getNotificationMessage());
 
       if (getWorkingStep() == DEFAULT_DONE_STEP) {
-        state = AIState.DONE;
+        state = state == AIState.ERROR ? AIState.ERROR : AIState.DONE;
         finalResult = step.getResult();
       }
       return;
@@ -243,9 +253,15 @@ public class AiFlow extends AiFunction {
    * Update working step based on state of the step after run Done: set
    * 'onSucess' to the working step Error: set 'onError' to the working step
    * 
+   * If the step type is KNOWLEDGE_BASE, end the flow
+   * 
    * @param step
    */
   private void updateWorkingStep(AiStep step) {
+    if (step.getType() == StepType.KNOWLEDGE_BASE) {
+      setWorkingStep(DEFAULT_DONE_STEP);
+      return;
+    }
     setWorkingStep(Optional.ofNullable(step).map(AiStep::getResult)
         .map(AiResultDTO::getState).orElse(AIState.DONE) == AIState.ERROR
             ? step.getOnError()
@@ -262,6 +278,12 @@ public class AiFlow extends AiFunction {
   private void updateStepResultToMemory(AiResultDTO result,
       Conversation conversation, Boolean saveToHistory,
       String notificationMessage, StepType type) {
+
+    if (StringUtils.isNotBlank(notificationMessage)) {
+      conversation.getMemory()
+          .add(ChatMessage.newSystemMessage(notificationMessage, type.name()));
+    }
+
     ChatMessage messageForAi = ChatMessage
         .newAIFlowMessage(result.getResultForAI());
     ChatMessage message = ChatMessage.newAIFlowMessage(result.getResult());
@@ -280,11 +302,6 @@ public class AiFlow extends AiFunction {
           .newSystemMessage(notificationMessage, type.name());
       conversation.getHistory().add(notification);
       conversation.getMemory().add(notification);
-    }
-
-    if (StringUtils.isNotBlank(notificationMessage)) {
-      conversation.getMemory()
-          .add(ChatMessage.newSystemMessage(notificationMessage, type.name()));
     }
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
   }

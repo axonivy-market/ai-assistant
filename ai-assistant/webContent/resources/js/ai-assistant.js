@@ -360,6 +360,13 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
     // If the flow is done, show final result
     if (workingFlow.state == 'done') {
+
+      const workingStep = workingFlow.runSteps.length == 0 ? null : workingFlow.runSteps[workingFlow.runSteps.length - 1];
+      if (workingStep.type == 'KNOWLEDGE_BASE') {
+        useKnowledgeBase(ivyUri, view, workingStep.userMessage, workingStep.toolId, conversationId);
+        return;
+      }
+
       if (workingFlow?.finalResult?.resultForAI) {
         executeResult(workingFlow.finalResult.resultForAI);
         streaming = true;
@@ -425,6 +432,46 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
   this.onClearHistory = function () {
     workingFlow = null;
+  }
+
+  
+
+  async function useKnowledgeBase(ivyUri, view, message, selectedFunctionId, conversationId) {
+    // Send AJAX request to the chatbot server
+    const uri = ivyUri + conversationId + '/useKnowledgeBase';
+    const content = JSON.stringify({
+      'selectedFunctionId': selectedFunctionId,
+      'conversationId': conversationId,
+      'assistantId': assistantId,
+      'message': message
+    });
+
+    fetch(uri, {
+      headers: ajaxHeader,
+      method: 'POST',
+      body: content
+    }).then(response => response.json())
+      .then(result => {
+        if (result.error) {
+          view.renderErrorMessage(result.error);
+          return;
+        }
+
+        // Handle normal conversation
+        if (result.status == 'in_progress') {
+          streaming = true;
+          view.collapseSystemSteps();
+          streamReply(ivyUri, assistantId, result.conversationId, view);
+        } else {
+          if (result.status == 'done') {
+            view.renderMessage(result.token);
+          }
+          view.enableSendButton();
+        }
+      }).catch(function (err) {
+        console.error('Error sending chat message:', err);
+        view.enableSendButton();
+      });
   }
 }
 

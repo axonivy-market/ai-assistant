@@ -26,7 +26,8 @@ import ch.ivyteam.ivy.environment.Ivy;
     @Type(value = SwitchStep.class, name = "SWITCH"),
     @Type(value = TextStep.class, name = "TEXT"),
     @Type(value = RephraseStep.class, name = "RE_PHRASE"),
-    @Type(value = TriggerFlowStep.class, name = "TRIGGER_FLOW") })
+    @Type(value = TriggerFlowStep.class, name = "TRIGGER_FLOW"),
+    @Type(value = KnowledgeBaseStep.class, name = "KNOWLEDGE_BASE") })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class AiStep implements Serializable, Cloneable {
 
