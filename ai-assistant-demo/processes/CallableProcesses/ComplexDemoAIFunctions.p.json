@@ -3,7 +3,7 @@
   "id" : "1919D0051F656423",
   "kind" : "CALLABLE_SUB",
   "config" : {
-    "data" : "com.axon.market.ai.assistant.demo.AIFunctionsData"
+    "data" : "com.axonivy.utils.aiassistant.demo.AIFunctionsData"
   },
   "elements" : [ {
       "id" : "f0",
@@ -172,7 +172,7 @@
       "id" : "f11",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 1592, "y" : 456 },
+        "at" : { "x" : 1400, "y" : 456 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -214,7 +214,7 @@
       "id" : "f20",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 1112, "y" : 568 },
+        "at" : { "x" : 992, "y" : 568 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -256,9 +256,9 @@
             "name" : "yes",
             "offset" : { "x" : -3, "y" : -10 }
           } },
-        { "id" : "f30", "to" : "f20", "via" : [ { "x" : 512, "y" : 672 }, { "x" : 1112, "y" : 672 } ], "label" : {
+        { "id" : "f30", "to" : "f20", "via" : [ { "x" : 512, "y" : 672 }, { "x" : 992, "y" : 672 } ], "label" : {
             "name" : "no",
-            "segment" : 1.4,
+            "segment" : 1.35,
             "offset" : { "x" : -150, "y" : -58 }
           } }
       ]
@@ -279,35 +279,7 @@
         "at" : { "x" : 672, "y" : 568 }
       },
       "connect" : [
-        { "id" : "f28", "to" : "f27" }
-      ]
-    }, {
-      "id" : "f27",
-      "type" : "Script",
-      "name" : "Reindex",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.searchengine.index.IndexInfo;",
-            "import ch.ivyteam.ivy.searchengine.ISearchEngineManager;",
-            "",
-            "",
-            "for (int i = 0; i < ISearchEngineManager.instance().indicesCount(); i++) {",
-            "  ",
-            "  IndexInfo indexInfo = ISearchEngineManager.instance().indices(0, 1000).get(i);",
-            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
-            "  ISearchEngineManager.instance().reindexSync(indexInfo.indexName());",
-            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
-            "  ",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 824, "y" : 568 }
-      },
-      "connect" : [
-        { "id" : "f29", "to" : "f31" }
+        { "id" : "f12", "to" : "f31" }
       ]
     }, {
       "id" : "f31",
@@ -326,7 +298,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 984, "y" : 568 }
+        "at" : { "x" : 864, "y" : 568 }
       },
       "connect" : [
         { "id" : "f32", "to" : "f20", "color" : "default" }
@@ -340,13 +312,13 @@
         "call" : {
           "map" : {
             "param.projectId" : "in.projectId",
-            "param.meetingId" : "in.meetingId",
+            "param.meetingId" : "in.meeting.meetingId",
             "param.employeeName" : "in.meeting.participants.get(in.counter)"
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 1048, "y" : 456 }
+        "at" : { "x" : 856, "y" : 456 }
       },
       "connect" : [
         { "id" : "f34", "to" : "f39", "color" : "default" }
@@ -360,7 +332,7 @@
           "code" : [
             "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
             "MeetingService service = new MeetingService();",
-            "in.meetingId = service.createProjectMeeting(in.meetingName, in.meetingAgenda, in.meetingRoom, in.projectId, in.meetingHost, in.meetingTime);"
+            "in.meeting = service.createProjectMeeting(in.meetingName, in.meetingAgenda, in.meetingRoom, in.projectId, in.meetingHost, in.meetingTime);"
           ]
         }
       },
@@ -368,34 +340,7 @@
         "at" : { "x" : 400, "y" : 456 }
       },
       "connect" : [
-        { "id" : "f16", "to" : "f17", "color" : "default" }
-      ]
-    }, {
-      "id" : "f17",
-      "type" : "Script",
-      "name" : "Reindex",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.searchengine.index.IndexInfo;",
-            "import ch.ivyteam.ivy.searchengine.ISearchEngineManager;",
-            "",
-            "for (int i = 0; i < ISearchEngineManager.instance().indicesCount(); i++) {",
-            "  ",
-            "  IndexInfo indexInfo = ISearchEngineManager.instance().indices(0, 1000).get(i);",
-            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
-            "  ISearchEngineManager.instance().reindexSync(indexInfo.indexName());",
-            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
-            "  ",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 584, "y" : 456 }
-      },
-      "connect" : [
-        { "id" : "f18", "to" : "f36" }
+        { "id" : "f13", "to" : "f36" }
       ]
     }, {
       "id" : "f36",
@@ -409,9 +354,6 @@
             "import ch.ivyteam.ivy.security.IUser;",
             "in.counter = 0;",
             "",
-            "MeetingService service = new MeetingService();",
-            "in.meeting = service.findByMeetingId(in.meetingId);",
-            "",
             "IUser host = ivy.security.users().find(in.meeting.hostUsername);",
             "",
             "ivy.case.name = in.meeting.title;",
@@ -422,10 +364,11 @@
             "    String.format(\"Created by AI on behalf of %s(%s)\",",
             "      host.getDisplayName(), host.getMemberName()));"
           ]
-        }
+        },
+        "sudo" : true
       },
       "visual" : {
-        "at" : { "x" : 784, "y" : 456 }
+        "at" : { "x" : 592, "y" : 456 }
       },
       "connect" : [
         { "id" : "f38", "to" : "f35" }
@@ -434,7 +377,7 @@
       "id" : "f35",
       "type" : "Alternative",
       "visual" : {
-        "at" : { "x" : 912, "y" : 456 },
+        "at" : { "x" : 720, "y" : 456 },
         "labelOffset" : { "x" : 14, "y" : 34 }
       },
       "connect" : [
@@ -454,7 +397,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1208, "y" : 456 }
+        "at" : { "x" : 1016, "y" : 456 }
       },
       "connect" : [
         { "id" : "f40", "to" : "f41", "color" : "default" }
@@ -469,11 +412,11 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1336, "y" : 456 },
+        "at" : { "x" : 1144, "y" : 456 },
         "labelOffset" : { "x" : 14, "y" : 34 }
       },
       "connect" : [
-        { "id" : "f43", "to" : "f35", "via" : [ { "x" : 1336, "y" : 360 }, { "x" : 912, "y" : 360 } ] },
+        { "id" : "f43", "to" : "f35", "via" : [ { "x" : 1144, "y" : 360 }, { "x" : 720, "y" : 360 } ] },
         { "id" : "f42", "to" : "f44", "color" : "default" }
       ]
     }, {
@@ -493,7 +436,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 1464, "y" : 456 }
+        "at" : { "x" : 1272, "y" : 456 }
       },
       "connect" : [
         { "id" : "f45", "to" : "f11", "color" : "default" }

@@ -25,6 +25,7 @@ public class MeetingRoomService extends BusinessDataService<MeetingRoom> {
     List<MeetingRoom> data = BusinessEntityConverter
         .jsonValueToEntities(MeetingRoom.DATA, MeetingRoom.class);
     for (MeetingRoom room : data) {
+      room.setAvailable(BooleanUtils.isNotFalse(room.isAvailable()));
       save(room);
     }
   }

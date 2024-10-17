@@ -127,6 +127,7 @@
     "version": "11.4.0",
     "id": "plan-software-project-flow",
     "name": "Plan Software Project",
+    "startable": true,
     "type": "FLOW",
     "permissions": [
       "Everybody"

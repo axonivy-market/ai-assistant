@@ -18,7 +18,6 @@
 .ai-assistant-card .avatar-container {
   display: flex;
   justify-content: center;
-  transform: translateY(30px);
 }
 
 .ai-assistant-card.active {
@@ -84,6 +83,17 @@
 
 .ai-assistant-card .assistant-name h3 {
   margin: 0;
+}
+
+.ai-assistant-card.ai-assistant-add-new {
+  flex-direction: column;
+  align-items: center;
+  color: var(--ivy-primary-color);
+  font-weight: bold;
+}
+
+.ai-assistant-card.ai-assistant-add-new i:before {
+  font-weight: bold !important;
 }
 
 .assistant-configuration-footer {
@@ -190,22 +200,6 @@ body .assistant-configuration-footer .ui-button ~ .ui-button {
   top: 7px;
   z-index: 1;
   border-radius: 50%;
-}
-
-.empty-message-container {
-  text-align: center;
-  margin: 70px 0px;
-  padding: 0 20px;
-}
-
-.empty-message-container .empty-message-icon {
-  font-size: 6rem;
-  margin-bottom: 10px;
-}
-
-.empty-message-container .empty-message-icon,
-.empty-message-container .empty-message-text {
-  color: var(--ivy-primary-color);
 }
 
 .ethical-rules-container .ethical-rule-item {

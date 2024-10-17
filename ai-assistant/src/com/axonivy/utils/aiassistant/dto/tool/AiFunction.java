@@ -125,10 +125,8 @@ public abstract class AiFunction extends AbstractConfiguration
     }
 
     for (ChatMessage message : memory) {
-      if (!message.isNotificationMessage()) {
-        result = result.concat(message.getFormattedMessage())
-            .concat(System.lineSeparator());
-      }
+      result = result.concat(message.getFormattedMessage())
+          .concat(System.lineSeparator());
     }
 
     return result;
@@ -138,13 +136,6 @@ public abstract class AiFunction extends AbstractConfiguration
   public String generateSelectedFunctionMessage() {
     return Ivy.cms().co(
         "/Labels/Message/SelectedToolMessage/".concat(this.getType().name()),
-        Arrays.asList(this.getName()));
-  }
-
-  @JsonIgnore
-  public String generateFinishedFunctionMessage() {
-    return Ivy.cms().co(
-        "/Labels/Message/FinishedToolMessage/".concat(this.getType().name()),
         Arrays.asList(this.getName()));
   }
 

@@ -15,9 +15,9 @@
     <ui:repeat var="suggestion"
       value="#{assistantBean.suggestions}">
       <div class="candidate-question-block js-candidate-question-block">
-        <div class="candidate-question ui-g-4 card">
-          <div class="candidate-question-header">
-            <span class="si #{suggestion.icon}" /> <span>#{suggestion.headerText}</span>
+        <div class="candidate-question ui-g-4 card p-5">
+          <div class="flex flex-row align-items-center mb-3 text-xl font-medium">
+            <span class="si #{suggestion.icon} mr-2 pt-1 text-xl" /> <span>#{suggestion.headerText}</span>
           </div>
           <div>
             <p class="js-candidate-question">#{suggestion.message}</p>
