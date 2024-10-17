@@ -1,9 +1,9 @@
 {
   "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
-  "id" : "191C03BA36F69285",
+  "id" : "19293B1A6DCE4023",
   "kind" : "HTML_DIALOG",
   "config" : {
-    "data" : "com.axon.market.ai.assistant.demo.MeetingInvitation.MeetingInvitationData"
+    "data" : "com.axonivy.utils.aiassistant.demo.MeetingInvitation.MeetingInvitationData"
   },
   "elements" : [ {
       "id" : "f0",
@@ -21,7 +21,7 @@
             "out.projectId" : "param.projectId"
           }
         },
-        "guid" : "191C03BA371B3F35"
+        "guid" : "19293B1A6DFCFA5D"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
@@ -41,7 +41,7 @@
       "type" : "HtmlDialogEventStart",
       "name" : "close",
       "config" : {
-        "guid" : "191C03BA374CD1C1"
+        "guid" : "19293B1A6E46100D"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 160 }

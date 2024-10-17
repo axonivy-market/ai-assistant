@@ -14,7 +14,7 @@ public class MeetingService extends BusinessDataService<Meeting> {
     return Meeting.class;
   }
 
-  public String createProjectMeeting(String title, String agenda,
+  public Meeting createProjectMeeting(String title, String agenda,
       String meetingRoomId, String projectId,
       String host, String time) {
     ProjectService projectService = new ProjectService();
@@ -40,7 +40,7 @@ public class MeetingService extends BusinessDataService<Meeting> {
       meeting.getParticipants().add(member.getUsername());
     }
     save(meeting);
-    return meeting.getMeetingId();
+    return meeting;
   }
 
   public Meeting findByMeetingId(String id) {

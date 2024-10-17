@@ -43,6 +43,7 @@ import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.dto.tool.IvyTool;
 import com.axonivy.utils.aiassistant.dto.tool.RetrievalQATool;
 import com.axonivy.utils.aiassistant.enums.StepType;
+import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
@@ -331,8 +332,7 @@ public class AssistantRestService {
     AiStreamingMessageHandler messageHandler = initStreamingMessageHandler(
         conversation);
 
-    String testEmbeddingConnectionResult = assistant.getAiModel().getAiBot()
-        .testEmbeddingStoreConnection(qaTool.getCollection());
+    String testEmbeddingConnectionResult = qaTool.testConnection(assistant);
 
     if (StringUtils.isNotBlank(testEmbeddingConnectionResult)) {
       conversation.getHistory()
@@ -419,6 +419,41 @@ public class AssistantRestService {
       response.resume(BusinessEntityConverter.entityToJsonValue(
           new StreamingMessage(conversationId, AIState.IN_PROGRESS, result)));
     }
+  }
+
+  @POST
+  @Path(value = "{conversationId}/useKnowledgeBase")
+  @Produces(MediaType.APPLICATION_JSON)
+  public void useKnowledgeBase(@Suspended AsyncResponse response,
+      AssistantChatPayload payload) throws JsonProcessingException {
+
+    Conversation conversation = ChatMessageManager.loadConversation(
+        payload.getAssistantId(), payload.getConversationId());
+    if (conversation == null) {
+      return;
+    }
+
+    Assistant assistant = AssistantService.getInstance()
+        .findById(payload.getAssistantId());
+    String selectedFunctionId = payload.getSelectedFunctionId();
+
+    if (StringUtils.isBlank(selectedFunctionId) || assistant == null) {
+      return;
+    }
+
+    AiFunction selectedFunction = AiFunctionService
+        .getInstance().findAll()
+        .stream()
+        .filter(func -> func.getType() == ToolType.RETRIEVAL_QA
+            && func.getId().contentEquals(selectedFunctionId))
+        .findFirst().get();
+
+    if (selectedFunction != null) {
+      handleRetrievalQATool(response, payload.getMessage(), conversation,
+          assistant, selectedFunction);
+    }
+
+
   }
 
   private String chooseFunction(Assistant assistant, Conversation conversation,

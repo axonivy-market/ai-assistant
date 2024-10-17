@@ -2,7 +2,7 @@
   "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
   "id" : "1919CEDEF7828B77",
   "config" : {
-    "data" : "com.axon.market.ai.assistant.demo.Data"
+    "data" : "com.axonivy.utils.aiassistant.demo.Data"
   },
   "elements" : [ {
       "id" : "f0",
@@ -25,7 +25,7 @@
       "id" : "f1",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 1328, "y" : 256 },
+        "at" : { "x" : 1152, "y" : 256 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -65,34 +65,7 @@
         "at" : { "x" : 456, "y" : 256 }
       },
       "connect" : [
-        { "id" : "f6", "to" : "f7", "color" : "default" }
-      ]
-    }, {
-      "id" : "f7",
-      "type" : "Script",
-      "name" : "Reindex",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import ch.ivyteam.ivy.searchengine.index.IndexInfo;",
-            "import ch.ivyteam.ivy.searchengine.ISearchEngineManager;",
-            "",
-            "for (int i = 0; i < ISearchEngineManager.instance().indicesCount(); i++) {",
-            "  ",
-            "  IndexInfo indexInfo = ISearchEngineManager.instance().indices(0, 1000).get(i);",
-            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
-            "  ISearchEngineManager.instance().reindexSync(indexInfo.indexName());",
-            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
-            "  ",
-            "}"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 616, "y" : 256 }
-      },
-      "connect" : [
-        { "id" : "f8", "to" : "f25", "color" : "default" }
+        { "id" : "f6", "to" : "f25" }
       ]
     }, {
       "id" : "f9",
@@ -140,15 +113,16 @@
             "out.meeting" : "in.meeting"
           },
           "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
             "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
             "import ch.ivyteam.ivy.security.IUser;",
+            "",
             "MeetingService service = new MeetingService();",
             "in.meeting = service.findByMeetingId(in.meetingId);",
             "",
             "IUser host = ivy.security.users().find(in.meeting.hostUsername);",
             "in.taskName = String.format(\"Meeting invitation: %s\", in.meeting.title);",
             "in.taskDescription = String.format(\"You are invited to the meeting %s by %s\", in.meeting.title, host.getDisplayName());",
-            "",
             "",
             "ivy.case.name = in.taskName;",
             "ivy.case.description = in.taskDescription;"
@@ -192,7 +166,7 @@
         "sudo" : true
       },
       "visual" : {
-        "at" : { "x" : 800, "y" : 256 }
+        "at" : { "x" : 624, "y" : 256 }
       },
       "connect" : [
         { "id" : "f26", "to" : "f16", "color" : "default" }
@@ -202,7 +176,7 @@
       "type" : "UserTask",
       "name" : "Invitation task",
       "config" : {
-        "dialog" : "com.axon.market.ai.assistant.demo.MeetingInvitation:start(String,String)",
+        "dialog" : "com.axonivy.utils.aiassistant.demo.MeetingInvitation:start(String,String)",
         "call" : {
           "map" : {
             "param.meetingId" : "in.meetingId",
@@ -257,7 +231,7 @@
         "sudo" : true
       },
       "visual" : {
-        "at" : { "x" : 1184, "y" : 256 }
+        "at" : { "x" : 1008, "y" : 256 }
       },
       "connect" : [
         { "id" : "f13", "to" : "f1", "color" : "default" }
@@ -301,7 +275,7 @@
         "processCall" : "CallableProcesses/BackupDataUtils:backupAssistantAndFunctions()"
       },
       "visual" : {
-        "at" : { "x" : 992, "y" : 257 },
+        "at" : { "x" : 816, "y" : 257 },
         "size" : { "width" : 176, "height" : 62 }
       },
       "connect" : [
