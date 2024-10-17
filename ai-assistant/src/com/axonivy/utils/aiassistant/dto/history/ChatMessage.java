@@ -2,6 +2,8 @@ package com.axonivy.utils.aiassistant.dto.history;
 
 import java.util.Optional;
 
+import com.axonivy.utils.aiassistant.enums.ToolType;
+
 import ch.ivyteam.ivy.scripting.objects.DateTime;
 
 public class ChatMessage {
@@ -9,13 +11,13 @@ public class ChatMessage {
   private static final String AI = "AI";
   private static final String ERROR = "Error";
   private static final String SYSTEM = "System";
-  private static final String NOTIFICATION = "Notification";
-  private static final String CHAT_MESSAGE_FORMAT = "%s: %s";
+  private static final String CHAT_MESSAGE_FORMAT = "%s:\n%s\n";
 
   private String content;
   private String role;
   private String time;
   private Boolean isAiFlowMessage;
+  private String type;
 
   public String getContent() {
     return content;
@@ -77,21 +79,32 @@ public class ChatMessage {
     return result;
   }
 
-  public static ChatMessage newNotificationMessage(String content) {
-    ChatMessage result = new ChatMessage();
-    result.setContent(content);
-    result.setRole(NOTIFICATION);
-    result.setTime((new DateTime()).toString());
-    result.setIsAiFlowMessage(false);
-    return result;
-  }
-
   public static ChatMessage newSystemMessage(String content) {
     ChatMessage result = new ChatMessage();
     result.setContent(content);
     result.setRole(SYSTEM);
     result.setTime((new DateTime()).toString());
     result.setIsAiFlowMessage(false);
+    return result;
+  }
+
+  public static ChatMessage newSystemMessage(String content, String tpye) {
+    ChatMessage result = new ChatMessage();
+    result.setContent(content);
+    result.setRole(SYSTEM);
+    result.setTime((new DateTime()).toString());
+    result.setIsAiFlowMessage(false);
+    result.setType(tpye);
+    return result;
+  }
+
+  public static ChatMessage newUseAIFlowSystemMessage(String content) {
+    ChatMessage result = new ChatMessage();
+    result.setContent(content);
+    result.setRole(SYSTEM);
+    result.setTime((new DateTime()).toString());
+    result.setIsAiFlowMessage(false);
+    result.setType(ToolType.FLOW.name());
     return result;
   }
 
@@ -111,12 +124,15 @@ public class ChatMessage {
     return Optional.ofNullable(this.role).orElse("").contentEquals(SYSTEM);
   }
 
-  public boolean isNotificationMessage() {
-    return Optional.ofNullable(this.role).orElse("")
-        .contentEquals(NOTIFICATION);
-  }
-
   public boolean isUserMessage() {
     return Optional.ofNullable(this.role).orElse("").contentEquals(USER);
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 }

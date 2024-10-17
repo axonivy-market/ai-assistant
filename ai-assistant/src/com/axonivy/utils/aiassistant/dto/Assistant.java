@@ -54,6 +54,9 @@ public class Assistant extends AbstractConfiguration implements Serializable {
   private List<AiFunction> allTools;
 
   @JsonIgnore
+  private List<AiFunction> filteredTools;
+
+  @JsonIgnore
   private AiModel aiModel;
   @JsonIgnore
   private List<SecurityMemberDTO> permissionDTOs;
@@ -252,4 +255,13 @@ public class Assistant extends AbstractConfiguration implements Serializable {
   public void setAllTools(List<AiFunction> allTools) {
     this.allTools = allTools;
   }
+
+  public List<AiFunction> getFilteredTools() {
+    return filteredTools;
+  }
+
+  public void setFilteredTools(List<AiFunction> filteredTools) {
+    this.filteredTools = filteredTools;
+  }
+
 }

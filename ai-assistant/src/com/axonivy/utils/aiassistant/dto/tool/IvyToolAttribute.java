@@ -12,7 +12,7 @@ public class IvyToolAttribute implements Serializable {
   private String name;
   private String value;
   private String description;
-  private boolean isRequired;
+  private String isImportant;
 
   public IvyToolAttribute() {
   }
@@ -23,10 +23,9 @@ public class IvyToolAttribute implements Serializable {
     this.description = description;
   }
 
-  public IvyToolAttribute(String name, String description, boolean isRequired) {
+  public IvyToolAttribute(String name, String description) {
     this.name = name;
     this.description = description;
-    this.isRequired = isRequired;
     this.value = "";
   }
 
@@ -54,11 +53,11 @@ public class IvyToolAttribute implements Serializable {
     this.description = description;
   }
 
-  public boolean isRequired() {
-    return isRequired;
+  public String getIsImportant() {
+    return isImportant;
   }
 
-  public void setRequired(boolean isRequired) {
-    this.isRequired = isRequired;
+  public void setIsImportant(String isImportant) {
+    this.isImportant = isImportant;
   }
 }

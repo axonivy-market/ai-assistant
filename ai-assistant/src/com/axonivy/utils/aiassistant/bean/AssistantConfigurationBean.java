@@ -50,8 +50,6 @@ public class AssistantConfigurationBean implements Serializable {
 
   private static final long serialVersionUID = -363630076717966691L;
 
-  private static final String TOOL_TYPE_CMS_PATTERN = "/Labels/Enums/ToolType/%s";
-
   private List<Assistant> assistants;
   private Assistant selectedAssistant;
   private String pageTitle;
@@ -140,12 +138,19 @@ public class AssistantConfigurationBean implements Serializable {
     if (!assistants.contains(selectedAssistant)) {
       assistants.add(selectedAssistant);
     }
+
+    selectedAssistant.setTools(
+        Optional.ofNullable(selectedAssistant).map(Assistant::getAllTools)
+            .orElse(new ArrayList<>()).stream().map(AiFunction::getId)
+            .toList());
+
     AssistantService.getInstance().saveAllPublicConfig(assistants);
 
     FacesContext.getCurrentInstance().addMessage(null, FacesMessageUtils
         .sanitizedMessage(FacesMessage.SEVERITY_INFO, Ivy.cms().co(
             "/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/AssistantSavedMessage",
             Arrays.asList(selectedAssistant.getName())), ""));
+    AiNavigator.navigateToAIManagement();
   }
 
   private void updatePermissionsBeforeSave() {
@@ -266,17 +271,5 @@ public class AssistantConfigurationBean implements Serializable {
     if (CollectionUtils.isNotEmpty(selectedPermissions)) {
       selectedPermissions.clear();
     }
-  }
-
-  public String getToolType(String typeName) {
-    return Ivy.cms().co(String.format(TOOL_TYPE_CMS_PATTERN, typeName));
-  }
-
-  public String generatePermisisonForDisplay(AiFunction tool) {
-    return Optional.ofNullable(tool).map(AiFunction::getPermissions)
-        .filter(l -> CollectionUtils.isNotEmpty(l)).isPresent()
-            ? String.join(", ",
-                RoleUtils.getDisplayNameOfRoles(tool.getPermissions()))
-            : "";
   }
 }

@@ -78,16 +78,8 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         return;
       }
 
-      // Ctrl + Enter (or Cmd + Enter on Mac) is pressed
-      if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
-        // Add new line and adjust textarea height
-        view.addNewLineToTextbox(event.srcElement);
-        view.adjustTextareaHeight(event.srcElement);
-        return;
-      }
-
-      // Enter is pressed
-      if (event.key === 'Enter') {
+      // Enter is pressed without other keys, send the message
+      if (event.key === 'Enter' && !(event.ctrlKey || event.altKey || event.shiftKey || event.metaKey)) {
         event.preventDefault();
         this.sendMessage(event.srcElement);
         return;
@@ -137,17 +129,20 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         if (result && result.history) {
           result.history.forEach(message => {
             if (message.isAiFlowMessage) {
+              view.collapseSystemSteps();
               view.renderAiFlowMessage(message.content);
             } else {
               if (message.role == 'AI') {
+                view.collapseSystemSteps();
                 streaming = true;
                 view.renderMessage(message.content);
                 streaming = false;
                 view.removeStreamingClassFromMessage();
               } else if (message.role == 'Error') {
+                view.collapseSystemSteps();
                 view.renderErrorMessage(message.content);
-              } else if (message.role == 'Notification') {
-                view.renderSystemMessage(message.content, false);
+              } else if (message.role == 'System') {
+                view.renderSystemMessage(message.content, false, message.type);
               } else {
                 view.renderMyMessage({ 'message': message.content });
               }
@@ -227,7 +222,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         }
 
         if (result.selectedFunctionMessage) {
-          view.renderSystemMessage(result.selectedFunctionMessage, true);
+          view.renderSystemMessage(result.selectedFunctionMessage, true, result.type);
           continueRequest(conversationId, JSON.stringify(result));
           return;
         }
@@ -276,6 +271,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
           // Handle normal conversation
           if (result.status == 'in_progress') {
             streaming = true;
+            view.collapseSystemSteps();
             streamReply(ivyUri, assistantId, result.conversationId, view);
           } else {
             if (result.status == 'done') {
@@ -349,7 +345,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
     // Handle trigger another flow
     if (!workingFlow.state && workingFlow?.selectedFunctionId) {
-      view.renderSystemMessage(result.selectedFunctionMessage, true);
+      view.renderSystemMessage(result.selectedFunctionMessage, true, result.type);
       continueRequest(conversationId, JSON.stringify(workingFlow));
       return;
     }
@@ -378,15 +374,24 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       return;
     }
 
+    const workingStep = workingFlow.runSteps.length == 0 ? null : workingFlow.runSteps[workingFlow.runSteps.length - 1];
+
     // Show notification
     if (workingFlow.notificationMessage) {
-      view.renderSystemMessage(workingFlow.notificationMessage, true);
+      const type = workingStep == null ? '' : workingStep.type;
+      view.renderSystemMessage(workingFlow.notificationMessage, true, type);
       resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
       return;
     }
 
-
-    const workingStep = workingFlow.runSteps[workingFlow.runSteps.length - 1];
+    
+    
+    // If step type switch, continue without render message
+    if (workingStep.type == 'SWITCH') {
+      resumeFlow(ivyUri, view, '', conversationId, assistantId, true);
+      return;
+    }
+    
     if (workingStep.result) {
       executeResult(workingStep.result.resultForAI);
       if (workingStep.isHidden) {
@@ -463,6 +468,8 @@ function ViewAI(uri) {
       return;
     }
 
+    view.collapseSystemSteps();
+
     var messages = message.split('\r\n\r\n');
     messages.forEach(line => {
       if (line.trim() != '') {
@@ -472,6 +479,7 @@ function ViewAI(uri) {
         this.removeStreamingClassFromMessage();
       }
     });
+
   }
 
   // Rendering user's own messages
@@ -500,10 +508,48 @@ function ViewAI(uri) {
 
   }
 
-  this.renderSystemMessage = function (message, useAnimation) {
+  this.renderSystemMessage = function (message, useAnimation, type) {
+    if (!message || message.trim() === '') {
+      return;
+    }
+
+    message = message.replace(/<([^>]+)>/g, "$1");
+
+    let icon = '';
+    let header = '';
+
+    switch(type) {
+      case 'FLOW':
+        icon = 'si si-lg si-cog-play';
+        header = 'Use AI Flow';
+        break;
+      case 'IVY_TOOL':
+        icon = 'si si-lg si-cog-double-2';
+        header = 'Processing Ivy tool';
+        break;
+      case 'RE_PHRASE':
+        icon = 'si si-lg si-messages-bubble-check';
+        header = 'Rephrase message';
+        break;
+      case 'TRIGGER_FLOW':
+        icon = 'si si-lg si-cog-play';
+        header = 'Trigger AI Flow';
+        break;
+      case 'RETRIEVAL_QA':
+        icon = 'si si-common-file-search';
+        header = 'Use knowledge base';
+        break;
+      default:
+        icon = 'si si-lg si-cog-double-2';
+        header = 'Proceeded';
+    }
+
     streaming = true;
-    const icon = `<span class="si si-cog-double-2"></span>`;
-    this.renderMessage(icon + message.replace(/<([^>]+)>/g, "<strong>$1</strong>"));
+
+    const iconPart = `<span class="${icon}"></span>`;
+    const messagePart = `<div class="ml-3 flex flex-column"><span class="font-bold w-fit">${header}</span><p class="w-fit">${message}</p></div>`;
+
+    this.renderMessage(`<div class="run-step w-full flex flex-row align-items-center ${type}"><div class="icon-container">${iconPart}</div>${messagePart}</div>`);
     streaming = false;
 
     var messageList = document.getElementsByClassName('js-chatbot-message-list')[0];
@@ -520,11 +566,69 @@ function ViewAI(uri) {
     this.removeStreamingClassFromMessage(true);
   }
 
+  this.collapseSystemSteps = function () {
+    const numberOfSystemResponse = $('.chatbot-message-list > .chat-message-container.system-response').length;
+    
+    if (numberOfSystemResponse !== 0) {
+      const parentContainer = $('.chat-message-container.system-response').last().parent();
+      
+      // Append button and collapsible panel for system responses
+      parentContainer.append(`
+        <div class='ui-g-9'>
+          <button type='button' class='system-response-expand-button chat-message'>
+            Answered by ${numberOfSystemResponse} step(s)
+            <i class='si si-arrow-down-1 si-sm ml-2'></i>
+          </button>
+        </div>
+      `);
+      
+      parentContainer.append("<div class='system-response-container ui-g-9 hidden'></div>");
+
+      // Move all system responses into the collapsible panel
+      $('.chatbot-message-list > .chat-message-container.system-response')
+        .appendTo($('.system-response-container').last());
+
+      // Handle button click to collapse/expand the panel
+      const expandButton = $('.system-response-expand-button').last();
+      expandButton.click(function () {
+        const responseContainer = expandButton.parent().next().first();
+        responseContainer.toggleClass("hidden");
+        expandButton.find("i")
+          .toggleClass("si-arrow-down-1")
+          .toggleClass("si-arrow-up-1");
+      });
+
+      parentContainer.find('.system-response-container').each(function() {
+        let level = 0;
+        let runSteps = $(this).find('.run-step');
+        for (var i = 0; i < runSteps.length; i++) {
+          var step = runSteps.get(i);
+          $(step).addClass(`level-${level}`);
+          $(step).find('.icon-container').addClass('border-circle border-1 border-solid flex flex-row align-items-center justify-content-center');
+
+          if ($(step).hasClass('FLOW')) {
+            level ++;
+            $(step).addClass('has-child');
+          }
+          
+          if (i != runSteps.length - 1) {
+            $(step).addClass('draw-line');
+          }
+        }
+      });
+    }
+  }
+
   // Helper function for rendering messages
   function renderNewMessageFunc(messageWrapper, isMyMessage) {
     // Clone message template
     const cloneTemplate = originalMessageTemplate.cloneNode(true);
-    const message = isMyMessage ? messageWrapper.message : parseMessage(messageWrapper);
+    let message = '';
+    if (isMyMessage) {
+      message = messageWrapper.message.replaceAll('\r\n', '<br/>').replaceAll('\n', '<br/>');
+    } else {
+      message = parseMessage(messageWrapper);
+    }
 
     // Set message content
     cloneTemplate.getElementsByClassName('js-message')[0].innerHTML = message;
@@ -616,15 +720,17 @@ function ViewAI(uri) {
       return;
     }
 
+    let converted = isIFrame(streamingValue) ? convertIFrame(streamingValue) : marked.parse(streamingValue);
+
     if (typeof jsMessageList !== 'undefined') {
       const messageList = $(jsMessageList);
       const streamingMessage = messageList.find('.chat-message-container.streaming').not('.my-message');
       if (streamingMessage.length > 0) {
         streamingMessage.removeClass('streaming');
-        $(streamingMessage).find('.js-message').get(0).innerHTML = parseFinalMessage(streamingValue);
+        $(streamingMessage).find('.js-message').get(0).innerHTML = converted;
       } else {
         const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
-        messages.get(messages.length - 1).innerHTML = parseFinalMessage(streamingValue);
+        messages.get(messages.length - 1).innerHTML = converted;
       }
 
       if (!isDisableChat) {
@@ -681,7 +787,7 @@ function ViewAI(uri) {
 
   function initTextbox(textbox) {
     // Initial height of the textbox equals to 5 times font size
-    const initialHeight = 5 * parseFloat(getComputedStyle(textbox).fontSize);
+    const initialHeight = 2 * parseFloat(getComputedStyle(textbox).fontSize);
     const paddingTop = parseFloat(getComputedStyle(textbox).paddingTop);
     const paddingBottom = parseFloat(getComputedStyle(textbox).paddingBottom);
     textbox.style.height = initialHeight + paddingTop + paddingBottom + 'px';

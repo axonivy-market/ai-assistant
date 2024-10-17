@@ -17,31 +17,17 @@ public class AiFlowPromptTemplates {
          Example: If the correct action is "2", then you should show "<2>"
       """;
 
-  public static final String CHECK_USER_MESSAGE_STEP = """
-      Instructions:
-      - Show <1> when: User's last message is off-topic or unrelated to the chat history.
-      - Show <2> when: User's last message continues the context of the chat, even when AI asked something and user say no or don't agree.
-
-      This is the chat history:
-
-      AI: Hello User
-      {{memory}}
-      """;
-
   public static final String RE_PHRASE_STEP = """
-      This is information about the person you should act as:
-      {{info}}
-
       Metadata:
       {{metadata}}
 
-      I have chat history between two people, "User" and "AI":
+      Chat history:
 
       AI: Hello User
       User: Hi AI
       {{memory}}
 
-      And I have a tool:
+      Function:
 
       {{tool}}
 
@@ -49,15 +35,15 @@ public class AiFlowPromptTemplates {
 
       Instruction:
 
-      Check if the last message from User is clear to fulfill any value of the tool's attributes.
+      Check if the last message from User is clear to fulfill any value of the attributes.
 
-      If the message is clear enough to fulfill the tool, don't need to rephrase, just show " ".
+      If the message is clear enough to fulfill, don't need to rephrase, just show " ".
 
       {{customInstruction}}
 
-      If you cannot use the message to fulfill the tool json, rephrase it to make it possible to fulfill the values in the tool json above then ONLY show the rephrased message inside <>.
+      If you cannot use the message to fulfill any of the attribute, rephrase it to make it possible to fulfill the values of the attributes above then ONLY show the rephrased message inside <>.
       The rephrased message must be in English.
-      Example: <a message>, otherwise, just show a " "
+      The rephrased message must include meaning of the attributes you choose to fulfill.
 
       Some example how to rephrase:
       {{examples}}

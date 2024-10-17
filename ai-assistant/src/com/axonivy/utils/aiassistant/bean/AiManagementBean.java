@@ -11,7 +11,9 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import com.axonivy.utils.aiassistant.dto.AiModel;
 import com.axonivy.utils.aiassistant.dto.Assistant;
+import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.navigation.AiNavigator;
+import com.axonivy.utils.aiassistant.service.AiFunctionService;
 import com.axonivy.utils.aiassistant.service.AiModelService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
 
@@ -25,6 +27,7 @@ public class AiManagementBean implements Serializable {
 
   private List<Assistant> assistants;
   private List<AiModel> models;
+  private List<AiFunction> functions;
   private Assistant assistant;
   private AiModel model;
 
@@ -33,6 +36,9 @@ public class AiManagementBean implements Serializable {
     assistants = AssistantService.getInstance()
         .findAvailableAssistantForUser(Ivy.session().getSessionUserName());
     models = AiModelService.getInstance().findAll();
+    functions = AiFunctionService.getInstance().findAll();
+    functions.sort((firstFunction, secondFunction) -> firstFunction.getType()
+        .name().compareTo(secondFunction.getType().name()));
   }
 
   public List<Assistant> getAssistants() {
@@ -85,5 +91,13 @@ public class AiManagementBean implements Serializable {
 
   public boolean isEmptyModels() {
     return CollectionUtils.isEmpty(models);
+  }
+
+  public List<AiFunction> getFunctions() {
+    return functions;
+  }
+
+  public void setFunctions(List<AiFunction> functions) {
+    this.functions = functions;
   }
 }

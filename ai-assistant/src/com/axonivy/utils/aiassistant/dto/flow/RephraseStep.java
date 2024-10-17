@@ -38,11 +38,16 @@ public class RephraseStep extends AiStep {
     IvyTool tool = (IvyTool) AiFunctionService.getInstance()
         .findById(getToolId());
 
+    String dataFulfillRequest = tool.buildDataFulfillRequest();
+    if (StringUtils.isBlank(dataFulfillRequest)) {
+      dataFulfillRequest = BusinessEntityConverter.entityToJsonValue(tool);
+    }
+
     Map<String, Object> params = new HashMap<>();
     params.put("info", assistant.getInfo());
     params.put("metadata", getFormattedMetadatas(metadatas));
     params.put("memory", AiFunction.getFormattedMemory(memory));
-    params.put("tool", BusinessEntityConverter.entityToJsonValue(tool));
+    params.put("tool", dataFulfillRequest);
     params.put("examples", formatExamples());
     params.put("customInstruction",
         Optional.ofNullable(getCustomInstruction()).orElse(""));
@@ -63,7 +68,7 @@ public class RephraseStep extends AiStep {
     }
     setResult(resultDto);
     resultDto.setState(AIState.DONE);
-    setNotificationMessage("Rephrasing");
+    setNotificationMessage(resultDto.getResult());
   }
 
   public String getToolId() {

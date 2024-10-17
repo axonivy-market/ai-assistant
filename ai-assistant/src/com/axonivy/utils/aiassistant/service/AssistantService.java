@@ -77,4 +77,17 @@ public class AssistantService extends JsonConfigurationService<Assistant> {
 
     return result;
   }
+
+  public List<Assistant> findAssistantByFunctionId(String functionId) {
+    List<Assistant> result = new ArrayList<>();
+
+    findAll().forEach(assistant -> {
+      if (assistant.getTools().stream()
+          .filter(tool -> tool.contentEquals(functionId)).count() > 0) {
+        result.add(assistant);
+      }
+    });
+
+    return result;
+  }
 }

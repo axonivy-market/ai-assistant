@@ -138,6 +138,20 @@ public abstract class AiStep implements Serializable, Cloneable {
     return "";
   }
 
+  public static String extractJsonArray(String text) {
+    String tagPattern = "\\[([^\\]]+)]"; // Regex pattern to match characters
+                                         // inside []
+    Pattern pattern = Pattern.compile(tagPattern);
+    Matcher matcher = pattern.matcher(text);
+
+    if (matcher.find()) {
+      return "[" + matcher.group(1) + "]"; // Return the first captured group
+                                           // inside array characters
+    }
+    return "";
+  }
+
+
   public static String extractTextInsideDoubleTag(String text) {
     String tagPattern = "<<([^>]+)>>"; // Regex pattern to match characters
                                        // inside <<>>

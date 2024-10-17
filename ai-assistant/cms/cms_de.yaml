@@ -4,6 +4,18 @@ Dialogs:
       utils:
         aiassistant:
           component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Öffne die Detailseite der KI-Funktion "{0}"
+              OpenFunctionDetailsWarningDialogMessage: Nicht gespeicherte Änderungen gehen verloren. Möchten Sie fortfahren?
+              RemoveFunctionDialogHeader: Entfernen Sie die „{0}“ AI-Funktion
+              RemoveFunctionForAssistantMessage: Sind Sie sicher, dass Sie diese KI-Funktion von {0} entfernen möchten?
+              RemoveFunctionMessage: |-
+                Diese AI-Funktion wird von AI-Assistenten verwendet:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Sind Sie sicher, dass Sie diese AI-Funktion löschen möchten?
+              ToggleNonStartableAiFunction: Nicht startbare KI-Funktionen anzeigen
             ChatDashboard:
               AiManagement: AI-Management
               ClearConversationHistory: Gesprächsverlauf löschen
@@ -29,20 +41,28 @@ Dialogs:
           management:
             AiManagement:
               AIManagementDescription: Auf dieser Seite können Sie alles verwalten, was mit AI zu tun hat
+              AddNewAssistant: Neuen Assistenten hinzufügen
               AiModels: AI-Modelle
+              BackToAssistantDashboard: Zurück zum Assistenten-Dashboard
             AiModelConfiguration:
               Connected: Erfolgreich mit dem AI-Anbieter verbunden
+              Disclaimer: |-
+                Unser KI-Assistent verwendet einen API-Schlüssel/eine Zugangsberechtigung eines ausgewählten Drittanbieters, um bestimmte Funktionalitäten bereitzustellen. Bitte beachten Sie, dass Ihre Daten von diesem Drittanbieter in Übereinstimmung mit dessen eigenen Datenschutzrichtlinien und -bestimmungen verarbeitet werden. Wir empfehlen, die Datenschutzrichtlinien des Drittanbieters zu lesen, um zu verstehen, wie Ihre Daten behandelt werden.
+
+                Übersetzt mit DeepL.com (kostenlose Version)
               ModelSavedMessage: Modell "{0}" wurde erfolgreich gespeichert
               TestConnection: Verbindung testen
               Title: AI-Modell Konfiguration
               UsingBy: Assistenten, die dieses Modell verwenden
             AssistantConfiguration:
+              AddFunction: Funktion hinzufügen
               AssistantSavedMessage: Assistent "{0}" wurde erfolgreich gespeichert
               AssistantTemplates: Assistentenvorlagen
               CreateAssistant: Assistent erstellen
               EthicalGuideline: Ethische Richtlinien, denen der Assistent folgen muss
               Functions: Funktionen
               Information: Informationen
+              NoAvaliableAiFunction: Es sind derzeit keine AI-Funktionen verfügbar, die hinzugefügt werden können.
               RemoveDialogHeader: Entfernen Sie den "{0}"-Assistenten
               RemoveDialogMessage: |-
                 Alle Chat-Unterhaltungen werden ebenfalls gelöscht.
@@ -57,10 +77,6 @@ Labels:
       IVY: Ivy-Tool
       RETRIEVAL_QA: Wissensdatenbank
   Message:
-    FinishedToolMessage:
-      FLOW: 'Stop using Ivy Flow: **{0}**'
-      IVY: 'Stop using Ivy Tool: **{0}**'
-      RETRIEVAL_QA: 'Stop using Ivy Tool: **{0}**'
     InvalidEmailFormat: Ungültiges E-Mail-Format
     InvalidUrl: "Ungültige URL\t"
     SelectedToolMessage:
@@ -75,6 +91,8 @@ Labels:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
   common:
     AIFunctions: AI-Funktionen
+    Actions: Aktionen
+    Add: Hinzufügen
     ApiKey: API-Schlüssel
     Assistants: Assistenten
     Avatar: Avatar
@@ -85,7 +103,8 @@ Labels:
     ContactWebsite: Kontakt Website
     Delete: Löschen
     Description: Beschreibung
-    DisabledFlow: Dieser AI Flow ist deaktiviert
+    Details: Einzelheiten
+    DisabledFlow: Dieser KI-Flow kann nicht direkt gestartet werden oder ist deaktiviert
     EmbeddingModel: Einbettungsmodell
     Model: Modell
     ModelType: Modell Typ

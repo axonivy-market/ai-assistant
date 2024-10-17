@@ -42,6 +42,7 @@ import com.axonivy.utils.aiassistant.dto.payload.ErrorPayload;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.dto.tool.IvyTool;
 import com.axonivy.utils.aiassistant.dto.tool.RetrievalQATool;
+import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
@@ -100,7 +101,7 @@ public class AssistantRestService {
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
     AiFunction selectedFunction = AiFunctionService.getInstance()
-        .findById(chooseFunction(assistant, conversation));
+        .findById(chooseFunction(assistant, conversation, message));
 
     if (selectedFunction == null) {
       handleDefaultTool(response, conversation, assistant, message);
@@ -111,11 +112,17 @@ public class AssistantRestService {
         .generateSelectedFunctionMessage();
 
     payload.setSelectedFunctionId(selectedFunction.getId());
-    payload.setSelectedFunctionMessage(selectedFunctionMessage);
+    payload.setSelectedFunctionMessage(selectedFunction.getName());
+    payload.setType(selectedFunction.getType().name());
 
     ChatMessage systemMessage = ChatMessage
-        .newNotificationMessage(selectedFunctionMessage);
-    conversation.getHistory().add(systemMessage);
+        .newSystemMessage(selectedFunctionMessage,
+            selectedFunction.getType().name());
+
+    ChatMessage systemMessageHistory = ChatMessage.newSystemMessage(
+        selectedFunction.getName(), selectedFunction.getType().name());
+
+    conversation.getHistory().add(systemMessageHistory);
     conversation.getMemory().add(systemMessage);
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
 
@@ -145,7 +152,12 @@ public class AssistantRestService {
     String selectedFunctionId = payload.getSelectedFunctionId();
 
     if (StringUtils.isBlank(selectedFunctionId)) {
-      selectedFunctionId = chooseFunction(assistant, conversation);
+      selectedFunctionId = chooseFunction(assistant, conversation, message);
+    }
+
+    if (StringUtils.isBlank(selectedFunctionId)) {
+      handleDefaultTool(response, conversation, assistant, selectedFunctionId);
+      return;
     }
 
     AiFunction selectedFunction = AiFunctionService.getInstance()
@@ -247,8 +259,9 @@ public class AssistantRestService {
       payload.setConversationId(conversation.getId());
       payload.setMessage(flow.getFinalResult().getResult());
       payload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
+      payload.setType(StepType.TRIGGER_FLOW.name());
       payload.setSelectedFunctionMessage(
-          flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+          flow.getFunctionToTrigger().getId());
 
       response.resume(payload);
     } else {
@@ -292,7 +305,8 @@ public class AssistantRestService {
       chatPayload.setMessage(flow.getFinalResult().getResult());
       chatPayload.setSelectedFunctionId(flow.getFunctionToTrigger().getId());
       chatPayload.setSelectedFunctionMessage(
-          flow.getFunctionToTrigger().generateSelectedFunctionMessage());
+          flow.getFunctionToTrigger().getName());
+      chatPayload.setType(StepType.TRIGGER_FLOW.name());
 
       response.resume(chatPayload);
     } else {
@@ -302,7 +316,7 @@ public class AssistantRestService {
 
   private void initTriggerToolMessage(Conversation conversation, AiFlow flow,
       Assistant assistant) {
-    ChatMessage systemMessage = ChatMessage.newNotificationMessage(
+    ChatMessage systemMessage = ChatMessage.newUseAIFlowSystemMessage(
         flow.getFunctionToTrigger().generateSelectedFunctionMessage());
     conversation.getHistory().add(systemMessage);
     conversation.getMemory().add(systemMessage);
@@ -338,11 +352,13 @@ public class AssistantRestService {
       return;
     }
 
+    String language = Ivy.session().getContentLocale().toLanguageTag();
+
     Map<String, Object> params = new HashMap<>();
     params.put("input", message);
 
-    params.put("language",
-        Ivy.session().getContentLocale().getDisplayCountry());
+    params.put("language", language
+        );
     params.put("info", assistant.getInfo());
     params.put("ethicalRules",
         Optional.ofNullable(assistant.formatEthicalRules()).orElse("<None>"));
@@ -405,15 +421,28 @@ public class AssistantRestService {
     }
   }
 
-  private String chooseFunction(Assistant assistant, Conversation conversation)
+  private String chooseFunction(Assistant assistant, Conversation conversation,
+      String request)
       throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
     params.put("functions", assistant.formatFunctionsForChoose());
-    params.put("memory",
-        AiFunction.getFormattedMemory(conversation.getMemory()));
+    params.put("request", request);
 
-    return getFunctionIdFromBotAnswer(assistant.getAiModel().getAiBot().chat(
+    String selectedFunction = getFunctionIdFromBotAnswer(
+        assistant.getAiModel().getAiBot().chat(
         params, BasicPromptTemplates.CHOOSE_FUNCTION), assistant.getTools());
+
+    if (StringUtils.isBlank(selectedFunction)) {
+      params.put("functions", assistant.formatFunctionsForChoose());
+      params.put("memory",
+          AiFunction.getFormattedMemory(conversation.getMemory()));
+      selectedFunction = getFunctionIdFromBotAnswer(
+          assistant.getAiModel().getAiBot().chat(params,
+              BasicPromptTemplates.CHOOSE_FUNCTION_WITH_HISTORY),
+          assistant.getTools());
+    }
+
+    return selectedFunction;
   }
 
   private String getFunctionIdFromBotAnswer(String answer,

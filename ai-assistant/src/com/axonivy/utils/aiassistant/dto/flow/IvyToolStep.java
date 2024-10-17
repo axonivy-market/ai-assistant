@@ -41,20 +41,24 @@ public class IvyToolStep extends AiStep {
     IvyTool tool = (IvyTool) AiFunctionService.getInstance()
         .findById(this.toolId);
     try {
-      tool = tool.fullfilIvyTool(memory,
-          assistant.getAiModel().getAiBot(), getFormattedMetadatas(metadatas));
+      tool = tool.fullfilIvyTool(memory, assistant.getAiModel().getAiBot(),
+          getFormattedMetadatas(metadatas));
       setResult(tool.getResult());
     } catch (JsonProcessingException e) {
       setResult(createSomethingWentWrongError());
     }
-    setNotificationMessage(
-        String.format("Processing Ivy tool: **%s**", tool.getName()));
+    setNotificationMessage(tool.getName());
   }
 
   @JsonIgnore
   public Boolean isDisabled() {
     IvyTool tool = (IvyTool) AiFunctionService.getInstance()
         .findById(this.toolId);
+
+    if (tool == null) {
+      return true;
+    }
+
     tool.init();
     return tool.isDisabled();
   }
