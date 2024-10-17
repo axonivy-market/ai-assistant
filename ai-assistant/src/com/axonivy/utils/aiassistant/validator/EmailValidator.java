@@ -1,5 +1,6 @@
 package com.axonivy.utils.aiassistant.validator;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +25,7 @@ public class EmailValidator implements Validator {
   @Override
   public void validate(FacesContext context, UIComponent component,
       Object value) throws ValidatorException {
-    String strValue = StringUtils.defaultIfBlank(value.toString(), null);
+    String strValue = Optional.ofNullable(value).map(Object::toString).orElse(null);
 
     if (StringUtils.isBlank(strValue)) {
       return;

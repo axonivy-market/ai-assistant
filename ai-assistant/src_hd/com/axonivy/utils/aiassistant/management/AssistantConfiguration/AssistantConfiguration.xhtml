@@ -130,7 +130,7 @@
           <div class="ui-g">
             <ui:repeat var="template" value="#{assistantConfigurationBean.assistantTemplates}">
               <div class="ui-g-6">
-                <ic:com.axonivy.utils.aiassistant.component.AIAssistantTemplateItem template="#{template}" isReadOnly="false"
+                <ic:com.axonivy.utils.aiassistant.component.AIAssistantTemplateItem id="assistant-template" template="#{template}" isReadOnly="false"
                   clickEventListener="#{assistantConfigurationBean.createAssistantFromTemplate(template)}"
                   clickEventOnComplete="PF('choose-assistant-template-dialog').hide();"
                   clickEventUpdate="assistant-details-form" />
