@@ -75,10 +75,8 @@ public class Conversation {
     String result = StringUtils.EMPTY;
     if (CollectionUtils.isNotEmpty(memory)) {
       for (var message : memory) {
-        if (!message.isNotificationMessage()) {
-          result = result.concat(message.getFormattedMessage())
-              .concat(System.lineSeparator());
-        }
+        result = result.concat(message.getFormattedMessage())
+            .concat(System.lineSeparator());
       }
     }
     return result.strip();

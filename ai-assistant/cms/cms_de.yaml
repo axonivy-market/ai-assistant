@@ -41,9 +41,15 @@ Dialogs:
           management:
             AiManagement:
               AIManagementDescription: Auf dieser Seite können Sie alles verwalten, was mit AI zu tun hat
+              AddNewAssistant: Neuen Assistenten hinzufügen
               AiModels: AI-Modelle
+              BackToAssistantDashboard: Zurück zum Assistenten-Dashboard
             AiModelConfiguration:
               Connected: Erfolgreich mit dem AI-Anbieter verbunden
+              Disclaimer: |-
+                Unser KI-Assistent verwendet einen API-Schlüssel/eine Zugangsberechtigung eines ausgewählten Drittanbieters, um bestimmte Funktionalitäten bereitzustellen. Bitte beachten Sie, dass Ihre Daten von diesem Drittanbieter in Übereinstimmung mit dessen eigenen Datenschutzrichtlinien und -bestimmungen verarbeitet werden. Wir empfehlen, die Datenschutzrichtlinien des Drittanbieters zu lesen, um zu verstehen, wie Ihre Daten behandelt werden.
+
+                Übersetzt mit DeepL.com (kostenlose Version)
               ModelSavedMessage: Modell "{0}" wurde erfolgreich gespeichert
               TestConnection: Verbindung testen
               Title: AI-Modell Konfiguration
@@ -71,10 +77,6 @@ Labels:
       IVY: Ivy-Tool
       RETRIEVAL_QA: Wissensdatenbank
   Message:
-    FinishedToolMessage:
-      FLOW: 'Stop using Ivy Flow: **{0}**'
-      IVY: 'Stop using Ivy Tool: **{0}**'
-      RETRIEVAL_QA: 'Stop using Ivy Tool: **{0}**'
     InvalidEmailFormat: Ungültiges E-Mail-Format
     InvalidUrl: "Ungültige URL\t"
     SelectedToolMessage:

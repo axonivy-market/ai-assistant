@@ -8,7 +8,7 @@
     "tools" : [
       "handle-tasks-flow",
       "handle-process-flow",
-      "find-cases-flow",
+      "handle-cases-flow",
       "portal-support"
     ] , 
     "ethicalRules" : [

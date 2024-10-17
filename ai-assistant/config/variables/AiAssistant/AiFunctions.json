@@ -24,8 +24,8 @@
             "case": "User want to find, list out, show, or look up for process"
           },
           {
-            "action": 2,
-            "case": "User want to do something different from above conditions"
+            "action": 3,
+            "case": "User has a question related to process or he want to do something different from above conditions"
           }
         ]
       },
@@ -42,6 +42,13 @@
         "flowId": "find-processes-flow",
         "triggerMessage": "I want to find process with information in the lastest message from User",
         "useConversationMemory": true
+      },
+      {
+        "stepNo": 3,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
       }
     ]
   },
@@ -70,8 +77,8 @@
             "case": "User want to find, list out, show, or look up for tasks"
           },
           {
-            "action": 2,
-            "case": "User want to do something different from above conditions"
+            "action": 3,
+            "case": "User has a question related to task or he want to do something different from above conditions"
           }
         ]
       },
@@ -88,6 +95,55 @@
         "flowId": "find-tasks-flow",
         "triggerMessage": "I want to find task with information in the lastest message from User",
         "useConversationMemory": true
+      },
+      {
+        "stepNo": 3,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
+      }
+    ]
+  },
+  {
+    "version": "11.4.0",
+    "id": "handle-cases-flow",
+    "name": "Handle cases",
+    "type": "FLOW",
+    "startable": true,
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to handle cases",
+    "usage": "Please use this tool when user mentioned the word 'case'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User want to start, run, find, list out, show, or look up for case"
+          },
+          {
+            "action": 2,
+            "case": "User has a question related to case or he want to do something different from above conditions"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TRIGGER_FLOW",
+        "flowId": "find-cases-flow",
+        "triggerMessage": "I want to find case with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 2,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
       }
     ]
   },
@@ -96,7 +152,6 @@
     "id": "find-cases-flow",
     "name": "Find cases",
     "type": "FLOW",
-    "startable": true,
     "permissions": [
       "Everybody"
     ],
@@ -598,7 +653,7 @@
         "type": "TEXT",
         "text": "I found some processes that match your request. Which one would you like to start?",
         "showResultOfStep": 4,
-        "onSuccess": 3
+        "onSuccess": 29
       },
       {
         "stepNo": 7,
@@ -607,6 +662,7 @@
         "toolId": "find-processes",
         "onRephrase": 8,
         "onSuccess": 4,
+        "customInstruction" : "If user doesn't specify which attributes to find, only field the name attribute",
         "examples": [
           {
             "before": "submit leave request",
@@ -852,6 +908,25 @@
         "flowId": "start-process-with-params-flow",
         "triggerMessage": "Start process",
         "showResultOfStep": 27
+      },
+      {
+        "stepNo": 29,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 3,
+            "case": "User choose a process on the list above"
+          },
+          {
+            "action": 4,
+            "case": "User choose a process not in the list above"
+          },
+          {
+            "action": -1,
+            "case": "User has other request"
+          }
+        ]
       }
     ]
   },

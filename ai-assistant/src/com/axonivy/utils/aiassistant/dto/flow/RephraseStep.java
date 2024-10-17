@@ -68,7 +68,7 @@ public class RephraseStep extends AiStep {
     }
     setResult(resultDto);
     resultDto.setState(AIState.DONE);
-    setNotificationMessage("Rephrasing");
+    setNotificationMessage(resultDto.getResult());
   }
 
   public String getToolId() {

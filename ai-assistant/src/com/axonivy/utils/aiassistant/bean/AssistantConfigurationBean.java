@@ -150,6 +150,7 @@ public class AssistantConfigurationBean implements Serializable {
         .sanitizedMessage(FacesMessage.SEVERITY_INFO, Ivy.cms().co(
             "/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/AssistantSavedMessage",
             Arrays.asList(selectedAssistant.getName())), StringUtils.EMPTY));
+    AiNavigator.navigateToAIManagement();
   }
 
   private void updatePermissionsBeforeSave() {

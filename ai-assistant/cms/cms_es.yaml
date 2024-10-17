@@ -40,9 +40,13 @@ Dialogs:
           management:
             AiManagement:
               AIManagementDescription: En esta página puedes gestionar todo lo relacionado con la IA
+              AddNewAssistant: Añadir nuevo asistente
               AiModels: Modelos de IA
+              BackToAssistantDashboard: Volver al panel del asistente
             AiModelConfiguration:
               Connected: Conectado correctamente al proveedor de AI
+              Disclaimer: Nuestro AI Assistant utiliza una clave/credenciales API de un proveedor externo seleccionado para ofrecer determinadas funcionalidades. Tenga en cuenta que sus datos serán procesados por este proveedor externo de acuerdo con sus propias políticas y normativas de privacidad. Le
+                recomendamos que revise las políticas de privacidad del proveedor externo para comprender cómo se tratarán sus datos.
               ModelSavedMessage: El modelo "{0}" se ha guardado correctamente
               TestConnection: Conexión de prueba
               Title: Configuración del modelo AI
@@ -70,10 +74,6 @@ Labels:
       IVY: Herramienta Ivy
       RETRIEVAL_QA: Base de conocimientos
   Message:
-    FinishedToolMessage:
-      FLOW: 'Stop using Ivy Flow: **{0}**'
-      IVY: 'Stop using Ivy Tool: **{0}**'
-      RETRIEVAL_QA: 'Stop using Ivy Tool: **{0}**'
     InvalidEmailFormat: Formato de Email inválido
     InvalidUrl: URL no válida
     SelectedToolMessage:

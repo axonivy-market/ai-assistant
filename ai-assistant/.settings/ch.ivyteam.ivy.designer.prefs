@@ -1,5 +1,5 @@
-ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_DATA_CLASS=com.axon.market.ai.assistant.Data
-ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_NAMESPACE=com.axon.market.ai.assistant
+ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_DATA_CLASS=com.axonivy.utils.aiassistant.Data
+ch.ivyteam.ivy.designer.preferences.DataClassPreferencePage\:DEFAULT_NAMESPACE=com.axonivy.utils.aiassistant.assistant
 ch.ivyteam.ivy.project.preferences\:PRIMEFACES_VERSION=13
 ch.ivyteam.ivy.project.preferences\:PROJECT_VERSION=120000
 eclipse.preferences.version=1

@@ -77,8 +77,10 @@
          value="#{ivy.cms.co('/Labels/common/Add')}"
          icon="si si-add" process="add-function-form">
          <p:ajax event="click" listener="#{assistantFunctionListBean.addFunctions()}"
-           update="#{p:resolveFirstComponentWithId('assistant-details-form', view).clientId}"
+           process="add-function-form"
+           update="#{p:resolveFirstComponentWithId('function-container', view).clientId}"
            oncomplete="PF('add-function-dialog').hide();" />
+           <f:param name="skipValidator" value="true" />
        </p:commandButton>
      </f:facet>
     
