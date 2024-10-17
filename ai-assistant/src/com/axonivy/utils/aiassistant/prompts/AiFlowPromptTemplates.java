@@ -41,7 +41,7 @@ public class AiFlowPromptTemplates {
 
       {{customInstruction}}
 
-      If you cannot use the message to fulfill any of the attribute, rephrase it to make it possible to fulfill the values of the attribtes above then ONLY show the rephrased message inside <>.
+      If you cannot use the message to fulfill any of the attribute, rephrase it to make it possible to fulfill the values of the attributes above then ONLY show the rephrased message inside <>.
       The rephrased message must be in English.
       The rephrased message must include meaning of the attributes you choose to fulfill.
 

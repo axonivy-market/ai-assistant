@@ -282,10 +282,6 @@ public class AiFlow extends AiFunction {
       conversation.getMemory().add(notification);
     }
 
-    if (StringUtils.isNotBlank(notificationMessage)) {
-      conversation.getMemory()
-          .add(ChatMessage.newSystemMessage(notificationMessage, type.name()));
-    }
     ChatMessageManager.saveConversation(assistant.getId(), conversation);
   }
 

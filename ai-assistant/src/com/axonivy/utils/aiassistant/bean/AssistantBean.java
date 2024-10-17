@@ -99,10 +99,13 @@ public class AssistantBean implements Serializable {
   public void chooseAssistant(String id) {
     assistantId = id;
     assistant = availableAssistants.stream().filter(a -> a.getId().contentEquals(assistantId)).findFirst().orElse(null);
-    assistant.initModel();
-    assistant.initToolkit();
-    initBean();
-    Ivy.session().setAttribute(SELECTED_ASSISTANT_ID.name(), assistantId);
+
+    if (assistant != null) {
+      assistant.initModel();
+      assistant.initToolkit();
+      initBean();
+      Ivy.session().setAttribute(SELECTED_ASSISTANT_ID.name(), assistantId);
+    }
   }
 
   public List<Assistant> getAvailableAssistants() {

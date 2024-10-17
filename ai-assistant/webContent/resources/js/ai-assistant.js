@@ -511,7 +511,7 @@ function ViewAI(uri) {
   this.renderSystemMessage = function (message, useAnimation, type) {
     if (!message || message.trim() === '') {
       return;
-	  }
+    }
 
     message = message.replace(/<([^>]+)>/g, "$1");
 
