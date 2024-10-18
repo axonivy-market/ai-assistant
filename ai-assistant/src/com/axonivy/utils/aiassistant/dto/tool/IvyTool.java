@@ -14,6 +14,7 @@ import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
 import com.axonivy.portal.components.service.IvyAdapterService;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.core.AbstractAIBot;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.flow.AiStep;
@@ -148,10 +149,9 @@ public class IvyTool extends AiFunction {
 
   private boolean fulfillNormalAttributes(List<ChatMessage> memory,
       AbstractAIBot bot, String metadata, Map<String, Object> params) {
-    params.put("tool", buildDataFulfillRequest());
-
-    params.put("memory", getFormattedMemory(memory));
-    params.put("metadata", metadata);
+    params.put(AiConstants.TOOL, buildDataFulfillRequest());
+    params.put(AiConstants.MEMORY, getFormattedMemory(memory));
+    params.put(AiConstants.METADATA, metadata);
 
     List<IvyToolAttribute> fulfilled = new ArrayList<>();
 
@@ -202,8 +202,8 @@ public class IvyTool extends AiFunction {
       throws JsonProcessingException {
       Map<String, Object> params = new HashMap<>();
       params.put("attribute", buildDataFulfillAttributeRequest(attr));
-      params.put("memory", getFormattedMemory(memory));
-      params.put("metadata", metadata);
+      params.put(AiConstants.MEMORY, getFormattedMemory(memory));
+      params.put(AiConstants.METADATA, metadata);
 
       return BusinessEntityConverter.jsonValueToEntity(
           AiStep.extractTextInsideTag(

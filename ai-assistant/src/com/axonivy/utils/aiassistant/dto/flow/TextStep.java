@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.core.AbstractAIBot;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
@@ -66,9 +67,9 @@ public class TextStep extends AiStep {
     setResult(new AiResultDTO());
 
     Map<String, Object> params = new HashMap<>();
-    params.put("metadata", getFormattedMetadatas(metadatas));
-    params.put("memory", AiFunction.getFormattedMemory(memory));
-    params.put("customInstruction",
+    params.put(AiConstants.METADATA, getFormattedMetadatas(metadatas));
+    params.put(AiConstants.MEMORY, AiFunction.getFormattedMemory(memory));
+    params.put(AiConstants.CUSTOM_INSTRUCTION,
         Optional.ofNullable(getCustomInstruction()).orElse(StringUtils.EMPTY));
 
     String extractedText = extractTextInsideTag(

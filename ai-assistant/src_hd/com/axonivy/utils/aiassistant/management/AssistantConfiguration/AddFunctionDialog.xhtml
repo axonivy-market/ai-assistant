@@ -32,7 +32,7 @@
     
            <f:facet name="filter">
              <p:selectOneMenu onchange="PF('function-to-add-table').filter()" styleClass="ui-custom-filter">
-               <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+               <f:selectItem itemLabel="#{ivy.cms.co('/Labels/common/All')}" itemValue="#{null}" noSelectionOption="true" />
                <f:selectItems value="#{assistantFunctionListBean.functionToolTypes}" />
              </p:selectOneMenu>
            </f:facet>

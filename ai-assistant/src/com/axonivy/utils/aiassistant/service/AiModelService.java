@@ -17,6 +17,7 @@ public class AiModelService {
   private static final String MODEL = "Model";
   private static final String EMBEDDING_MODEL = "EmbeddingModel";
   private static final String API_KEY = "ApiKey";
+  private static final String DOT = DOT;
 
   private static AiModelService instance;
 
@@ -32,11 +33,11 @@ public class AiModelService {
   }
 
   private static String getPropertyOfPrimaryOpenAI(String propery) {
-    return Ivy.var().get(String.join(".", PRIMARY_OPEN_AI_VARIABLE, propery));
+    return Ivy.var().get(String.join(DOT, PRIMARY_OPEN_AI_VARIABLE, propery));
   }
 
   private static String getPropertyOfSecondaryOpenAI(String propery) {
-    return Ivy.var().get(String.join(".", SECONDARY_OPEN_AI_VARIABLE, propery));
+    return Ivy.var().get(String.join(DOT, SECONDARY_OPEN_AI_VARIABLE, propery));
   }
 
   public static AiModel getPrimaryOpenAIModel() {
@@ -62,7 +63,7 @@ public class AiModelService {
   }
 
   public void saveApiKey(String modelName, String apiKey) {
-    Ivy.var().set(String.join(".", modelName, API_KEY), apiKey);
+    Ivy.var().set(String.join(DOT, modelName, API_KEY), apiKey);
   }
 
   public AiModel findByName(String name) {

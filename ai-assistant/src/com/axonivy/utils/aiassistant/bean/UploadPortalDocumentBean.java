@@ -89,6 +89,8 @@ public class UploadPortalDocumentBean {
         zipEntry = fileStream.getNextEntry();
       }
 
+      fileStream.close();
+
       // Embed converted contents
       PortalDocService.createTextIndex(bot, indexName, result);
     }
@@ -104,6 +106,7 @@ public class UploadPortalDocumentBean {
 
     String fileContent = new String(docContentStream.toByteArray(),
         StandardCharsets.UTF_8);
+    docContentStream.close();
     return fileContent;
   }
 }

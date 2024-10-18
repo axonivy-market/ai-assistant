@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
@@ -50,7 +51,7 @@ public class SwitchStep extends AiStep {
   public void run(String message, List<ChatMessage> memory,
       Map<String, String> metadatas, Assistant assistant) {
     Map<String, Object> params = new HashMap<>();
-    params.put("memory", AiFunction.getFormattedMemory(memory));
+    params.put(AiConstants.MEMORY, AiFunction.getFormattedMemory(memory));
     params.put("conditions", generateConditionsString());
 
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,

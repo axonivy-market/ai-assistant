@@ -1,5 +1,6 @@
 package com.axonivy.utils.aiassistant.demo.service;
 
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -94,47 +95,13 @@ public class EmployeeService extends BusinessDataService<Employee> {
 
   public AiResultDTO findByAI(String names, String roles, String ranks,
       String techStack) {
-    List<String> nameList = new ArrayList<>();
-    if (StringUtils.isNotBlank(names)) {
-      nameList = Arrays.asList(names.split(AiConstants.COMMA));
+    List<Employee> data = new ArrayList<>();
+
+    try {
+      data = getDataForFindByAI(names, roles, ranks, techStack);
+    } catch (InvalidKeyException e) {
+      return AiAssistantAPI.generateErrorAiResult(e.getMessage());
     }
-
-    List<Role> roleList = new ArrayList<>();
-    if (StringUtils.isNotBlank(roles)) {
-      List<String> rolesStr = Arrays
-          .asList(roles.split(AiConstants.COMMA));
-      for (String childRole : rolesStr) {
-        Role role = Role.valueOf(childRole.strip());
-
-        if (role == null) {
-          return AiAssistantAPI.generateErrorAiResult(
-              String.format("Role %s is not valid", childRole.strip()));
-        }
-        roleList.add(role);
-      }
-    }
-
-    List<Ranking> rankList = new ArrayList<>();
-    if (StringUtils.isNotBlank(ranks)) {
-      List<String> ranksStr = Arrays
-          .asList(ranks.split(AiConstants.COMMA));
-      for (String childRank : ranksStr) {
-        Ranking rank = Ranking.valueOf(childRank.strip());
-
-        if (rank == null) {
-          return AiAssistantAPI.generateErrorAiResult(
-              String.format("Rank %s is not valid", childRank.strip()));
-        }
-        rankList.add(rank);
-      }
-    }
-
-    List<String> techs = new ArrayList<>();
-    if (StringUtils.isNotBlank(techStack)) {
-      techs = Arrays.asList(techStack.split(AiConstants.COMMA));
-    }
-
-    List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
     if (CollectionUtils.isEmpty(data)) {
       return AiAssistantAPI.createSomethingWentWrongError();
     }
@@ -158,47 +125,14 @@ public class EmployeeService extends BusinessDataService<Employee> {
 
   public AiResultDTO findByAIForInteraction(String names, String roles,
       String ranks, String techStack) {
-    List<String> nameList = new ArrayList<>();
-    if (StringUtils.isNotBlank(names)) {
-      nameList = Arrays.asList(names.split(AiConstants.COMMA));
+    List<Employee> data = new ArrayList<>();
+
+    try {
+      data = getDataForFindByAI(names, roles, ranks, techStack);
+    } catch (InvalidKeyException e) {
+      return AiAssistantAPI.generateErrorAiResult(e.getMessage());
     }
 
-    List<Role> roleList = new ArrayList<>();
-    if (StringUtils.isNotBlank(roles)) {
-      List<String> rolesStr = Arrays
-          .asList(roles.split(AiConstants.COMMA));
-      for (String childRole : rolesStr) {
-        Role role = Role.valueOf(childRole.strip());
-
-        if (role == null) {
-          return AiAssistantAPI.generateErrorAiResult(
-              String.format("Role %s is not valid", childRole.strip()));
-        }
-        roleList.add(role);
-      }
-    }
-
-    List<Ranking> rankList = new ArrayList<>();
-    if (StringUtils.isNotBlank(ranks)) {
-      List<String> ranksStr = Arrays
-          .asList(ranks.split(AiConstants.COMMA));
-      for (String childRank : ranksStr) {
-        Ranking rank = Ranking.valueOf(childRank.strip());
-
-        if (rank == null) {
-          return AiAssistantAPI.generateErrorAiResult(
-              String.format("Rank %s is not valid", childRank.strip()));
-        }
-        rankList.add(rank);
-      }
-    }
-
-    List<String> techs = new ArrayList<>();
-    if (StringUtils.isNotBlank(techStack)) {
-      techs = Arrays.asList(techStack.split(AiConstants.COMMA));
-    }
-
-    List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
     String resultStr = "Found employees:".concat(System.lineSeparator());
     for (Employee emp : data) {
       resultStr = resultStr
@@ -238,6 +172,71 @@ public class EmployeeService extends BusinessDataService<Employee> {
     result.setResultForAI(resultStr);
     result.setState(AIState.DONE);
     return result;
+  }
+
+  private List<Employee> getDataForFindByAI(String names, String roles,
+      String ranks, String techStack) throws InvalidKeyException {
+    List<String> nameList = new ArrayList<>();
+    if (StringUtils.isNotBlank(names)) {
+      nameList = Arrays.asList(names.split(AiConstants.COMMA));
+    }
+
+    List<Role> roleList = findRoles(roles);
+    if (roleList == null) {
+      throw new InvalidKeyException(String.format("Has invalid role"));
+    }
+
+    List<Ranking> rankList = findRanks(ranks);
+    if (rankList == null) {
+      throw new InvalidKeyException(String.format("Has invalid rank"));
+    }
+
+    List<String> techs = getTechs(techStack);
+
+    List<Employee> data = findByCriteria(nameList, roleList, rankList, techs);
+    return data;
+  }
+
+  private List<Role> findRoles(String roles) {
+    List<Role> roleList = new ArrayList<>();
+    if (StringUtils.isNotBlank(roles)) {
+      List<String> rolesStr = Arrays.asList(roles.split(AiConstants.COMMA));
+      for (String childRole : rolesStr) {
+        Role role = Role.valueOf(childRole.strip());
+        if (role == null) {
+          return null;
+        }
+        roleList.add(role);
+      }
+    }
+    return roleList;
+  }
+
+  private List<Ranking> findRanks(String ranks) {
+    List<Ranking> rankList = new ArrayList<>();
+    if (StringUtils.isNotBlank(ranks)) {
+      List<String> ranksStr = Arrays.asList(ranks.split(AiConstants.COMMA));
+      for (String childRank : ranksStr) {
+        Ranking rank = Ranking.valueOf(childRank.strip());
+        if (rank == null) {
+          return null;
+        }
+        rankList.add(rank);
+      }
+    }
+    return rankList;
+  }
+
+  private List<String> getTechs(String techStack) {
+    List<String> techs = new ArrayList<>();
+    if (StringUtils.isNotBlank(techStack)) {
+      techs = Arrays.asList(techStack.split(AiConstants.COMMA));
+    }
+
+    if (CollectionUtils.isEmpty(techs)) {
+      techs.add(techStack);
+    }
+    return techs;
   }
 
   public List<Employee> findByUser(String names, String roles, String ranks,

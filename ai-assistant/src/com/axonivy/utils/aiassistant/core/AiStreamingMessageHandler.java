@@ -12,6 +12,9 @@ import dev.langchain4j.model.output.Response;
 public class AiStreamingMessageHandler
     implements StreamingResponseHandler<AiMessage> {
 
+  private static final String ERROR_PATTERN = "<error>%s</error>";
+  private static final String COMPLETE_PATTERN = "%s %s";
+
   private Queue<String> contents;
   private String completedToken;
 
@@ -35,10 +38,10 @@ public class AiStreamingMessageHandler
       OpenAIErrorResponse errorResponse = BusinessEntityConverter
           .jsonValueToEntity(error.getMessage(), OpenAIErrorResponse.class);
       if (errorResponse != null) {
-        this.contents.offer(
-            "<error>" + errorResponse.getError().getMessage() + "</error>");
+        this.contents.offer(String.format(ERROR_PATTERN,
+            errorResponse.getError().getMessage()));
       } else {
-        this.contents.offer("<error>" + error.getMessage() + "</error>");
+        this.contents.offer(String.format(ERROR_PATTERN, error.getMessage()));
       }
 
       this.contents.offer(completedToken);
@@ -49,8 +52,8 @@ public class AiStreamingMessageHandler
   public void onComplete(Response<AiMessage> response) {
     synchronized (this.contents) {
       this.contents.clear();
-      this.contents
-          .offer(this.completedToken + " " + response.content().text());
+      this.contents.offer(String.format(COMPLETE_PATTERN, this.completedToken,
+          response.content().text()));
     }
   }
 

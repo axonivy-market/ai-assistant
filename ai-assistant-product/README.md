@@ -1,7 +1,5 @@
 # ai-assistant
 
-YOUR DESCRIPTION GOES HERE: Please just give a short description here without further headings.
-
 <todo>
 
 ## Demo

@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.enums.AIState;
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.core.AiStreamingMessageHandler;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.flow.AiFlow;
@@ -65,8 +66,9 @@ public class AssistantRestService {
   @GET
   @Path(value = "{assistantId}/{conversationId}/initialize")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response initConversation(@PathParam("assistantId") String assistantId,
-      @PathParam("conversationId") String conversationId) {
+  public Response initConversation(
+      @PathParam(AiConstants.ASSISTANT_ID) String assistantId,
+      @PathParam(AiConstants.CONVERSATION_ID) String conversationId) {
     Conversation conversation = new Conversation();
     conversation.setId(conversationId);
     conversation = ChatMessageManager.loadConversation(assistantId,
@@ -79,7 +81,7 @@ public class AssistantRestService {
   @Path(value = "{conversationId}/request")
   @Produces(MediaType.APPLICATION_JSON)
   public void handleUserRequest(@Suspended AsyncResponse response,
-      @PathParam("conversationId") String conversationId,
+      @PathParam(AiConstants.CONVERSATION_ID) String conversationId,
       AssistantChatPayload payload)
       throws WebApplicationException, IOException, InterruptedException {
 
@@ -135,7 +137,7 @@ public class AssistantRestService {
   @Path(value = "{conversationId}/continueRequest")
   @Produces(MediaType.APPLICATION_JSON)
   public void continueHandleUserRequest(@Suspended AsyncResponse response,
-      @PathParam("conversationId") String conversationId,
+      @PathParam(AiConstants.CONVERSATION_ID) String conversationId,
       AssistantChatPayload payload)
       throws WebApplicationException, IOException, InterruptedException {
 
@@ -184,7 +186,8 @@ public class AssistantRestService {
         conversation);
 
     Map<String, Object> params = initParamsForDefaultAnswer(assistant, request);
-    params.put("contactPart", BasicPromptTemplates.generateContactPrompt(
+    params.put(AiConstants.CONTACT_PART,
+        BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
@@ -210,7 +213,7 @@ public class AssistantRestService {
         conversation);
 
     Map<String, Object> params = initParamsForDefaultAnswer(assistant, request);
-    params.put("info", assistant.getInfo());
+    params.put(AiConstants.INFO, assistant.getInfo());
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
         new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS,
@@ -276,7 +279,8 @@ public class AssistantRestService {
   @Path(value = "{conversationId}/resume")
   @Produces(MediaType.APPLICATION_JSON)
   public void resumeAiFlow(@Suspended AsyncResponse response,
-      @PathParam("conversationId") String conversationId, AiFlowPayload payload)
+      @PathParam(AiConstants.CONVERSATION_ID) String conversationId,
+      AiFlowPayload payload)
       throws WebApplicationException, IOException, InterruptedException {
 
     AiFlow flow = BusinessEntityConverter.jsonValueToEntity(payload.getAiFlow(),
@@ -357,15 +361,15 @@ public class AssistantRestService {
     String language = Ivy.session().getContentLocale().toLanguageTag();
 
     Map<String, Object> params = new HashMap<>();
-    params.put("input", message);
-
-    params.put("language", language
-        );
-    params.put("info", assistant.getInfo());
-    params.put("ethicalRules",
-        Optional.ofNullable(assistant.formatEthicalRules()).orElse("<None>"));
-    params.put("context", context);
-    params.put("contactPart", BasicPromptTemplates.generateContactPrompt(
+    params.put(AiConstants.REQUEST, message);
+    params.put(AiConstants.LANGUAGE, language);
+    params.put(AiConstants.INFO, assistant.getInfo());
+    params.put(AiConstants.ETHICAL_RULES,
+        Optional.ofNullable(assistant.formatEthicalRules())
+            .orElse(AiConstants.NONE_RESULT));
+    params.put(AiConstants.CONTEXT, context);
+    params.put(AiConstants.CONTACT_PART,
+        BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
@@ -380,8 +384,8 @@ public class AssistantRestService {
   @Path(value = "{assistantId}/{conversationId}/stream")
   @Produces(MediaType.APPLICATION_JSON)
   public void streamReply(@Suspended AsyncResponse response,
-      @PathParam("assistantId") String assistantId,
-      @PathParam("conversationId") String conversationId) {
+      @PathParam(AiConstants.ASSISTANT_ID) String assistantId,
+      @PathParam(AiConstants.CONVERSATION_ID) String conversationId) {
 
     if (StringUtils.isBlank(conversationId)) {
       response.cancel();
@@ -465,16 +469,16 @@ public class AssistantRestService {
       String request)
       throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
-    params.put("functions", assistant.formatFunctionsForChoose());
-    params.put("request", request);
+    params.put(AiConstants.FUNCTIONS, assistant.formatFunctionsForChoose());
+    params.put(AiConstants.REQUEST, request);
 
     String selectedFunction = getFunctionIdFromBotAnswer(
         assistant.getAiModel().getAiBot().chat(
         params, BasicPromptTemplates.CHOOSE_FUNCTION), assistant.getTools());
 
     if (StringUtils.isBlank(selectedFunction)) {
-      params.put("functions", assistant.formatFunctionsForChoose());
-      params.put("memory",
+      params.put(AiConstants.FUNCTIONS, assistant.formatFunctionsForChoose());
+      params.put(AiConstants.MEMORY,
           AiFunction.getFormattedMemory(conversation.getMemory()));
       selectedFunction = getFunctionIdFromBotAnswer(
           assistant.getAiModel().getAiBot().chat(params,
@@ -508,12 +512,12 @@ public class AssistantRestService {
   private Map<String, Object> initParamsForDefaultAnswer(Assistant assistant,
       String request) throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
-    params.put("language",
+    params.put(AiConstants.LANGUAGE,
         Ivy.session().getContentLocale().getDisplayCountry());
-    params.put("tools", BusinessEntityConverter.getObjectMapper()
+    params.put(AiConstants.FUNCTIONS, BusinessEntityConverter.getObjectMapper()
         .writeValueAsString(assistant.getToolkit()));
-    params.put("ethicalRules", assistant.formatEthicalRules());
-    params.put("request", request);
+    params.put(AiConstants.ETHICAL_RULES, assistant.formatEthicalRules());
+    params.put(AiConstants.REQUEST, request);
     return params;
   }
 }

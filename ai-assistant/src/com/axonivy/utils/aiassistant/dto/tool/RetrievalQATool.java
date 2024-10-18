@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
@@ -50,15 +51,17 @@ public class RetrievalQATool extends AiFunction {
     }
 
     Map<String, Object> params = new HashMap<>();
-    params.put("input", message);
+    params.put(AiConstants.REQUEST, message);
 
-    params.put("language",
+    params.put(AiConstants.LANGUAGE,
         Ivy.session().getContentLocale().getDisplayCountry());
-    params.put("info", assistant.getInfo());
-    params.put("ethicalRules",
-        Optional.ofNullable(assistant.formatEthicalRules()).orElse("<None>"));
-    params.put("context", context);
-    params.put("contactPart", BasicPromptTemplates.generateContactPrompt(
+    params.put(AiConstants.INFO, assistant.getInfo());
+    params.put(AiConstants.ETHICAL_RULES,
+        Optional.ofNullable(assistant.formatEthicalRules())
+            .orElse(AiConstants.NONE_RESULT));
+    params.put(AiConstants.CONTEXT, context);
+    params.put(AiConstants.CONTACT_PART,
+        BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
     return assistant.getAiModel().getAiBot().chat(params,

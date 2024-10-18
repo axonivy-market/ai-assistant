@@ -7,6 +7,7 @@ import java.util.Map;
 import com.axonivy.portal.components.generic.navigation.BaseNavigator;
 import com.axonivy.portal.components.publicapi.PortalNavigatorInFrameAPI;
 import com.axonivy.portal.components.util.ProcessStartUtils;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.exception.AiChatException;
 
 public class AiNavigator extends BaseNavigator {
@@ -30,7 +31,7 @@ public class AiNavigator extends BaseNavigator {
   public static void navigateToAssistantConfiguration(String assistantId) {
     try {
       Map<String, String> params = new HashMap<>();
-      params.put("assistantId", assistantId);
+      params.put(AiConstants.ASSISTANT_ID, assistantId);
       ProcessStartUtils.redirect(buildAbsoluteUrl(
           ASSISTANT_CONFIGURATION_FRIENDLY_REQUEST_PATH, params));
     } catch (IOException e) {

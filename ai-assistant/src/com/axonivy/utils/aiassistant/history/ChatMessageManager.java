@@ -79,10 +79,9 @@ public class ChatMessageManager {
         return new Gson().fromJson(decryptedConversation, Conversation.class);
       }
     } catch (IOException e) {
-      new AiChatException(
+      throw new AiChatException(
           "Could not load previous conversation. Chat history file could not be decoded",
           e);
-      return null;
     }
     return null;
   }

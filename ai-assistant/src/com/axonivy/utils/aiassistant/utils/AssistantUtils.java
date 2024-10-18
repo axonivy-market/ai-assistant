@@ -12,6 +12,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import com.axonivy.portal.components.service.impl.ProcessService;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.enums.IvyToolResultType;
 import com.axonivy.utils.aiassistant.service.DateTimeGlobalSettingService;
@@ -63,7 +64,7 @@ public class AssistantUtils {
       return StringUtils.EMPTY;
     }
     Map<String, Object> params = new HashMap<>();
-    params.put("info", assistant.getInfo());
+    params.put(AiConstants.INFO, assistant.getInfo());
     return PromptTemplate.from(promptTemplate).apply(params).text();
   }
 
