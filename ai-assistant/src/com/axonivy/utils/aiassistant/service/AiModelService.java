@@ -17,7 +17,7 @@ public class AiModelService {
   private static final String MODEL = "Model";
   private static final String EMBEDDING_MODEL = "EmbeddingModel";
   private static final String API_KEY = "ApiKey";
-  private static final String DOT = DOT;
+  private static final String DOT = ".";
 
   private static AiModelService instance;
 
