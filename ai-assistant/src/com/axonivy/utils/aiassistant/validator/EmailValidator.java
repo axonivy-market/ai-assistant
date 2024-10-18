@@ -25,8 +25,8 @@ public class EmailValidator implements Validator {
   @Override
   public void validate(FacesContext context, UIComponent component,
       Object value) throws ValidatorException {
-    String strValue = Optional.ofNullable(value).map(Object::toString)
-        .orElse(null);
+    String strValue = Optional.ofNullable(value).map(Object::toString).orElse(null);
+
     if (StringUtils.isBlank(strValue)) {
       return;
     }
