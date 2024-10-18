@@ -12,7 +12,7 @@ import com.axonivy.utils.aiassistant.test.page.FunctionManagementPage;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 
-@IvyWebTest(headless = false)
+@IvyWebTest
 public class FunctionManagementTest extends BaseTest {
 
   @BeforeEach

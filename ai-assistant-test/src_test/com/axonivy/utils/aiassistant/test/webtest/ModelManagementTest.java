@@ -9,7 +9,7 @@ import com.axonivy.utils.aiassistant.test.page.AssistantManagementPage;
 import com.axonivy.utils.aiassistant.test.page.ModelDetailsPage;
 import com.axonivy.utils.aiassistant.test.page.ModelManagementPage;
 
-@IvyWebTest(headless = false)
+@IvyWebTest
 public class ModelManagementTest extends BaseTest {
 
   @BeforeEach

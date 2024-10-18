@@ -10,7 +10,7 @@ import com.axonivy.utils.aiassistant.test.page.AssistantManagementPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 
-@IvyWebTest(headless = false)
+@IvyWebTest
 public class AssistantManagementTest extends BaseTest {
 
   @BeforeEach

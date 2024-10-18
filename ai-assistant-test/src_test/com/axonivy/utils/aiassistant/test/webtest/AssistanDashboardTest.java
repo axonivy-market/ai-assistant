@@ -12,7 +12,7 @@ import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.axonivy.ivy.webtest.engine.WebAppFixture;
 import com.axonivy.utils.aiassistant.test.page.AssistantDashboardPage;
 
-@IvyWebTest(headless = false)
+@IvyWebTest
 public class AssistanDashboardTest extends BaseTest {
 
   @BeforeEach
