@@ -6,7 +6,7 @@ public class AssistantManagementPage extends BasePage {
 
   @Override
   protected String getLoadedLocator() {
-    return "a[href$='assistant-tab']";
+    return "div[id$='add-assistant']";
   }
 
   public AssistantDetailsPage addAssistant() {
@@ -17,5 +17,10 @@ public class AssistantManagementPage extends BasePage {
   public ModelManagementPage goToModelManagementPage() {
     $("a[href$='model-tab']").click();
     return new ModelManagementPage();
+  }
+
+  public FunctionManagementPage goToFunctionManagementPage() {
+    $("a[href$='function-tab']").click();
+    return new FunctionManagementPage();
   }
 }

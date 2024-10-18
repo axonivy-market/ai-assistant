@@ -6,7 +6,7 @@ public class ModelManagementPage extends BasePage {
 
   @Override
   protected String getLoadedLocator() {
-    return "a[href$='model-tab']";
+    return "span[id$='model-item-panel']";
   }
 
   public ModelDetailsPage openModelDetails(int index) {
