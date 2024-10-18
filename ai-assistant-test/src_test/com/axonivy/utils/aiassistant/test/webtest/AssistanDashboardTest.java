@@ -1,4 +1,4 @@
-package com.axonivy.utils.aiassistant.test;
+package com.axonivy.utils.aiassistant.test.webtest;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;

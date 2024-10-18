@@ -1,4 +1,4 @@
-package com.axonivy.utils.aiassistant.test;
+package com.axonivy.utils.aiassistant.test.webtest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
