@@ -40,7 +40,7 @@ public class BasicPromptTemplates {
       Now, Please only use the following Context to answer the question.
       Context: {{context}}
 
-      Message From User: {{input}}
+      Message From User: {{request}}
       Answer:
       """;
 
@@ -170,7 +170,7 @@ public class BasicPromptTemplates {
       3. Otherwise, I want you to say sorry and tell him you cannot fulfill his request. After that, do step 4
       4. Take a look at these tool:
 
-        {{tools}}
+        {{functions}}
 
         IF the tools are empty: Don't need to say anything else. Don't tell them that there are no tools.
 

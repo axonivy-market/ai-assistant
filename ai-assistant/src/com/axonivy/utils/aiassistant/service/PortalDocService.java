@@ -27,6 +27,7 @@ public class PortalDocService {
 
   private static final String HEADER_PREFIX = "__header: ";
   private static final String SUB_HEADER_PREFIX = "__sub_header: ";
+  private static final String TWO_LEVELS_PATH_PREFIX = "../../";
 
   public static void createTextIndex(AbstractAIBot bot, String index,
       List<String> contents) throws IOException {
@@ -124,19 +125,20 @@ public class PortalDocService {
 
     // Set h1 tags as header will be used as metadata keyword
     for (Element h1Tag : document.select("h1")) {
-      h1Tag.text("__header: " + h1Tag.text());
+      h1Tag.text(HEADER_PREFIX + h1Tag.text());
     }
 
     // Add a prefix "Information about" and remove special characters for <h2>
     // tags
     for (Element h2Tag : document.select("h2")) {
       h2Tag.text(
-          "__sub_header: " + h2Tag.text().replace("ïƒ�", StringUtils.EMPTY));
+          SUB_HEADER_PREFIX + h2Tag.text().replace("ïƒ�", StringUtils.EMPTY));
     }
 
     // Replace image tags with their source links
     for (Element imgTag : document.select("img")) {
-      String srcLink = imgTag.attr("src").replace("../../", IVY_DOC_HOST);
+      String srcLink = imgTag.attr("src").replace(TWO_LEVELS_PATH_PREFIX,
+          IVY_DOC_HOST);
       if (srcLink.startsWith("screenshots/")) {
         var srcLinkParts = Arrays.asList(srcLink.split("/"));
         srcLink = IVY_DOC_HOST + "_images/"
@@ -151,7 +153,7 @@ public class PortalDocService {
       if (hrefLink.startsWith("#")) {
         anchorTag.remove();
       } else {
-        hrefLink = hrefLink.replace("../../", IVY_DOC_HOST);
+        hrefLink = hrefLink.replace(TWO_LEVELS_PATH_PREFIX, IVY_DOC_HOST);
         if (hrefLink.endsWith("svg")) {
           // If a link is a svg file, remove it
           anchorTag.remove();

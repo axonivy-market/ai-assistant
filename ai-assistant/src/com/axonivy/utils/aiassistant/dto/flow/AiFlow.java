@@ -219,7 +219,7 @@ public class AiFlow extends AiFunction {
       default -> throw new IllegalArgumentException(
           "Unexpected value: " + step.getType());
       }
-      ;
+
 
       updateWorkingStep(step);
       setNotificationMessage(step.getNotificationMessage());

@@ -1,0 +1,16 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          demo:
+            MeetingInvitation:
+              Agenda: Agenda
+              IniviationNotice: You are invited to a kick-off meeting for a project
+              Meeting: Meeting
+              Members: Members
+              Proceed: Proceed
+              ProjectDescription: Project Description
+              ProjectName: Project Name
+              Room: Room
+              Time: Time

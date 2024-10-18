@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.axonivy.portal.components.dto.AiResultDTO;
 import com.axonivy.portal.components.enums.AIState;
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
@@ -23,6 +24,8 @@ public class RephraseStep extends AiStep {
   private static final long serialVersionUID = -4106563714989416129L;
 
   private static final String EXAMPLE_FORMAT = "before: %s ; after: %s";
+  private static final String EXAMPLES_PARAM = "examples";
+
   private String toolId;
   private Integer onRephrase;
   private List<RephraseExample> examples;
@@ -44,12 +47,12 @@ public class RephraseStep extends AiStep {
     }
 
     Map<String, Object> params = new HashMap<>();
-    params.put("info", assistant.getInfo());
-    params.put("metadata", getFormattedMetadatas(metadatas));
-    params.put("memory", AiFunction.getFormattedMemory(memory));
-    params.put("tool", dataFulfillRequest);
-    params.put("examples", formatExamples());
-    params.put("customInstruction",
+    params.put(AiConstants.INFO, assistant.getInfo());
+    params.put(AiConstants.METADATA, getFormattedMetadatas(metadatas));
+    params.put(AiConstants.MEMORY, AiFunction.getFormattedMemory(memory));
+    params.put(AiConstants.TOOL, dataFulfillRequest);
+    params.put(EXAMPLES_PARAM, formatExamples());
+    params.put(AiConstants.CUSTOM_INSTRUCTION,
         Optional.ofNullable(getCustomInstruction()).orElse(StringUtils.EMPTY));
 
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
@@ -96,15 +99,14 @@ public class RephraseStep extends AiStep {
   }
 
   public String formatExamples() {
+    String result = StringUtils.EMPTY;
     if (CollectionUtils.isNotEmpty(examples)) {
-      String result = StringUtils.EMPTY;
       for (RephraseExample example : examples) {
         result = result.concat(String.format(EXAMPLE_FORMAT,
             example.getBefore(), example.getAfter()))
             .concat(System.lineSeparator());
       }
-      return result;
     }
-    return StringUtils.EMPTY;
+    return result;
   }
 }

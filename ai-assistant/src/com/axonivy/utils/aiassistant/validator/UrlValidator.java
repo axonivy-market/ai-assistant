@@ -2,6 +2,7 @@ package com.axonivy.utils.aiassistant.validator;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.Optional;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -22,7 +23,8 @@ public class UrlValidator implements Validator {
   @Override
   public void validate(FacesContext context, UIComponent component,
       Object value) throws ValidatorException {
-    String strValue = StringUtils.defaultIfBlank(value.toString(), null);
+    String strValue = Optional.ofNullable(value).map(Object::toString)
+        .orElse(null);
 
     try {
       if (StringUtils.isBlank(strValue)) {

@@ -1,0 +1,16 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          demo:
+            MeetingInvitation:
+              Agenda: Ordre du jour
+              IniviationNotice: Vous êtes invité à une réunion de lancement d'un projet
+              Meeting: Réunion
+              Members: Membres
+              Proceed: Procéder
+              ProjectDescription: Description du projet
+              ProjectName: Nom du projet
+              Room: Chambre
+              Time: Temps
