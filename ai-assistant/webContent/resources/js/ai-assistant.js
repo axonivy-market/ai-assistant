@@ -480,11 +480,13 @@ function ViewAI(uri) {
   this.init = function () {
     $('.container.frame').addClass('chatbot-layout-main');
     // Set the iframe height to content height
-    const contentHeight = window.parent.document.getElementById('iFrame').clientHeight;
-    $('.js-chatbot-panel').height(contentHeight);
+    if (window.parent.document.getElementById('iFrame') !== null) {
+      const contentHeight = window.parent.document.getElementById('iFrame').clientHeight;
+      $('.js-chatbot-panel').height(contentHeight);
 
-    $('.js-chatbot-panel').parents('#content').css('padding', '0');
-    $('.js-chatbot-panel').parents('body').css('overflow', 'hidden');
+      $('.js-chatbot-panel').parents('#content').css('padding', '0');
+      $('.js-chatbot-panel').parents('body').css('overflow', 'hidden');
+    }
 
     // Initialize textbox element
     this.initInputTextbox($('.js-chat-send-form .js-chatbot-input-message').get(0));

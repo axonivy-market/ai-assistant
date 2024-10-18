@@ -13,4 +13,8 @@ public class AssistantDashboardPage extends BasePage {
     $("textarea[id$='message-input-field']").sendKeys(message);
     $("button[id$='send-button']").click();
   }
+
+  public void choosePreDefinedMessage() {
+    $(".js-candidate-question-block").click();
+  }
 }

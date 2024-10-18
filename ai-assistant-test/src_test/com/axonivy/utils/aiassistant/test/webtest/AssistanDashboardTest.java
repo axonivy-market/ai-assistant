@@ -29,4 +29,13 @@ public class AssistanDashboardTest extends BaseTest {
     $("div.chat-message-container.error-response").shouldHave(text("openAiApiKey cannot be null or empty"));
   }
 
+  @Test
+  public void choosePreDefinedMessage() {
+    open(EngineUrl.createProcessUrl("/ai-assistant-demo/1919CEDEF7828B77/startComplexDemo.ivp"));
+    open(EngineUrl.createProcessUrl("/ai-assistant/19198CAD6D9F2F9E/AssistantDashboard.ivp"));
+    AssistantDashboardPage assistantDashboardPage = new AssistantDashboardPage();
+    assistantDashboardPage.choosePreDefinedMessage();
+    $("div.chat-message-container.error-response").shouldHave(text("openAiApiKey cannot be null or empty"));
+  }
+
 }
