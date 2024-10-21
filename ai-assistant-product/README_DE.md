@@ -199,11 +199,12 @@ Grundlegende Attribute eines AI Flow:
 ###### Attribute
 
 - **stepType**: Art des Schritts. Gültige Werte:
-    - **IVY_TOOL**: [Ivy-Tool-Schritt](#ivy-tool-schritt).
-    - **SWITCH**: [Switch-Schritt](#switch-schritt).
-    - **TEXT**: [Text-Schritt](#text-schritt).
-    - **RE_PHRASE**: [Rephrase-Schritt](#rephrase-schritt).
-    - **TRIGGER_FLOW**: [Trigger-Flow-Schritt](#trigger-flow-schritt).
+    - IVY_TOOL: [Ivy-Tool-Schritt](#ivy-tool-schritt).
+    - SWITCH: [Switch-Schritt](#switch-schritt).
+    - TEXT: [Text-Schritt](#text-schritt).
+    - RE_PHRASE: [Rephrase-Schritt](#rephrase-schritt).
+    - TRIGGER_FLOW: [Trigger-Flow-Schritt](#trigger-flow-schritt).
+    - KNOWLEDGE_BASE: [Knowledge-Base-Schritt](#trigger-flow-schritt).
 
 - **stepNo**: Nummer des Schritts im Flow.
 
@@ -431,6 +432,22 @@ Der **Trigger-Flow-Schritt** startet einen neuen Flow innerhalb des KI-Prozesses
     "flowId": "create-project-flow",
     "showResultOfStep": 13,
     "useConversationMemory": false
+}
+```
+
+##### Knowledge-Base-Schritt
+
+Beim Arbeiten an einem Schritt können Benutzer Fragen haben, die nicht direkt mit dem Arbeitsablauf zusammenhängen. Wenn ein Benutzer beispielsweise eine Aufgabe nicht delegieren kann, möchte er möglicherweise wissen, warum die Delegation nicht möglich ist. Der **Knowledge-Base-Schritt** wurde entwickelt, um Benutzern zu helfen, schnell Antworten auf solche Fragen zu finden.
+
+- **toolId**: Bezieht sich auf das Tool vom Typ `RETRIEVAL_QA`, das die KI als Knowledge Base zur Beantwortung der Fragen verwendet.
+
+```json
+{
+    "stepNo": 3,
+    "type": "KNOWLEDGE_BASE",
+    "toolId": "portal-support",
+    "onSuccess": -1,
+    "onError": -1
 }
 ```
 

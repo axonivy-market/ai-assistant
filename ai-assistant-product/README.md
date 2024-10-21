@@ -209,7 +209,8 @@ Basic attributes of an AI Flow:
    - SWITCH: [Switch step](#switch-step).
    - TEXT: [Text step](#text-step).
    - RE_PHRASE: [Rephrase step](#re-phrase-step).
-   - TRIGGER_FLOW: Trigger flow step.
+   - TRIGGER_FLOW: [Trigger flow step](#trigger-flow-step).
+   - KNOWLEDGE_BASE: [Knowledge base step](#knowledge-base-step)
 
 - **stepNo**: Number of step in the flow.
 
@@ -438,6 +439,21 @@ The **Trigger flow step** initiates a new flow within the AI process, either by 
     "flowId": "create-project-flow",
     "showResultOfStep": 13,
     "useConversationMemory": false
+}
+```
+##### Knowledge base step
+
+When working on a step, users may have questions that aren't directly related to the workflow. For instance, if a user is unable to delegate a task, they might want to know why delegation isn't possible. The **Knowledge Base** step is designed to help users quickly find answers to such questions.
+
+- **toolId**: Refers to the tool of type `RETRIEVAL_QA` that the AI will use as the knowledge base to provide answers.
+
+```json
+{
+    "stepNo": 3,
+    "type": "KNOWLEDGE_BASE",
+    "toolId": "portal-support",
+    "onSuccess": -1,
+    "onError": -1
 }
 ```
 
