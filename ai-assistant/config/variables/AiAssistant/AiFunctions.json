@@ -202,7 +202,11 @@
           },
           {
             "action": 0,
-            "case": "User don't agree and suggested something else"
+            "case": "User don't agree and refine the condition to find case"
+          },
+          {
+            "action": -1,
+            "case": "User don't want to find case anymore"
           }
         ]
       },
@@ -222,7 +226,7 @@
             "case": "User clarify or make another request to find case"
           },
           {
-            "action": 0,
+            "action": -1,
             "case": "User say he want to cancel or he make another request that irrelevant to the find case function"
           }
         ]
@@ -296,7 +300,11 @@
           },
           {
             "action": 0,
-            "case": "User don't agree and suggested something else"
+            "case": "User don't agree and suggested another condition to find task"
+          },
+          {
+            "action": -1,
+            "case": "User don't want to find task anymore"
           }
         ]
       },
@@ -315,7 +323,7 @@
             "case": "User clarify or make another request to find task"
           },
           {
-            "action": 0,
+            "action": -1,
             "case": "User say he want to cancel or he make another request that irrelevant to the find task function"
           },
           {
@@ -436,6 +444,14 @@
           {
             "action": 0,
             "case": "User provide information to search tasks again"
+          },
+          {
+            "action": -1,
+            "case": "User say something irrelevant to the find task function"
+          },
+          {
+            "action": -1,
+            "case": "User say something meaningless"
           }
         ]
       },
@@ -537,6 +553,10 @@
           {
             "action": 0,
             "case": "User suggest other processes"
+          },
+          {
+            "action": -1,
+            "case": "User says something meaningless or he don't want to continue"
           }
         ]
       },
