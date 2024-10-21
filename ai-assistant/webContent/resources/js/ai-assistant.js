@@ -364,6 +364,7 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
       const workingStep = workingFlow.runSteps.length == 0 ? null : workingFlow.runSteps[workingFlow.runSteps.length - 1];
       if (workingStep.type == 'KNOWLEDGE_BASE') {
         useKnowledgeBase(ivyUri, view, workingStep.userMessage, workingStep.toolId, conversationId);
+        workingFlow = null;
         return;
       }
 
@@ -777,9 +778,11 @@ function ViewAI(uri) {
       if (streamingMessage.length > 0) {
         streamingMessage.removeClass('streaming');
         $(streamingMessage).find('.js-message').get(0).innerHTML = converted;
+        $($(streamingMessage).find('.js-message').get(0)).find('img').addClass('w-full');
       } else {
         const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
         messages.get(messages.length - 1).innerHTML = converted;
+        $(messages.get(messages.length - 1)).find('img').addClass('w-full');
       }
 
       if (!isDisableChat) {

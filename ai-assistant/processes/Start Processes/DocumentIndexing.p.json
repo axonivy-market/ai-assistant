@@ -11,8 +11,8 @@
       "config" : {
         "signature" : "createIndex",
         "request" : {
-          "name" : "Create knowledge base for AI Assistant",
-          "description" : "Create knowledge base for AI Assistant by upload zip file of documents",
+          "name" : "<%=ivy.cms.co(\"/Processes/DocumentIndexing/createIndex/name\")%>",
+          "description" : "<%=ivy.cms.co(\"/Processes/DocumentIndexing/createIndex/description\")%>",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si si-common-file-text-edit" }
           ]

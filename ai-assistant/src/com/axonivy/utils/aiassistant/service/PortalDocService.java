@@ -14,20 +14,22 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.core.AbstractAIBot;
 
 import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;
 
 public class PortalDocService {
-  private static final String IVY_DOC_HOST = "https://market.axonivy.com/portal/11.3/doc/";
+  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/11.3.1/doc/";
   public static final String USER_GUIDE_DIR = "portal-user-guide";
   public static final String DEVELOPER_GUIDE_DIR = "portal-developer-guide";
   public static final String PORTAL_COMPONENT_GUIDE_DIR = "portal-components";
 
-  private static final String HEADER_PREFIX = "__header: ";
-  private static final String SUB_HEADER_PREFIX = "__sub_header: ";
+  private static final String HEADER_PREFIX = "# ";
+  private static final String SUB_HEADER_PREFIX = "## ";
   private static final String TWO_LEVELS_PATH_PREFIX = "../../";
+  private static final String IMAGE_FORMAT = "![%s](%s)";
 
   public static void createTextIndex(AbstractAIBot bot, String index,
       List<String> contents) throws IOException {
@@ -38,7 +40,7 @@ public class PortalDocService {
     List<TextSegment> data = new ArrayList<>();
     contents.forEach(content -> data.add(TextSegment.from(content)));
 
-    bot.embed(index, data);
+    bot.embed(generateVectorStoreName(index), data);
   }
 
   public static void createPortalIndex(AbstractAIBot bot, String index,
@@ -50,7 +52,12 @@ public class PortalDocService {
     List<TextSegment> data = new ArrayList<>();
     contents.forEach(content -> data.addAll(proceedEachContent(content)));
 
-    bot.embed(index, data);
+    bot.embed(generateVectorStoreName(index), data);
+  }
+
+  private static String generateVectorStoreName(String index) {
+    return String.join("-", AiConstants.DEFAULT_AXON_IVY_VECTOR_STORE_PREFIX,
+        index);
   }
 
   private static List<TextSegment> proceedEachContent(String content) {
@@ -137,6 +144,7 @@ public class PortalDocService {
 
     // Replace image tags with their source links
     for (Element imgTag : document.select("img")) {
+      String alt = imgTag.attr("alt");
       String srcLink = imgTag.attr("src").replace(TWO_LEVELS_PATH_PREFIX,
           IVY_DOC_HOST);
       if (srcLink.startsWith("screenshots/")) {
@@ -144,7 +152,9 @@ public class PortalDocService {
         srcLink = IVY_DOC_HOST + "_images/"
             + srcLinkParts.get(srcLinkParts.size() - 1);
       }
-      imgTag.replaceWith(new TextNode("<image>" + srcLink + "</image>"));
+
+      imgTag
+          .replaceWith(new TextNode(String.format(IMAGE_FORMAT, alt, srcLink)));
     }
 
     // Transform <a> tags to "<link> url here </link>" format

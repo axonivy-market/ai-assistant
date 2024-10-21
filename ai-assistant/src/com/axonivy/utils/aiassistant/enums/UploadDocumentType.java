@@ -1,20 +1,12 @@
 package com.axonivy.utils.aiassistant.enums;
 
+import ch.ivyteam.ivy.environment.Ivy;
+
 public enum UploadDocumentType {
-  PORTAL_SUPPORT("Portal Support"), OTHERS("Others");
+  PORTAL_SUPPORT, OTHERS;
 
-  private String value;
-
-  private UploadDocumentType(String value) {
-    this.value = value;
+  public String getLabel() {
+    return Ivy.cms()
+        .co(String.format("/Labels/Enums/UploadDocumentType/%s", this.name()));
   }
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-
 }

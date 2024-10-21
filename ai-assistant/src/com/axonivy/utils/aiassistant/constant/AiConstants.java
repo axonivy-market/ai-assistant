@@ -1,6 +1,7 @@
 package com.axonivy.utils.aiassistant.constant;
 
 public final class AiConstants {
+  public static final String DEFAULT_AXON_IVY_VECTOR_STORE_PREFIX = "axon-ivy-vector-store";
   public static final String COMMA = ",";
   public static final String METADATA = "metadata";
   public static final String MEMORY = "memory";

@@ -30,13 +30,13 @@
           </div>
           <div class="ui-g-12">
             <p:selectOneMenu id="type" value="#{data.type}">
-              <f:selectItems value="#{data.types}" var="type" itemValue="#{type}" itemLabel="#{type}" />
+              <f:selectItems value="#{data.types}" var="type" itemValue="#{type}" itemLabel="#{type.label}" />
               <p:ajax event="itemSelect" update="@(form)" process="@(this)" />
             </p:selectOneMenu>
           </div>
           <div class="ui-g-6">
             <h:outputText value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/helper/UploadPortalDocument/OtherTypeImportantNote')}"
-              rendered="#{data.type eq 'Others'}" />
+              rendered="#{data.type eq 'OTHERS'}" />
           </div>
           <div class="ui-g-12">
             <h:outputText value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/DocumentTable/Upload')}" />
@@ -46,14 +46,14 @@
               label="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/helper/UploadPortalDocument/UploadZipFile')}"
               listener="#{uploadPortalDocumentBean.handleUpload}"
               allowTypes="/(\.|\/)(zip)$/i"
-              accept=".zip" rendered="#{data.type eq 'Others'}"
+              accept=".zip" rendered="#{data.type eq 'OTHERS'}"
               invalidFileMessage="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/helper/UploadPortalDocument/InvalidFormat')}"
               process="@(form)" />
             <p:fileUpload id="portal-doc-upload-component"
               label="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/helper/UploadPortalDocument/UploadPortalZipFile')}"
               listener="#{uploadPortalDocumentBean.handlePortalDocumentUpload}"
               allowTypes="/(\.|\/)(zip)$/i"
-              accept=".zip" rendered="#{data.type ne 'Others'}"
+              accept=".zip" rendered="#{data.type ne 'OTHERS'}"
               invalidFileMessage="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/helper/UploadPortalDocument/InvalidFormat')}" />
           </div>
         </div>

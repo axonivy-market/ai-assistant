@@ -10,6 +10,7 @@ import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
+import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
@@ -65,6 +66,6 @@ public class RetrievalQATool extends AiFunction {
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
     return assistant.getAiModel().getAiBot().chat(params,
-        BasicPromptTemplates.RAG_PROMPT_TEMPLATE);
+        RagPromptTemplates.RAG_PROMPT_TEMPLATE);
   }
 }

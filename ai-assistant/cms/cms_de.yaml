@@ -33,8 +33,7 @@ Dialogs:
                 WICHTIG: Der Dateiname muss im dash-case-Format vorliegen (z. B. my-test-file.zip). Wenn der Dateiname dieses Format nicht einhält, tritt ein Fehler bei der Erstellung der Wissensbasis auf.
 
               PortalSupportType: <strong>Portalsupport:</strong> Aktualisieren Sie nur den Inhalt des integrierten Tools namens Portalsupport, das Fragen zum Axon Ivy Portal beantworten kann.
-              Title: |
-                Wissensbasis für AI-Assistent erstellen
+              Title: Wissensdatenbank für KI-Assistenten erstellen
               UploadPortalZipFile: |
                 Portal-Dokument-Zip-Datei hochladen
               UploadZipFile: Zip-Datei hochladen
@@ -76,6 +75,9 @@ Labels:
       FLOW: Ivy-Fluss
       IVY: Ivy-Tool
       RETRIEVAL_QA: Wissensdatenbank
+    UploadDocumentType:
+      OTHERS: Sonstiges
+      PORTAL_SUPPORT: Portal-Unterstützung
   Message:
     InvalidEmailFormat: Ungültiges E-Mail-Format
     InvalidUrl: "Ungültige URL\t"
@@ -117,3 +119,8 @@ Labels:
     Save: Speichern
     Type: Typ
     Usage: Verwendung
+Processes:
+  DocumentIndexing:
+    createIndex:
+      description: Erstellen Sie eine Wissensdatenbank für den KI-Assistenten, indem Sie eine ZIP-Datei mit Dokumenten hochladen
+      name: Wissensdatenbank für KI-Assistenten erstellen

@@ -78,6 +78,9 @@ Labels:
       FLOW: Flux Ivy
       IVY: Outil Ivy
       RETRIEVAL_QA: Base de connaissances
+    UploadDocumentType:
+      OTHERS: Autres
+      PORTAL_SUPPORT: Assistance du portail
   Message:
     InvalidEmailFormat: Format d'e-mail non valide
     InvalidUrl: URL invalide
@@ -119,3 +122,8 @@ Labels:
     Save: Enregistrer
     Type: Type
     Usage: Utilisation
+Processes:
+  DocumentIndexing:
+    createIndex:
+      description: Créez une base de connaissances pour AI Assistant en téléchargeant un fichier zip de documents
+      name: Créer une base de connaissances pour AI Assistant

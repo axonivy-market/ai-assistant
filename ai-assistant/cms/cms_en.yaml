@@ -69,6 +69,9 @@ Labels:
       FLOW: Ivy Flow
       IVY: Ivy Tool
       RETRIEVAL_QA: Knowledge Base
+    UploadDocumentType:
+      OTHERS: Others
+      PORTAL_SUPPORT: Portal Support
   Message:
     InvalidEmailFormat: Invalid email format
     InvalidUrl: Invalid URL
@@ -110,3 +113,8 @@ Labels:
     Save: Save
     Type: Type
     Usage: Usage
+Processes:
+  DocumentIndexing:
+    createIndex:
+      description: Create knowledge base for AI Assistant by upload zip file of documents
+      name: Create knowledge base for AI Assistant

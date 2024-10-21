@@ -2,6 +2,7 @@ package com.axonivy.utils.aiassistant.utils;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -116,5 +117,15 @@ public class AssistantUtils {
         .getDefaultDateFormatter().format(new Date()));
     metadatas.put("username", Ivy.session().getSessionUserName());
     return metadatas;
+  }
+
+  public static String getDefaultLanguage() {
+    Locale locale = Ivy.session().getContentLocale();
+    if (locale == null) {
+      return Locale.ENGLISH.getDisplayLanguage();
+    }
+
+    return StringUtils.defaultIfBlank(locale.getDisplayLanguage(),
+        locale.toLanguageTag());
   }
 }

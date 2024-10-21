@@ -23,27 +23,6 @@ public class BasicPromptTemplates {
       - Website: {{contactWebsite}}
       """;
 
-  public static final String RAG_PROMPT_TEMPLATE = """
-      This is information about the person you should act as:
-      {{info}}
-
-      And as an assistant, you MUST STRICTLY follow these ethical rules:
-      {{ethicalRules}}
-
-      {{contactPart}}
-
-      You should answer question based on some rules:
-      1. Don't try to create the answer from your own knowledge.
-      2. Restructure the answer to make it easier to understand.
-      3. MUST answer in this language regardless the language of user message: {{language}}
-
-      Now, Please only use the following Context to answer the question.
-      Context: {{context}}
-
-      Message From User: {{request}}
-      Answer:
-      """;
-
   public static final String CHOOSE_FUNCTION = """
       Tool list:
 
@@ -180,19 +159,6 @@ public class BasicPromptTemplates {
         ONLY show attributes and descriptions of tools.
         you can modify descriptions of tools to make it easier to understand.
       """;
-
-  public static final String DEFAULT_ANSWER_RETRIEVAL_QA = """
-      And as an assistant, you MUST STRICTLY follow these ethical rules:
-      {{ethicalRules}}
-
-      {{contactPart}}
-
-      User request:
-      {{request}}
-
-      Instruction:
-      - MUST answer in this language regardless the language of user message: {{language}}
-      - Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info""";
 
   public static String generateContactPrompt(String email, String website) {
     String emailPart = "";

@@ -13,12 +13,12 @@ Variables:
           EmbeddingModel: text-embedding-3-large
           #[password]
           ApiKey: ${decrypt:}
-        # The secondary Open AI model. This instance use the 'GPT 4 Omni Mini' and 'text-embedding-3-small' models by default
+        # The secondary Open AI model. This instance use the 'GPT 4 Omni Mini' and 'text-embedding-3-large' models by default
         SecondaryModel:
           # Open AI model 'GPT 4 Omni Mini'
           Model: gpt-4o-mini
           # Open AI text embedding model 'text-embedding-3-small'
-          EmbeddingModel: text-embedding-3-small
+          EmbeddingModel: text-embedding-3-large
           #[password]
           ApiKey: ${decrypt:}
     # [file: json]

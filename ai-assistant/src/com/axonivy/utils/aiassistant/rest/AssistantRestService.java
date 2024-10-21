@@ -47,12 +47,12 @@ import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
+import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISecurityConstants;
 
 @Singleton
@@ -195,7 +195,7 @@ public class AssistantRestService {
             StringUtils.EMPTY)));
 
     String error = assistant.getAiModel().getAiBot().streamChat(params,
-        BasicPromptTemplates.DEFAULT_ANSWER_RETRIEVAL_QA, messageHandler);
+        RagPromptTemplates.DEFAULT_RAG_ANSWER, messageHandler);
     if (StringUtils.isNotBlank(error)) {
       conversation.getHistory().add(ChatMessage.newErrorMessage(error));
       ChatMessageManager.saveConversation(assistant.getId(), conversation);
@@ -358,11 +358,9 @@ public class AssistantRestService {
       return;
     }
 
-    String language = Ivy.session().getContentLocale().toLanguageTag();
-
     Map<String, Object> params = new HashMap<>();
     params.put(AiConstants.REQUEST, message);
-    params.put(AiConstants.LANGUAGE, language);
+    params.put(AiConstants.LANGUAGE, AssistantUtils.getDefaultLanguage());
     params.put(AiConstants.INFO, assistant.getInfo());
     params.put(AiConstants.ETHICAL_RULES,
         Optional.ofNullable(assistant.formatEthicalRules())
@@ -377,7 +375,7 @@ public class AssistantRestService {
             StringUtils.EMPTY)));
 
     assistant.getAiModel().getAiBot().streamChat(params,
-        BasicPromptTemplates.RAG_PROMPT_TEMPLATE, messageHandler);
+        RagPromptTemplates.RAG_PROMPT_TEMPLATE, messageHandler);
   }
 
   @GET
@@ -512,8 +510,7 @@ public class AssistantRestService {
   private Map<String, Object> initParamsForDefaultAnswer(Assistant assistant,
       String request) throws JsonProcessingException {
     Map<String, Object> params = new HashMap<>();
-    params.put(AiConstants.LANGUAGE,
-        Ivy.session().getContentLocale().getDisplayCountry());
+    params.put(AiConstants.LANGUAGE, AssistantUtils.getDefaultLanguage());
     params.put(AiConstants.FUNCTIONS, BusinessEntityConverter.getObjectMapper()
         .writeValueAsString(assistant.getToolkit()));
     params.put(AiConstants.ETHICAL_RULES, assistant.formatEthicalRules());

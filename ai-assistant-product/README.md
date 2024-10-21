@@ -58,16 +58,21 @@ Example:
 ## Setup
 
 1. Deploy the **ai-assistant** artifact in the same application with **Portal**.
+
 2. Start the engine, login to Portal.
+
 3. On the header of Portal, click on the **AI Assistant** icon to access the **AI Assistant** app.
 
 ### User guide
 
 #### AI Management
+
 The AI Management page serves as a central hub for configuring and managing all aspects of your AI system. From here, you can:
 
 - [Configure AI models](#configure-ai-models): Change settings for AI models such as API Key that power your applications.
+
 - [Manage AI assistants](#manage-ai-assistants): Oversee and modify the AI assistants, including change visualization, personality, adjusting their behavior, and  managing the functions they can handle.
+
 - [Manage AI functions](#manage-ai-functions): Control and organize various AI functions, defining the actions your AI can perform and how it interacts with users to provide accurate and efficient results.
 
 ##### Configure AI Models
@@ -92,7 +97,9 @@ Simply start the process `Create knowledge base for AI Assistant` and follow the
 Currently, you can create knowledge base for 2 types: Portal Support and Others.
 
 ##### Knowledge base: Portal Support
+
 The AI Assistant includes a built-in tool called `Portal support` which can answer questions related to the Axon Ivy Portal.
+
 To generate the knowledge base for this function, please visit the [Portal download page](https://market.axonivy.com/portal) on the Axon Ivy Market and download the latest document, as shown in the image below.
 
 ![Download Portal Document](./doc/img/download-portal-doc.png)
@@ -106,10 +113,14 @@ After upload the zip file, please wait for some minutes till the the upload pane
 Before upload other knowledge bases, please keep in mind:
 
 1. The name of the uploaded file will be the ID of an index in the vector store, therefore:
+
    - The name must be strictly follow `dash-case`, otherwise you will get errors when AI Assistant create knowledge base.
+
    - The name must be unique, otherwise you will override existing knowledge base!
 
 2. All files you put inside the zip file must be a text file (type `.txt`). AI Assistant will skip other file types when reading content to create knowledge base.
+
+3. Vector stores created by Axon Ivy are prefixed with `axon-ivy-vector-store` followed by the name of uploaded file. For example, if you upload a file named `customer-support.zip`, the resulting vector store ID will be `axon-ivy-vector-store-customer-support`.
 
 After upload the zip file, please wait for some minutes till the the upload panel closed. It may takes some minutes because it takes time for AI Assistant to do the job.
 
@@ -142,11 +153,11 @@ That's where AI Flow comes in. It not only speeds up the search process but also
 ##### How it works
 AI Flow operates as a workflow framework in the form of JSON. It consists of multiple AI Steps, each of which is linked together based on user-defined configurations.
 
-Basic attributes of an AI Flows:
+Basic attributes of an AI Flow:
 
 ``` json
 {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-employees-flow",
     "name": "Find employees information",
     "type": "FLOW",
@@ -172,10 +183,15 @@ Basic attributes of an AI Flows:
 - **usage**: Specifies when to use the AI Flow. A clearer explanation ensures the AI can accurately select the appropriate flow to fulfill user requests.
 
 - **steps**: Lists the AI Steps that the AI Flow should execute to handle the user's request. Available step types:
+
    - **Switch**: decision-making element that guide AI in selecting the appropriate next action based on specific conditions.
+
    - **Ivy Tool**: directs AI to use specific Ivy tools (Ivy callable) in its decision-making process.
+
    - **Text**: display or generate text-based content for user interaction.
+
    - **Re-phrase**: help AI refine user input before executing specific actions or using tools.
+
    - **Trigger Flow**: initiates a new flow within the AI process, either by passing a specific trigger message or using the result of a previous step. This allows for seamless transitions between different workflows and the ability to pass relevant data between them.
 
 > [!TIP]
@@ -363,8 +379,8 @@ The **Rephrase step** is designed to help AI refine user input before executing 
 - **onSuccess**: Specifies the step to run if the AI does not need to rephrase the message.
 
 - **examples**: A list of predefined examples that guide the AI in understanding how to rephrase user messages. Each example consists of:
-    - before: The original, unstructured message from the user.
-    - after: The rephrased message that the AI would generate for better clarity and actionability
+    - **before**: The original, unstructured message from the user.
+    - **after**: The rephrased message that the AI would generate for better clarity and actionability
 
 ```json
 {
@@ -444,7 +460,7 @@ The Result DTO ensures that the AI Assistant provides reliable and consistent re
 
 #### Create your own AI Flow
 
-In this section, we will explain how to develop your own AI Flow using the [Real world problem](#real-world-problem) as a use case..
+In this section, we will explain how to develop your own AI Flow using the [Real world problem](#real-world-problem) as a use case.
 
 > [!NOTE]
 > In the [Compex demo](#complex-demo), we have implemented a function to find employee information. Therefore, it is highly recommended not to use that demo in conjunction with this guide.
@@ -473,7 +489,7 @@ The output result of the Ivy Callable process must be an object has name `result
 
 ```json
 {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-employees-info",
     "name": "Find information of employees",
     "type": "IVY",
@@ -521,7 +537,7 @@ And this is the AI flow:
 
 ```json
 {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-employees-flow",
     "name": "Find employees information",
     "type": "FLOW",
@@ -577,7 +593,7 @@ And this is the AI flow:
 [
     {
         "id": "537bc9e684d8481d87e7f50240aaa45e",
-        "version": "11.4.0",
+        "version": "12.0.0",
         "templateId": "portal-assistant-template",
         "aiModelName": "AiAssistant.AiModels.OpenAI.SecondaryModel",
         "avatarLocation": "/Logo/DefaultLogo",

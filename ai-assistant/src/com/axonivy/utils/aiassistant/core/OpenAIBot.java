@@ -1,6 +1,7 @@
 package com.axonivy.utils.aiassistant.core;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.axonivy.utils.aiassistant.core.error.OpenAIErrorResponse;
 import com.axonivy.utils.aiassistant.dto.AiModel;
 import com.axonivy.utils.aiassistant.enums.AiVariable;
 import com.axonivy.utils.aiassistant.enums.ModelType;
+import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import dev.langchain4j.data.embedding.Embedding;
@@ -24,6 +26,7 @@ import dev.langchain4j.model.input.PromptTemplate;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
+import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingSearchRequest;
 import dev.langchain4j.store.embedding.EmbeddingSearchResult;
 
@@ -167,7 +170,7 @@ public class OpenAIBot extends AbstractAIBot {
       StreamingResponseHandler<AiMessage> handler) {
     try {
       getChatModel().generate(
-          PromptTemplate.from(promptTemplate).apply(variables).toUserMessage(),
+          PromptTemplate.from(promptTemplate).apply(variables).text(),
           handler);
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
@@ -184,14 +187,11 @@ public class OpenAIBot extends AbstractAIBot {
     Embedding queryEmbedding = embeddingModel.embed(query).content();
 
     EmbeddingSearchResult<TextSegment> relevant = getEmbeddingStore()
-        .searchApproximateKnn(EmbeddingSearchRequest.builder().maxResults(4)
+        .searchApproximateKnn(EmbeddingSearchRequest.builder().maxResults(10)
             .minScore(0.8).queryEmbedding(queryEmbedding).build());
 
-    String result = StringUtils.EMPTY;
-    for (var match : relevant.matches()) {
-      result = String.join("\n\n", result, match.embedded().text());
-    }
-    return result;
+    relevant.matches().sort(Comparator.comparing(EmbeddingMatch::score));
+    return RagPromptTemplates.formatRetrievedDocuments(relevant.matches());
   }
 
   @Override

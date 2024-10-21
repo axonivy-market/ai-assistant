@@ -11,7 +11,7 @@ import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.StreamingResponseHandler;
 
 public abstract class AbstractAIBot {
-  protected static final int DEFAULT_DIMENSIONS = 200;
+  protected static final int DEFAULT_DIMENSIONS = 300;
 
   private ModelType modelType;
 

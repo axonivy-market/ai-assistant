@@ -5,11 +5,11 @@
   "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "type",
-    "type" : "String",
+    "type" : "com.axonivy.utils.aiassistant.enums.UploadDocumentType",
     "modifiers" : [ "PERSISTENT" ]
   }, {
     "name" : "types",
-    "type" : "java.util.List<String>",
+    "type" : "java.util.List<com.axonivy.utils.aiassistant.enums.UploadDocumentType>",
     "modifiers" : [ "PERSISTENT" ]
   } ]
 }

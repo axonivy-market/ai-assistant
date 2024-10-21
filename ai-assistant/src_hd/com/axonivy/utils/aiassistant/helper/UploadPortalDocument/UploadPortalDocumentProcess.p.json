@@ -54,10 +54,10 @@
         "output" : {
           "code" : [
             "import com.axonivy.utils.aiassistant.enums.UploadDocumentType;",
-            "in.types.add(UploadDocumentType.PORTAL_SUPPORT.getValue());",
-            "in.types.add(UploadDocumentType.OTHERS.getValue());",
+            "in.types.add(UploadDocumentType.PORTAL_SUPPORT);",
+            "in.types.add(UploadDocumentType.OTHERS);",
             "",
-            "in.type = UploadDocumentType.PORTAL_SUPPORT.getValue();"
+            "in.type = UploadDocumentType.PORTAL_SUPPORT;"
           ]
         }
       },
