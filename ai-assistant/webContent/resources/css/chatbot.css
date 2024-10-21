@@ -505,6 +505,37 @@ body .chatbot-send-form .chat-send-form-button button.ui-button.ui-button-icon-o
   margin-right: 10px;
 }
 
+/* Theme for elements inside message */
+.chat-message table {
+  border-spacing: 0;
+}
+
+.chat-message table {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.chat-message table > thead > tr > th {
+  padding: .5em;
+  background: var(--surface-50);
+  border: solid 1px var(--surface-300);
+  border-right: 0;
+}
+
+.chat-message table > thead > tr > th:last-child {
+  border-right: solid 1px var(--surface-300);
+}
+
+.chat-message table > tbody > tr > td {
+  border: solid 1px var(--surface-300);
+  border-top: 0;
+  border-right: 0;
+}
+
+.chat-message table > tbody > tr > td:last-child {
+  border-right: solid 1px var(--surface-300);
+}
+
 /* Specific styles for themes */
 body.dark .chatbot-panel .candidate-question-container .candidate-question,
 body.dark .chatbot-panel .chat-message {
