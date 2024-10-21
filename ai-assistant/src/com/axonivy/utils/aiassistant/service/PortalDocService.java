@@ -75,13 +75,13 @@ public class PortalDocService {
       }
 
       if (line.startsWith(HEADER_PREFIX)) {
-        headerKeyword = line.replace(HEADER_PREFIX, StringUtils.EMPTY).strip();
+        headerKeyword = line.strip();
         handleBlockText(headerKeyword, keyword, blockText, result);
         continue;
       }
 
       if (line.startsWith(SUB_HEADER_PREFIX)) {
-        keyword = line.replace(SUB_HEADER_PREFIX, StringUtils.EMPTY).strip();
+        keyword = line.strip();
         handleBlockText(headerKeyword, keyword, blockText, result);
         continue;
       }
@@ -97,8 +97,8 @@ public class PortalDocService {
     if (CollectionUtils.isNotEmpty(blockText)) {
       Metadata meta = Metadata.from("keywords",
           String.join(" ", Arrays.asList(headerKeyword, keyword)));
-      String keywords = String.join(": ",
-          Arrays.asList(headerKeyword, keyword));
+      String keywords = headerKeyword.concat(System.lineSeparator())
+          .concat(keyword).concat(System.lineSeparator());
 
       List<String> blockTextWithHeader = new ArrayList<>();
       blockTextWithHeader.add(keywords);

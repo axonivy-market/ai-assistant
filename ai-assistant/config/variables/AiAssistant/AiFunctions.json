@@ -25,7 +25,19 @@
           },
           {
             "action": 3,
-            "case": "User has a question related to process or he want to do something different from above conditions"
+            "case": "User has a question related to process"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to process widget" 
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to process list"
+          },
+          {
+            "action": 3,
+            "case": "User want to do something different from above conditions"
           }
         ]
       },
@@ -78,7 +90,19 @@
           },
           {
             "action": 3,
-            "case": "User has a question related to task or he want to do something different from above conditions"
+            "case": "User has a question related to task"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to task widget"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to task list"
+          },
+          {
+            "action": 3,
+            "case": "User want to do something different from above conditions"
           }
         ]
       },
@@ -127,7 +151,19 @@
           },
           {
             "action": 2,
-            "case": "User has a question related to case or he want to do something different from above conditions"
+            "case": "User has a question related to case"
+          },
+          {
+            "action": 2,
+            "case": "User has a question related to case widget"
+          },
+          {
+            "action": 2,
+            "case": "User has a question related to case list"
+          },
+          {
+            "action": 2,
+            "case": "User want to do something different from above conditions"
           }
         ]
       },

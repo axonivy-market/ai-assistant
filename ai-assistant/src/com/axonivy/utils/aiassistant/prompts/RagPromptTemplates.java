@@ -27,11 +27,10 @@ public class RagPromptTemplates {
       {{contactPart}}
       *************************
       Instruction:
-      - Given the context information above and not prior knowledge, answer the query.
-      - Don't try to create the answer from your own knowledge.
-      - Restructure the answer to make it easier to understand.
+      - Don't try to create the answer from your own knowledge
+      - Restructure the answer to make it easier to understand
       - Prefer the context has higher matching score
-      - Prefer to answer with image
+      - Prefer to answer with image from the Context part
       - MUST answer in this language regardless the language of user message: {{language}}
       *************************
       Query: {{request}}""";
@@ -39,12 +38,13 @@ public class RagPromptTemplates {
   public static final String DEFAULT_RAG_ANSWER = """
       And as an assistant, you MUST STRICTLY follow these ethical rules:
       {{ethicalRules}}
-
+      *************************
+      Contact information:
       {{contactPart}}
-
+      *************************
       User request:
       {{request}}
-
+      *************************
       Instruction:
       - MUST answer in this language regardless the language of user message: {{language}}
       - Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info""";
