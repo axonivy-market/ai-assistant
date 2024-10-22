@@ -18,7 +18,7 @@ public class ModelManagementTest extends BaseTest {
   }
 
   @Test
-  public void manageAssistant(WebAppFixture fixture) {
+  public void manageModels(WebAppFixture fixture) {
     AssistantManagementPage assistantManagementPage = navigateToAiManagementPage();
     ModelManagementPage modelManagementPage = assistantManagementPage.goToModelManagementPage();
     ModelDetailsPage modelDetailsPage = modelManagementPage.openModelDetails(1);

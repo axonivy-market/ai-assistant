@@ -19,7 +19,7 @@ public class AssistantManagementTest extends BaseTest {
   }
 
   @Test
-  public void manageAssistant(WebAppFixture fixture) {
+  public void manageAssistants(WebAppFixture fixture) {
     AssistantManagementPage assistantManagementPage = navigateToAiManagementPage();
     AssistantDetailsPage assistantDetailsPage = assistantManagementPage.addAssistant();
     assistantDetailsPage.useTemplate(0);
@@ -29,7 +29,5 @@ public class AssistantManagementTest extends BaseTest {
     assistantManagementPage = new AssistantManagementPage();
     Selenide.$$("div[id$='assistant-tab'] div.assistant-name").last().shouldBe(Condition.text("Portal Assistant"));
   }
-
-
 
 }

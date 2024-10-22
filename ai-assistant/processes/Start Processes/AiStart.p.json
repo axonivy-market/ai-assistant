@@ -232,6 +232,9 @@
           "map" : {
             "out.targetId" : "param.functionId"
           }
+        },
+        "request" : {
+          "isVisibleOnStartList" : false
         }
       },
       "visual" : {
