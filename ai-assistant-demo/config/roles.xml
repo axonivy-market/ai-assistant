@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<role>
+    <identifier>Everybody</identifier>
+    <role>
+        <identifier>Employee</identifier>
+        <role>
+            <identifier>ProjectManager</identifier>
+            <displayName>Project Manager</displayName>
+        </role>
+    </role>
+</role>

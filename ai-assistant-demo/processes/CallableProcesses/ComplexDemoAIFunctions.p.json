@@ -1,0 +1,445 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "1919D0051F656423",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.utils.aiassistant.demo.AIFunctionsData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "findMeetingRooms(String,String, String)",
+      "config" : {
+        "signature" : "findMeetingRooms",
+        "input" : {
+          "params" : [
+            { "name" : "meetingRoomName", "type" : "String", "desc" : "name of meeting room" },
+            { "name" : "meetingRoomFloor", "type" : "String", "desc" : "floor of the meeting room. Must be an integer" },
+            { "name" : "onlyAvailable", "type" : "String", "desc" : "Boolean field. If user want to find available room, set to \"true\"" }
+          ],
+          "map" : {
+            "out.meetingRoomFloor" : "param.meetingRoomFloor",
+            "out.meetingRoomName" : "param.meetingRoomName",
+            "out.onlyAvailable" : "param.onlyAvailable"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 208 },
+        "description" : "Function to find meeting rooms by name, floor, or status"
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 584, "y" : 208 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "Script",
+      "name" : "Find meeting room",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "MeetingRoomService service = new MeetingRoomService();",
+            "in.result = service.findByAI(in.meetingRoomName, in.meetingRoomFloor, in.onlyAvailable);"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "findEmployees(String,String,String,String)",
+      "config" : {
+        "signature" : "findEmployees",
+        "input" : {
+          "params" : [
+            { "name" : "employeeNames", "type" : "String", "desc" : "List of employee name. Must be separated by comma. Example: 'peter,alex,Johann Schmidt'" },
+            { "name" : "employeeRoles", "type" : "String", "desc" : "List of employee roles. valid value: SOFTWARE_ENGINEER, WEB_DESIGNER, TESTER, PROJECT_MANAGER. The value must be separated by comma. Example: 'SOFTWARE_ENGINEER,TESTER'" },
+            { "name" : "employeeRanks", "type" : "String", "desc" : "List of employee ranks. Valid value: SENIOR, JUNIOR, PROFESSIONAL. The value must be separated by comma. Example: 'SENIOR,JUNIOR'" },
+            { "name" : "employeeTechstacks", "type" : "String", "desc" : "List of technologies. Must be seperated by comma. Example: 'Java,HTML'" }
+          ],
+          "map" : {
+            "out.employeeNames" : "param.employeeNames",
+            "out.employeeRanks" : "param.employeeRanks",
+            "out.employeeRoles" : "param.employeeRoles",
+            "out.employeeTechstacks" : "param.employeeTechstacks"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 336 },
+        "description" : "function to find employee by name, role, rank, or technology stack"
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 584, "y" : 336 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "Find employees",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "EmployeeService service = new EmployeeService();",
+            "",
+            "in.result = service.findByAI(in.employeeNames, in.employeeRoles, in.employeeRanks, in.employeeTechstacks);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 336 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f10",
+      "type" : "CallSubStart",
+      "name" : "createProjectKickoffMeeting(String,String,String,String,String,String)",
+      "config" : {
+        "signature" : "createProjectKickoffMeeting",
+        "input" : {
+          "params" : [
+            { "name" : "projectId", "type" : "String", "desc" : "" },
+            { "name" : "host", "type" : "String", "desc" : "" },
+            { "name" : "meetingRoomId", "type" : "String", "desc" : "" },
+            { "name" : "time", "type" : "String", "desc" : "" },
+            { "name" : "title", "type" : "String", "desc" : "" },
+            { "name" : "agenda", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.meetingAgenda" : "param.agenda",
+            "out.meetingHost" : "param.host",
+            "out.meetingName" : "param.title",
+            "out.meetingRoom" : "param.meetingRoomId",
+            "out.meetingTime" : "param.time",
+            "out.projectId" : "param.projectId"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 1400, "y" : 456 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f19",
+      "type" : "CallSubStart",
+      "name" : "createProject(String,String,String,String,String)",
+      "config" : {
+        "signature" : "createProject",
+        "input" : {
+          "params" : [
+            { "name" : "projectName", "type" : "String", "desc" : "" },
+            { "name" : "projectDescription", "type" : "String", "desc" : "" },
+            { "name" : "members", "type" : "String", "desc" : "" },
+            { "name" : "technologies", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.employeeNames" : "param.members",
+            "out.projectDescription" : "param.projectDescription",
+            "out.projectName" : "param.projectName",
+            "out.technologies" : "param.technologies"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "com.axonivy.portal.components.dto.AiResultDTO", "desc" : "" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 208, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f21" }
+      ]
+    }, {
+      "id" : "f20",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 992, "y" : 568 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f21",
+      "type" : "Script",
+      "name" : "Validate",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.portal.components.dto.AiResultDTO;",
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "",
+            "EmployeeService service = new EmployeeService();",
+            "in.result = service.findByAI(in.employeeNames, null, null, null);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "Alternative",
+      "name" : "is valid?",
+      "config" : {
+        "conditions" : {
+          "f26" : "in.result.state != com.axonivy.portal.components.enums.AIState.ERROR"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 568 },
+        "labelOffset" : { "y" : -16 }
+      },
+      "connect" : [
+        { "id" : "f26", "to" : "f25", "label" : {
+            "name" : "yes",
+            "offset" : { "x" : -3, "y" : -10 }
+          } },
+        { "id" : "f30", "to" : "f20", "via" : [ { "x" : 512, "y" : 672 }, { "x" : 992, "y" : 672 } ], "label" : {
+            "name" : "no",
+            "segment" : 1.35,
+            "offset" : { "x" : -150, "y" : -58 }
+          } }
+      ]
+    }, {
+      "id" : "f25",
+      "type" : "Script",
+      "name" : "Persist to business data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.ProjectService;",
+            "ProjectService service = new ProjectService();",
+            "in.projectId = service.createProject(in.projectName, in.projectDescription, in.employeeNames, in.technologies);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 672, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f31" }
+      ]
+    }, {
+      "id" : "f31",
+      "type" : "Script",
+      "name" : "Create result for AI",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.portal.components.enums.AIState;",
+            "import com.axonivy.portal.components.dto.AiResultDTO;",
+            "in.result = new AiResultDTO();",
+            "in.result.setResult(String.format( \"Project %s was saved successfully.\", in.projectName));",
+            "in.result.setResultForAI(String.format(\"Project %s (ID: %s) was saved successfully.\", in.projectName, in.projectId));",
+            "in.result.setState(AIState.DONE);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 864, "y" : 568 }
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f20", "color" : "default" }
+      ]
+    }, {
+      "id" : "f33",
+      "type" : "TriggerCall",
+      "name" : "Trigger Meeting Invitation process",
+      "config" : {
+        "processCall" : "Start Processes/ComplexDemo:CreateMeetingInvitation(String,String,String)",
+        "call" : {
+          "map" : {
+            "param.projectId" : "in.projectId",
+            "param.meetingId" : "in.meeting.meetingId",
+            "param.employeeName" : "in.meeting.participants.get(in.counter)"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 856, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f34", "to" : "f39", "color" : "default" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "Script",
+      "name" : "Persist to business data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
+            "MeetingService service = new MeetingService();",
+            "in.meeting = service.createProjectMeeting(in.meetingName, in.meetingAgenda, in.meetingRoom, in.projectId, in.meetingHost, in.meetingTime);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f36" }
+      ]
+    }, {
+      "id" : "f36",
+      "type" : "Script",
+      "name" : "Init counter & case details",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
+            "import com.axonivy.utils.aiassistant.demo.dto.Meeting;",
+            "import ch.ivyteam.ivy.security.IUser;",
+            "in.counter = 0;",
+            "",
+            "IUser host = ivy.security.users().find(in.meeting.hostUsername);",
+            "",
+            "ivy.case.name = in.meeting.title;",
+            "ivy.case.description = in.meeting.agenda;",
+            "",
+            "// Add note that this case created by AI",
+            "ivy.case.createNote(ivy.session,",
+            "    String.format(\"Created by AI on behalf of %s(%s)\",",
+            "      host.getDisplayName(), host.getMemberName()));"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 592, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f38", "to" : "f35" }
+      ]
+    }, {
+      "id" : "f35",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 720, "y" : 456 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f37", "to" : "f33", "color" : "default" }
+      ]
+    }, {
+      "id" : "f39",
+      "type" : "Script",
+      "name" : "Counter++",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.lang.Thread;",
+            "in.counter++;",
+            "Thread.sleep(1000);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1016, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f40", "to" : "f41", "color" : "default" }
+      ]
+    }, {
+      "id" : "f41",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f42" : "in.counter == in.meeting.participants.size()",
+          "f43" : ""
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1144, "y" : 456 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f43", "to" : "f35", "via" : [ { "x" : 1144, "y" : 360 }, { "x" : 720, "y" : 360 } ] },
+        { "id" : "f42", "to" : "f44", "color" : "default" }
+      ]
+    }, {
+      "id" : "f44",
+      "type" : "Script",
+      "name" : "Create result for AI",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.portal.components.enums.AIState;",
+            "import com.axonivy.portal.components.dto.AiResultDTO;",
+            "in.result = new AiResultDTO();",
+            "in.result.setResult(\"I sent invitations tasks to project members.\");",
+            "in.result.setResultForAI(\"I sent invitations tasks to project members.\");",
+            "in.result.setState(AIState.DONE);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1272, "y" : 456 }
+      },
+      "connect" : [
+        { "id" : "f45", "to" : "f11", "color" : "default" }
+      ]
+    } ]
+}

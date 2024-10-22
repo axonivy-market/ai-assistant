@@ -1,0 +1,147 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "191C18CEB181BABE",
+  "config" : {
+    "data" : "com.axonivy.utils.aiassistant.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "startErrorHandlingDemo",
+      "config" : {
+        "signature" : "startErrorHandlingDemo",
+        "request" : {
+          "name" : "Start Error Handling Demo",
+          "description" : "Start the error handling demo of AI Assistant"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 200, "y" : 264 },
+        "labelOffset" : { "x" : 41, "y" : 49 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f4" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1048, "y" : 264 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "name" : "Initialize demo assistant",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.enums.DemoVariables;",
+            "String demoFunctions = ivy.var.get(DemoVariables.ERROR_HANDLING_DEMO_FUNCTIONS.key);",
+            "ivy.var.set(DemoVariables.AI_FUNCTIONS.key, demoFunctions);",
+            "",
+            "String demoAssistant = ivy.var.get(DemoVariables.ERROR_HANDLING_DEMO_ASSISTANT.key);",
+            "ivy.var.set(DemoVariables.AI_ASSISTANT.key,demoAssistant);"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 920, "y" : 264 }
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "Script",
+      "name" : "Delete all meeting rooms",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "MeetingRoomService service = new MeetingRoomService();",
+            "service.deleteAll();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 360, "y" : 264 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f7", "color" : "default" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.searchengine.index.IndexInfo;",
+            "import ch.ivyteam.ivy.searchengine.ISearchEngineManager;",
+            "",
+            "for (int i = 0; i < ISearchEngineManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = ISearchEngineManager.instance().indices(0, 1000).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  ISearchEngineManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 520, "y" : 264 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f16", "color" : "default" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "RUN THIS PROCESS TO START THE DEMO",
+        "",
+        "DATA PREPARATION:",
+        "     - Delete all meeting room data",
+        "     - Create an assistant with:",
+        "          + ivy tool: find meeting room",
+        "          + ivy flow: find meeting room flow",
+        "",
+        "HOW TO USE: Run this process then try to find meeting room."
+      ],
+      "visual" : {
+        "at" : { "x" : 200, "y" : 120 },
+        "size" : { "width" : 367, "height" : 143 },
+        "description" : [
+          "DATA PREPARATION:",
+          "     - Delete all meeting room data",
+          "     - Create an assistant with:",
+          "          + ivy tool: find meeting room",
+          "          + ivy flow: find meeting room flow",
+          "",
+          "HOW TO USE: Run this process then try to find meeting room."
+        ],
+        "color" : "default"
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f0" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "SubProcessCall",
+      "name" : "Back up assistant and functions variables",
+      "config" : {
+        "processCall" : "CallableProcesses/BackupDataUtils:backupAssistantAndFunctions()"
+      },
+      "visual" : {
+        "at" : { "x" : 720, "y" : 264 },
+        "size" : { "width" : 176, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f11", "color" : "default" }
+      ]
+    } ]
+}

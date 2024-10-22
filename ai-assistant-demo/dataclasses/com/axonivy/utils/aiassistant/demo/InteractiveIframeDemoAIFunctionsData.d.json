@@ -1,0 +1,22 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "InteractiveIframeDemoAIFunctionsData",
+  "namespace" : "com.axonivy.utils.aiassistant.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "employeeNames",
+    "type" : "String"
+  }, {
+    "name" : "employeeRoles",
+    "type" : "String"
+  }, {
+    "name" : "employeeRanks",
+    "type" : "String"
+  }, {
+    "name" : "employeeTechstacks",
+    "type" : "String"
+  }, {
+    "name" : "result",
+    "type" : "com.axonivy.portal.components.dto.AiResultDTO"
+  } ]
+}

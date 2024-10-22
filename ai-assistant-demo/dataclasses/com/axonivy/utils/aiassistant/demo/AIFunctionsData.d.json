@@ -1,0 +1,78 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "AIFunctionsData",
+  "namespace" : "com.axonivy.utils.aiassistant.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "result",
+    "type" : "com.axonivy.portal.components.dto.AiResultDTO"
+  }, {
+    "name" : "meetingRoomName",
+    "type" : "String"
+  }, {
+    "name" : "meetingRoomFloor",
+    "type" : "String"
+  }, {
+    "name" : "onlyAvailable",
+    "type" : "String"
+  }, {
+    "name" : "employeeTechstacks",
+    "type" : "String"
+  }, {
+    "name" : "employeeNames",
+    "type" : "String"
+  }, {
+    "name" : "employeeRoles",
+    "type" : "String"
+  }, {
+    "name" : "employeeRanks",
+    "type" : "String"
+  }, {
+    "name" : "meetingName",
+    "type" : "String"
+  }, {
+    "name" : "meetingDescription",
+    "type" : "String"
+  }, {
+    "name" : "meetingHost",
+    "type" : "String"
+  }, {
+    "name" : "meetingParticipants",
+    "type" : "String"
+  }, {
+    "name" : "meetingRoom",
+    "type" : "String"
+  }, {
+    "name" : "meetingTime",
+    "type" : "String"
+  }, {
+    "name" : "isValidated",
+    "type" : "Boolean"
+  }, {
+    "name" : "projectName",
+    "type" : "String"
+  }, {
+    "name" : "projectDescription",
+    "type" : "String"
+  }, {
+    "name" : "technologies",
+    "type" : "String"
+  }, {
+    "name" : "projectId",
+    "type" : "String"
+  }, {
+    "name" : "meetingAgenda",
+    "type" : "String"
+  }, {
+    "name" : "meetingId",
+    "type" : "String"
+  }, {
+    "name" : "counter",
+    "type" : "Integer",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "meeting",
+    "type" : "com.axonivy.utils.aiassistant.demo.dto.Meeting",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}

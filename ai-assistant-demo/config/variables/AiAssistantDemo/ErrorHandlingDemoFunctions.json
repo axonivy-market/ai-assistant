@@ -1,0 +1,93 @@
+[
+  {
+    "version": "12.0.0",
+    "id": "find-meeting-room",
+    "name": "Find meeting room",
+    "type": "IVY",
+    "signature": "findMeetingRooms(String,String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find meeting room by name, floor, or available status",
+    "usage": "This tool is helpful when user want to find for a meeting room",
+    "attributes": [
+      {
+        "name": "meetingRoomFloor",
+        "description": "floor of the meeting room. Must be an integer"
+      },
+      {
+        "name": "meetingRoomName",
+        "description": "name of meeting room"
+      },
+      {
+        "name": "onlyAvailable",
+        "description": "Boolean field. If user want to find available room, set to 'true"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-meeting-room-flow",
+    "name": "Find meeting room flow",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "This tool is helpful when user want to find for a meeting room",
+    "usage": "This tool is helpful when user want to find for a meeting room",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "TEXT",
+        "text": "Please tell me more about the room you are looking for. Such as name, floor...",
+        "useConversationMemory": false,
+        "onSuccess": 1
+      },
+      {
+        "stepNo": 1,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 3,
+            "case": "User tell more seem to be mentioned characteristics of the room he is looking for such as name or floor."
+          },
+          {
+            "action": 2,
+            "case": "User doesn't mention about characteristics of a meeting room."
+          }
+        ]
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "Sorry I cannot uderstand, please tell me about the room you are looking for.",
+        "useConversationMemory": false,
+        "onSuccess": 1
+      },
+      {
+        "stepNo": 3,
+        "type": "IVY_TOOL",
+        "toolId": "find-meeting-room",
+        "onSuccess": 5,
+        "onError": 4,
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 4,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a message to let user know the error above.",
+        "useConversationMemory": true,
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 5,
+        "type": "TEXT",
+        "text": "Run sucessfully without error",
+        "useConversationMemory": false,
+        "onSuccess": -1
+      }
+    ]
+  }
+]

@@ -1,0 +1,124 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Abrir la página de detalles de la función de IA "{0}"
+              OpenFunctionDetailsWarningDialogMessage: Los cambios no guardados se perderán. ¿Desea continuar?
+              RemoveFunctionDialogHeader: Eliminar la función AI “{0}”
+              RemoveFunctionForAssistantMessage: ¿Está seguro de que desea eliminar esta función de IA de {0}?
+              RemoveFunctionMessage: |-
+                Esta función de AI está siendo utilizada por asistentes de AI:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                ¿Está seguro de que desea eliminar esta función de AI?
+              ToggleNonStartableAiFunction: Mostrar funciones de IA no iniciables
+            ChatDashboard:
+              AiManagement: Gestión de la IA
+              ClearConversationHistory: Borrar el historial de conversaciones
+              Title: Cuadro de mandos auxiliar
+          helper:
+            UploadPortalDocument:
+              Information: |-
+                Puedes crear contenido para la herramienta de base de conocimientos subiendo un archivo zip que contenga todos los documentos necesarios.
+                Hay dos tipos de bases de conocimientos que puedes cargar:
+              InvalidFormat: |
+                Formato no válido
+              KnowledgeBaseType: Tipo de base de conocimiento
+              OtherType: <strong>Otros:</strong> Crea una base de conocimientos con el ID del archivo cargado y el contenido generado a partir de todos los archivos 'txt' dentro del archivo 'zip' cargado.
+              OtherTypeImportantNote: |+
+                IMPORTANTE: El nombre del archivo debe estar en formato dash-case (por ejemplo, my-test-file.zip). Si el nombre del archivo no sigue este formato, se producirá un error al crear la base de conocimientos.
+
+              PortalSupportType: <strong>Soporte del portal:</strong> Solo actualiza el contenido de la herramienta integrada llamada Soporte del portal, que puede responder preguntas relacionadas con el portal de Axon Ivy.
+              Title: Crear una base de conocimiento para el asistente AI
+              UploadPortalZipFile: |
+                Subir archivo zip del documento del portal
+              UploadZipFile: Subir archivo zip
+          management:
+            AiManagement:
+              AIManagementDescription: En esta página puedes gestionar todo lo relacionado con la IA
+              AddNewAssistant: Añadir nuevo asistente
+              AiModels: Modelos de IA
+              BackToAssistantDashboard: Volver al panel del asistente
+            AiModelConfiguration:
+              Connected: Conectado correctamente al proveedor de AI
+              Disclaimer: Nuestro AI Assistant utiliza una clave/credenciales API de un proveedor externo seleccionado para ofrecer determinadas funcionalidades. Tenga en cuenta que sus datos serán procesados por este proveedor externo de acuerdo con sus propias políticas y normativas de privacidad. Le
+                recomendamos que revise las políticas de privacidad del proveedor externo para comprender cómo se tratarán sus datos.
+              ModelSavedMessage: El modelo "{0}" se ha guardado correctamente
+              TestConnection: Conexión de prueba
+              Title: Configuración del modelo AI
+              UsingBy: Asistentes que utilizan este modelo
+            AssistantConfiguration:
+              AddFunction: Agregar función
+              AssistantSavedMessage: El asistente "{0}" se ha guardado correctamente
+              AssistantTemplates: Plantillas de asistente
+              CreateAssistant: Crear Asistente
+              EthicalGuideline: Normas éticas que el asistente debe cumplir
+              Functions: Funciones
+              Information: Información
+              NoAvaliableAiFunction: No hay funciones de IA disponibles para agregar en este momento.
+              RemoveDialogHeader: Eliminar el asistente "{0}
+              RemoveDialogMessage: |-
+                También se eliminarán todas las conversaciones de chat.
+                ¿Estás seguro de que quieres borrar este asistente?
+              Settings: Configuración
+              Title: Asistente de configuración
+              UseTemplate: Usar plantilla
+Labels:
+  Enums:
+    ToolType:
+      FLOW: Flujo Ivy
+      IVY: Herramienta Ivy
+      RETRIEVAL_QA: Base de conocimientos
+    UploadDocumentType:
+      OTHERS: Otras
+      PORTAL_SUPPORT: Soporte del portal
+  Message:
+    InvalidEmailFormat: Formato de Email inválido
+    InvalidUrl: URL no válida
+    SelectedToolMessage:
+      FLOW: 'Usar Ivy Flow: <{0}>'
+      IVY: 'Usar Ivy Tool: <{0}>'
+      RETRIEVAL_QA: 'Usar la base de conocimientos: <{0}>'
+  Model:
+    OpenAI:
+      PrimaryModel: Modelo principal de Open AI
+      SecondaryModel: Modelo secundario de Open AI
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  common:
+    AIFunctions: Funciones AI
+    Actions: Acciones
+    Add: Agregar
+    All: Todo
+    ApiKey: Clave API
+    Assistants: Asistentes
+    Avatar: Avatar
+    Close: Cerrar
+    ConfirmationHeaderText: ¿Está seguro?
+    Contact: Póngase en contacto con
+    ContactEmail: Email de contacto
+    ContactWebsite: Sitio web de contacto
+    Delete: Borrar
+    Description: Descripción
+    Details: Detalles
+    DisabledFlow: Este flujo de IA no puede iniciarse directamente o está deshabilitado
+    EmbeddingModel: Modelo de incrustación
+    Model: Modelo
+    ModelType: Tipo de modelo
+    Name: Nombre
+    New: Nuevo
+    Permissions: Permisos
+    Remove: Eliminar
+    RemoveMessage: ¿De verdad quieres quitarlo?
+    Save: Guardar
+    Type: Tipo
+    Usage: Uso
+Processes:
+  DocumentIndexing:
+    createIndex:
+      description: Cree una base de conocimientos para AI Assistant cargando un archivo zip de documentos
+      name: Crear una base de conocimientos para el asistente de IA

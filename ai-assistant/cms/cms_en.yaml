@@ -1,0 +1,120 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Open AI function "{0}" details page
+              OpenFunctionDetailsWarningDialogMessage: Unsaved changes will be lost. Do you want to proceed?
+              RemoveFunctionDialogHeader: Remove the "{0}" AI function
+              RemoveFunctionForAssistantMessage: Are you sure you want to remove this AI function from {0}?
+              RemoveFunctionMessage: |-
+                This AI function is using by AI assistants:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Are you sure you want to delete this AI function?
+              ToggleNonStartableAiFunction: Show non-startable AI functions
+            ChatDashboard:
+              AiManagement: AI Management
+              ClearConversationHistory: Clear conversation history
+              Title: Assistant Dashboard
+          helper:
+            UploadPortalDocument:
+              Information: |2
+                 You can create content for Knowledge base tool by upload a zip file which contained all documents for it.
+                 There are two type of knowledge base you can upload:
+              InvalidFormat: Invalid format
+              KnowledgeBaseType: Knowledge base type
+              OtherType: <strong>Others:</strong> Create a knowledge base with the ID of the uploaded file with the content generated from all 'txt' files inside the uploaded 'zip' file.
+              OtherTypeImportantNote: 'IMPORTANT: The file name must be in dash-case format (e.g., my-test-file.zip). If the file name does not follow this format, an error will occur when creating the knowledge base.'
+              PortalSupportType: <strong>Portal Support:</strong> Only update the content of the built-in tool called `Portal support` which can answer questions related to the Axon Ivy Portal.
+              Title: Create knowledge base for AI Assistant
+              UploadPortalZipFile: Upload Portal Document zip file
+              UploadZipFile: Upload zip file
+          management:
+            AiManagement:
+              AIManagementDescription: This is the page you can manage everything related to AI
+              AddNewAssistant: Add new assistant
+              AiModels: AI Models
+              BackToAssistantDashboard: Back to assistant dashboard
+            AiModelConfiguration:
+              Connected: Connected to AI provider successfully
+              Disclaimer: Our AI Assistant uses an API key/Credentials from a selected third-party provider to deliver certain functionalities. Please note that your data will be processed by this third-party provider in accordance with their own privacy policies and regulations. We recommend reviewing
+                the privacy policies of the third-party provider to understand how your data will be handled.
+              ModelSavedMessage: Model "{0}" is saved successfully
+              TestConnection: Test Connection
+              Title: AI Model Configuration
+              UsingBy: Assistants using this model
+            AssistantConfiguration:
+              AddFunction: Add function
+              AssistantSavedMessage: Assistant "{0}" is saved successfully
+              AssistantTemplates: Assistant Templates
+              CreateAssistant: Create Assistant
+              EthicalGuideline: Ethical guidelines the assistant must adhere to
+              Functions: Functions
+              Information: Information
+              NoAvaliableAiFunction: There are no AI functions available to be added at this time.
+              RemoveDialogHeader: Remove the "{0}" assistant
+              RemoveDialogMessage: |-
+                All chat conversations will also be deleted.
+                Are you sure you want to delete this assistant?
+              Settings: Settings
+              Title: Assistant Configuration
+              UseTemplate: Use template
+Labels:
+  Enums:
+    ToolType:
+      FLOW: Ivy Flow
+      IVY: Ivy Tool
+      RETRIEVAL_QA: Knowledge Base
+    UploadDocumentType:
+      OTHERS: Others
+      PORTAL_SUPPORT: Portal Support
+  Message:
+    InvalidEmailFormat: Invalid email format
+    InvalidUrl: Invalid URL
+    SelectedToolMessage:
+      FLOW: 'Use Ivy Flow: <{0}>'
+      IVY: 'Use Ivy Tool: <{0}>'
+      RETRIEVAL_QA: 'Use Knowledge Base: <{0}>'
+  Model:
+    OpenAI:
+      PrimaryModel: Primary Open AI Model
+      SecondaryModel: Secondary Open AI Model
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  common:
+    AIFunctions: AI Functions
+    Actions: Actions
+    Add: Add
+    All: All
+    ApiKey: API Key
+    Assistants: Assistants
+    Avatar: Avatar
+    Close: Close
+    ConfirmationHeaderText: Are you sure?
+    Contact: Contact
+    ContactEmail: Contact Email
+    ContactWebsite: Contact Website
+    Delete: Delete
+    Description: Description
+    Details: Details
+    DisabledFlow: This AI flow cannot be started directly or is disabled
+    EmbeddingModel: Embedding Model
+    Model: Model
+    ModelType: Model Type
+    Name: Name
+    New: New
+    Permissions: Permissions
+    Remove: Remove
+    RemoveMessage: Do you really want to remove it?
+    Save: Save
+    Type: Type
+    Usage: Usage
+Processes:
+  DocumentIndexing:
+    createIndex:
+      description: Create knowledge base for AI Assistant by upload zip file of documents
+      name: Create knowledge base for AI Assistant

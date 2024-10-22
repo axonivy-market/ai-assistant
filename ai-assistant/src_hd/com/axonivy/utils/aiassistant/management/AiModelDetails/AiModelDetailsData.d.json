@@ -1,0 +1,11 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "AiModelDetailsData",
+  "namespace" : "com.axonivy.utils.aiassistant.management.AiModelDetails",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "modelName",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}

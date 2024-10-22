@@ -1,0 +1,285 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "1919CEDEF7828B77",
+  "config" : {
+    "data" : "com.axonivy.utils.aiassistant.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "Start Complex Demo",
+      "config" : {
+        "signature" : "startComplexDemo",
+        "request" : {
+          "name" : "Start Complex Demo",
+          "description" : "Start the complex demo of AI Assistant"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 168, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1152, "y" : 256 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "Script",
+      "name" : "Create Employee data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.security.user.NewUser;",
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "EmployeeService employeeService = new EmployeeService();",
+            "employeeService.createData();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 296, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f5", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "Create Meeting Room data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "MeetingRoomService meetingRoomService = new MeetingRoomService();",
+            "meetingRoomService.createData();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 456, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f25" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "RequestStart",
+      "name" : "CreateMeetingInvitation",
+      "config" : {
+        "signature" : "CreateMeetingInvitation",
+        "input" : {
+          "params" : [
+            { "name" : "projectId", "type" : "String", "desc" : "" },
+            { "name" : "meetingId", "type" : "String", "desc" : "" },
+            { "name" : "employeeName", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.employeeName" : "param.employeeName",
+            "out.meetingId" : "param.meetingId",
+            "out.projectId" : "param.projectId"
+          }
+        },
+        "request" : {
+          "isHttpRequestable" : false,
+          "isVisibleOnStartList" : false
+        },
+        "triggerable" : true,
+        "task" : {
+          "responsible" : {
+            "activator" : "SYSTEM"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 168, "y" : 400 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f23" }
+      ]
+    }, {
+      "id" : "f23",
+      "type" : "Script",
+      "name" : "Init task details",
+      "config" : {
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.meeting" : "in.meeting"
+          },
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingRoomService;",
+            "import com.axonivy.utils.aiassistant.demo.service.MeetingService;",
+            "import ch.ivyteam.ivy.security.IUser;",
+            "",
+            "MeetingService service = new MeetingService();",
+            "in.meeting = service.findByMeetingId(in.meetingId);",
+            "",
+            "IUser host = ivy.security.users().find(in.meeting.hostUsername);",
+            "in.taskName = String.format(\"Meeting invitation: %s\", in.meeting.title);",
+            "in.taskDescription = String.format(\"You are invited to the meeting %s by %s\", in.meeting.title, host.getDisplayName());",
+            "",
+            "ivy.case.name = in.taskName;",
+            "ivy.case.description = in.taskDescription;"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 336, "y" : 400 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f27" }
+      ]
+    }, {
+      "id" : "f25",
+      "type" : "Script",
+      "name" : "Create ivy users",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.security.user.NewUser;",
+            "import com.axonivy.utils.aiassistant.demo.dto.Employee;",
+            "import com.axonivy.utils.aiassistant.demo.service.EmployeeService;",
+            "",
+            "EmployeeService service = new EmployeeService();",
+            "List<Employee> employees = service.findAll();",
+            "",
+            "for (Employee emp : employees) {",
+            "  if (ivy.security.users().find(emp.username) == null) {",
+            "    ",
+            "    NewUser user = NewUser.create(emp.username)",
+            "      .fullName(emp.displayName)",
+            "      .formattingLanguage(ivy.session.getFormattingLocale())",
+            "      .language(ivy.session.getContentLocale())",
+            "      .toNewUser();",
+            "",
+            "    ivy.security.users().create(user);",
+            "  }",
+            "}"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 624, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f26", "to" : "f16", "color" : "default" }
+      ]
+    }, {
+      "id" : "f27",
+      "type" : "UserTask",
+      "name" : "Invitation task",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.demo.MeetingInvitation:start(String,String)",
+        "call" : {
+          "map" : {
+            "param.meetingId" : "in.meetingId",
+            "param.projectId" : "in.projectId"
+          }
+        },
+        "task" : {
+          "name" : "<%= in.taskName %>",
+          "description" : "<%= in.taskDescription %>",
+          "responsible" : {
+            "type" : "USER_FROM_ATTRIBUTE",
+            "activator" : "in.employeeName"
+          },
+          "code" : [
+            "import ch.ivyteam.ivy.security.IUser;",
+            "",
+            "IUser host = ivy.security.users().find(in.meeting.hostUsername);",
+            "",
+            "ivy.task.createNote(ivy.session,",
+            "  String.join(\"This task was created automatically by AI on behalf of %s\", host.getDisplayName()));"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 520, "y" : 400 }
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f28" }
+      ]
+    }, {
+      "id" : "f28",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 704, "y" : 400 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "name" : "Initialize demo assistant",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.utils.aiassistant.demo.enums.DemoVariables;",
+            "String demoFunctions = ivy.var.get(DemoVariables.COMPLEX_DEMO_FUNCTIONS.key);",
+            "ivy.var.set(DemoVariables.AI_FUNCTIONS.key, demoFunctions);",
+            "",
+            "String demoAssistant = ivy.var.get(DemoVariables.COMPLEX_DEMO_ASSISTANT.key);",
+            "ivy.var.set(DemoVariables.AI_ASSISTANT.key,demoAssistant);"
+          ]
+        },
+        "sudo" : true
+      },
+      "visual" : {
+        "at" : { "x" : 1008, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "RUN THIS PROCESS TO START THE DEMO",
+        "DATA PREPARATION:",
+        "     - Create data for demo employees",
+        "\t - Create ivy user for each demo employees",
+        "\t - Create data for demo meeting room",
+        "     - Create an assistant with:",
+        "          + ivy flow: Plan software project",
+        "",
+        "HOW TO USE: Run this process then try to plan project."
+      ],
+      "visual" : {
+        "at" : { "x" : 168, "y" : 120 },
+        "size" : { "width" : 332, "height" : 144 },
+        "description" : [
+          "DATA PREPARATION:",
+          "     - Create data for demo employees",
+          "   - Create ivy user for each demo employees",
+          "   - Create data for demo meeting room",
+          "     - Create an assistant with:",
+          "          + ivy flow: Plan software project",
+          "",
+          "HOW TO USE: Run this process then try to plan project."
+        ]
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f0" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "SubProcessCall",
+      "name" : "Back up assistant and functions variables",
+      "config" : {
+        "processCall" : "CallableProcesses/BackupDataUtils:backupAssistantAndFunctions()"
+      },
+      "visual" : {
+        "at" : { "x" : 816, "y" : 257 },
+        "size" : { "width" : 176, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f11", "color" : "default" }
+      ]
+    } ]
+}

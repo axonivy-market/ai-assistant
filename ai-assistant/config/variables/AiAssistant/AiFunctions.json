@@ -1,0 +1,1196 @@
+[
+  {
+    "version": "12.0.0",
+    "id": "handle-process-flow",
+    "name": "Handle process",
+    "type": "FLOW",
+    "startable": true,
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to handle processes",
+    "usage": "Use this tool when user make a request",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User want to start, or run a process"
+          },
+          {
+            "action": 2,
+            "case": "User want to find, list out, show, or look up for process"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to process"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to process widget" 
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to process list"
+          },
+          {
+            "action": 3,
+            "case": "User want to do something different from above conditions"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TRIGGER_FLOW",
+        "flowId": "start-process-flow",
+        "triggerMessage": "I want to start a process with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 2,
+        "type": "TRIGGER_FLOW",
+        "flowId": "find-processes-flow",
+        "triggerMessage": "I want to find process with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 3,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "handle-tasks-flow",
+    "name": "Handle tasks",
+    "type": "FLOW",
+    "startable": true,
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to handle tasks",
+    "usage": "Please use this tool when user mentioned the word 'task'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User want to start, or run the task"
+          },
+          {
+            "action": 2,
+            "case": "User want to find, list out, show, or look up for tasks"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to task"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to task widget"
+          },
+          {
+            "action": 3,
+            "case": "User has a question related to task list"
+          },
+          {
+            "action": 3,
+            "case": "User want to do something different from above conditions"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TRIGGER_FLOW",
+        "flowId": "start-task-flow",
+        "triggerMessage": "I want to start task with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 2,
+        "type": "TRIGGER_FLOW",
+        "flowId": "find-tasks-flow",
+        "triggerMessage": "I want to find task with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 3,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "handle-cases-flow",
+    "name": "Handle cases",
+    "type": "FLOW",
+    "startable": true,
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to handle cases",
+    "usage": "Please use this tool when user mentioned the word 'case'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User want to start, run, find, list out, show, or look up for case"
+          },
+          {
+            "action": 2,
+            "case": "User has a question related to case"
+          },
+          {
+            "action": 2,
+            "case": "User has a question related to case widget"
+          },
+          {
+            "action": 2,
+            "case": "User has a question related to case list"
+          },
+          {
+            "action": 2,
+            "case": "User want to do something different from above conditions"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TRIGGER_FLOW",
+        "flowId": "find-cases-flow",
+        "triggerMessage": "I want to find case with information in the lastest message from User",
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 2,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-cases-flow",
+    "name": "Find cases",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find cases by name, description, and states",
+    "usage": "Use this tool when the user mentioned 'case'.",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "RE_PHRASE",
+        "useConversationMemory": true,
+        "toolId": "find-cases",
+        "onRephrase": 1,
+        "onSuccess": 1,
+        "saveToHistory": false,
+        "examples": [
+          {
+            "before": "find my testing case",
+            "after": "find case has name 'testing'"
+          },
+          {
+            "before": "find my working cases",
+            "after": "find cases has state 'in_progress'"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "IVY_TOOL",
+        "toolId": "find-cases",
+        "onSuccess": -1,
+        "onError": 4
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a question similar to 'I have rephrased your request to find case as follows. Could you please confirm if it is correct?'",
+        "showResultOfStep": 0,
+        "onSuccess": 3
+      },
+      {
+        "stepNo": 3,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User agree"
+          },
+          {
+            "action": 0,
+            "case": "User don't agree and refine the condition to find case"
+          },
+          {
+            "action": -1,
+            "case": "User don't want to find case anymore"
+          }
+        ]
+      },
+      {
+        "stepNo": 4,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Generate a question similar to 'Sorry, I cannot find any cases matched your request. Could you please provide more details?'",
+        "onSuccess": 5
+      },
+      {
+        "stepNo": 5,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User clarify or make another request to find case"
+          },
+          {
+            "action": -1,
+            "case": "User say he want to cancel or he make another request that irrelevant to the find case function"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-tasks-flow",
+    "name": "Find tasks",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find tasks by name, description, priority, state, and expiry date",
+    "usage": "Please use this tool when the user wants to find a task or mentions a task, but it's unclear what he want to do with it. Example: 'i want to find task has name submit'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "RE_PHRASE",
+        "useConversationMemory": false,
+        "toolId": "find-tasks",
+        "onRephrase": 1,
+        "onSuccess": 1,
+        "saveToHistory": false,
+        "examples": [
+          {
+            "before": "find my fix car task",
+            "after": "find task has name 'fix car'"
+          },
+          {
+            "before": "find top priority task",
+            "after": "find task has high priority"
+          },
+          {
+            "before": "find my running task",
+            "after": "find task has state 'in_progress'"
+          },
+          {
+            "before": "please find tasks I need to finish this week",
+            "after": "find task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>, and the responsible is <username in metadata>"
+          },
+          {
+            "before": "List me all the tasks that need completion within the current week",
+            "after": "find task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "IVY_TOOL",
+        "toolId": "find-tasks",
+        "onSuccess": 6,
+        "onError": 4,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "I have rephrased your request as follows. Could you please confirm if it is correct?",
+        "showResultOfStep": 0,
+        "onSuccess": 3
+      },
+      {
+        "stepNo": 3,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User agree"
+          },
+          {
+            "action": 0,
+            "case": "User don't agree and suggested another condition to find task"
+          },
+          {
+            "action": -1,
+            "case": "User don't want to find task anymore"
+          }
+        ]
+      },
+      {
+        "stepNo": 4,
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
+        "onSuccess": 5
+      },
+      {
+        "stepNo": 5,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 1,
+            "case": "User clarify or make another request to find task"
+          },
+          {
+            "action": -1,
+            "case": "User say he want to cancel or he make another request that irrelevant to the find task function"
+          },
+          {
+            "action": -1,
+            "case": "User say good or thank you or seem that he don't want to find task anymore."
+          }
+        ]
+      },
+      {
+        "stepNo": 6,
+        "type": "TEXT",
+        "text": "I found tasks matched your request.",
+        "onSuccess": -1,
+        "showResultOfStep": 1
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "start-task-flow",
+    "name": "Start task",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Automatically finds relevant information then start the task whenever user want to start one",
+    "usage": "Use this tool when user mentioned words 'start' 'task'. Example: 'I want to start approval task assigned to me'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "RE_PHRASE",
+        "useConversationMemory": false,
+        "toolId": "find-tasks",
+        "onRephrase": 1,
+        "onSuccess": 1,
+        "saveToHistory": false,
+        "examples": [
+          {
+            "before": "start my fix car task",
+            "after": "start task has name 'fix car'"
+          },
+          {
+            "before": "start top priority task",
+            "after": "start task has high priority"
+          },
+          {
+            "before": "start my running task",
+            "after": "start task has state 'in_progress'"
+          },
+          {
+            "before": "please start tasks I need to finish this week",
+            "after": "start task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>, and the responsible is <username in metadata>"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "IVY_TOOL",
+        "toolId": "find-tasks",
+        "onSuccess": 3,
+        "onError": 2,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
+        "onSuccess": 0
+      },
+      {
+        "stepNo": 3,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 2,
+            "case": "cannot find any tasks"
+          },
+          {
+            "action": 5,
+            "case": "found multiple tasks"
+          },
+          {
+            "action": 4,
+            "case": "found only one tasks"
+          }
+        ]
+      },
+      {
+        "stepNo": 4,
+        "type": "IVY_TOOL",
+        "toolId": "start-task-by-id",
+        "onSuccess": -1,
+        "onError": 6,
+        "useConversationMemory": true
+      },
+      {
+        "stepNo": 5,
+        "type": "TEXT",
+        "text": "I found some tasks that match your request. Which one would you like to start?",
+        "showResultOfStep": 1,
+        "onSuccess": 6,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 6,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 4,
+            "case": "User choose a task from the list to start"
+          },
+          {
+            "action": 10,
+            "case": "User don't want to choose any of them"
+          },
+          {
+            "action": 0,
+            "case": "User provide information to search tasks again"
+          },
+          {
+            "action": -1,
+            "case": "User say something irrelevant to the find task function"
+          },
+          {
+            "action": -1,
+            "case": "User say something meaningless"
+          }
+        ]
+      },
+      { 
+        "stepNo": 7,
+        "type": "IVY_TOOL",
+        "toolId": "find-task-details-by-id",
+        "onSuccess": 8,
+        "onError": 9,
+        "useConversationMemory": false,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "text": "You cannot start the requested task. Please check the task details.",
+        "showResultOfStep": 7,
+        "onSuccess": -1,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 9,
+        "type": "TEXT",
+        "text": "Something went wrong when I trying to start the task you requested. Please try again later.",
+        "onSuccess": -1,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 10,
+        "type": "TEXT",
+        "text": "Sorry to hear that, can you provide information of the task you want to start?",
+        "onSuccess": 6,
+        "saveToHistory": true
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-processes-flow",
+    "name": "Find processes",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find processes by name or description",
+    "usage": "Please use this tool when the user wants to find a process or mentions a process, but it's unclear what he want to do with it. Examples: 'fix car process', 'is there any fix car process?', 'help me find fix car process'",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "IVY_TOOL",
+        "toolId": "find-processes",
+        "onSuccess": -1,
+        "onError": 1
+      },
+      {
+        "stepNo": 1,
+        "type": "RE_PHRASE",
+        "toolId": "find-processes",
+        "onRephrase": 2,
+        "onSuccess": 0,
+        "examples": [
+          {
+            "before": "find leave request process",
+            "after": "find process help creating leave request"
+          },
+          {
+            "before": "find process leave request",
+            "after": "find processes has name 'leave request'"
+          },
+          {
+            "before": "find process to create a leave request",
+            "after": "find process has name 'leave request'"
+          },
+          {
+            "before": "find processes",
+            "after": "find all processes"
+          }
+        ]
+      },
+      {
+        "stepNo": 2,
+        "type": "TEXT",
+        "text": "I have rephrased your request as follows. Could you please confirm if it is correct?",
+        "showResultOfStep": 1,
+        "onSuccess": 3
+      },
+      {
+        "stepNo": 3,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 4,
+            "case": "User agree"
+          },
+          {
+            "action": -1,
+            "case": "User don't agree"
+          },
+          {
+            "action": 0,
+            "case": "User suggest other processes"
+          },
+          {
+            "action": -1,
+            "case": "User says something meaningless or he don't want to continue"
+          }
+        ]
+      },
+      {
+        "stepNo": 4,
+        "type": "IVY_TOOL",
+        "toolId": "find-processes",
+        "onSuccess": -1,
+        "onError": 5
+      },
+      {
+        "stepNo": 5,
+        "type": "TEXT",
+        "text": "Sorry I cannot find any process matched your request",
+        "onSuccess": -1
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "start-process-flow",
+    "name": "Start process",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Automatically finds relevant information and starts the most suitable process whenever the user has request",
+    "usage": "Use this tool when user want to start process or he want to perform some actions.",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 1,
+            "case": "In the chat history, has an AI message start with 'AI: Found processes', and you can see information (ID, name, description,...) that could fulfill the request of user from those found processes."
+          },
+          {
+            "action": 26,
+            "case": "In the chat history, AI didn't metion any process"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
+        "type": "TEXT",
+        "useAI": true,
+        "useConversationMemory": true,
+        "customInstruction": "Act as friendly assistant, ask user if he want to use the process in the conversation above. The process name should be put inside double asterisks. Example: **Test process**",
+        "onSuccess": 2
+      },
+      {
+        "stepNo": 2,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 3,
+            "case": "User agree"
+          },
+          {
+            "action": 22,
+            "case": "User want to cancel"
+          },
+          {
+            "action": 4,
+            "case": "User want to use other process"
+          },
+          {
+            "action": -1,
+            "case": "User has other request from above"
+          }
+        ]
+      },
+      {
+        "stepNo": 3,
+        "type": "IVY_TOOL",
+        "toolId": "find-process-info",
+        "onSuccess": 12,
+        "onError": 10,
+        "useConversationMemory": true,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 4,
+        "type": "IVY_TOOL",
+        "toolId": "find-processes",
+        "onSuccess": 5,
+        "onError": 7,
+        "useConversationMemory": false,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 5,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 10,
+            "case": "cannot find any processes"
+          },
+          {
+            "action": 6,
+            "case": "found multiple processes"
+          },
+          {
+            "action": 3,
+            "case": "found one process"
+          }
+        ]
+      },
+      {
+        "stepNo": 6,
+        "type": "TEXT",
+        "text": "I found some processes that match your request. Which one would you like to start?",
+        "showResultOfStep": 4,
+        "onSuccess": 29
+      },
+      {
+        "stepNo": 7,
+        "type": "RE_PHRASE",
+        "useConversationMemory": false,
+        "toolId": "find-processes",
+        "onRephrase": 8,
+        "onSuccess": 4,
+        "customInstruction" : "If user doesn't specify which attributes to find, only field the name attribute",
+        "examples": [
+          {
+            "before": "submit leave request",
+            "after": "start process has name contains 'leave request'"
+          },
+          {
+            "before": "I want to start process has description 'leave request'",
+            "after": "start process has description contains 'leave request'"
+          }
+        ]
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any process matched your request. Therefore I changed it as below, could you please confirm if it is correct?",
+        "showResultOfStep": 7,
+        "onSuccess": 9
+      },
+      {
+        "stepNo": 9,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 0,
+            "case": "User want to request something else, or he don't agree give information to improve. Examples: 'No, name contains Leave', 'let find other leave request process'"
+          },
+          {
+            "action": 4,
+            "case": "User agree"
+          },
+          {
+            "action": 22,
+            "case": "User don't agree. Example: 'No', 'Cancel'"
+          }
+        ]
+      },
+      {
+        "stepNo": 10,
+        "type": "TEXT",
+        "text": "Sorry, I couldn't find any processes that match your request. Could you please provide more details?",
+        "onSuccess": 4
+      },
+      {
+        "stepNo": 11,
+        "type": "TEXT",
+        "text": "Something went wrong when start the process you requested. Please try again later.",
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 12,
+        "type": "SWITCH",
+        "useConversationMemory": true,
+        "cases": [
+          {
+            "action": 16,
+            "case": "The process information above has parameter"
+          },
+          {
+            "action": 13,
+            "case": "The process information doesn't mentioned about parameter"
+          },
+          {
+            "action": 27,
+            "case": "The process information doesn't mentioned about parameter and in the last message of user, he don't want you to ask"
+          }
+        ]
+      },
+      {
+        "stepNo": 13,
+        "type": "TEXT",
+        "text": "This is details of the requested process. Please read carefully and confirm if you want to start it.",
+        "showResultOfStep": 3,
+        "onSuccess": 14
+      },
+      {
+        "stepNo": 14,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 27,
+            "case": "User agree"
+          },
+          {
+            "action": 22,
+            "case": "User don't agree"
+          },
+          {
+            "action": 4,
+            "case": "User suggest other processes"
+          }
+        ]
+      },
+      {
+        "stepNo": 15,
+        "type": "IVY_TOOL",
+        "toolId": "start-process",
+        "onSuccess": -1,
+        "onError": 11,
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 16,
+        "type": "TEXT",
+        "text": "I found a process matched your request. However, it required some parameters in order to start. Please provide some information for these parameters:",
+        "showResultOfStep": 3,
+        "onSuccess": 17
+      },
+      {
+        "stepNo": 17,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 18,
+            "case": "User input value for parameters"
+          },
+          {
+            "action": 19,
+            "case": "User doesn't input value for parameter but he agree to do it"
+          },
+          {
+            "action": 20,
+            "case": "User want to start the process now or he doesn't agree to input parameter because he think it's doesn't necessary to input parameters"
+          },
+          {
+            "action": 11,
+            "case": "User want to cancel"
+          }
+        ]
+      },
+      {
+        "stepNo": 18,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 19,
+            "case": "Has at least one parameter has empty value"
+          },
+          {
+            "action": 20,
+            "case": "All parameters has value"
+          }
+        ]
+      },
+      {
+        "stepNo": 19,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Some parameters of the process above still have empty value. Please generate a question to ask for ONLY one of those empty paramter.",
+        "onSuccess": 17
+      },
+      {
+        "stepNo": 20,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "User input all information for the process. Please show the process information above with updated values. Then show a new line and ask if user want to start the process. We need his confirmation. And you should also show him a warning that he will be rediected away from this page once the process is started.",
+        "onSuccess": 21
+      },
+      {
+        "stepNo": 21,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 27,
+            "case": "User agree"
+          },
+          {
+            "action": 22,
+            "case": "User doesn't agree"
+          },
+          {
+            "action": 23,
+            "case": "User want to update parameters"
+          },
+          {
+            "action": 23,
+            "case": "User described what he want"
+          }
+        ]
+      },
+      {
+        "stepNo": 22,
+        "type": "TEXT",
+        "text": "You has cancelled the request. Please let me know if you have other requests or quesitons. Thank you.",
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 23,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 24,
+            "case": "User already input what he want for the parameters. Keep in mind that user may not tell the exact name of the parameter, in that case, you can guess which parameter he want to update"
+          },
+          {
+            "action": 25,
+            "case": "User didn't say what he want to update"
+          }
+        ]
+      },
+      {
+        "stepNo": 24,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "User request some updates for parameters of process. Please update the process information above with updated values. Then show a new line, say that you updated parameters then ask if user want to start the process. We need his confirmation. And you should also show him a warning that he will be rediected away from this page once the process is started.",
+        "onSuccess": 21
+      },
+      {
+        "stepNo": 25,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Ask user which parameter he want to update? Just describle what you want, you will update for him.",
+        "onSuccess": 21
+      },
+      {
+        "stepNo": 26,
+        "type": "RE_PHRASE",
+        "useConversationMemory": false,
+        "toolId": "find-processes",
+        "onRephrase": 4,
+        "onSuccess": 4,
+        "saveToHistory": false,
+        "examples": [
+          {
+            "before": "submit leave request",
+            "after": "start process has name contains 'leave request'"
+          },
+          {
+            "before": "I want to start process has description 'leave request'",
+            "after": "start process has description contains 'leave request'"
+          }
+        ]
+      }, {
+        "stepNo": 27,
+        "type": "TEXT",
+        "useAI": true,
+        "isHidden" : true,
+        "customInstruction": "Summarize information of the selected process above with the template: processId: <process_id>\nparameters:<list of parameters and their values>",
+        "onSuccess": 28
+      },
+      {
+        "stepNo": 28,
+        "type": "TRIGGER_FLOW",
+        "flowId": "start-process-with-params-flow",
+        "triggerMessage": "Start process",
+        "showResultOfStep": 27
+      },
+      {
+        "stepNo": 29,
+        "type": "SWITCH",
+        "useConversationMemory": false,
+        "cases": [
+          {
+            "action": 3,
+            "case": "User choose a process on the list above"
+          },
+          {
+            "action": 4,
+            "case": "User choose a process not in the list above"
+          },
+          {
+            "action": -1,
+            "case": "User has other request"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "start-process-with-params-flow",
+    "name": "Start process with parameters",
+    "type": "FLOW",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Flow to start process with parameters",
+    "usage": "Use this tool when user want to start process with parameters",
+    "steps": [
+      {
+        "stepNo": 0,
+        "type": "IVY_TOOL",
+        "toolId": "start-process",
+        "onSuccess": -1,
+        "onError": 1,
+        "useConversationMemory": false
+      },
+      {
+        "stepNo": 1,
+        "type": "TEXT",
+        "text": "Something went wrong when start the process you requested. Please try again later.",
+        "onSuccess": -1
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-tasks",
+    "name": "Find tasks",
+    "type": "IVY",
+    "signature": "findTasks(String,String,String,String,String,String, String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find tasks by name, description, priority, state, and expiry date",
+    "usage": "This tool is helpful when user want to find tasks by attributes. ONLY useful for task",
+    "attributes": [
+      {
+        "name": "taskName",
+        "description": "Name of the task. Only fill when the request mentioned task name. Example: task name is 'fix car'"
+      },
+      {
+        "name": "taskDescription",
+        "description": "Description of the task. Only fill when the request mentioned task description. Example: task desciption is 'fix the car YXR-53'"
+      },
+      {
+        "name": "taskPriority",
+        "description": "Priority of a task. Valid values for this attribute: low, normal, high, exception. If there are multiple values for state, seperated them by comma. Example: normal,high"
+      },
+      {
+        "name": "taskState",
+        "description": "State of the task. Valid values for this attribute: open, in_progress, done. If there are multiple values for state, seperated them by comma. Example: open,done"
+      },
+      {
+        "name": "taskExpiryDateFrom",
+        "description": "Task's expiry date from"
+      },
+      {
+        "name": "taskExpiryDateTo",
+        "description": "Task's expiry date to"
+      },
+      {
+        "name": "onlyMyTask",
+        "description": "when user mentions words similiar to 'my task' set to 'true'. Otherwise, don't change this attribute."
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-cases",
+    "name": "Find cases",
+    "type": "IVY",
+    "signature": "findCases(String,String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find cases by name, description, and states",
+    "usage": "This tool is helpful when user want to find cases by attributes. ONLY useful for case",
+    "attributes": [
+      {
+        "name": "caseName",
+        "description": "Name of the case"
+      },
+      {
+        "name": "caseDescription",
+        "description": "Description of the case"
+      },
+      {
+        "name": "caseState",
+        "description": "State of the case. Valid values for this attribute: open, done, destroyed. If there are multiple values for state, seperated them by comma. Example: open,done"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-processes",
+    "name": "Find processes",
+    "type": "IVY",
+    "signature": "findProcesses(String,String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find processes by name or description",
+    "usage": "This tool is helpful when user want to find processes by attributes. ONLY useful for processes. If user want to find all processes, don't fill any value",
+    "attributes": [
+      {
+        "name": "processName",
+        "description": "Name of the process"
+      },
+      {
+        "name": "processDescription",
+        "description": "Description of the process"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "start-task-by-id",
+    "name": "Start task by ID",
+    "type": "IVY",
+    "signature": "startTask(String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Start task by ID",
+    "usage": "This tool is helpful when user want to start a task by its ID",
+    "attributes": [
+      {
+        "name": "taskId",
+        "description": "ID of the task"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-task-details-by-id",
+    "name": "Generate task details page by ID",
+    "type": "IVY",
+    "signature": "findTaskDetails(String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description": "Find task details by ID",
+    "usage": "This tool is helpful when user want to find task details by ID",
+    "attributes": [
+      {
+        "name": "taskId",
+        "description": "ID of the task"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "start-process",
+    "name": "start process",
+    "type": "IVY",
+    "signature": "startProcess(String, String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description" : "Start process by process ID",
+    "usage": "This tool is helpful when user want to start a process",
+    "attributes": [
+      {
+        "name": "processId",
+        "description": "ID of the process",
+        "isImportant": "true"
+      },
+      {
+        "name": "parameters",
+        "description": "Parameters of the process. This field is a String and its value ONLY accept an array in JSON format with two attribute: name, value. Example: '[{'name': 'leaveType' , 'value' : '1'} , {'name': 'isAdmin' , 'value' : 'true'}]'. Note: replace single quote with double quotes.",
+        "isImportant": "true"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "find-process-info",
+    "name": "Find process info",
+    "type": "IVY",
+    "signature": "getProcessInfo(String)",
+    "permissions": [
+      "Everybody"
+    ],
+    "description" : "Find information of a process",
+    "usage": "This tool is helpful when user want to find information of a process",
+    "attributes": [
+      {
+        "name": "processId",
+        "description": "ID of the process"
+      }
+    ]
+  },
+  {
+    "version": "12.0.0",
+    "id": "portal-support",
+    "name": "Portal support",
+    "type": "RETRIEVAL_QA",
+    "description" : "Knowledge base of Portal",
+    "usage": "Helpful when user ask kind of questions related to Portal or when user need a guide to do something",
+    "permissions": [
+      "Everybody"
+    ],
+    "collection": "axon-ivy-vector-store-portal-user-guide"
+  }
+]

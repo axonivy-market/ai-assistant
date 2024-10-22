@@ -1,0 +1,129 @@
+Dialogs:
+  com:
+    axonivy:
+      utils:
+        aiassistant:
+          component:
+            AIFunctionList:
+              OpenFunctionDetailsWarningDialogHeader: Ouvrir la page des détails de la fonction d'IA "{0}"
+              OpenFunctionDetailsWarningDialogMessage: Les modifications non enregistrées seront perdues. Voulez-vous continuer?
+              RemoveFunctionDialogHeader: Supprimer la fonction AI « {0} »
+              RemoveFunctionForAssistantMessage: Êtes-vous sûr de vouloir supprimer cette fonction d'IA de {0}?
+              RemoveFunctionMessage: |-
+                Cette fonction AI est utilisée par les assistants AI :
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Êtes-vous sûr de vouloir supprimer cette fonction AI ?
+              ToggleNonStartableAiFunction: Afficher les fonctions d'IA non démarrables
+            ChatDashboard:
+              AiManagement: Gestion de l'IA
+              ClearConversationHistory: Effacer l'historique de conversation
+              Title: Tableau de bord de l'assistant
+          helper:
+            UploadPortalDocument:
+              Information: |+
+                Vous pouvez créer du contenu pour l'outil de base de connaissances en téléchargeant un fichier zip contenant tous les documents nécessaires.
+                Il existe deux types de bases de connaissances que vous pouvez télécharger :
+
+              InvalidFormat: |
+                Format invalide
+              KnowledgeBaseType: |
+                Type de base de connaissances
+              OtherType: <strong>Autres :</strong> Créez une base de connaissances avec l'ID du fichier téléchargé et le contenu généré à partir de tous les fichiers 'txt' à l'intérieur du fichier 'zip' téléchargé.
+              OtherTypeImportantNote: |+
+                IMPORTANT : Le nom du fichier doit être au format dash-case (par exemple, my-test-file.zip). Si le nom du fichier ne respecte pas ce format, une erreur se produira lors de la création de la base de connaissances.
+
+              PortalSupportType: <strong>Support du portail :</strong> Mettez uniquement à jour le contenu de l'outil intégré appelé Support du portail, qui peut répondre aux questions liées au portail Axon Ivy.
+              Title: |
+                Créer une base de connaissances pour l'assistant AI
+              UploadPortalZipFile: |
+                Télécharger le fichier zip du document portail
+              UploadZipFile: Télécharger un fichier zip
+          management:
+            AiManagement:
+              AIManagementDescription: C'est la page où vous pouvez gérer tout ce qui a trait à l'IA.
+              AddNewAssistant: Ajouter un nouvel assistant
+              AiModels: Modèles d'IA
+              BackToAssistantDashboard: Retour au tableau de bord de l'assistant
+            AiModelConfiguration:
+              Connected: Connexion réussie au fournisseur d'IA
+              Disclaimer: |-
+                Notre assistant AI utilise une clé API/des références d'un fournisseur tiers sélectionné pour fournir certaines fonctionnalités. Veuillez noter que vos données seront traitées par ce fournisseur tiers conformément à ses propres politiques et réglementations en matière de confidentialité. Nous vous recommandons de consulter les politiques de confidentialité du fournisseur tiers pour comprendre comment vos données seront traitées.
+
+                Traduit avec DeepL.com (version gratuite)
+              ModelSavedMessage: Le modèle "{0}" est sauvegardé avec succès
+              TestConnection: Test de connexion
+              Title: Configuration du modèle AI
+              UsingBy: Assistants utilisant ce modèle
+            AssistantConfiguration:
+              AddFunction: Ajouter une fonction
+              AssistantSavedMessage: L'assistant "{0}" est sauvegardé avec succès
+              AssistantTemplates: Modèles d'assistant
+              CreateAssistant: Créer un assistant
+              EthicalGuideline: Les règles éthiques que l'assistant doit suivre
+              Functions: Fonctions
+              Information: Informations
+              NoAvaliableAiFunction: Aucune fonction d'IA n'est disponible pour être ajoutée pour le moment.
+              RemoveDialogHeader: Supprimer l'assistant "{0}".
+              RemoveDialogMessage: |-
+                Toutes les conversations de chat seront également supprimées.
+                Êtes-vous sûr de vouloir supprimer cet assistant ?
+              Settings: Paramètres
+              Title: Configuration de l'assistant
+              UseTemplate: Utiliser le modèle
+Labels:
+  Enums:
+    ToolType:
+      FLOW: Flux Ivy
+      IVY: Outil Ivy
+      RETRIEVAL_QA: Base de connaissances
+    UploadDocumentType:
+      OTHERS: Autres
+      PORTAL_SUPPORT: Assistance du portail
+  Message:
+    InvalidEmailFormat: Format d'e-mail non valide
+    InvalidUrl: URL invalide
+    SelectedToolMessage:
+      FLOW: 'Utiliser Ivy Flow: <{0}>'
+      IVY: 'Utiliser Ivy Tool : <{0}>'
+      RETRIEVAL_QA: 'Utiliser la base de connaissances : <{0}>'
+  Model:
+    OpenAI:
+      PrimaryModel: Modèle Open AI principal
+      SecondaryModel: Modèle Open AI secondaire
+  Portal:
+    PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  common:
+    AIFunctions: Fonctions AI
+    Actions: Actions
+    Add: Ajouter
+    All: Tout
+    ApiKey: Clé API
+    Assistants: Assistants
+    Avatar: Avatar
+    Close: Fermer
+    ConfirmationHeaderText: Êtes-vous sûr ?
+    Contact: Contact
+    ContactEmail: Contact Email
+    ContactWebsite: Contacter le site web
+    Delete: Supprimer
+    Description: Description
+    Details: Détails
+    DisabledFlow: Ce flux d'IA ne peut pas être démarré directement ou est désactivé
+    EmbeddingModel: Modèle d'intégration
+    Model: Modèle
+    ModelType: Type de modèle
+    Name: Nom
+    New: Nouveau
+    Permissions: Permissions
+    Remove: Retirer
+    RemoveMessage: Voulez-vous vraiment l'enlever ?
+    Save: Enregistrer
+    Type: Type
+    Usage: Utilisation
+Processes:
+  DocumentIndexing:
+    createIndex:
+      description: Créez une base de connaissances pour AI Assistant en téléchargeant un fichier zip de documents
+      name: Créer une base de connaissances pour AI Assistant

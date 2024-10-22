@@ -1,0 +1,31 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "MeetingInvitationData",
+  "namespace" : "com.axonivy.utils.aiassistant.demo.MeetingInvitation",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "meetingId",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "meeting",
+    "type" : "com.axonivy.utils.aiassistant.demo.dto.Meeting",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "projectId",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "project",
+    "type" : "com.axonivy.utils.aiassistant.demo.dto.Project",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "explanation",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "meetingRoom",
+    "type" : "com.axonivy.utils.aiassistant.demo.dto.MeetingRoom",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}
