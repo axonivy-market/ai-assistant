@@ -1,6 +1,6 @@
 [
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-meeting-room",
     "name": "Find meeting room",
     "type": "IVY",
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-employees",
     "name": "Find employees",
     "type": "IVY",
@@ -56,7 +56,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "create-project",
     "name": "Create project",
     "type": "IVY",
@@ -86,7 +86,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "create-project-kickoff-meeting",
     "name": "Create project kick-off meeting",
     "type": "IVY",
@@ -124,7 +124,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "plan-software-project-flow",
     "name": "Plan Software Project",
     "startable": true,
@@ -297,7 +297,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "choose-member-flow",
     "name": "Choose member for a project",
     "type": "FLOW",
@@ -475,7 +475,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "create-project-flow",
     "name": "Create Project",
     "type": "FLOW",
@@ -534,7 +534,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "book-project-meeting-flow",
     "name": "Create project's kick-off meeting",
     "type": "FLOW",

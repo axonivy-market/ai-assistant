@@ -1,6 +1,6 @@
 [
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-meeting-room",
     "name": "Find meeting room",
     "type": "IVY",
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-meeting-room-flow",
     "name": "Find meeting room flow",
     "type": "FLOW",

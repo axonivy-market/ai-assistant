@@ -1,20 +1,20 @@
 [
   {
-    "version" : "11.4.0",
+    "version" : "12.0.0",
     "id" : "suggestion-1",
     "icon" : "si-bulb",
     "headerText" : "Explore",
     "descriptionText" : "What are the key features of the Axon Ivy Portal?",
     "message" : "What are the key features of the Axon Ivy Portal?"
   } , {
-    "version" : "11.4.0",
+    "version" : "12.0.0",
     "id" : "suggestion-2",
     "icon" : "si-pencil-write",
     "headerText" : "Tutorial",
     "descriptionText" : "Where can I find the documentation or tutorials for the Axon Ivy Portal?",
     "message" : "Where can I find the documentation or tutorials for the Axon Ivy Portal?"
   } , {
-    "version" : "11.4.0",
+    "version" : "12.0.0",
     "id" : "suggestion-3",
     "icon" : "si-layout-dashboard",
     "headerText" : "Interact",

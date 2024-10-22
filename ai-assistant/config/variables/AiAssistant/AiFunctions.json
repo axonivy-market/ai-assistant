@@ -1,6 +1,6 @@
 [
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "handle-process-flow",
     "name": "Handle process",
     "type": "FLOW",
@@ -65,7 +65,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "handle-tasks-flow",
     "name": "Handle tasks",
     "type": "FLOW",
@@ -130,7 +130,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "handle-cases-flow",
     "name": "Handle cases",
     "type": "FLOW",
@@ -184,7 +184,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-cases-flow",
     "name": "Find cases",
     "type": "FLOW",
@@ -270,7 +270,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-tasks-flow",
     "name": "Find tasks",
     "type": "FLOW",
@@ -378,7 +378,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "start-task-flow",
     "name": "Start task",
     "type": "FLOW",
@@ -525,7 +525,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-processes-flow",
     "name": "Find processes",
     "type": "FLOW",
@@ -612,7 +612,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "start-process-flow",
     "name": "Start process",
     "type": "FLOW",
@@ -987,7 +987,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "start-process-with-params-flow",
     "name": "Start process with parameters",
     "type": "FLOW",
@@ -1014,7 +1014,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-tasks",
     "name": "Find tasks",
     "type": "IVY",
@@ -1056,7 +1056,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-cases",
     "name": "Find cases",
     "type": "IVY",
@@ -1082,7 +1082,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-processes",
     "name": "Find processes",
     "type": "IVY",
@@ -1104,7 +1104,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "start-task-by-id",
     "name": "Start task by ID",
     "type": "IVY",
@@ -1122,7 +1122,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-task-details-by-id",
     "name": "Generate task details page by ID",
     "type": "IVY",
@@ -1140,7 +1140,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "start-process",
     "name": "start process",
     "type": "IVY",
@@ -1164,7 +1164,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "find-process-info",
     "name": "Find process info",
     "type": "IVY",
@@ -1182,7 +1182,7 @@
     ]
   },
   {
-    "version": "11.4.0",
+    "version": "12.0.0",
     "id": "portal-support",
     "name": "Portal support",
     "type": "RETRIEVAL_QA",
