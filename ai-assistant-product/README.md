@@ -517,7 +517,7 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 }
 ```
 
-**Hidden**
+**Hidden Text step**
 
 - **isHidden**: Set to true to hide the text from the user but allow the AI to read and process it. This is useful when generating content that the AI needs for further processing without displaying it on the UI.
 

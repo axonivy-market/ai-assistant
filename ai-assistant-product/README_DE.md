@@ -23,7 +23,7 @@ Treten Sie in einen interaktiveren und intuitiveren Workflow ein, indem Sie mit 
 
 ### Demoprojekt
 
-Im **ai-assistant-demo** Ivy-Projekt haben wir Demo-Assistenten erstellt, die Ihnen helfen können, Ihren eigenen KI-Assistenten effizienter zu verstehen und zu entwickeln.
+Im **ai-assistant-demo** Ivy-Projekt haben wir Demo-Assistenten erstellt, Du Ihnen helfen können, Ihren eigenen KI-Assistenten effizienter zu verstehen und zu entwickeln.
 
 > [!IMPORTANT]
 > Dieses Demoprojekt erstellt Ivy-Benutzer und -Rollen und überschreibt die primären KI-Assistentenvariablen. Es wird **DRINGEND EMPFOHLEN**, es im Demomodus auf einer Ivy-Engine auszuführen, um Ihre Daten zu schützen.
@@ -35,18 +35,18 @@ Im **ai-assistant-demo** Ivy-Projekt haben wir Demo-Assistenten erstellt, die Ih
 >
 > Nach Abschluss der Demo ersetzen Sie die modifizierten Variablen-Dateien durch die Sicherungskopien.
 
-#### Komplexe Demo
+#### Complex Demo
 
-**Anwendungsfall**
+**Use Case**
 
 Der Benutzer kann ein Softwareprojekt mit dem KI-Assistenten planen. Der KI-Assistent ermöglicht es dem Benutzer, ein Softwareprojekt effizient zu planen, indem er Informationen in ein strukturiertes Format organisiert. Er kann:
 
-- Das Projekt erstellen und in der Datenbank speichern
-- Bei der Suche und Auswahl geeigneter Teammitglieder für das Projekt unterstützen
-- Dem Benutzer bei der Vorbereitung des Kick-off-Meetings für das Projekt helfen
-- Aufgaben erstellen und zuweisen, um Teammitglieder zu dem Meeting einzuladen
+- das Projekt erstellen und in der Datenbank speichern
+- bei der Suche und Auswahl geeigneter Teammitglieder für das Projekt unterstützen
+- dem Benutzer bei der Vorbereitung des Kick-off-Meetings für das Projekt helfen
+- aufgaben erstellen und zuweisen, um Teammitglieder zu dem Meeting einzuladen
 
-**Wie man es verwendet**
+**Wie man es Verwendung**
 
 1. Führen Sie den Prozess `startComplexDemo` aus, um Testdaten zu erstellen und den ursprünglichen KI-Assistenten durch den **Complex Demo Assistant** zu ersetzen
 
@@ -58,13 +58,13 @@ Beispiel:
 
 `The XYZ Solutions Web Development Project aims to build a state-of-the-art web application that enhances user experience and supports the company's growth objectives. Mainly use basic web technologies such as HTML and CSS, the project will deliver a secure, scalable, and efficient platform that aligns with industry standards and best practices. We need 3 engineer, 1 web designer and 2 tester for it.`
 
-#### Fehlerbehandlungs-Demo
+#### Fehlerbehandlung-Demo
 
-**Anwendungsfall**
+**Use Case**
 
 Es gibt keine Daten für Besprechungsräume. Daher wird der KI-Assistent immer dann, wenn der Benutzer nach einem Besprechungsraum sucht, einen Fehler anzeigen. Dies ist ein einfaches Beispiel dafür, wie der KI-Assistent Fehler ordnungsgemäß behandeln kann.
 
-**Wie man es verwendet**
+**Wie man es Verwendung**
 
 1. Führen Sie den Prozess `startErrorHandlingDemo` aus, um Testdaten zu erstellen und den ursprünglichen KI-Assistenten durch den **Error Handling Demo Assistant** zu ersetzen.
 
@@ -517,7 +517,7 @@ Der **Text-Schritt** ist eine zentrale Komponente in KI-Workflows, die darauf au
 }
 ```
 
-**Versteckt**
+**versteckter Text Schritt**
 
 - **isHidden**: Auf „true“ setzen, um den Text vor dem Benutzer zu verbergen, aber der KI zu erlauben, ihn zu lesen und zu verarbeiten. Dies ist nützlich, wenn Inhalte generiert werden, die die KI für die weitere Verarbeitung benötigt, ohne sie in der Benutzeroberfläche anzuzeigen.
 
@@ -654,7 +654,7 @@ Das Ergebnis-DTO stellt sicher, dass der KI-Assistent zuverlässige und konsiste
 
 #### Erstellen Sie Ihren eigenen AI Flow
 
-In diesem Abschnitt erklären wir, wie Sie Ihren eigenen AI Flow entwickeln können, wobei das [Reale Weltproblem](#reales-weltproblem) als Anwendungsfall dient.
+In diesem Abschnitt erklären wir, wie Sie Ihren eigenen AI Flow entwickeln können, wobei das [Reale Weltproblem](#reales-weltproblem) als Use Case dient.
 
 > [!NOTE]
 > In der [Komplexen Demo](#komplexe-demo) haben wir eine Funktion implementiert, um Mitarbeiterinformationen zu finden. Daher wird dringend empfohlen, diese Demo nicht in Verbindung mit dieser Anleitung zu verwenden.
@@ -677,7 +677,7 @@ Das Ausgaberesultat des Ivy-Callable-Prozesses muss ein Objekt mit dem Namen res
 | result | com.axonivy.portal.components.dto.AiResultDTO | Ergebnis für den KI-Assistenten |
 
 > [!TIP]
-> Sie müssen die Logik zur Mitarbeitersuche selbst implementieren. Zur Orientierung können Sie den Code in der [Komplexe Demo](#komplexe-demo) im **ai-assistant-demo** Ivy-Projekt untersuchen.
+> Sie müssen die Logik zur Mitarbeitersuche selbst implementieren. Zur Orientierung können Sie den Code in der [Complex Demo](#complex-demo) im **ai-assistant-demo** Ivy-Projekt untersuchen.
 
 3. Fügen Sie in der Variablendatei **AiFunctions.json** ein Ivy-Tool hinzu, das mit dem oben genannten Callable-Prozess interagiert, um eine Liste von Mitarbeitern abzufragen.
 
