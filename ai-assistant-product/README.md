@@ -1,17 +1,39 @@
-# ai-assistant
+# AI Assistant
 
-<todo>
+The AI Assistant is a powerful tool designed to streamline your daily work within the portal. Acting as your personal assistant, it provides seamless support for a wide range of tasks, from navigating documentation to launching processes and managing tasks and cases. With the AI Assistant at your side, you can work more efficiently and effectively, freeing up valuable time for what truly matters.
+Engage in a more interactive and intuitive workflow by conversing with the assistant about your processes instead of merely executing them. This dynamic interaction enhances your experience, allowing you to explore options and gain insights as you work. With multilingual capabilities, the AI Assistant communicates effortlessly in English, German, Spanish, and more, ensuring you receive support in your preferred language.
+
+<img src="./doc/img/chat-dashboard.png" width="50%" alt="Chat Dashboard">
+
+Beyond providing immediate assistance, the AI Assistant empowers you to create and manage custom models and assistants tailored to your unique needs. With the management overview feature, designing, configuring, and organizing these models is a breeze. You can craft personalized assistants, assign specific behaviors, or leverage predefined templates to guide their actions. This level of customization ensures that your AI Assistant aligns perfectly with your preferences and work style.
+Embrace the future of work with the AI Assistant, your personalized companion for enhanced productivity and seamless task management.
+
+<img src="./doc/img/assistant-management.png" width="50%" alt="Assistant Management">
+
+**List of capabilities:**
+
+- Portal Support: The AI Assistant knows the Axon Ivy documentation.
+- Task and Process Management: The AI Assistant can initiate tasks and processes.
+- Search and Filter: It can search and filter tasks and cases.
+- Multilingual Support: It offers support in multiple languages.
+- Customizable Assistants: Create topic-based and personalized assistants.
+- Model-based AI: Assistants are built and managed using custom models.
 
 ## Demo
 
 ### Demo project
 
-In the **ai-assistant-demo** Ivy project, we created demo assistants which can help you understand and develop your own AI assistant more effeciency.
+In the **ai-assistant-demo** Ivy project, we created demo assistants which can help you understand and develop your own AI assistant more efficiently.
 
 > [!IMPORTANT]
-> This demo project will create Ivy users and roles and override the main variables of the AI Assistant. Therefore, it is HIGHLY RECOMMENDED to run it on an Ivy engine in demo mode to protect your data.
+> This demo project will create Ivy users and roles, as well as override the primary AI Assistant variables. It is **HIGHLY RECOMMENDED** to run it in demo mode on an Ivy engine to safeguard your data.
 >
-> If you choose to run this demo in a production environment, please ensure you back up all Ivy variables related to AI Assistant and restore them once the demo is complete.
+> If you choose to run this demo in a production environment, ensure that you back up all AI Assistant-related Ivy variables. Create backups of the following files on your engine:
+>
+> - `<engine folder>/configuration/applications/<application folder>/variables.AiAssistant.Assistants.json`
+> - `<engine folder>/configuration/applications/<application folder>/variables.AiAssistant.AiFunctions.json`
+>
+> After the demo is complete, replace the modified variable files with the backups.
 
 #### Complex Demo
 
@@ -19,10 +41,10 @@ In the **ai-assistant-demo** Ivy project, we created demo assistants which can h
 
 User can plan a software project with AI Assistant. The AI Assistant enables users to efficiently plan a software project by organizing information into a structured format. It can:
 
-- Create the project and persist it in the database
-- Assist in finding and selecting suitable team members for the project
-- Help users prepare for the project kick-off meeting
-- Create and assign tasks to invite team members to the meeting
+- create the project and persist it in the database
+- assist in finding and selecting suitable team members for the project
+- help users prepare for the project kick-off meeting
+- create and assign tasks to invite team members to the meeting
 
 **How to use**
 
@@ -40,14 +62,14 @@ Example:
 
 **Use case**
 
-There are no data for meeting room. Therefore whenever user find for meeting room, AI Assitant will show error.
-This is an simple example how to help AI Assistant handle error properly.
+There are no data for the meeting room. Therefore, whenever a user searches for a meeting room, the AI Assistant will show an error.
+This is a simple example of how to help the AI Assistant handle errors properly.
 
 **How to use**
 
 1. Run the process `startErrorHandlingDemo` to create test data and replace the original AI Assistant with the **Error Handling Demo Assistant**
 
-2. From **Portal**, open the AI Assistant app
+2. From **Portal**, open the AI Assistant app   
 
 3. Now you can run the demo by request to information of some room with **Error Handling Demo Assistant**.
 
@@ -59,40 +81,142 @@ Example:
 
 1. Deploy the **ai-assistant** artifact in the same application with **Portal**.
 
-2. Start the engine, login to Portal.
+2. Start the Engine, login to Portal.
 
-3. On the header of Portal, click on the **AI Assistant** icon to access the **AI Assistant** app.
+3. In the header of Portal, click the **AI Assistant** icon to access the **AI Assistant** app.
 
 ### User guide
 
 #### AI Management
 
-The AI Management page serves as a central hub for configuring and managing all aspects of your AI system. From here, you can:
+The AI Management screen serves as a central hub for configuring and managing all aspects of your AI assistant system. From here, you can:
 
-- [Configure AI models](#configure-ai-models): Change settings for AI models such as API Key that power your applications.
+- [Manage AI assistants](#manage-ai-assistants): oversee and modify the AI assistants, including change visualization, personality, adjusting their behavior, and  managing the functions they can handle
 
-- [Manage AI assistants](#manage-ai-assistants): Oversee and modify the AI assistants, including change visualization, personality, adjusting their behavior, and  managing the functions they can handle.
+- [Configure AI models](#configure-ai-models): modify settings for AI models such as API Key that powers your applications
 
-- [Manage AI functions](#manage-ai-functions): Control and organize various AI functions, defining the actions your AI can perform and how it interacts with users to provide accurate and efficient results.
+- [Manage AI functions](#manage-ai-functions): control and organize various AI functions, defining the actions your AI can perform and how it interacts with users to provide accurate and efficient results
 
-##### Configure AI Models
-
-<todo>
+<img src="./doc/img/ai-functions-management.png" width="50%" alt="AI Functions management">
 
 ##### Manage AI Assistants
 
-<todo>
+This section lists all the AI assistants that the logged-in user has permission to access, along with their names, avatars, and short descriptions.
+
+<img src=".\./doc/img/assistant-management.png" width="50%" alt="Assistant management">
+
+You can create a new AI assistant by clicking the **Add new assistant** button, or modify an existing AI assistant's details by selecting the corresponding assistant from the list.
+
+Once you've selected an AI assistant, its details page will be displayed.
+
+<img src="./doc/img/assistant-details.png" width="50%" alt="AI assistant details">
+
+There are some settings you can change:
+
+- `Name`: name of the AI assistant
+- `Permissions`: a list of Ivy roles that can use the AI assistant
+- `Model`: the AI model the assistant will use to perform its functions (for more details, please refer to [Configure AI Models](#configure-ai-models))
+- `Avatar`: the avatar of the AI assistant. Only the following image file types are accepted: `*.png`, `*.jpg`, `*.jpeg`. By default, the AI Assistant logo is used as the avatar
+- `Contact Email`: the contact email that the AI assistant can provide to users if needed
+- `Contact Website`: the website email that the AI assistant can provide to users if needed
+
+To ensure the AI assistant's safety for users and alignment with ethical guidelines, we have introduced advanced settings:
+
+- `Information`: defines how you want the AI assistant to behave when replying to users, including personality, role, and the business sector it should focus on
+- `Ethical guidelines`: ethical principles the AI assistant must strictly follow
+
+By default, these settings are read-only to prevent errors that could lead to incorrect responses. However, AI engineers can develop new templates that provide information and ethical rules for assistants. To learn how to do this, please refer to [Assistant templates](#assistant-templates).
+
+###### Use template
+
+You can quickly configure all the necessary settings for an AI assistant by using a template. To apply a template, follow these steps:
+
+1. On the AI assistant details screen, click the **Use template** button in the top right corner.
+
+2. The **Assistant Templates** dialog will appear. Select a template from the list by clicking it.
+
+    <img src="./doc/img/assistant-templates-dialog.png" width="50%" alt="Assistant Templates">
+
+3. The template's settings will be applied to your AI assistant. You can then modify them to suit your needs.
+
+###### Manage AI functions
+
+On the right side is a table listing the AI functions available to the AI assistant. You can view general information about each function, such as its name, type, description, permissions, and usage.
+
+<img src="./doc/img/assistant-details-functions.png" width="50%" alt="Functions">
+
+You can prevent the AI assistant from using a function by removing it from this table.
+
+When you click the **Add** button, the **Add function** dialog will appear. To add a function, click on the row of the function you want to select, then click **Add** to add the selected functions.
+
+<img src="./doc/img/assistant-details-add-functions.png" width="50%" alt="Add function dialog">
+
+Afterward, the selected functions will appear in the **Functions** table.
+
+###### Save your changes
+
+To apply all the changes you've made to the AI assistant details, please click the **Save** button in the bottom right corner. You will then be redirected to the [AI management](#ai-management) screen.
+
+###### Delete AI assistant
+
+As time goes by, an AI assistant may become obsoleted and you may want to delete it and create a new AI assistant. To do that, please click the **Delete** button placed on the bottom left corner of the AI assistant details page.
+
+A confim dialog will appear, you can delete the AI assistant completely by clicking the **Remove** button on that dialog.
+
+<img src="./doc/img/assistant-details-delete.png" width="50%" alt="Delete AI Assistant dialog">
+
+But please aware that, all conversations between the AI assistant and Ivy users will be deleted.
+
+##### Configure AI Models
+
+AI Models is a list of model options which a AI assistant can use to perform its functionalities.
+
+<img src="./doc/img/models-management.png" width="50%" alt="Model management">
+
+The AI Assistant need 2 AI models to works: a GPT model, and a text embedding model. Therefore, AI Assistant offers 2 tailored options that tested and ready to use:
+
+- Primary OpenAI Model:
+    - GPT model: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
+    - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+
+- Secondary OpenAI Model
+    - GPT model: [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini)
+    - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+
+When you clicking on a model item in the AI Models list, you will be redirected to the details page of that model. There you can find more model informations and change the API Key to the OpenAI platform. Your API Key is encrypted and completely secured.
+
+Furthermore, you can test to connection to OpenAI platform by clicking the button **Test Connection**. If something went wrong, we will show the details error
+
+<img src="./doc/img/ai-model-test-connection.png" width="50%" alt="Test connection">
+
+Once you click the **Save** button, all the settings, including the API Key will be saved as Axon Ivy variables, and you will be redirected to the [AI Management](#ai-management).
 
 ##### Manage AI Functions
 
-<todo>
+All AI functions that the logged in user can access are listed in the **AI Functions** section with general information such as name, type, permissions to use the function,and description. There are some reasons why an AI function is non-startable:
+
+- `Ivy Tool` function: disabled by default because it's only be used by `Ivy Flow` functions
+- `Ivy Flow` function: disabled when system detected that there could be an error when running the flow. For example: a required Ivy callable process could not be found
+- `Knowkedge Base` function: disabled when the system cannot find the corresponding vector store
+
+<img src="./doc/img/all-ai-functions-list.png" width="50%" alt="AI Function list">
+
+You can also see all non-startable AI functions by toggling the option **Show non-startable AI functions**.
+
+###### Delete AI function
+
+You can delete the AI function completely from the AI Assistant by clicking the **Delete** button (has the trash bin icon) placed in the last column of the corresponding row of that AI function. A confirmation dialog will show as below
+
+<img src="./doc/img/delete-ai-function.png" width="30%" alt="Delete AI Function">
+
+Please read the confirmation carefully before delete the AI function. The AI function could be using by some AI assitants, and once you delete it, the AI assistants cannot work on the functions any more, or worser, some errors may arise.
 
 #### Create knowledge bases
 
 AI Assistant allows admin users (with has role `AXONIVY_PORTAL_ADMIN`) to create knowledge bases for use by the AI function of type `Knowledge Base`.
 Simply start the process `Create knowledge base for AI Assistant` and follow the instructions there, you can create create knowledge bases which could be use by `Knowledge Base` functions.
 
-![Create Knowledge Base UI](./doc/img/create-knowledge-page-ui.png)
+<img src="./doc/img/create-knowledge-page-ui.png" width="50%" alt="create Knowledge Base section">
 
 Currently, you can create knowledge base for 2 types: Portal Support and Others.
 
@@ -102,7 +226,7 @@ The AI Assistant includes a built-in tool called `Portal support` which can answ
 
 To generate the knowledge base for this function, please visit the [Portal download page](https://market.axonivy.com/portal) on the Axon Ivy Market and download the latest document, as shown in the image below.
 
-![Download Portal Document](./doc/img/download-portal-doc.png)
+<img src="./doc/img/download-portal-doc.png" width="50%" alt="Download Portal Document">
 
 Then, just simply upload the downloaded file as instructed in [Create knowledge bases](#create-knowledge-bases) above.
 
@@ -125,6 +249,59 @@ Before upload other knowledge bases, please keep in mind:
 After upload the zip file, please wait for some minutes till the the upload panel closed. It may takes some minutes because it takes time for AI Assistant to do the job.
 
 ### Developer guide
+
+#### Assistant templates
+
+AI assistants provide an approach for developers to predefine templates for AI assistants. To update these templates, you need to modify the JSON file for the Ivy variable`variable.AiAssistant.AssistantTemplates.json` located in the engine folder at `<engine folder>/configuration/applications/<application folder>`.
+
+Here’s an example of an AI assistant template:
+
+```json
+[
+  {
+    "id" : "hr-assistant-template",
+    "version":"12.0.0",
+    "name" : "HR Assistant",
+    "info" : "You're an AI HR Assistant responsible for managing various HR-related tasks within a company. Your primary duties include answering employee questions, guiding them through internal processes, and handling requests related to personal information updates. You should provide clear, accurate, and concise information while following company policies maintaining confidentiality, and adhering to ethical standards.",
+    "ethicalRules" : [
+      "Adhere to all legal and regulatory requirements related to HR practices, including data protection and labor laws",
+      "Prioritize employee well-being, ensuring that their needs are addressed with care and empathy",
+      "Avoiding any form of discrimination or bias"
+    ],
+    "contactWebsite": "https://support.axonivy.com/hc/en-us",
+    "contactEmail": "testing@localhost.com",
+    "tools" : [
+      "handle-tasks-flow",
+      "handle-process-flow",
+      "handle-cases-flow",
+      "portal-support"
+    ] , 
+    "description": "HR Assistant manages your HR tasks with clarity, accuracy, and confidentiality, adhering to company policies and ethical standards."
+  }
+]
+```
+
+Attributes of an AI assistant template:
+
+- `id`: the unique ID of the template
+- `version`: the template version. It must match the version of the AI Assistant
+- `name`: the name of the assistant. When this template is selected, this value will be set as the default name for the assistant
+- `info`: defines how you want the AI assistant to behave when replying to users, including personality, role, and the business sector it should focus on
+- `ethicalRules`: ethical principles the AI assistant must strictly follow
+- `contactEmail`: the contact email the AI assistant can provide to users if needed
+- `contactWebsite`: the website the AI assistant can provide to users if needed
+- `tools`: IDs of the AI functions the assistant using this template can access
+- `description`: a short description of the template. This attribute won't affect the assistant's behavior
+
+By default, the AI assistant provides four templates:
+
+- **Portal Assistant**: a template for the Axon Ivy Portal assistant, with functions to interact with the Axon Ivy system, such as finding tasks, cases, and processes, and accessing a knowledge base about the Axon Ivy Portal
+
+- **HR Assistant**: a template designed for AI assistants in the Human Resources sector. This template doesn't include any tools but features clear information and a strong ethical rule set tailored for HR
+
+- **Sales Assistant**: a template for AI assistants that support sales teams. Like the HR Assistant, it doesn't include tools but offers clear information and a strong ethical rule set
+
+- **ICT Assistant**: a template for AI assistants used to troubleshoot IT issues in the back office. This template also doesn't include any tools
 
 #### AI Flow
 
