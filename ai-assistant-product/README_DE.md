@@ -1,6 +1,23 @@
 # ai-assistant
 
-<todo>
+Der KI-Assistent ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um Ihre tägliche Arbeit im Portal zu optimieren. Als Ihr persönlicher Assistent bietet er nahtlose Unterstützung bei einer Vielzahl von Aufgaben, von der Navigation durch Dokumentationen über das Starten von Prozessen bis hin zur Verwaltung von Aufgaben und Fällen. Mit dem KI-Assistenten an Ihrer Seite können Sie effizienter und effektiver arbeiten und wertvolle Zeit für das widmen, was wirklich wichtig ist.
+
+Treten Sie in einen interaktiveren und intuitiveren Workflow ein, indem Sie mit dem Assistenten über Ihre Prozesse sprechen, anstatt sie lediglich auszuführen. Diese dynamische Interaktion verbessert Ihr Erlebnis, sodass Sie Optionen erkunden und Einblicke gewinnen können, während Sie arbeiten. Mit mehrsprachigen Fähigkeiten kommuniziert der KI-Assistent mühelos in Englisch, Deutsch, Spanisch und mehr, sodass Sie Unterstützung in Ihrer bevorzugten Sprache erhalten.
+
+<img src="./doc/img/chat-dashboard.png" width="50%" alt="Chat-Dashboard">
+
+Über die unmittelbare Unterstützung hinaus ermöglicht Ihnen der KI-Assistent, benutzerdefinierte Modelle und Assistenten zu erstellen und zu verwalten, die auf Ihre individuellen Bedürfnisse zugeschnitten sind. Mit der Verwaltungsübersicht ist es ein Kinderspiel, diese Modelle zu entwerfen, zu konfigurieren und zu organisieren. Sie können personalisierte Assistenten erstellen, spezifische Verhaltensweisen zuweisen oder vordefinierte Vorlagen verwenden, um deren Aktionen zu steuern. Dieses Maß an Anpassung stellt sicher, dass Ihr KI-Assistent perfekt auf Ihre Vorlieben und Arbeitsweise abgestimmt ist.
+
+<img src="./doc/img/assistant-management.png" width="50%" alt="Assistentenverwaltung">
+
+**Liste der Funktionen**
+
+- Portal-Suppport: Der AI Assistant kennt die Axon Ivy Dokumentation.
+- Aufgaben- und Prozessmanagement: Der AI Assistant kann Aufgaben und Prozesse starten.
+- Suche und Filter: Er kann Aufgaben und Fälle durchsuchen und filtern.
+- Mehrsprachige Unterstützung: Unterstützung in mehreren Sprachen.
+- Anpassbare Assistenten: Erstellen Sie themenbasierte und personalisierte Assistenten.
+- Modellbasierte AI: Assistenten werden anhand benutzerdefinierter Modelle erstellt und verwaltet.
 
 ## Demo
 
@@ -9,9 +26,14 @@
 Im **ai-assistant-demo** Ivy-Projekt haben wir Demo-Assistenten erstellt, die Ihnen helfen können, Ihren eigenen KI-Assistenten effizienter zu verstehen und zu entwickeln.
 
 > [!IMPORTANT]
-> Dieses Demoprojekt wird Ivy-Benutzer und -Rollen erstellen und die Hauptvariablen des KI-Assistenten überschreiben. Es wird daher DRINGEND EMPFOHLEN, es auf einer Ivy-Engine im Demomodus auszuführen, um Ihre Daten zu schützen.
+> Dieses Demoprojekt erstellt Ivy-Benutzer und -Rollen und überschreibt die primären KI-Assistentenvariablen. Es wird **DRINGEND EMPFOHLEN**, es im Demomodus auf einer Ivy-Engine auszuführen, um Ihre Daten zu schützen.
 >
-> Wenn Sie dieses Demo in einer Produktionsumgebung ausführen möchten, stellen Sie bitte sicher, dass Sie alle Ivy-Variablen, die mit dem KI-Assistenten in Verbindung stehen, sichern und nach Abschluss des Demos wiederherstellen.
+> Wenn Sie dieses Demo in einer Produktionsumgebung ausführen möchten, stellen Sie sicher, dass Sie alle mit dem KI-Assistenten verbundenen Ivy-Variablen sichern. Erstellen Sie Sicherungskopien der folgenden Dateien auf Ihrer Engine:
+>
+> - `<engine folder>/configuration/applications/<application folder>/variables.AiAssistant.Assistants.json`
+> - `<engine folder>/configuration/applications/<application folder>/variables.AiAssistant.AiFunctions.json`
+>
+> Nach Abschluss der Demo ersetzen Sie die modifizierten Variablen-Dateien durch die Sicherungskopien.
 
 #### Komplexe Demo
 
@@ -68,24 +90,132 @@ Beispiel:
 
 Die Seite KI-Management dient als zentrale Anlaufstelle für die Konfiguration und Verwaltung aller Aspekte Ihres KI-Systems. Von hier aus können Sie:
 
-- [KI-Modelle konfigurieren](#ki-modelle-konfigurieren): Ändern Sie Einstellungen für KI-Modelle, wie z. B. den API-Schlüssel, der Ihre Anwendungen unterstützt.
-
 - [KI-Assistenten verwalten](#ki-assistenten-verwalten): Überwachen und modifizieren Sie die KI-Assistenten, einschließlich der Änderung der Visualisierung, Persönlichkeit, Anpassung ihres Verhaltens und Verwaltung der Funktionen, die sie ausführen können.
+
+- [KI-Modelle konfigurieren](#ki-modelle-konfigurieren): Ändern Sie Einstellungen für KI-Modelle, wie z. B. den API-Schlüssel, der Ihre Anwendungen unterstützt.
 
 - [KI-Funktionen verwalten](#ki-funktionen-verwalten): Kontrollieren und organisieren Sie verschiedene KI-Funktionen, definieren Sie die Aktionen, die Ihre KI ausführen kann, und wie sie mit Benutzern interagiert, um genaue und effiziente Ergebnisse zu liefern.
 
-##### KI-Modelle konfigurieren
+<img src="./doc/img/ai-functions-management.png" width="50%" alt="Verwaltung von KI-Funktionen">
 
 ##### KI-Assistenten verwalten
 
+Dieser Abschnitt listet alle KI-Assistenten auf, auf die der eingeloggte Benutzer Zugriff hat, zusammen mit ihren Namen, Avataren und kurzen Beschreibungen.
+
+<img src="./doc/img/assistant-management.png" width="50%" alt="Assistentenverwaltung">
+
+Sie können einen neuen KI-Assistenten erstellen, indem Sie auf die Schaltfläche Neuen Assistenten hinzufügen klicken, oder die Details eines vorhandenen KI-Assistenten ändern, indem Sie den entsprechenden Assistenten aus der Liste auswählen.
+
+Sobald Sie einen KI-Assistenten ausgewählt haben, wird dessen Detailseite angezeigt.
+
+<img src="./doc/img/assistant-details.png" width="50%" alt="Details zum KI-Assistenten">
+
+Es gibt einige Einstellungen, die Sie ändern können:
+
+- `Name`: Name des KI-Assistenten
+- `Berechtigungen`: Eine Liste von Ivy-Rollen, die den KI-Assistenten verwenden dürfen
+- `Modell`: Das KI-Modell, das der Assistent verwendet, um seine Funktionen auszuführen (weitere Informationen finden Sie unter KI-Modelle konfigurieren)
+- `Avatar`: Der Avatar des KI-Assistenten. Es werden nur die folgenden Bilddateitypen akzeptiert: *.png, *.jpg, *.jpeg. Standardmäßig wird das KI-Assistenten-Logo als Avatar verwendet.
+- `Kontakt E-Mail`: Die Kontakt E-Mail, die der KI-Assistent bei Bedarf den Benutzern zur Verfügung stellen kann.
+- `Kontakt Website`: Die Website, die der KI-Assistent bei Bedarf den Benutzern zur Verfügung stellen kann.
+
+Um die Sicherheit des KI-Assistenten für Benutzer und die Einhaltung ethischer Richtlinien zu gewährleisten, haben wir erweiterte Einstellungen eingeführt:
+
+- `Informationen`: Definiert, wie der KI-Assistent sich bei der Beantwortung von Benutzern verhalten soll, einschließlich Persönlichkeit, Rolle und dem Geschäftsbereich, auf den er sich konzentrieren soll.
+- `Ethische Richtlinien`: Ethische Prinzipien, denen der KI-Assistent strikt folgen muss.
+
+Standardmäßig sind diese Einstellungen schreibgeschützt, um Fehler zu vermeiden, die zu falschen Antworten führen könnten. KI-Ingenieure können jedoch neue Vorlagen entwickeln, die Informationen und ethische Regeln für Assistenten bereitstellen. Um zu erfahren, wie dies funktioniert, lesen Sie bitte [Assistentenvorlagen](#assistentenvorlagen).
+
+###### Vorlage verwenden
+
+Sie können schnell alle erforderlichen Einstellungen für einen KI-Assistenten mit einer Vorlage konfigurieren. Gehen Sie wie folgt vor, um eine Vorlage anzuwenden:
+
+1. Klicken Sie auf dem Detailbildschirm des KI-Assistenten oben rechts auf die Schaltfläche Vorlage verwenden.
+
+2. Der Dialog Assistentenvorlagen wird angezeigt. Wählen Sie eine Vorlage aus der Liste aus, indem Sie darauf klicken.
+
+    <img src="./doc/img/assistant-templates-dialog.png" width="50%" alt="Assistentenvorlagen">
+
+3. Die Einstellungen der Vorlage werden auf Ihren KI-Assistenten angewendet. Sie können diese anschließend nach Bedarf anpassen.
+
+###### KI-Funktionen verwalten
+
+Auf der rechten Seite befindet sich eine Tabelle, die die dem KI-Assistenten verfügbaren KI-Funktionen auflistet. Sie können allgemeine Informationen zu jeder Funktion einsehen, wie z. B. Name, Typ, Beschreibung, Berechtigungen und Nutzung.
+
+<img src="./doc/img/assistant-details-functions.png" width="50%" alt="Funktionen">
+
+Sie können verhindern, dass der KI-Assistent eine Funktion verwendet, indem Sie diese aus der Tabelle entfernen.
+
+Wenn Sie auf die Schaltfläche **Hinzufügen** klicken, erscheint der Dialog **Funktion hinzufügen**. Um eine Funktion hinzuzufügen, klicken Sie auf die Zeile der gewünschten Funktion und dann auf **Hinzufügen**, um die ausgewählten Funktionen hinzuzufügen.
+
+<img src="./doc/img/assistant-details-add-functions.png" width="50%" alt="Dialog zum Hinzufügen von Funktionen">
+
+Anschließend erscheinen die ausgewählten Funktionen in der **Funktionen** Tabelle.
+
+###### Änderungen speichern
+
+Um alle Änderungen, die Sie an den Details des KI-Assistenten vorgenommen haben, zu übernehmen, klicken Sie bitte auf die Schaltfläche **Speichern** in der unteren rechten Ecke. Sie werden dann zum Bildschirm [KI-Management](#ki-management) weitergeleitet.
+
+###### KI-Assistent löschen
+
+Mit der Zeit kann ein KI-Assistent veraltet sein, und Sie möchten ihn möglicherweise löschen und einen neuen erstellen. Um dies zu tun, klicken Sie bitte auf die Schaltfläche **Löschen** unten links auf der Detailseite des KI-Assistenten.
+
+Ein Bestätigungsdialog wird angezeigt, in dem Sie den KI-Assistenten vollständig löschen können, indem Sie im Dialog auf die Schaltfläche **Entfernen** klicken.
+
+<img src="./doc/img/assistant-details-delete.png" width="50%" alt="Dialog zum Löschen des KI-Assistenten">
+
+Bitte beachten Sie, dass dabei alle Gespräche zwischen dem KI-Assistenten und Ivy-Benutzern gelöscht werden.
+
+##### KI-Modelle konfigurieren
+
+KI-Modelle ist eine Liste von Modelloptionen, die ein KI-Assistent verwenden kann, um seine Funktionen auszuführen.
+
+<img src="./doc/img/models-management.png" width="50%" alt="Modellverwaltung">
+
+Der KI-Assistent benötigt zwei KI-Modelle, um zu funktionieren: ein GPT-Modell und ein Text-Embedding-Modell. Daher bietet der KI-Assistent zwei maßgeschneiderte, getestete und einsatzbereite Optionen an:
+
+- Primäres OpenAI-Modell:
+    - GPT-Modell: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
+    - Text-Embedding-Modell: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+
+- Sekundäres OpenAI-Modell:
+    - GPT-Modell: [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini)
+    - Text-Embedding-Modell: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+
+Wenn Sie auf ein Modell in der Liste der KI-Modelle klicken, werden Sie zur Detailseite dieses Modells weitergeleitet. Dort finden Sie weitere Informationen zum Modell und können den API-Schlüssel für die OpenAI-Plattform ändern. Ihr API-Schlüssel ist verschlüsselt und vollständig gesichert.
+
+Darüber hinaus können Sie die Verbindung zur OpenAI-Plattform testen, indem Sie auf die Schaltfläche **Verbindung testen** klicken. Wenn ein Fehler auftritt, zeigen wir die Details des Fehlers an.
+
+<img src="./doc/img/ai-model-test-connection.png" width="50%" alt="Verbindung testen">
+
+Sobald Sie auf die Schaltfläche **Speichern** klicken, werden alle Einstellungen, einschließlich des API-Schlüssels, als Axon Ivy-Variablen gespeichert, und Sie werden zur [KI-Management](#ki-management) weitergeleitet.
+
 ##### KI-Funktionen verwalten
+
+Alle KI-Funktionen, auf die der eingeloggte Benutzer zugreifen kann, sind im Abschnitt **KI-Funktionen** aufgelistet, zusammen mit allgemeinen Informationen wie Name, Typ, Berechtigungen zur Nutzung der Funktion und Beschreibung. Es gibt einige Gründe, warum eine KI-Funktion nicht startbar ist:
+
+- `Ivy Tool` Funktion: standardmäßig deaktiviert, da sie nur von Ivy Flow-Funktionen verwendet wird.
+- `Ivy Flow` Funktion: deaktiviert, wenn das System feststellt, dass ein Fehler beim Ausführen des Flows auftreten könnte. Zum Beispiel: Ein erforderlicher Ivy-Aufrufprozess konnte nicht gefunden werden.
+- `Wissensbasis` Funktion: deaktiviert, wenn das System den entsprechenden Vektorspeicher nicht finden kann.
+
+<img src="./doc/img/all-ai-functions-list.png" width="50%" alt="Liste der KI-Funktionen">
+
+Sie können auch alle nicht startbaren KI-Funktionen anzeigen, indem Sie die Option Nicht **Nicht startbare KI-Funktionen anzeigen** umschalten.
+
+###### KI-Funktion löschen
+
+Sie können die KI-Funktion vollständig aus dem KI-Assistenten löschen, indem Sie auf die Schaltfläche **Löschen** (mit dem Mülleimer-Symbol) klicken, die sich in der letzten Spalte der entsprechenden Zeile dieser KI-Funktion befindet. Ein Bestätigungsdialog wird wie unten angezeigt:
+
+<img src="./doc/img/delete-ai-function.png" width="30%" alt="KI-Funktion löschen">
+
+Bitte lesen Sie die Bestätigung sorgfältig, bevor Sie die KI-Funktion löschen. Die KI-Funktion könnte von einigen KI-Assistenten verwendet werden, und sobald Sie sie löschen, können die KI-Assistenten die Funktionen nicht mehr ausführen oder, noch schlimmer, es können Fehler auftreten.
 
 #### Wissensdatenbanken erstellen
 
 Der KI-Assistent ermöglicht es Administratorbenutzern (mit der Rolle `AXONIVY_PORTAL_ADMIN`), Wissensdatenbanken zu erstellen, die von der KI-Funktion des Typs `Wissensdatenbank` verwendet werden können.
 Starten Sie einfach den Prozess `Wissensdatenbank für KI-Assistenten erstellen` und folgen Sie den Anweisungen dort, um Wissensdatenbanken zu erstellen, die von Funktionen des Typs `Wissensdatenbank` genutzt werden können.
 
-![Wissensdatenbank erstellen UI](./doc/img/create-knowledge-page-ui.png)
+<img src="./doc/img/create-knowledge-page-ui.png" width="50%" alt="Wissensdatenbank erstellen UI">
 
 Derzeit können Sie Wissensdatenbanken für zwei Typen erstellen: Portal-Unterstützung und Sonstiges.
 
@@ -95,7 +225,7 @@ Der AI-Assistent enthält ein integriertes Tool namens `Portal support`, das Fra
 
 Um die Wissensdatenbank für diese Funktion zu erstellen, besuchen Sie bitte die [Portal-Downloadseite](https://market.axonivy.com/portal) auf dem Axon Ivy Market und laden Sie das neueste Dokument herunter, wie im untenstehenden Bild gezeigt.
 
-![Portal-Dokument herunterladen](./doc/img/download-portal-doc.png)
+<img src="./doc/img/download-portal-doc.png" width="30%" alt="Portal-Dokument herunterladen">
 
 Anschließend laden Sie die heruntergeladene Datei einfach wie in  [Wissensdatenbanken erstellen](#wissensdatenbanken-erstellen) oben beschrieben hoch.
 
@@ -118,6 +248,59 @@ Bevor Sie andere Wissensdatenbanken hochladen, beachten Sie bitte:
 Nach dem Hochladen der ZIP-Datei warten Sie bitte einige Minuten, bis sich das Upload-Fenster schließt. Dies kann einige Minuten dauern, da der AI-Assistent Zeit benötigt, um die Aufgabe zu erledigen.
 
 ### Entwicklerhandbuch
+
+#### Assistentenvorlagen
+
+KI-Assistenten bieten Entwicklern die Möglichkeit, Vorlagen für KI-Assistenten vorab zu definieren. Um diese Vorlagen zu aktualisieren, müssen Sie die JSON-Datei für die Ivy-Variable `variable.AiAssistant.AssistantTemplates.json` im Engine-Ordner unter `<engine folder>/configuration/applications/<application folder>` ändern.
+
+Hier ist ein Beispiel für eine KI-Assistenten-Vorlage:
+
+```json
+[
+  {
+    "id" : "hr-assistant-template",
+    "version":"12.0.0",
+    "name" : "HR Assistant",
+    "info" : "You're an AI HR Assistant responsible for managing various HR-related tasks within a company. Your primary duties include answering employee questions, guiding them through internal processes, and handling requests related to personal information updates. You should provide clear, accurate, and concise information while following company policies maintaining confidentiality, and adhering to ethical standards.",
+    "ethicalRules" : [
+      "Adhere to all legal and regulatory requirements related to HR practices, including data protection and labor laws",
+      "Prioritize employee well-being, ensuring that their needs are addressed with care and empathy",
+      "Avoiding any form of discrimination or bias"
+    ],
+    "contactWebsite": "https://support.axonivy.com/hc/en-us",
+    "contactEmail": "testing@localhost.com",
+    "tools" : [
+      "handle-tasks-flow",
+      "handle-process-flow",
+      "handle-cases-flow",
+      "portal-support"
+    ] , 
+    "description": "HR Assistant manages your HR tasks with clarity, accuracy, and confidentiality, adhering to company policies and ethical standards."
+  }
+]
+```
+
+Attribute einer KI-Assistenten-Vorlage:
+
+- `id`: die eindeutige ID der Vorlage
+- `version`: die Versionsnummer der Vorlage. Sie muss mit der Version des KI-Assistenten übereinstimmen
+- `name`: der Name des Assistenten. Wenn diese Vorlage ausgewählt wird, wird dieser Wert als Standardname für den Assistenten festgelegt
+- `info`: definiert, wie der KI-Assistent sich bei der Beantwortung von Benutzern verhalten soll, einschließlich Persönlichkeit, Rolle und dem Geschäftsbereich, auf den er sich konzentrieren soll
+- `ethicalRules`: ethische Prinzipien, denen der KI-Assistent strikt folgen muss
+- `contactEmail`: die Kontakt-E-Mail, die der KI-Assistent bei Bedarf den Benutzern zur Verfügung stellen kann
+- `contactWebsite`: die Website, die der KI-Assistent bei Bedarf den Benutzern zur Verfügung stellen kann
+- `tools`: IDs der KI-Funktionen, auf die der Assistent mit dieser Vorlage zugreifen kann
+- `description`: eine kurze Beschreibung der Vorlage. Dieses Attribut beeinflusst nicht das Verhalten des Assistenten
+
+Standardmäßig bietet der KI-Assistent vier Vorlagen an:
+
+- **Portal-Assistent**: Eine Vorlage für den Axon Ivy Portal-Assistenten, mit Funktionen zur Interaktion mit dem Axon Ivy-System, wie das Finden von Aufgaben, Fällen und Prozessen sowie den Zugriff auf eine Wissensdatenbank zum Axon Ivy-Portal.
+
+- **HR-Assistent**: Eine Vorlage für KI-Assistenten im Bereich Human Resources. Diese Vorlage enthält keine Tools, bietet jedoch klare Informationen und eine starke ethische Regelung, die speziell auf HR zugeschnitten ist.
+
+- **Sales-Assistent**: Eine Vorlage für KI-Assistenten, die Vertriebsteams unterstützen. Wie der HR-Assistent enthält auch diese Vorlage keine Tools, bietet jedoch klare Informationen und eine starke ethische Regelung.
+
+- **ICT-Assistent**: Eine Vorlage für KI-Assistenten, die zur Fehlerbehebung von IT-Problemen im Backoffice eingesetzt werden. Diese Vorlage enthält ebenfalls keine Tools.
 
 #### AI Flow
 

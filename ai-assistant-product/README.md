@@ -103,7 +103,7 @@ The AI Management screen serves as a central hub for configuring and managing al
 
 This section lists all the AI assistants that the logged-in user has permission to access, along with their names, avatars, and short descriptions.
 
-<img src=".\./doc/img/assistant-management.png" width="50%" alt="Assistant management">
+<img src="./doc/img/assistant-management.png" width="50%" alt="Assistant management">
 
 You can create a new AI assistant by clicking the **Add new assistant** button, or modify an existing AI assistant's details by selecting the corresponding assistant from the list.
 
