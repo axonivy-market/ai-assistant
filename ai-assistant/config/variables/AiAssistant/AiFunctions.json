@@ -355,8 +355,12 @@
         "type": "SWITCH",
         "cases": [
           {
-            "action": 1,
-            "case": "User clarify or make another request to find task"
+            "action": 0,
+            "case": "User update the condition to find task"
+          },
+          {
+            "action": 0,
+            "case": "User make another request to find task"
           },
           {
             "action": -1,

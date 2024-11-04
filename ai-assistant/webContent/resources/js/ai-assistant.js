@@ -6,6 +6,7 @@ const IVY = 'IVY';
 const RETRIEVAL_QA = 'RETRIEVAL_QA';
 const VALIDATE_ERROR = 'ERROR';
 var streamingValue = '';
+var streamingText = '';
 
 var workingFlow = null;
 
@@ -301,8 +302,12 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
         if (result.status == 'in_progress') {
           streaming = true;
           if (result.token != null) {
+          streamingText += result.token;
+          }
+          if (result.token != null) {
             if (result.token.startsWith(result.conversationId)) {
               streaming = false;
+              streamingText = '';
               streamingValue = result.token.replace(result.conversationId, '').trim();
               view.removeStreamingClassFromMessage();
               view.enableSendButton();
@@ -761,6 +766,12 @@ function ViewAI(uri) {
 
     // Update existing streaming message
     streamingMessage.get(0).innerHTML = cloneTemplate.innerHTML;
+
+    if (!isIFrame(streamingMessage.get(0).innerHTML)) {
+        streamingMessage.find('.js-message').get(0).innerHTML = marked.parse(streamingText);
+        streamingMessage.find('.js-message').find('img').addClass('w-full');
+        streamingMessage.find('.js-message').find('a').attr('target', '_blank').addClass('underline');
+    }
   }
 
   // Function to remove the 'streaming' class from a message
@@ -779,10 +790,12 @@ function ViewAI(uri) {
         streamingMessage.removeClass('streaming');
         $(streamingMessage).find('.js-message').get(0).innerHTML = converted;
         $($(streamingMessage).find('.js-message').get(0)).find('img').addClass('w-full');
+        $($(streamingMessage).find('.js-message').get(0)).find('a').attr('target', '_blank').addClass('underline');
       } else {
         const messages = messageList.find('.chat-message-container').not('.my-message').find('.js-message');
         messages.get(messages.length - 1).innerHTML = converted;
         $(messages.get(messages.length - 1)).find('img').addClass('w-full');
+        $(messages.get(messages.length - 1)).find('a').attr('target', '_blank').addClass('underline');
       }
 
       if (!isDisableChat) {

@@ -508,11 +508,9 @@ body .chatbot-send-form .chat-send-form-button button.ui-button.ui-button-icon-o
 /* Theme for elements inside message */
 .chat-message table {
   border-spacing: 0;
-}
-
-.chat-message table {
   margin-top: 1em;
   margin-bottom: 1em;
+  word-break: auto-phrase;
 }
 
 .chat-message table > thead > tr > th {

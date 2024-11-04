@@ -2,10 +2,10 @@ package com.axonivy.utils.aiassistant.core.embedding;
 
 import java.util.Map;
 
-public class EsDocument {
+public class EmbeddingDocument {
   private float[] vector;
   private String text;
-  private Map<String, Object> metadata;
+  private Map<String, String> metadata;
 
   public float[] getVector() {
     return vector;
@@ -23,11 +23,11 @@ public class EsDocument {
     this.text = text;
   }
 
-  public Map<String, Object> getMetadata() {
+  public Map<String, String> getMetadata() {
     return metadata;
   }
 
-  public void setMetadata(Map<String, Object> metadata) {
+  public void setMetadata(Map<String, String> metadata) {
     this.metadata = metadata;
   }
 }
