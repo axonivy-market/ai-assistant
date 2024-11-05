@@ -79,11 +79,76 @@ Example:
 
 ## Setup
 
+### Setup the ai-assistant application
+
 1. Deploy the **ai-assistant** artifact in the same application with **Portal**.
 
 2. Start the Engine, login to Portal.
 
 3. In the header of Portal, click the **AI Assistant** icon to access the **AI Assistant** app.
+
+
+### Setup vector store
+
+#### Install OpenSearch
+
+AI Assistant use OpenSearch 2.17.1 as the vector store which store all the knowledge bases. To learn how to setup, please refer to [OpenSearch 2.17.1](https://opensearch.org/versions/opensearch-2-17-1.html).
+
+After you installed OpenSearch successfully, please ensure:
+
+- the `opensearch-knn` plugin is installed
+- your OpenSearch instance has an RESTful endpoint
+
+For a quick setup on your machine, follow one of these guides:
+
+- [Quick Setup for OpenSearch on Windows](#quick-setup-for-opensearch-on-windows)
+- [Quick Setup for OpenSearch on Linux and macOS](#quick-setup-for-opensearch-on-linux-and-macos)
+
+The only precondition is that your system has a Docker distro such as [DockerDesktop](https://www.docker.com/products/docker-desktop/) or [RancherDesktop](https://rancherdesktop.io/).
+
+#### Quick Setup for OpenSearch on Windows
+
+In this guide, we’ll use the folder `C:\axon-ivy-vector-store` to store all logs and files related to the OpenSearch instance. You can change this location as needed.
+
+##### Step 1:
+
+Copy the PowerShell script [run-vector-store.ps1](./doc/files/run-vector-store.ps1) to `C:\axon-ivy-vector-store`
+
+##### Step 2:
+
+Run the `run-vector-store.ps1` PowerShell script. This will:
+
+- create a Docker container for the Axon Ivy vector store, named `axon-ivy-open-search-vector-store`
+- generate necessary configuration files:
+    + `.env`: Contains the default password.
+    + `docker-compose.yml`: Defines the Docker setup for `axon-ivy-open-search-vector-store`.
+    + `opensearch-logs` folder: Stores all logs from the vector store.
+    + `opensearch-data` folder: Stores all data from the vector store.
+
+    
+    <img src="./doc/img/quick-setup-opensearch-windows.png" width="50%" alt="All necessary files for the Docker container">
+
+- download and start the Docker container `axon-ivy-open-search-vector-store`.
+
+The RESTful endpoint for the container will be available at `http://localhost:19201/`.
+
+##### Step 3:
+
+Wait a few minutes for the Docker container to start. You can verify that the OpenSearch container is ready by opening `http://localhost:19201/` in a web browser. If the page displays OpenSearch results, your vector store is ready.
+
+<img src="./doc/img/quick-setup-opensearch-result.png" width="50%" alt="OpenSearch result">
+
+##### Step 4:
+
+To configure the Docker container for the Axon Ivy vector store, modify the `docker-compose.yml` file as needed.
+
+#### Quick Setup for OpenSearch on Linux and macOS
+
+The setup process is almost the same as for Windows. The only difference is that you'll run the bash script [run-vector-store.sh](./doc/files/run-vector-store.sh) instead of the PowerShell script.
+
+#### Configure the ai-assistant project
+
+By default, the AI Assistant connects to the vector store's RESTful endpoint at `http://localhost:19201`. If you changed the default host in the `docker-compose.yml` file, you’ll also need to update the `AiAssistant.OpenSearchVectorStoreUrl` variable to match your new RESTful endpoint.
 
 ### User guide
 
