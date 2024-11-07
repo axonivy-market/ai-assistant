@@ -180,7 +180,7 @@ There are some settings you can change:
 
 - `Name`: name of the AI assistant
 - `Permissions`: a list of Ivy roles that can use the AI assistant
-- `Model`: the AI model the assistant will use to perform its functions (for more details, please refer to [Configure AI Models](#configure-ai-models))
+- `Model`: the AI model that the assistant will use to perform its functions (for more details, please refer to [Configure AI Models](#configure-ai-models))
 - `Avatar`: the avatar of the AI assistant. Only the following image file types are accepted: `*.png`, `*.jpg`, `*.jpeg`. By default, the AI Assistant logo is used as the avatar
 - `Contact Email`: the contact email that the AI assistant can provide to users if needed
 - `Contact Website`: the website email that the AI assistant can provide to users if needed
@@ -248,9 +248,9 @@ The AI Assistant need 2 AI models to works: a GPT model, and a text embedding mo
     - GPT model: [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini)
     - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
-When you clicking on a model item in the AI Models list, you will be redirected to the details page of that model. There you can find more model informations and change the API Key to the OpenAI platform. Your API Key is encrypted and completely secured.
+When clicking on a model item in the AI Models list, you will be redirected to the details page of that model. There you can find more model informations and change the API Key to the OpenAI platform. Your API Key is encrypted and completely secured.
 
-Furthermore, you can test to connection to OpenAI platform by clicking the button **Test Connection**. If something went wrong, we will show the details error
+Furthermore, you can test the connection to the OpenAI platform by clicking the button **Test Connection**. If something went wrong, we will show the details error
 
 <img src="./doc/img/ai-model-test-connection.png" width="50%" alt="Test connection">
 
@@ -410,21 +410,21 @@ Basic attributes of an AI Flow:
 }
 ```
 
-- **version**: Specifies the version of the AI Flow, which must align with the Ivy version.
+- **version**: specifies the version of the AI Flow, which must align with the Ivy version.
 
-- **id**: The unique identifier for the AI Flow.
+- **id**: the unique identifier for the AI Flow.
 
-- **name**: The name of the AI Flow.
+- **name**: the name of the AI Flow.
 
-- **type**: Always set to "FLOW". The AI Assistant can access various tools like Ivy tools, Knowledge Base tools, and AI Flows. By defining the type as "FLOW", you indicate that this tool is an AI Flow, allowing the AI Assistant to use it correctly.
+- **type**: always set to "FLOW". The AI Assistant can access various tools like Ivy tools, Knowledge Base tools, and AI Flows. By defining the type as "FLOW", you indicate that this tool is an AI Flow, allowing the AI Assistant to use it correctly.
 
-- **permissions**: Defines the roles or usernames of users authorized to use this AI Flow.
+- **permissions**: defines the roles or usernames of users authorized to use this AI Flow.
 
-- **description**: A detailed explanation of the AI Flow. The more thorough the description, the better the AI can understand how to use the AI Flow.
+- **description**: a detailed explanation of the AI Flow. The more thorough the description, the better the AI can understand how to use the AI Flow.
 
-- **usage**: Specifies when to use the AI Flow. A clearer explanation ensures the AI can accurately select the appropriate flow to fulfill user requests.
+- **usage**: specifies when to use the AI Flow. A clearer explanation ensures the AI can accurately select the appropriate flow to fulfill user requests.
 
-- **steps**: Lists the AI Steps that the AI Flow should execute to handle the user's request. Available step types:
+- **steps**: lists the AI Steps that the AI Flow should execute to handle the user's request. Available step types:
 
    - **Switch**: decision-making element that guide AI in selecting the appropriate next action based on specific conditions.
 
@@ -454,17 +454,17 @@ Basic attributes of an AI Flow:
    - TRIGGER_FLOW: [Trigger flow step](#trigger-flow-step).
    - KNOWLEDGE_BASE: [Knowledge base step](#knowledge-base-step)
 
-- **stepNo**: Number of step in the flow.
+- **stepNo**: number of step in the flow.
 
-- **result**: Result of a step (Refer [AI Result DTO](#ai-result-dto) ).
+- **result**: result of a step (Refer [AI Result DTO](#ai-result-dto) ).
 
-- **onSuccess**: The step that will be execute if this step is run successfully.
+- **onSuccess**: the step that will be execute if this step is run successfully.
 
-- **onError**: The step that will be execute if we got trouble when running this step.
+- **onError**: the step that will be execute if we got trouble when running this step.
 
-- **useConversationMemory**: Set to true to include all chat messages of the conversation when running the step. Otherwise the AI step only include chat messages of the running AI flow.
+- **useConversationMemory**: set to true to include all chat messages of the conversation when running the step. Otherwise the AI step only include chat messages of the running AI flow.
 
-- **saveToHistory**: Set to false to exclude the message from conversation history, only save to the memory.
+- **saveToHistory**: set to false to exclude the message from conversation history, only save to the memory.
 
 - **customInstruction**: instruction for a specific requirement for AI.
 
@@ -474,7 +474,7 @@ The **Switch step** is a decision-making element designed to guide AI in selecti
 
 In the provided structure, the AI examines the case descriptions within the list and assigns the correct action number to proceed. This allows the AI to dynamically adjust its behavior based on different outcomes or states, ensuring a tailored response for various circumstances.
 
-- **cases**: A list of possible scenarios with corresponding actions.
+- **cases**: a list of possible scenarios with corresponding actions.
 
 ```json
 {
@@ -503,7 +503,7 @@ The **Ivy tool step** is a specialized instruction mechanism that directs AI to 
 }
 ```
 
-- **customInstruction**: Provides specific instructions for the AI to follow in executing the tool. For instance, the AI might be directed to "Find employees who have the role 'WEB_DEVELOPER'".
+- **customInstruction**: provides specific instructions for the AI to follow in executing the tool. For instance, the AI might be directed to "Find employees who have the role 'WEB_DEVELOPER'".
 
 ```json
 {
@@ -523,11 +523,11 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 
 **Fixed text**
 
-- **text**: The fixed text to be displayed on the UI.
+- **text**: the fixed text to be displayed on the UI.
 
-- **showResultOfStep**: Option to display the result of a previous step by referencing its number.
+- **showResultOfStep**: option to display the result of a previous step by referencing its number.
 
-- **onSuccess**: Defines the next step when the user provides input after reading the text.
+- **onSuccess**: defines the next step when the user provides input after reading the text.
 
 ```json
 {
@@ -541,11 +541,11 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 
 **AI generated**
 
-- **useAI**: Set to true to allow AI to generate content dynamically, such as summaries or reports.
+- **useAI**: set to true to allow AI to generate content dynamically, such as summaries or reports.
 
-- **customInstruction**: A guiding instruction to help the AI generate appropriate text based on context or user inputs
+- **customInstruction**: a guiding instruction to help the AI generate appropriate text based on context or user inputs
 
-- **onSuccess**: The next step to execute after user interaction.
+- **onSuccess**: the next step to execute after user interaction.
 
 ```json
 {
@@ -559,7 +559,7 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 
 **Show result of other step**
 
-- **showResultOfStep**: Displays the result from a previously executed step.
+- **showResultOfStep**: displays the result from a previously executed step.
 
 ```json
 {
@@ -584,7 +584,7 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 
 **Hidden Text step**
 
-- **isHidden**: Set to true to hide the text from the user but allow the AI to read and process it. This is useful when generating content that the AI needs for further processing without displaying it on the UI.
+- **isHidden**: set to true to hide the text from the user but allow the AI to read and process it. This is useful when generating content that the AI needs for further processing without displaying it on the UI.
 
 ```json
 {
@@ -609,21 +609,21 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 
 The **Rephrase step** is designed to help AI refine user input before executing specific actions or using tools. This is particularly useful when the user's message is vague, incomplete, or not structured in a way that the AI can immediately process. By rephrasing the input, the AI ensures that the information is more precise, making it easier to use with target tools or functions.
 
-- **toolId**: Refers to the tool the AI will use as the target. AI should use JSON schema of the corresponding tool to rephrase the message. By defining this attribute, you ensures that the rephrased input is compatible with the tool’s requirements.
-    - Example:
+- **toolId**: refers to the tool the AI will use as the target. AI should use JSON schema of the corresponding tool to rephrase the message. By defining this attribute, you ensure that the rephrased input is compatible with the tool’s requirements.
+    - example:
         - user input “find my sick leave task”
-        - You have a tool to find task by name, description, priority,… but user didn’t tell you that which field he want to use. Therefore you should rephrase the message before use it with the ivy tool.
+        - you have a tool to find task by name, description, priority,… but user didn’t tell you that which field he want to use. Therefore you should rephrase the message before use it with the ivy tool.
         - → find task with name ‘sick leave’
 
-- **customInstruction**: Provides specific guidelines for how the AI should rephrase the message. This helps the AI handle particular cases such as abstract terms or dates, formatting them into more useful data.
+- **customInstruction**: provides specific guidelines for how the AI should rephrase the message. This helps the AI handle particular cases such as abstract terms or dates, formatting them into more useful data.
 
-- **onRephrase**: Defines the next step to execute if the AI determines that it needs to rephrase the message.
+- **onRephrase**: defines the next step to execute if the AI determines that it needs to rephrase the message.
 
-- **onSuccess**: Specifies the step to run if the AI does not need to rephrase the message.
+- **onSuccess**: specifies the step to run if the AI does not need to rephrase the message.
 
-- **examples**: A list of predefined examples that guide the AI in understanding how to rephrase user messages. Each example consists of:
-    - **before**: The original, unstructured message from the user.
-    - **after**: The rephrased message that the AI would generate for better clarity and actionability
+- **examples**: a list of predefined examples that guide the AI in understanding how to rephrase user messages. Each example consists of:
+    - **before**: the original, unstructured message from the user.
+    - **after**: the rephrased message that the AI would generate for better clarity and actionability.
 
 ```json
 {
@@ -659,7 +659,7 @@ The **Trigger flow step** initiates a new flow within the AI process, either by 
 
 **Trigger with trigger message**
 
-- **triggerMessage**: The custom message that serves as input to the new flow, guiding the AI on what to do next.
+- **triggerMessage**: the custom message that serves as input to the new flow, guiding the AI on what to do next.
 
 ```json
 {
@@ -672,7 +672,7 @@ The **Trigger flow step** initiates a new flow within the AI process, either by 
 
 **Trigger with result of other step**
 
-- **showResultOfStep**: Passes the result of a specific preceding step as the trigger message for the new flow. This option is useful when you want to pass result of a flow to another, or the message you want to pass to the new step is get from the system. 
+- **showResultOfStep**: passes the result of a specific preceding step as the trigger message for the new flow. This option is useful when you want to pass result of a flow to another, or the message you want to pass to the new step is get from the system. 
 
 ```json
 {
@@ -687,7 +687,7 @@ The **Trigger flow step** initiates a new flow within the AI process, either by 
 
 When working on a step, users may have questions that aren't directly related to the workflow. For instance, if a user is unable to delegate a task, they might want to know why delegation isn't possible. The **Knowledge Base** step is designed to help users quickly find answers to such questions.
 
-- **toolId**: Refers to the tool of type `RETRIEVAL_QA` that the AI will use as the knowledge base to provide answers.
+- **toolId**: refers to the tool of type `RETRIEVAL_QA` that the AI will use as the knowledge base to provide answers.
 
 ```json
 {
