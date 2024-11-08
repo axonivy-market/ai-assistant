@@ -45,6 +45,9 @@ services:
     container_name: axon-ivy-open-search-vector-store
     environment:
       - cluster.name=axon-ivy-open-search-vector-store-cluster
+      - cluster.routing.allocation.disk.watermark.low=900mb
+      - cluster.routing.allocation.disk.watermark.high=600mb
+      - cluster.routing.allocation.disk.watermark.flood_stage=400mb
       - discovery.type=single-node
       - plugins.security.disabled=true
       - node.name=axon-ivy-open-search-vector-store-node
@@ -81,7 +84,7 @@ Write-Host "docker-compose.yml file created."
 
 # Start Docker Compose
 Write-Host "Starting Docker Compose..."
-docker-compose up
+docker compose up
 
 # Keep PowerShell window open
 Write-Host "Press Enter to exit..."
