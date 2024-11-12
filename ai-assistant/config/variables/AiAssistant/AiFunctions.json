@@ -21,23 +21,31 @@
           },
           {
             "action": 2,
-            "case": "User want to find, list out, show, or look up for process"
+            "case": "Latest message of user is a request to find, list out, show, or look up for process"
+          },
+          {
+            "action": 2,
+            "case": "Latest message of user is a normal sentence about his conditions, for example: got sick, pregnant,..."
+          },
+          {
+            "action": 2,
+            "case": "Latest message of user is a normal sentence about his changes, for example: buy new house, just married,..."
           },
           {
             "action": 3,
-            "case": "User has a question related to process"
+            "case": "Latest message of user is a question process. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "User has a question related to process widget" 
+            "case": "Latest message of user is a question process widget. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "User has a question related to process list"
+            "case": "Latest message of user is a question process list. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "User want to do something different from above conditions"
+            "case": "Latest message of user about something different from above conditions"
           }
         ]
       },
@@ -90,15 +98,15 @@
           },
           {
             "action": 3,
-            "case": "User has a question related to task"
+            "case": "Latest message of user is a question task. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "User has a question related to task widget"
+            "case": "Latest message of user is a question task widget. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "User has a question related to task list"
+            "case": "Latest message of user is a question task list. Question could be end with question mark or not"
           },
           {
             "action": 3,
@@ -151,15 +159,15 @@
           },
           {
             "action": 2,
-            "case": "User has a question related to case"
+            "case": "Latest message of user is a question case. Question could be end with question mark or not"
           },
           {
             "action": 2,
-            "case": "User has a question related to case widget"
+            "case": "Latest message of user is a question case widget. Question could be end with question mark or not"
           },
           {
             "action": 2,
-            "case": "User has a question related to case list"
+            "case": "Latest message of user is a question case list. Question could be end with question mark or not"
           },
           {
             "action": 2,
@@ -196,11 +204,33 @@
     "steps": [
       {
         "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 5,
+            "case": "Latest message of user is a question about why the find case function didn't work"
+          },
+          {
+            "action": 5,
+            "case": "Latest message of user is a question about what he should do if he cannot find a case"
+          },
+          {
+            "action": 1,
+            "case": "User want to do something different from above conditions"
+          },
+          {
+            "action": 1,
+            "case": "User want to find case"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
         "type": "RE_PHRASE",
         "useConversationMemory": true,
         "toolId": "find-cases",
-        "onRephrase": 1,
-        "onSuccess": 1,
+        "onRephrase": 2,
+        "onSuccess": 2,
         "saveToHistory": false,
         "examples": [
           {
@@ -214,58 +244,32 @@
         ]
       },
       {
-        "stepNo": 1,
+        "stepNo": 2,
         "type": "IVY_TOOL",
         "toolId": "find-cases",
-        "onSuccess": -1,
-        "onError": 4
-      },
-      {
-        "stepNo": 2,
-        "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'I have rephrased your request to find case as follows. Could you please confirm if it is correct?'",
-        "showResultOfStep": 0,
-        "onSuccess": 3
+        "onSuccess": 4,
+        "onError": 3,
+        "saveToHistory": false
       },
       {
         "stepNo": 3,
-        "type": "SWITCH",
-        "cases": [
-          {
-            "action": 1,
-            "case": "User agree"
-          },
-          {
-            "action": 0,
-            "case": "User don't agree and refine the condition to find case"
-          },
-          {
-            "action": -1,
-            "case": "User don't want to find case anymore"
-          }
-        ]
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any case matched your request.",
+        "onSuccess": -1
       },
       {
         "stepNo": 4,
         "type": "TEXT",
-        "useAI": true,
-        "customInstruction": "Generate a question similar to 'Sorry, I cannot find any cases matched your request. Could you please provide more details?'",
-        "onSuccess": 5
+        "text": "I found cases matched your request.",
+        "onSuccess": -1,
+        "showResultOfStep": 2
       },
       {
         "stepNo": 5,
-        "type": "SWITCH",
-        "cases": [
-          {
-            "action": 1,
-            "case": "User clarify or make another request to find case"
-          },
-          {
-            "action": -1,
-            "case": "User say he want to cancel or he make another request that irrelevant to the find case function"
-          }
-        ]
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
       }
     ]
   },
@@ -282,11 +286,33 @@
     "steps": [
       {
         "stepNo": 0,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 5,
+            "case": "Latest message of user is a question about why the find task function didn't work"
+          },
+          {
+            "action": 5,
+            "case": "Latest message of user is a question about what he should do if he cannot find a task"
+          },
+          {
+            "action": 1,
+            "case": "User want to do something different from above conditions"
+          },
+          {
+            "action": 1,
+            "case": "User want to find task"
+          }
+        ]
+      },
+      {
+        "stepNo": 1,
         "type": "RE_PHRASE",
         "useConversationMemory": false,
         "toolId": "find-tasks",
-        "onRephrase": 1,
-        "onSuccess": 1,
+        "onRephrase": 2,
+        "onSuccess": 2,
         "saveToHistory": false,
         "examples": [
           {
@@ -298,86 +324,58 @@
             "after": "find task has high priority"
           },
           {
+            "before": "find working tasks",
+            "after": "find task has state 'in_progress','open'"
+          },
+          {
+            "before": "find finished tasks",
+            "after": "find task has state 'done'"
+          },
+          {
             "before": "find my running task",
-            "after": "find task has state 'in_progress'"
+            "after": "find task has state 'in_progress' and the responsible is <username in metadata>"
           },
           {
-            "before": "please find tasks I need to finish this week",
-            "after": "find task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>, and the responsible is <username in metadata>"
+            "before": "please find tasks I need to finish",
+            "after": "find task has state 'in_progress','open', and the responsible is <username in metadata>"
           },
           {
-            "before": "List me all the tasks that need completion within the current week",
+            "before": "List me all the tasks that need completion this week",
             "after": "find task has state 'in_progress','open', expiry date from <start date this week> to <end date this week>"
+          },
+          {
+            "before": "List me all the tasks that need completion this month",
+            "after": "find task has state 'in_progress','open', expiry date from <start date this month> to <end date this month>"
           }
         ]
-      },
-      {
-        "stepNo": 1,
-        "type": "IVY_TOOL",
-        "toolId": "find-tasks",
-        "onSuccess": 6,
-        "onError": 4,
-        "saveToHistory": false
       },
       {
         "stepNo": 2,
-        "type": "TEXT",
-        "text": "I have rephrased your request as follows. Could you please confirm if it is correct?",
-        "showResultOfStep": 0,
-        "onSuccess": 3
+        "type": "IVY_TOOL",
+        "toolId": "find-tasks",
+        "onSuccess": 4,
+        "onError": 3,
+        "saveToHistory": false
       },
       {
         "stepNo": 3,
-        "type": "SWITCH",
-        "cases": [
-          {
-            "action": 1,
-            "case": "User agree"
-          },
-          {
-            "action": 0,
-            "case": "User don't agree and suggested another condition to find task"
-          },
-          {
-            "action": -1,
-            "case": "User don't want to find task anymore"
-          }
-        ]
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any task matched your request.",
+        "onSuccess": -1
       },
       {
         "stepNo": 4,
         "type": "TEXT",
-        "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
-        "onSuccess": 5
+        "text": "I found tasks matched your request.",
+        "onSuccess": -1,
+        "showResultOfStep": 2
       },
       {
         "stepNo": 5,
-        "type": "SWITCH",
-        "cases": [
-          {
-            "action": 0,
-            "case": "User update the condition to find task"
-          },
-          {
-            "action": 0,
-            "case": "User make another request to find task"
-          },
-          {
-            "action": -1,
-            "case": "User say he want to cancel or he make another request that irrelevant to the find task function"
-          },
-          {
-            "action": -1,
-            "case": "User say good or thank you or seem that he don't want to find task anymore."
-          }
-        ]
-      },
-      {
-        "stepNo": 6,
-        "type": "TEXT",
-        "text": "I found tasks matched your request.",
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
         "onSuccess": -1,
-        "showResultOfStep": 1
+        "onError": -1
       }
     ]
   },
@@ -541,17 +539,39 @@
     "steps": [
       {
         "stepNo": 0,
-        "type": "IVY_TOOL",
-        "toolId": "find-processes",
-        "onSuccess": -1,
-        "onError": 1
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 7,
+            "case": "Latest message of user is a question about why the find process function didn't work"
+          },
+          {
+            "action": 7,
+            "case": "Latest message of user is a question about what he should do if he cannot find a process"
+          },
+          {
+            "action": 1,
+            "case": "User want to do something different from above conditions"
+          },
+          {
+            "action": 1,
+            "case": "User want to find process"
+          }
+        ]
       },
       {
         "stepNo": 1,
+        "type": "IVY_TOOL",
+        "toolId": "find-processes",
+        "onSuccess": -1,
+        "onError": 2
+      },
+      {
+        "stepNo": 2,
         "type": "RE_PHRASE",
         "toolId": "find-processes",
-        "onRephrase": 2,
-        "onSuccess": 0,
+        "onRephrase": 3,
+        "onSuccess": 1,
         "examples": [
           {
             "before": "find leave request process",
@@ -572,18 +592,18 @@
         ]
       },
       {
-        "stepNo": 2,
+        "stepNo": 3,
         "type": "TEXT",
         "text": "I have rephrased your request as follows. Could you please confirm if it is correct?",
-        "showResultOfStep": 1,
-        "onSuccess": 3
+        "showResultOfStep": 2,
+        "onSuccess": 4
       },
       {
-        "stepNo": 3,
+        "stepNo": 4,
         "type": "SWITCH",
         "cases": [
           {
-            "action": 4,
+            "action": 5,
             "case": "User agree"
           },
           {
@@ -591,7 +611,7 @@
             "case": "User don't agree"
           },
           {
-            "action": 0,
+            "action": 1,
             "case": "User suggest other processes"
           },
           {
@@ -601,17 +621,24 @@
         ]
       },
       {
-        "stepNo": 4,
+        "stepNo": 5,
         "type": "IVY_TOOL",
         "toolId": "find-processes",
         "onSuccess": -1,
-        "onError": 5
+        "onError": 6
       },
       {
-        "stepNo": 5,
+        "stepNo": 6,
         "type": "TEXT",
         "text": "Sorry I cannot find any process matched your request",
         "onSuccess": -1
+      },
+      {
+        "stepNo": 7,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
       }
     ]
   },
@@ -638,6 +665,14 @@
           {
             "action": 26,
             "case": "In the chat history, AI didn't metion any process"
+          },
+          {
+            "action": 30,
+            "case": "Latest message of user is a question about why the start process function didn't work"
+          },
+          {
+            "action": 30,
+            "case": "Latest message of user is a question about what he should do if he cannot start a process"
           }
         ]
       },
@@ -987,6 +1022,13 @@
             "case": "User has other request"
           }
         ]
+      },
+      {
+        "stepNo": 30,
+        "type": "KNOWLEDGE_BASE",
+        "toolId": "portal-support",
+        "onSuccess": -1,
+        "onError": -1
       }
     ]
   },

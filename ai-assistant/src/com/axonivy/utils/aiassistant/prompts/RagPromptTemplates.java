@@ -34,9 +34,11 @@ public class RagPromptTemplates {
       *************************
       Instruction:
       - Don't try to create the answer from your own knowledge
+      - If the contexts are not related to the query, just say you don't know
       - Restructure the answer to make it easier to understand
       - Prioritize to answer with contexts have higher score
       - MUST answer in this language regardless the language of user message: {{language}}
+      - When show image, please also show its explanation
       - Criticize the answer:
          + if you found something incorrect, Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info.
          + otherwise, show the answer
@@ -180,9 +182,9 @@ public class RagPromptTemplates {
     return switch (requestType) {
       case QUESTION_TYPE_WHAT -> QUESTION_TYPE_WHAT_INSTRUCTION;
       case QUESTION_TYPE_HOW -> QUESTION_TYPE_HOW_INSTRUCTION;
-    case QUESTION_TYPE_LIST -> QUESTION_TYPE_LIST_INSTRUCTION;
-    case QUESTION_TYPE_COMPARE -> QUESTION_TYPE_COMPARE_INSTRUCTION;
-    case QUESTION_TYPE_WHY_CANNOT -> QUESTION_TYPE_WHY_CANNOT_INSTRUCTION;
+      case QUESTION_TYPE_LIST -> QUESTION_TYPE_LIST_INSTRUCTION;
+      case QUESTION_TYPE_COMPARE -> QUESTION_TYPE_COMPARE_INSTRUCTION;
+      case QUESTION_TYPE_WHY_CANNOT -> QUESTION_TYPE_WHY_CANNOT_INSTRUCTION;
       default -> "";
     };
   }

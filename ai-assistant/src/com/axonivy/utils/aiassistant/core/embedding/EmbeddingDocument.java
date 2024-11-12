@@ -5,7 +5,7 @@ import java.util.Map;
 public class EmbeddingDocument {
   private float[] vector;
   private String text;
-  private Map<String, String> metadata;
+  private Map<String, Object> metadata;
 
   public float[] getVector() {
     return vector;
@@ -23,11 +23,11 @@ public class EmbeddingDocument {
     this.text = text;
   }
 
-  public Map<String, String> getMetadata() {
+  public Map<String, Object> getMetadata() {
     return metadata;
   }
 
-  public void setMetadata(Map<String, String> metadata) {
+  public void setMetadata(Map<String, Object> metadata) {
     this.metadata = metadata;
   }
 }

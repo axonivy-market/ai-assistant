@@ -1,7 +1,6 @@
 package com.axonivy.utils.aiassistant.service;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,20 +21,17 @@ import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;
 
 public class PortalDocService {
-  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/11.3.1/doc/";
-  public static final String USER_GUIDE_DIR = "portal-user-guide";
-  public static final String DEVELOPER_GUIDE_DIR = "portal-developer-guide";
-  public static final String PORTAL_COMPONENT_GUIDE_DIR = "portal-components";
+  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/12.0.0-m266/doc/";
 
   private static final String HEADER_PREFIX = "# ";
   private static final String SUB_HEADER_PREFIX = "## ";
   private static final String SMALL_SUB_HEADER_PREFIX = "#### ";
+  private static final String LIST_ITEM_PREFIX = "- ";
 
   private static final String TWO_LEVELS_PATH_PREFIX = "../../";
   private static final String LINK_FORMAT = "[%s](%s)";
   private static final String IMAGE_FORMAT = "!" + LINK_FORMAT;
   private static final String CODE_BLOCK = "```";
-  private static final String UNKNOWN_CHARACTER_CODE = "?";
 
   public static void createTextIndex(AbstractAIBot bot, String index,
       List<String> contents) throws IOException {
@@ -109,7 +105,7 @@ public class PortalDocService {
     if (CollectionUtils.isNotEmpty(blockText)) {
       Metadata meta = Metadata.from("keywords",
           String.join(" ", Arrays.asList(headerKeyword, keyword)));
-      String keywords = String.format("The main topic of this context: %s, %s",
+      String keywords = String.format("Keywords: %s, %s",
           headerKeyword, keyword).concat(System.lineSeparator());
 
       List<String> blockTextWithHeader = new ArrayList<>();
@@ -193,10 +189,6 @@ public class PortalDocService {
           if (StringUtils.isBlank(alt)) {
             alt = Optional.ofNullable(anchorTag.select("span.std-ref"))
                 .map(Elements::first).map(Element::text).orElse("");
-            byte[] ptext = alt.getBytes(StandardCharsets.ISO_8859_1);
-            alt = new String(ptext, StandardCharsets.UTF_8);
-            // remove the key icon
-            alt.replace(UNKNOWN_CHARACTER_CODE, "");
           }
           anchorTag.replaceWith(new TextNode(
               String.format(LINK_FORMAT, alt, hrefLink)));
@@ -221,6 +213,18 @@ public class PortalDocService {
     for (Element codeBlockDiv : document.select("div.notranslate")) {
       codeBlockDiv.before(CODE_BLOCK);
       codeBlockDiv.after(CODE_BLOCK);
+    }
+
+    // Replace '\n' inside <p> tags with a single space
+    for (Element paragraphTag : document.select("p")) {
+      String converted = paragraphTag.text().replace(StringUtils.LF,
+          StringUtils.SPACE);
+      paragraphTag.replaceWith(new TextNode(converted));
+    }
+
+    // Add '- ' before <li> tags
+    for (Element listTag : document.select("li")) {
+      listTag.replaceWith(new TextNode(LIST_ITEM_PREFIX + listTag.text()));
     }
 
     // Add a new line after each tag for better readability
@@ -258,13 +262,13 @@ public class PortalDocService {
     Elements headers = table.select("thead tr th");
     if (!headers.isEmpty()) {
       for (Element header : headers) {
-        markdown.append("| ").append(header.text()).append(" ");
+        markdown.append("| ").append(header.text()).append(StringUtils.SPACE);
       }
-      markdown.append("|\n");
+      markdown.append("|").append(StringUtils.LF);
 
       // Add separator line for headers
       headers.forEach(header -> markdown.append("|---"));
-      markdown.append("|\n");
+      markdown.append("|").append(StringUtils.LF);
     }
 
     // Convert table rows
@@ -272,9 +276,9 @@ public class PortalDocService {
     for (Element row : rows) {
       Elements cells = row.select("td");
       for (Element cell : cells) {
-        markdown.append("| ").append(cell.text()).append(" ");
+        markdown.append("| ").append(cell.text()).append(StringUtils.SPACE);
       }
-      markdown.append("|\n");
+      markdown.append("|").append(StringUtils.LF);
     }
 
     return markdown.toString();

@@ -166,7 +166,7 @@ public class OpenAIBot extends AbstractAIBot {
     List<EmbeddingDocument> embeddings = new ArrayList<>();
     for (TextSegment segment : textSegments) {
       EmbeddingDocument doc = new EmbeddingDocument();
-      doc.setMetadata(segment.metadata().asMap());
+      doc.setMetadata(segment.metadata().toMap());
       doc.setText(segment.text());
       doc.setVector(getEmbeddingModel().embed(segment).content().vector());
       embeddings.add(doc);
@@ -196,12 +196,7 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String chat(String message) {
     try {
-      Ivy.log().error(message);
-
-      String x = getModel().generate(message);
-      Ivy.log().error(x);
-
-      return x;
+      return getModel().generate(message);
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);
@@ -213,8 +208,6 @@ public class OpenAIBot extends AbstractAIBot {
   public String streamChat(Map<String, Object> variables, String promptTemplate,
       StreamingResponseHandler<AiMessage> handler) {
     try {
-      Ivy.log()
-          .error(PromptTemplate.from(promptTemplate).apply(variables).text());
       getChatModel().generate(
           PromptTemplate.from(promptTemplate).apply(variables).text(),
           handler);
@@ -233,10 +226,14 @@ public class OpenAIBot extends AbstractAIBot {
     Embedding queryEmbedding = embeddingModel.embed(query).content();
 
     List<EmbeddingMatch<TextSegment>> relevant = toEmbeddingMatch(
-        getEmbeddingStore().findRelevantDocuments(queryEmbedding, 10, 0.6));
+        getEmbeddingStore().findRelevantDocuments(queryEmbedding, 10, 0.7));
 
     relevant.sort(Comparator.comparing(EmbeddingMatch::score));
-    return RagPromptTemplates.formatRetrievedDocuments(relevant);
+
+    String formattedRetrievedDocuments = RagPromptTemplates
+        .formatRetrievedDocuments(relevant);
+
+    return formattedRetrievedDocuments;
   }
 
   @Override

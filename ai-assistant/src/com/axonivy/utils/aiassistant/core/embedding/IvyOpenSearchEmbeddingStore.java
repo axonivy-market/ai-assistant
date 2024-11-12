@@ -23,6 +23,7 @@ import org.opensearch.client.opensearch.OpenSearchClient;
 import org.opensearch.client.opensearch._types.FieldValue;
 import org.opensearch.client.opensearch._types.InlineScript;
 import org.opensearch.client.opensearch._types.Time;
+import org.opensearch.client.opensearch._types.mapping.KnnVectorMethod;
 import org.opensearch.client.opensearch._types.mapping.Property;
 import org.opensearch.client.opensearch._types.mapping.TextProperty;
 import org.opensearch.client.opensearch._types.mapping.TypeMapping;
@@ -65,6 +66,13 @@ public class IvyOpenSearchEmbeddingStore {
 
   private static final String INDEX_NOT_EXIST_ERROR = "Cannot find vector store [%s]";
   private static final String CANNOT_CONNECT_TO_OPEN_SEARCH = "Cannot connect to the OpenSearch server with URL %s";
+
+  // Possible values: 'faiss' 'lucene', 'nmslib'
+  // Use Meta's FAISS by default
+  private static final String SEARCH_ENGINE = "faiss";
+
+  // Possible values: 'hnsw', 'ivf' (only for FAISS)
+  private static final String SEARCH_METHOD = "hnsw";
 
   /**
    * Creates an instance of OpenSearchEmbeddingStore to connect with
@@ -281,16 +289,25 @@ public class IvyOpenSearchEmbeddingStore {
     BooleanResponse response;
     response = client.indices().exists(c -> c.index(indexName));
     if (!response.value()) {
-      client.indices().create(c -> c.index(indexName).settings(s -> s.knn(true))
+      client.indices()
+          .create(c -> c.index(indexName)
+              .settings(s -> s.knn(true).knnAlgoParamEfSearch(100))
           .mappings(getDefaultMappings(dimension)));
     }
   }
 
   private TypeMapping getDefaultMappings(int dimension) {
+
+    KnnVectorMethod.Builder builder = new KnnVectorMethod.Builder();
+    builder.engine(SEARCH_ENGINE);
+    builder.name(SEARCH_METHOD);
+
     Map<String, Property> properties = new HashMap<>(4);
     properties.put("text", Property.of(p -> p.text(TextProperty.of(t -> t))));
     properties.put("vector",
-        Property.of(p -> p.knnVector(k -> k.dimension(dimension))));
+        Property
+            .of(p -> p.knnVector(
+                k -> k.dimension(dimension).method(builder.build()))));
     return TypeMapping.of(c -> c.properties(properties));
   }
 
