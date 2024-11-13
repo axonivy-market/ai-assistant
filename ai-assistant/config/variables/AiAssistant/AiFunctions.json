@@ -316,6 +316,14 @@
         "saveToHistory": false,
         "examples": [
           {
+            "before": "show me all tasks",
+            "after": "find all tasks"
+          },
+          {
+            "before": "show all my tasks",
+            "after": "find tasks which the responsible is <username in metadata>"
+          },
+          {
             "before": "find my fix car task",
             "after": "find task has name 'fix car'"
           },
@@ -664,7 +672,7 @@
           },
           {
             "action": 26,
-            "case": "In the chat history, AI didn't metion any process"
+            "case": "In the chat history, AI didn't mention any process"
           },
           {
             "action": 30,

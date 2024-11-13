@@ -791,8 +791,8 @@ function ViewAI(uri) {
     }
 
     // User default renderer
-    const renderer = new marked.Renderer();
-    marked.use({ renderer });
+    marked.use({ renderer: new marked.Renderer() });
+    marked.setOptions(marked.getDefaults());
 
     let converted = isIFrame(streamingValue) ? convertIFrame(streamingValue) : marked.parse(streamingValue);
 
