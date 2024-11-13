@@ -18,7 +18,8 @@ Dialogs:
               ToggleNonStartableAiFunction: Show non-startable AI functions
             ChatDashboard:
               AiManagement: AI Management
-              ClearConversationHistory: Clear conversation history
+              ClearConversationHistory: Clear history
+              ExportHistory: Export history
               Title: Assistant Dashboard
           helper:
             UploadPortalDocument:

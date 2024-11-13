@@ -17,6 +17,7 @@ import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 
 public class TextStep extends AiStep {
 
@@ -72,7 +73,7 @@ public class TextStep extends AiStep {
     params.put(AiConstants.CUSTOM_INSTRUCTION,
         Optional.ofNullable(getCustomInstruction()).orElse(StringUtils.EMPTY));
 
-    String extractedText = extractTextInsideTag(
+    String extractedText = AiFunctionUtils.extractTextInsideTag(
         bot.chat(params, AiFlowPromptTemplates.TEXT_STEP_USE_AI))
         .concat(System.lineSeparator()).concat(System.lineSeparator())
         .concat(Optional.ofNullable(resultToDisplay).map(AiResultDTO::getResult)

@@ -369,6 +369,10 @@ public class AssistantRestService {
     params.put(AiConstants.CONTACT_PART,
         BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
+    
+    int requestType = RetrievalQATool.analyzeRequestType(assistant, message);
+    params.put("structureGuidelines",
+        RagPromptTemplates.getStructuredOutputInstruction(requestType));
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
         new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS,

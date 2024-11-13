@@ -26,6 +26,7 @@ import com.axonivy.utils.aiassistant.utils.BotUtils;
 public class UploadPortalDocumentBean {
 
   private static final String PORTAL_USER_GUIDE = "portal-user-guide";
+  private static final String PERMISSIONS_DOC = "portal-developer-guide/permissions/index.html";
 
   public boolean handlePortalDocumentUpload(FileUploadEvent event)
       throws IOException {
@@ -45,8 +46,9 @@ public class UploadPortalDocumentBean {
       while (zipEntry != null) {
         String fileName = zipEntry.getName();
         // Only handle files within "portal-user-guide" folder and ending with ".html"
-        if (fileName.startsWith(PORTAL_USER_GUIDE + "/")
-            && fileName.endsWith(".html")) {
+        if ((fileName.startsWith(PORTAL_USER_GUIDE + "/")
+            && fileName.endsWith(".html"))
+            || fileName.contentEquals(PERMISSIONS_DOC)) {
           // Get data from the XHTML file
           String fileContent = extractFileContent(buffer, fileStream);
 

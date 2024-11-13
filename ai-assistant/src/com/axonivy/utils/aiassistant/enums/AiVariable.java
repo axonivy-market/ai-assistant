@@ -3,7 +3,7 @@ package com.axonivy.utils.aiassistant.enums;
 public enum AiVariable {
   AI_ASSISTANT("AiAssistant.Assistants"),
   AI_FUNCTIONS("AiAssistant.AiFunctions"),
-  ELASTIC_SEARCH_URL("AiAssistant.ElasticSearchUrl"),
+  OPEN_SEARCH_VECTOR_STORE_URL("AiAssistant.OpenSearchVectorStoreUrl"),
   SUGGESTIONS("AiAssistant.Suggestions"),
   AI_ASSISTANT_TEMPLATES("AiAssistant.AssistantTemplates");
 

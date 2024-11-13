@@ -19,6 +19,7 @@ import com.axonivy.utils.aiassistant.dto.tool.IvyTool;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 public class RephraseStep extends AiStep {
 
   private static final long serialVersionUID = -4106563714989416129L;
@@ -57,7 +58,8 @@ public class RephraseStep extends AiStep {
 
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
         AiFlowPromptTemplates.RE_PHRASE_STEP);
-    String extractedRephrasedText = extractTextInsideTag(resultFromAI);
+    String extractedRephrasedText = AiFunctionUtils
+        .extractTextInsideTag(resultFromAI);
 
     AiResultDTO resultDto = new AiResultDTO();
     if (StringUtils.isNotBlank(extractedRephrasedText)) {
