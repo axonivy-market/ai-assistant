@@ -28,17 +28,22 @@ $acl = Get-Acl "./opensearch-logs"
 $acl.SetAccessRule($accessRule)
 Set-Acl "./opensearch-logs" $acl
 
-# Create an .env file to store environment variables securely
+# Create an .env file to store environment variables securely if it doesn't exist
 $envFilePath = ".env"
-$envContent = @"
+if (-not (Test-Path $envFilePath)) {
+    $envContent = @"
 OPENSEARCH_INITIAL_ADMIN_PASSWORD=1Ae0ce926bb6a0a1d1cf10c9c9e147a50457f9c27e49780c20e103a78036380d
 "@
-Set-Content -Path $envFilePath -Value $envContent
-Write-Host "Created .env file with environment variables."
+    Set-Content -Path $envFilePath -Value $envContent
+    Write-Host "Created .env file with environment variables."
+} else {
+    Write-Host ".env file already exists."
+}
 
-# Create updated docker-compose.yml file
+# Create docker-compose.yml file if it doesn't exist
 $composeFilePath = "docker-compose.yml"
-$composeContent = @"
+if (-not (Test-Path $composeFilePath)) {
+    $composeContent = @"
 services:
   opensearch:
     image: opensearchproject/opensearch:2.17.1
@@ -79,8 +84,11 @@ services:
     env_file:
       - .env
 "@
-Set-Content -Path $composeFilePath -Value $composeContent
-Write-Host "docker-compose.yml file created."
+    Set-Content -Path $composeFilePath -Value $composeContent
+    Write-Host "docker-compose.yml file created."
+} else {
+    Write-Host "docker-compose.yml file already exists."
+}
 
 # Start Docker Compose
 Write-Host "Starting Docker Compose..."

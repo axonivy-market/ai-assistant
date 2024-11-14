@@ -16,29 +16,40 @@ else
 fi
 
 # Create directories if they do not exist
-directories=("opensearch-data" "opensearch-logs")
-for dir in "${directories[@]}"; do
-    if [ ! -d "$dir" ]; then
-        mkdir -p "$dir"
-        echo "Created directory: $dir"
-    fi
-done
+create_directories() {
+    directories=("opensearch-data" "opensearch-logs")
+    for dir in "${directories[@]}"; do
+        if [ ! -d "$dir" ]; then
+            mkdir -p "$dir"
+            echo "Created directory: $dir"
+        fi
+    done
+}
 
 # Set permissions for OpenSearch directories
-echo "Setting permissions for data and logs directories..."
-chmod -R 777 ./opensearch-data
-chmod -R 777 ./opensearch-logs
+set_permissions() {
+    echo "Setting permissions for data and logs directories..."
+    chmod -R 777 ./opensearch-data
+    chmod -R 777 ./opensearch-logs
+}
 
-# Create an .env file to store environment variables securely
-env_file=".env"
-cat << EOF > "$env_file"
-OPENSEARCH_INITIAL_ADMIN_PASSWORD=1Ae0ce926bb6a0a1d1cf10c9c9e147a50457f9c27e49780c20e103a78036380d
-EOF
-echo "Created .env file with environment variables."
+# Create an .env file to store environment variables securely if it doesn't exist
+create_env_file() {
+    envFilePath=".env"
+    envContent="OPENSEARCH_INITIAL_ADMIN_PASSWORD=1Ae0ce926bb6a0a1d1cf10c9c9e147a50457f9c27e49780c20e103a78036380d"
+    if [ ! -f "$envFilePath" ]; then
+        echo "$envContent" > "$envFilePath"
+        echo "Created .env file with environment variables."
+    else
+        echo ".env file already exists."
+    fi
+}
 
-# Create updated docker-compose.yml file
-compose_file="docker-compose.yml"
-cat << EOF > "$compose_file"
+# Create docker-compose.yml file if it doesn't exist
+create_docker_compose_file() {
+    composeFilePath="docker-compose.yml"
+    if [ ! -f "$composeFilePath" ]; then
+        composeContent=$(cat <<EOF
 services:
   opensearch:
     image: opensearchproject/opensearch:2.17.1
@@ -79,11 +90,26 @@ services:
     env_file:
       - .env
 EOF
-echo "docker-compose.yml file created."
+)
+        echo "$composeContent" > "$composeFilePath"
+        echo "docker-compose.yml file created."
+    else
+        echo "docker-compose.yml file already exists."
+    fi
+}
 
 # Start Docker Compose
-echo "Starting Docker Compose..."
-docker compose up
+start_docker_compose() {
+    echo "Starting Docker Compose..."
+    docker compose up
+}
+
+# Main script execution
+create_directories
+set_permissions
+create_env_file
+create_docker_compose_file
+start_docker_compose
 
 # Keep Bash shell open
 echo "Press Enter to exit..."
