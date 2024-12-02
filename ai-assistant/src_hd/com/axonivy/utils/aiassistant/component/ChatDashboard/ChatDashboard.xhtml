@@ -87,23 +87,32 @@
                     </p:overlayPanel>
 
                     <div class="action-panel">
-                      <p:commandButton id="ai-management"
-                        icon="si si-cog"
-                        styleClass="rounded-button ui-button-outlined action-column-icon-button u-mar-right-5 widget-button"
-                        actionListener="#{assistantBean.navigateToAIManagement()}" />
-                      <p:tooltip for="ai-management"
-                        value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}" />
-                      <p:commandButton id="clear-history-button"
-                        icon="si si-messages-bubble-square-sync"
-                        styleClass="rounded-button ui-button-outlined action-column-icon-button widget-button"
-                        process="@this" update="@form"
-                        actionListener="#{assistantBean.clearHistory}" oncomplete="chatbot.onClearHistory();" />
-                      <p:tooltip for="clear-history-button"
-                        value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/ClearConversationHistory')}" />
+                      <p:commandButton id="action-button" icon="fa fa-ellipsis-h"
+                        styleClass="rounded-button icon-more-menu-button mr-3"
+                     type="button"/>
+                     
+                     <p:menu id="action-button-menu" trigger="action-button" styleClass="w-12rem" 
+                       overlay="true" my="right top" at="right bottom">
+                       <p:menuitem id="ai-management-menu" process="@this" actionListener="#{assistantBean.navigateToAIManagement()}"
+                         icon="si si-cog" styleClass="action-step-item"
+                         value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}"
+                         title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/AiManagement')}" />
+                       <p:menuitem id="export-history-menu"
+                         icon="si si-download-bottom" styleClass="action-step-item"
+                         value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/ExportHistory')}"
+                         title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/ExportHistory')}"
+                         process="@this" update="@this" immediate="true" ajax="false">
+                         <p:fileDownload value="#{assistantBean.exportHistory()}" />
+                       </p:menuitem>
+                       <p:menuitem id="clear-history-menu" actionListener="#{assistantBean.clearHistory}"
+                         icon="si si-messages-bubble-square-sync" styleClass="action-step-item red"
+                         value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/ClearConversationHistory')}"
+                         title="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/ChatDashboard/ClearConversationHistory')}"
+                         process="@this" update="@form" oncomplete="chatbot.onClearHistory();" />
+                    </p:menu>
                     </div>
                   </div>
                 </div>
-
                 <h:panelGroup id="chat-message-list" layout="block"
                   styleClass="chatbot-message-list js-chatbot-message-list ui-g-9 ui-sm-12">
 

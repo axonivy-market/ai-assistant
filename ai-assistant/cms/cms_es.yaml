@@ -18,7 +18,14 @@ Dialogs:
               ToggleNonStartableAiFunction: Mostrar funciones de IA no iniciables
             ChatDashboard:
               AiManagement: Gestión de la IA
-              ClearConversationHistory: Borrar el historial de conversaciones
+              ClearConversationHistory: Borrar historial
+              ExportHistory: |+
+                Exportar historial
+
+
+
+
+
               Title: Cuadro de mandos auxiliar
           helper:
             UploadPortalDocument:

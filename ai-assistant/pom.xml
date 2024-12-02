@@ -18,17 +18,12 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-open-ai</artifactId>
-      <version>0.31.0</version>
+      <version>0.35.0</version>
     </dependency>
     <dependency>
       <groupId>dev.langchain4j</groupId>
-      <artifactId>langchain4j-elasticsearch</artifactId>
-      <version>0.31.0</version>
-    </dependency>
-    <dependency>
-      <groupId>co.elastic.clients</groupId>
-      <artifactId>elasticsearch-java</artifactId>
-      <version>8.9.2</version>
+      <artifactId>langchain4j-opensearch</artifactId>
+      <version>0.35.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.pdfbox</groupId>
