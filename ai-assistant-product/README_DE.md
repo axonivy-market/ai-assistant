@@ -105,13 +105,11 @@ Für eine schnelle Einrichtung auf deinem Rechner folge einer dieser Anleitungen
 - [Schnelle Einrichtung von OpenSearch auf Windows](#schnelle-einrichtung-von-opensearch-auf-windows)
 - [Schnelle Einrichtung von OpenSearch auf Linux und macOS](#schnelle-einrichtung-von-opensearch-auf-linux-und-macos)
 
-The only precondition is that your system has a Docker distro such as [DockerDesktop](https://www.docker.com/products/docker-desktop/) or [RancherDesktop](https://rancherdesktop.io/).
-
 Die einzige Voraussetzung ist, dass auf deinem System eine Docker-Distribution wie [DockerDesktop](https://www.docker.com/products/docker-desktop/) oder [RancherDesktop](https://rancherdesktop.io/) installiert ist.
 
 #### Schnelle Einrichtung von OpenSearch auf Windows
 
-Schnelle Einrichtung von OpenSearch auf WindowsIn dieser Anleitung verwenden wir den Ordner `C:\axon-ivy-vector-store`, um alle Protokolle und Dateien der OpenSearch-Instanz zu speichern. Du kannst diesen Speicherort bei Bedarf anpassen.
+Schnelle Einrichtung von OpenSearch auf Windows. In dieser Anleitung verwenden wir den Ordner `C:\axon-ivy-vector-store`, um alle Protokolle und Dateien der OpenSearch-Instanz zu speichern. Du kannst diesen Speicherort bei Bedarf anpassen.
 
 ##### Schritt 1
 
