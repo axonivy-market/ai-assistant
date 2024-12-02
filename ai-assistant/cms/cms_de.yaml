@@ -18,7 +18,8 @@ Dialogs:
               ToggleNonStartableAiFunction: Nicht startbare KI-Funktionen anzeigen
             ChatDashboard:
               AiManagement: AI-Management
-              ClearConversationHistory: Gesprächsverlauf löschen
+              ClearConversationHistory: Verlauf löschen
+              ExportHistory: Verlauf exportieren
               Title: Assistent Dashboard
           helper:
             UploadPortalDocument:

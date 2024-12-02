@@ -508,11 +508,9 @@ body .chatbot-send-form .chat-send-form-button button.ui-button.ui-button-icon-o
 /* Theme for elements inside message */
 .chat-message table {
   border-spacing: 0;
-}
-
-.chat-message table {
   margin-top: 1em;
   margin-bottom: 1em;
+  word-break: auto-phrase;
 }
 
 .chat-message table > thead > tr > th {
@@ -644,3 +642,20 @@ body.dark .chatbot-panel .chat-message.system-response-expand-button {
   color: var(--gray-100);
 }
 
+body .ui-button.ui-widget.icon-more-menu-button {
+  background: var(--surface-a);
+  border-color: var(--surface-900);
+}
+
+body .ui-button.ui-widget.icon-more-menu-button {
+  color: var(--widget-header-icon);
+}
+
+.ui-menu-items, body .ui-menu .ui-menu-list .ui-menuitem:not(:last-child), .action-step-item:not(:last-child) {
+  border-bottom: solid 1px var(--gray-50);
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .action-step-item.red .ui-menuitem-text,
+body .ui-menu .ui-menu-list .ui-menuitem .action-step-item.red .si {
+  color: var(--red-500);
+}

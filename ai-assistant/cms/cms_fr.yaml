@@ -18,7 +18,9 @@ Dialogs:
               ToggleNonStartableAiFunction: Afficher les fonctions d'IA non démarrables
             ChatDashboard:
               AiManagement: Gestion de l'IA
-              ClearConversationHistory: Effacer l'historique de conversation
+              ClearConversationHistory: |
+                Effacer l'historique
+              ExportHistory: Exporter l'historique
               Title: Tableau de bord de l'assistant
           helper:
             UploadPortalDocument:

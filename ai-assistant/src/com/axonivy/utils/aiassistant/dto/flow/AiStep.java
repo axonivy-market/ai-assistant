@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -126,44 +124,6 @@ public abstract class AiStep implements Serializable, Cloneable {
           + System.lineSeparator();
     }
     return result;
-  }
-
-  public static String extractTextInsideTag(String text) {
-    String tagPattern = "<([^>]+)>"; // Regex pattern to match characters inside
-                                     // <>
-    Pattern pattern = Pattern.compile(tagPattern);
-    Matcher matcher = pattern.matcher(text);
-
-    if (matcher.find()) {
-      return matcher.group(1); // Return the first captured group
-    }
-    return StringUtils.EMPTY;
-  }
-
-  public static String extractJsonArray(String text) {
-    String tagPattern = "\\[([^\\]]+)]"; // Regex pattern to match characters
-                                         // inside []
-    Pattern pattern = Pattern.compile(tagPattern);
-    Matcher matcher = pattern.matcher(text);
-
-    if (matcher.find()) {
-      return "[" + matcher.group(1) + "]"; // Return the first captured group
-                                           // inside array characters
-    }
-    return StringUtils.EMPTY;
-  }
-
-
-  public static String extractTextInsideDoubleTag(String text) {
-    String tagPattern = "<<([^>]+)>>"; // Regex pattern to match characters
-                                       // inside <<>>
-    Pattern pattern = Pattern.compile(tagPattern);
-    Matcher matcher = pattern.matcher(text);
-
-    if (matcher.find()) {
-      return matcher.group(1); // Return the first captured group
-    }
-    return StringUtils.EMPTY;
   }
 
   public String getCustomInstruction() {

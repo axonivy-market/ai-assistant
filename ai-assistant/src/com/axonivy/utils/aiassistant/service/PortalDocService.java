@@ -21,15 +21,17 @@ import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;
 
 public class PortalDocService {
-  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/11.3.1/doc/";
-  public static final String USER_GUIDE_DIR = "portal-user-guide";
-  public static final String DEVELOPER_GUIDE_DIR = "portal-developer-guide";
-  public static final String PORTAL_COMPONENT_GUIDE_DIR = "portal-components";
+  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/12.0.0-m266/doc/";
 
   private static final String HEADER_PREFIX = "# ";
   private static final String SUB_HEADER_PREFIX = "## ";
+  private static final String SMALL_SUB_HEADER_PREFIX = "#### ";
+  private static final String LIST_ITEM_PREFIX = "- ";
+
   private static final String TWO_LEVELS_PATH_PREFIX = "../../";
-  private static final String IMAGE_FORMAT = "![%s](%s)";
+  private static final String LINK_FORMAT = "[%s](%s)";
+  private static final String IMAGE_FORMAT = "!" + LINK_FORMAT;
+  private static final String CODE_BLOCK = "```";
 
   public static void createTextIndex(AbstractAIBot bot, String index,
       List<String> contents) throws IOException {
@@ -76,19 +78,25 @@ public class PortalDocService {
 
       if (line.startsWith(HEADER_PREFIX)) {
         headerKeyword = line.strip();
+        keyword = headerKeyword;
         handleBlockText(headerKeyword, keyword, blockText, result);
         continue;
       }
 
       if (line.startsWith(SUB_HEADER_PREFIX)) {
-        keyword = line.strip();
         handleBlockText(headerKeyword, keyword, blockText, result);
+        keyword = line.strip();
         continue;
       }
 
       // If a line does not contain keywords, append them to the block text
       blockText.add(line);
     }
+
+    if (!blockText.isEmpty()) {
+      handleBlockText(headerKeyword, keyword, blockText, result);
+    }
+
     return result;
   }
 
@@ -97,8 +105,8 @@ public class PortalDocService {
     if (CollectionUtils.isNotEmpty(blockText)) {
       Metadata meta = Metadata.from("keywords",
           String.join(" ", Arrays.asList(headerKeyword, keyword)));
-      String keywords = headerKeyword.concat(System.lineSeparator())
-          .concat(keyword).concat(System.lineSeparator());
+      String keywords = String.format("Keywords: %s, %s",
+          headerKeyword, keyword).concat(System.lineSeparator());
 
       List<String> blockTextWithHeader = new ArrayList<>();
       blockTextWithHeader.add(keywords);
@@ -116,6 +124,7 @@ public class PortalDocService {
     Document document = Jsoup.parse(raw);
 
     // Remove specific elements by tag name
+    removeElements(document, "head");
     removeElements(document, "div[role=search]");
     removeElements(document, "ul.current");
     removeElements(document, "footer");
@@ -123,12 +132,14 @@ public class PortalDocService {
     removeElements(document, "div.wy-side-nav-search");
     removeElements(document, "p.caption[role=heading]");
     removeElements(document, "nav.wy-nav-top");
+    removeElements(document, "nav.wy-nav-side");
     removeElements(document, "ul.wy-breadcrumbs");
     removeElements(document, "script");
     removeElements(document, "link[rel=stylesheet]");
     removeElements(document, "hr");
     removeElements(document, "div.toctree-wrapper");
     removeElements(document, "a.headerlink");
+    removeElements(document, "div.toctree-wrapper");
 
     // Set h1 tags as header will be used as metadata keyword
     for (Element h1Tag : document.select("h1")) {
@@ -144,7 +155,13 @@ public class PortalDocService {
 
     // Replace image tags with their source links
     for (Element imgTag : document.select("img")) {
-      String alt = imgTag.attr("alt");
+      String alt = StringUtils.defaultIfBlank(imgTag.attr("alt"),
+          imgTag.attr("title"));
+      if (StringUtils.isBlank(alt)) {
+        alt = Optional.ofNullable(imgTag.select("span.std-ref"))
+            .map(Elements::first).map(Element::text).orElse("");
+      }
+
       String srcLink = imgTag.attr("src").replace(TWO_LEVELS_PATH_PREFIX,
           IVY_DOC_HOST);
       if (srcLink.startsWith("screenshots/")) {
@@ -157,7 +174,7 @@ public class PortalDocService {
           .replaceWith(new TextNode(String.format(IMAGE_FORMAT, alt, srcLink)));
     }
 
-    // Transform <a> tags to "<link> url here </link>" format
+    // Transform <a> tags to markdown link format
     for (Element anchorTag : document.select("a")) {
       String hrefLink = anchorTag.attr("href");
       if (hrefLink.startsWith("#")) {
@@ -168,51 +185,46 @@ public class PortalDocService {
           // If a link is a svg file, remove it
           anchorTag.remove();
         } else {
-          anchorTag.replaceWith(new TextNode("<link>" + hrefLink + "</link>"));
+          String alt = StringUtils.defaultIfBlank(anchorTag.attr("alt"), anchorTag.attr("title"));
+          if (StringUtils.isBlank(alt)) {
+            alt = Optional.ofNullable(anchorTag.select("span.std-ref"))
+                .map(Elements::first).map(Element::text).orElse("");
+          }
+          anchorTag.replaceWith(new TextNode(
+              String.format(LINK_FORMAT, alt, hrefLink)));
         }
       }
+    }
+
+    // Transform notes title to sub header
+    for (Element noteTag : document.select("div.admonition")) {
+      Element title = noteTag.select(".admonition-title").first();
+      title.replaceWith(new TextNode(
+          StringUtils.LF + SMALL_SUB_HEADER_PREFIX + title.text()
+              + StringUtils.LF));
     }
 
     // Transform tables into readable format
     for (Element tableTag : document.select("table")) {
-      Elements rows = tableTag.select("tr");
-
-      Elements headers = rows.get(0).select("thead");
-      if (headers.size() > 0 && rows.size() > 1) { // Ensure there are headers
-                                                   // and at least one row of
-                                                   // data
-
-        StringBuilder tableBuilder = new StringBuilder("Table content:")
-            .append(StringUtils.LF);
-
-        for (int rowIndex = 1; rowIndex < rows.size(); rowIndex++) { // Skip the
-                                                                     // header
-                                                                     // row
-          Elements dataCols = rows.get(rowIndex).select("td");
-          tableBuilder.append("row ").append(rowIndex).append(":")
-              .append(StringUtils.LF);
-
-          for (int colIndex = 0; colIndex < headers.size()
-              && colIndex < dataCols.size(); colIndex++) {
-            tableBuilder.append(headers.get(colIndex).text()).append(": ")
-                .append(dataCols.get(colIndex).text());
-
-            if (colIndex < headers.size() - 1) {
-              tableBuilder.append(", ");
-            }
-          }
-
-          tableBuilder.append(StringUtils.LF);
-        }
-
-        tableTag.replaceWith(Jsoup.parse(tableBuilder.toString()));
-      }
-
+        tableTag.replaceWith(Jsoup.parse(convertTableToMarkdown(tableTag)));
     }
 
-    // Added "Code block: " tag for all code blocks
+    // Transformed code block to markdown format
     for (Element codeBlockDiv : document.select("div.notranslate")) {
-      codeBlockDiv.before("__code_block: ");
+      codeBlockDiv.before(CODE_BLOCK);
+      codeBlockDiv.after(CODE_BLOCK);
+    }
+
+    // Replace '\n' inside <p> tags with a single space
+    for (Element paragraphTag : document.select("p")) {
+      String converted = paragraphTag.text().replace(StringUtils.LF,
+          StringUtils.SPACE);
+      paragraphTag.replaceWith(new TextNode(converted));
+    }
+
+    // Add '- ' before <li> tags
+    for (Element listTag : document.select("li")) {
+      listTag.replaceWith(new TextNode(LIST_ITEM_PREFIX + listTag.text()));
     }
 
     // Add a new line after each tag for better readability
@@ -242,4 +254,34 @@ public class PortalDocService {
       element.remove();
     }
   }
+
+  private static String convertTableToMarkdown(Element table) {
+    StringBuilder markdown = new StringBuilder();
+
+    // Convert table headers
+    Elements headers = table.select("thead tr th");
+    if (!headers.isEmpty()) {
+      for (Element header : headers) {
+        markdown.append("| ").append(header.text()).append(StringUtils.SPACE);
+      }
+      markdown.append("|").append(StringUtils.LF);
+
+      // Add separator line for headers
+      headers.forEach(header -> markdown.append("|---"));
+      markdown.append("|").append(StringUtils.LF);
+    }
+
+    // Convert table rows
+    Elements rows = table.select("tbody tr");
+    for (Element row : rows) {
+      Elements cells = row.select("td");
+      for (Element cell : cells) {
+        markdown.append("| ").append(cell.text()).append(StringUtils.SPACE);
+      }
+      markdown.append("|").append(StringUtils.LF);
+    }
+
+    return markdown.toString();
+  }
+
 }
