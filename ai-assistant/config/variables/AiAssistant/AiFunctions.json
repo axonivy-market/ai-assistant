@@ -94,19 +94,23 @@
           },
           {
             "action": 2,
-            "case": "User want to find, list out, show, or look up for tasks"
+            "case": "User want to find, list out, show, or look up for tasks. The request could be in form of a question asking about tasks related to him, any task need him"
+          },
+          {
+            "action": 2,
+            "case": "User want to see a task list"
           },
           {
             "action": 3,
-            "case": "Latest message of user is a question task. Question could be end with question mark or not"
+            "case": "Latest message of user is a question about task. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "Latest message of user is a question task widget. Question could be end with question mark or not"
+            "case": "Latest message of user is a question about task widget. Question could be end with question mark or not"
           },
           {
             "action": 3,
-            "case": "Latest message of user is a question task list. Question could be end with question mark or not"
+            "case": "Latest message of user is a question about task list. Question could be end with question mark or not"
           },
           {
             "action": 3,
@@ -155,19 +159,19 @@
         "cases": [
           {
             "action": 1,
-            "case": "User want to start, run, find, list out, show, or look up for case"
+            "case": "User want to start case"
+          },
+          {
+            "action": 1,
+            "case": "User want to find, list out case, case list"
+          },
+          {
+            "action": 1,
+            "case": "It's seem that user want to find a case"
           },
           {
             "action": 2,
-            "case": "Latest message of user is a question case. Question could be end with question mark or not"
-          },
-          {
-            "action": 2,
-            "case": "Latest message of user is a question case widget. Question could be end with question mark or not"
-          },
-          {
-            "action": 2,
-            "case": "Latest message of user is a question case list. Question could be end with question mark or not"
+            "case": "Latest message of user is a question about case, case widget, or case list. Question could be end with question mark or not"
           },
           {
             "action": 2,
@@ -240,6 +244,14 @@
           {
             "before": "find my working cases",
             "after": "find cases has state 'in_progress'"
+          },
+          {
+            "before": "find open cases",
+            "after": "find cases has state 'in_progress'"
+          },
+          {
+            "before": "find done cases",
+            "after": "find cases has state 'done'"
           }
         ]
       },
@@ -330,6 +342,10 @@
           {
             "before": "find top priority task",
             "after": "find task has high priority"
+          },
+          {
+            "before": "find open tasks",
+            "after": "find task has state 'in_progress','open'"
           },
           {
             "before": "find working tasks",
@@ -485,19 +501,19 @@
           },
           {
             "action": 10,
-            "case": "User don't want to choose any of them"
+            "case": "User don't want to choose any task"
           },
           {
             "action": 0,
             "case": "User provide information to search tasks again"
           },
           {
-            "action": -1,
-            "case": "User say something irrelevant to the find task function"
+            "action": 11,
+            "case": "User want to use functions different from find task"
           },
           {
-            "action": -1,
-            "case": "User say something meaningless"
+            "action": 12,
+            "case": "User say he want to cancel, or he don't want to search task"
           }
         ]
       },
@@ -530,6 +546,22 @@
         "type": "TEXT",
         "text": "Sorry to hear that, can you provide information of the task you want to start?",
         "onSuccess": 6,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 11,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Tell user that he is using the 'Start task' workflow, therefore you cannot help him with his request.",
+        "onSuccess": 6,
+        "saveToHistory": true
+      },
+      {
+        "stepNo": 12,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "Tell user that he has cancelled the 'Start task' flow.",
+        "onSuccess": -1,
         "saveToHistory": true
       }
     ]
@@ -1105,7 +1137,7 @@
       },
       {
         "name": "onlyMyTask",
-        "description": "when user mentions words similiar to 'my task' set to 'true'. Otherwise, don't change this attribute."
+        "description": "when user mentions words similiar to 'my task', or user want to find tasks related to him, set to 'true'. Otherwise, don't change this attribute."
       }
     ]
   },

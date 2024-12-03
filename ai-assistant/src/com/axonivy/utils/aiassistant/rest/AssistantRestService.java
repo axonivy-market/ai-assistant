@@ -50,6 +50,7 @@ import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -476,7 +477,8 @@ public class AssistantRestService {
 
     String selectedFunction = getFunctionIdFromBotAnswer(
         assistant.getAiModel().getAiBot().chat(
-        params, BasicPromptTemplates.CHOOSE_FUNCTION), assistant.getTools());
+            params, BasicPromptTemplates.CHOOSE_FUNCTION),
+        assistant.getTools());
 
     if (StringUtils.isBlank(selectedFunction)) {
       params.put(AiConstants.FUNCTIONS, assistant.formatFunctionsForChoose());
@@ -497,13 +499,16 @@ public class AssistantRestService {
       return answer;
     }
 
+    String selectedFunction = AiFunctionUtils
+        .extractTextInsideDoubleTag(answer);
+
     List<String> sortedFunctionIds = Optional.ofNullable(functionsIds)
         .orElseGet(() -> new ArrayList<>()).stream()
         .sorted((s1, s2) -> Integer.compare(s2.length(), s1.length()))
         .collect(Collectors.toList());
 
     for (String functionId : sortedFunctionIds) {
-      if (answer.contains(functionId)) {
+      if (selectedFunction.contains(functionId)) {
         return functionId;
       }
     }
