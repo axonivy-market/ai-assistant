@@ -97,10 +97,6 @@
             "case": "User want to find, list out, show, or look up for tasks. The request could be in form of a question asking about tasks related to him, any task need him"
           },
           {
-            "action": 2,
-            "case": "User want to see a task list"
-          },
-          {
             "action": 3,
             "case": "Latest message of user is a question about task. Question could be end with question mark or not"
           },
@@ -657,6 +653,10 @@
           {
             "action": -1,
             "case": "User says something meaningless or he don't want to continue"
+          },
+          {
+            "action": 7,
+            "case": "User says he doesn't mean to find a process, or he say that he want to ask a question instead"
           }
         ]
       },
@@ -671,7 +671,7 @@
         "stepNo": 6,
         "type": "TEXT",
         "text": "Sorry I cannot find any process matched your request",
-        "onSuccess": -1
+        "onSuccess": 7
       },
       {
         "stepNo": 7,

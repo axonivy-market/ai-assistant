@@ -130,11 +130,11 @@ Run the `run-vector-store.ps1` PowerShell script. This will:
 
 - download and start the Docker container `axon-ivy-open-search-vector-store`.
 
-The RESTful endpoint for the container will be available at `http://localhost:19201/`.
+The RESTful endpoint for the container will be available at `http://localhost:19300/`.
 
 ##### Step 3:
 
-Wait a few minutes for the Docker container to start. You can verify that the OpenSearch container is ready by opening `http://localhost:19201/` in a web browser. If the page displays OpenSearch results, your vector store is ready.
+Wait a few minutes for the Docker container to start. You can verify that the OpenSearch container is ready by opening `http://localhost:19300/` in a web browser. If the page displays OpenSearch results, your vector store is ready.
 
 <img src="./doc/img/quick-setup-opensearch-result.png" width="50%" alt="OpenSearch result">
 
@@ -148,7 +148,7 @@ The setup process is almost the same as for Windows. The only difference is that
 
 #### Configure the ai-assistant project
 
-By default, the AI Assistant connects to the vector store's RESTful endpoint at `http://localhost:19201`. If you changed the default host in the `docker-compose.yml` file, you’ll also need to update the `AiAssistant.OpenSearchVectorStoreUrl` variable to match your new RESTful endpoint.
+By default, the AI Assistant connects to the vector store's RESTful endpoint at `http://localhost:19300`. If you changed the default host in the `docker-compose.yml` file, you’ll also need to update the `AiAssistant.OpenSearchVectorStoreUrl` variable to match your new RESTful endpoint.
 
 ### User guide
 
