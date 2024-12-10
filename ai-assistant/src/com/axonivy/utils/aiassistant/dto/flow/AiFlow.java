@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -29,6 +30,8 @@ public class AiFlow extends AiFunction {
   private static final long serialVersionUID = 7244844189316469927L;
 
   private static final int DEFAULT_DONE_STEP = -1;
+  private static final int DEFAULT_DONE_STEP_AND_FORWARD = -2;
+
   private static final int DEFAULT_NUMBER_OF_AI_STEPS_NEED_CHECK = 15;
 
   private List<AiStep> steps;
@@ -44,6 +47,8 @@ public class AiFlow extends AiFunction {
   private AiResultDTO finalResult;
 
   private String notificationMessage;
+
+  private String forwardMessage;
 
   @JsonProperty(value = "startable")
   private boolean startable;
@@ -103,14 +108,23 @@ public class AiFlow extends AiFunction {
 
     assistant = workingAssistant;
     init();
-    if (getWorkingStep() == DEFAULT_DONE_STEP) {
+    if (getWorkingStep() == DEFAULT_DONE_STEP
+        || getWorkingStep() == DEFAULT_DONE_STEP_AND_FORWARD) {
       state = AIState.DONE;
       if (finalResult != null) {
         conversation.getHistory()
             .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
         conversation.getMemory()
             .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
-        ChatMessageManager.saveConversation(assistant.getId(), conversation);
+        ChatMessageManager.saveConversation(assistant.getId(),
+            conversation);
+      }
+
+      // If forward message, update to the field "forwardMessage"
+      if (getWorkingStep() == DEFAULT_DONE_STEP_AND_FORWARD) {
+        forwardMessage = conversation.getHistory().stream()
+            .filter(message -> message.isUserMessage())
+            .collect(Collectors.toList()).getLast().getContent();
       }
       return;
     }
@@ -304,7 +318,8 @@ public class AiFlow extends AiFunction {
       conversation.getMemory().add(notification);
     }
 
-    ChatMessageManager.saveConversation(assistant.getId(), conversation);
+    ChatMessageManager.saveConversation(assistant.getId(),
+        conversation);
   }
 
   public boolean isInProgress() {
@@ -451,5 +466,13 @@ public class AiFlow extends AiFunction {
 
   public void setStartable(boolean startable) {
     this.startable = startable;
+  }
+
+  public String getForwardMessage() {
+    return forwardMessage;
+  }
+
+  public void setForwardMessage(String forwardMessage) {
+    this.forwardMessage = forwardMessage;
   }
 }

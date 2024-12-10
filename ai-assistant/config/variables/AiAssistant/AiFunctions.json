@@ -87,6 +87,7 @@
       {
         "stepNo": 0,
         "type": "SWITCH",
+        "useConversationMemory": true,
         "cases": [
           {
             "action": 1,
@@ -110,7 +111,11 @@
           },
           {
             "action": 3,
-            "case": "User want to do something different from above conditions"
+            "case": "Latest message of user is a question related to the chat history. Question could be end with question mark or not"
+          },
+          {
+            "action": 4,
+            "case": "User want to do something different from above conditions or you cannot understand the message"
           }
         ]
       },
@@ -134,6 +139,13 @@
         "toolId": "portal-support",
         "onSuccess": -1,
         "onError": -1
+      },
+      {
+        "stepNo": 4,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "act as a polite assistant, generate a message to answer user that you cannot answer his question or you cannot find proper tool to handle his request",
+        "onSuccess": -1
       }
     ]
   },
@@ -172,6 +184,10 @@
           {
             "action": 2,
             "case": "User want to do something different from above conditions"
+          },
+          {
+            "action": 3,
+            "case": "User want to do something different from above conditions or you cannot understand the message"
           }
         ]
       },
@@ -188,6 +204,13 @@
         "toolId": "portal-support",
         "onSuccess": -1,
         "onError": -1
+      },
+      {
+        "stepNo": 3,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "act as a polite assistant, generate a message to answer user that you cannot answer his question or you cannot find proper tool to handle his request",
+        "onSuccess": -1
       }
     ]
   },
@@ -207,11 +230,11 @@
         "type": "SWITCH",
         "cases": [
           {
-            "action": 5,
+            "action": 10,
             "case": "Latest message of user is a question about why the find case function didn't work"
           },
           {
-            "action": 5,
+            "action": 10,
             "case": "Latest message of user is a question about what he should do if he cannot find a case"
           },
           {
@@ -227,7 +250,7 @@
       {
         "stepNo": 1,
         "type": "RE_PHRASE",
-        "useConversationMemory": true,
+        "useConversationMemory": false,
         "toolId": "find-cases",
         "onRephrase": 2,
         "onSuccess": 2,
@@ -268,12 +291,63 @@
       {
         "stepNo": 4,
         "type": "TEXT",
-        "text": "I found cases matched your request.",
-        "onSuccess": -1,
-        "showResultOfStep": 2
+        "text": "I’ve updated your message for clarity. Could you please review it and confirm if it aligns with your intended meaning?",
+        "onSuccess": 5,
+        "showResultOfStep": 1
       },
       {
         "stepNo": 5,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 6,
+            "case": "User agree"
+          },
+          {
+            "action": 9,
+            "case": "User don't agree"
+          },
+          {
+            "action": -2,
+            "case": "User has other request"
+          },
+          {
+            "action": -2,
+            "case": "User say something meaningless"
+          }
+        ]
+      },
+      {
+        "stepNo": 6,
+        "type": "IVY_TOOL",
+        "toolId": "find-cases",
+        "onSuccess": 8,
+        "onError": 7,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 7,
+        "type": "TEXT",
+        "text": "I found cases matched your request.",
+        "onSuccess": -1,
+        "showResultOfStep": 6
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "text": "I found cases matched your request.",
+        "onSuccess": -1,
+        "showResultOfStep": 6
+      },
+      {
+        "stepNo": 9,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "generate a better and easy to understand message similar to 'Can you provide some information to clarify the conditions to find tasks?'",
+        "onSuccess": 0
+      },
+      {
+        "stepNo": 10,
         "type": "KNOWLEDGE_BASE",
         "toolId": "portal-support",
         "onSuccess": -1,
@@ -297,20 +371,20 @@
         "type": "SWITCH",
         "cases": [
           {
-            "action": 5,
+            "action": 10,
             "case": "Latest message of user is a question about why the find task function didn't work"
           },
           {
-            "action": 5,
+            "action": 10,
             "case": "Latest message of user is a question about what he should do if he cannot find a task"
           },
           {
             "action": 1,
-            "case": "User want to do something different from above conditions"
+            "case": "User want to find task"
           },
           {
             "action": 1,
-            "case": "User want to find task"
+            "case": "User want to do something different from above conditions"
           }
         ]
       },
@@ -373,25 +447,76 @@
         "stepNo": 2,
         "type": "IVY_TOOL",
         "toolId": "find-tasks",
-        "onSuccess": 4,
-        "onError": 3,
+        "onSuccess": 3,
+        "onError": 4,
         "saveToHistory": false
       },
       {
         "stepNo": 3,
-        "type": "TEXT",
-        "text": "Sorry, I cannot find any task matched your request.",
-        "onSuccess": -1
-      },
-      {
-        "stepNo": 4,
         "type": "TEXT",
         "text": "I found tasks matched your request.",
         "onSuccess": -1,
         "showResultOfStep": 2
       },
       {
+        "stepNo": 4,
+        "type": "TEXT",
+        "text": "I’ve updated your message for clarity. Could you please review it and confirm if it aligns with your intended meaning?",
+        "onSuccess": 5,
+        "showResultOfStep": 1
+      },
+      {
         "stepNo": 5,
+        "type": "SWITCH",
+        "cases": [
+          {
+            "action": 6,
+            "case": "User agree"
+          },
+          {
+            "action": 9,
+            "case": "User don't agree"
+          },
+          {
+            "action": -2,
+            "case": "User has other request"
+          },
+          {
+            "action": -2,
+            "case": "User say something meaningless"
+          }
+        ]
+      },
+      {
+        "stepNo": 6,
+        "type": "IVY_TOOL",
+        "toolId": "find-tasks",
+        "onSuccess": 8,
+        "onError": 7,
+        "saveToHistory": false
+      },
+      {
+        "stepNo": 7,
+        "type": "TEXT",
+        "text": "Sorry, I cannot find any task matched your request.",
+        "onSuccess": -1
+      },
+      {
+        "stepNo": 8,
+        "type": "TEXT",
+        "text": "I found tasks matched your request.",
+        "onSuccess": -1,
+        "showResultOfStep": 6
+      },
+      {
+        "stepNo": 9,
+        "type": "TEXT",
+        "useAI": true,
+        "customInstruction": "generate a better and easy to understand message similar to 'Can you provide some information to clarify the conditions to find tasks?'",
+        "onSuccess": 0
+      },
+      {
+        "stepNo": 10,
         "type": "KNOWLEDGE_BASE",
         "toolId": "portal-support",
         "onSuccess": -1,
@@ -449,7 +574,7 @@
         "stepNo": 2,
         "type": "TEXT",
         "text": "Sorry, I cannot find any task matched your request. Could you please provide more details or clarify your request?",
-        "onSuccess": 0
+        "onSuccess": 6
       },
       {
         "stepNo": 3,
@@ -504,16 +629,16 @@
             "case": "User provide information to search tasks again"
           },
           {
-            "action": 11,
+            "action": -2,
             "case": "User want to use functions different from find task"
           },
           {
-            "action": 12,
+            "action": -2,
             "case": "User say he want to cancel, or he don't want to search task"
           }
         ]
       },
-      { 
+      {
         "stepNo": 7,
         "type": "IVY_TOOL",
         "toolId": "find-task-details-by-id",
@@ -548,8 +673,8 @@
         "stepNo": 11,
         "type": "TEXT",
         "useAI": true,
-        "customInstruction": "Tell user that he is using the 'Start task' workflow, therefore you cannot help him with his request.",
-        "onSuccess": 6,
+        "customInstruction": "Use the conversation messages, show a plain text message with content similiar to: Tell user that you will stop using the function to start the task he requested and start to looking for a proper function to handle his new request",
+        "onSuccess": -2,
         "saveToHistory": true
       },
       {
@@ -797,7 +922,7 @@
         "toolId": "find-processes",
         "onRephrase": 8,
         "onSuccess": 4,
-        "customInstruction" : "If user doesn't specify which attributes to find, only field the name attribute",
+        "customInstruction": "If user doesn't specify which attributes to find, only field the name attribute",
         "examples": [
           {
             "before": "submit leave request",
@@ -1029,11 +1154,12 @@
             "after": "start process has description contains 'leave request'"
           }
         ]
-      }, {
+      },
+      {
         "stepNo": 27,
         "type": "TEXT",
         "useAI": true,
-        "isHidden" : true,
+        "isHidden": true,
         "customInstruction": "Summarize information of the selected process above with the template: processId: <process_id>\nparameters:<list of parameters and their values>",
         "onSuccess": 28
       },
@@ -1234,7 +1360,7 @@
     "permissions": [
       "Everybody"
     ],
-    "description" : "Start process by process ID",
+    "description": "Start process by process ID",
     "usage": "This tool is helpful when user want to start a process",
     "attributes": [
       {
@@ -1258,7 +1384,7 @@
     "permissions": [
       "Everybody"
     ],
-    "description" : "Find information of a process",
+    "description": "Find information of a process",
     "usage": "This tool is helpful when user want to find information of a process",
     "attributes": [
       {
@@ -1272,7 +1398,7 @@
     "id": "portal-support",
     "name": "Portal support",
     "type": "RETRIEVAL_QA",
-    "description" : "Knowledge base of Portal",
+    "description": "Knowledge base of Portal",
     "usage": "Helpful when user ask kind of questions related to Portal or when user need a guide to do something",
     "permissions": [
       "Everybody"
