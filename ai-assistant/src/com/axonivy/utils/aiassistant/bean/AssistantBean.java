@@ -91,13 +91,13 @@ public class AssistantBean implements Serializable {
   }
 
   public void clearHistory() throws IOException {
-    ChatMessageManager.clearConversation(assistant.getId(), conversationId);
-    ChatMessageManager.loadConversation(assistant.getId(), conversationId);
+    ChatMessageManager.clearConversation(conversationId);
+    ChatMessageManager.loadConversation(conversationId);
   }
 
   public StreamedContent exportHistory() {
     Conversation conversation = ChatMessageManager
-        .loadConversation(assistant.getId(), conversationId);
+        .loadConversation(conversationId);
     var inputStream = new ByteArrayInputStream(
         BusinessEntityConverter.prettyPrintEntityToJsonValue(conversation)
             .getBytes(StandardCharsets.UTF_8));

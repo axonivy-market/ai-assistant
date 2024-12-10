@@ -178,8 +178,7 @@ public class AssistantConfigurationBean implements Serializable {
     assistants.remove(selectedAssistant);
     Ivy.var().set(AiVariable.AI_ASSISTANT.key,
         BusinessEntityConverter.entityToJsonValue(assistants));
-    ChatMessageManager
-        .deleteAssistantConversationFolder(selectedAssistant.getId());
+    ChatMessageManager.clearAllConversations();
   }
 
   public void onSelectModel() {

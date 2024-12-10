@@ -12,7 +12,10 @@ import ch.ivyteam.ivy.process.call.SubProcessSearchFilter.SearchScope;
 import ch.ivyteam.ivy.security.exec.Sudo;
 
 public class AiFunctionUtils {
+    protected static final String RESULT_PREFIX = "<<";
+    protected static final String RESULT_POSTFIX = ">>";
 
+    private static final Pattern STANDARD_RESULT_PATTERN = Pattern.compile("<<(.*?)>>");
   /**
    * Check if an Ivy tool is existing in the security context
    * 
@@ -54,16 +57,19 @@ public class AiFunctionUtils {
     }
     return StringUtils.EMPTY;
   }
+  
+  public static String extractTextInsideDoubleTag(String result) {
+      Matcher matcher = STANDARD_RESULT_PATTERN.matcher(result);
 
-  public static String extractTextInsideDoubleTag(String text) {
-    String tagPattern = "<<([^>]+)>>"; // Regex pattern to match characters
-                                       // inside <<>>
-    Pattern pattern = Pattern.compile(tagPattern);
-    Matcher matcher = pattern.matcher(text);
+      if (matcher.find()) {
+          return matcher.group(1); // Extracted data between << and >>
+      }
 
-    if (matcher.find()) {
-      return matcher.group(1); // Return the first captured group
-    }
-    return StringUtils.EMPTY;
+      // If the result has << but doesn't has >>, remove <<
+      if (result.startsWith(RESULT_PREFIX) && !result.endsWith(RESULT_POSTFIX)) {
+          result = result.replaceFirst(RESULT_PREFIX, "").strip();
+      }
+      
+      return result;
   }
 }

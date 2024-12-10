@@ -112,7 +112,7 @@ public class IvyTool extends AiFunction {
 
       conversation.getHistory().add(ChatMessage.newAIMessage(result));
       conversation.getMemory().add(ChatMessage.newAIMessage(resultForMemory));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      ChatMessageManager.saveConversation(conversation);
       return aiConversation;
     } catch (Exception e) {
       return BusinessEntityConverter.entityToJsonValue(new ErrorPayload(

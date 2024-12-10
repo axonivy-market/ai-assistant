@@ -5,6 +5,7 @@ const isIphone = navigator.userAgent.match(/iPhone|iPod/i);
 const IVY = 'IVY';
 const RETRIEVAL_QA = 'RETRIEVAL_QA';
 const VALIDATE_ERROR = 'ERROR';
+const DEFAULT_DONE_STEP_AND_FORWARD = -2; 
 var streamingValue = '';
 var streamingText = '';
 
@@ -365,6 +366,14 @@ function Assistant(ivyUri, uri, view, assistantId, conversationId, username) {
 
     // If the flow is done, show final result
     if (workingFlow.state == 'done') {
+
+      // Forward message to the main flow if necessary
+      if (workingFlow.workingStep == DEFAULT_DONE_STEP_AND_FORWARD) {
+        const forwardMessage = workingFlow.forwardMessage;
+        workingFlow = null;
+        request(ivyUri, view, forwardMessage, conversationId);
+        return;
+      }
 
       const workingStep = workingFlow.runSteps.length == 0 ? null : workingFlow.runSteps[workingFlow.runSteps.length - 1];
       if (workingStep.type == 'KNOWLEDGE_BASE') {

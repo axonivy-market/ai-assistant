@@ -78,7 +78,7 @@ services:
         soft: 65536
         hard: 65536
     ports:
-      - "19201:9200"
+      - "19300:9200"
     volumes:
       - type: bind
         source: ./opensearch-data

@@ -35,8 +35,13 @@ public class BasicPromptTemplates {
       Instructions:
 
       1. If the request seem to be related to other messages such as "start the second task" or "run the fix car process above", show <none>.
-      2. If user just make some casual chatting such as "hello", "how are you?", show <none>
-      3. Otherwise, choose the suitable tool for the request and ONLY respond the Id of the selected tool.""";
+      2. If user just make some casual chatting such as "hello", "how are you?", show <<none>>
+      3. Otherwise, analyze carefully and choose the suitable tool
+      4. Together with the analysis result from step 3, also show the ID of the selected tool inside '<<' and '>>'. Example:
+        + ID: handle-case-flow, output should be <<handle-case-flow>>
+        + ID: 1, output should be <<1>>
+        + ID: testingPortal, output should be <<testingPortal>>
+      5. Show result from step 3 and 4 together""";
 
   public static final String CHOOSE_FUNCTION_WITH_HISTORY = """
       Tool list:
@@ -53,8 +58,11 @@ public class BasicPromptTemplates {
       Instructions:
 
       1. If user just make some casual chatting such as "hello", "how are you?", show <none>
-      2. Otherwise, choose the suitable tool
-      3. ONLY respond the Id of the selected tool
+      2. Otherwise, analyze and choose the suitable tool
+      3. Put the result inside '<<' and '>>'. Example:
+  		+ ID: handle-case-flow, output should be <<handle-case-flow>>
+  		+ ID: 1, output should be <<1>>
+  		+ ID: testingPortal, output should be <<testingPortal>>
       """;
 
   public static final String FULFILL_IVY_TOOL = """

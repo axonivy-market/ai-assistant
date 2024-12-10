@@ -1,6 +1,6 @@
 # ai-assistant
 
-Der **KI-Assistent** ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um Ihre tägliche Arbeit im Portal zu optimieren. 
+Der **KI-Assistent** ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um Ihre tägliche Arbeit im Portal zu optimieren.
 
 Als Ihr persönlicher Assistent bietet er nahtlose Unterstützung bei einer Vielzahl von Aufgaben, von der Navigation durch Dokumentationen über das Starten von Prozessen bis hin zur Verwaltung von Aufgaben und Fällen. Mit dem KI-Assistenten an Ihrer Seite können Sie effizienter und effektiver arbeiten und wertvolle Zeit für das widmen, was wirklich wichtig ist.
 
@@ -130,11 +130,11 @@ Führe das PowerShell-Skript `run-vector-store.ps1` aus. Dieses Skript wird:
 
 - den Docker-Container `axon-ivy-open-search-vector-store` herunterladen und starten.
 
-Der RESTful-Endpunkt des Containers wird unter `http://localhost:19201/` verfügbar sein.
+Der RESTful-Endpunkt des Containers wird unter `http://localhost:19300/` verfügbar sein.
 
 ##### Schritt 3
 
-Warte ein paar Minuten, bis der Docker-Container gestartet ist. Du kannst überprüfen, ob der OpenSearch-Container bereit ist, indem du `http://localhost:19201/` in einem Webbrowser öffnest. Wenn die Seite OpenSearch-Ergebnisse anzeigt, ist dein Vektorspeicher einsatzbereit.
+Warte ein paar Minuten, bis der Docker-Container gestartet ist. Du kannst überprüfen, ob der OpenSearch-Container bereit ist, indem du `http://localhost:19300/` in einem Webbrowser öffnest. Wenn die Seite OpenSearch-Ergebnisse anzeigt, ist dein Vektorspeicher einsatzbereit.
 
 <img src="./doc/img/quick-setup-opensearch-result.png" width="50%" alt="OpenSearch-Ergebnis">
 
@@ -148,7 +148,7 @@ Der Einrichtungsprozess ist fast identisch mit dem auf Windows. Der einzige Unte
 
 #### Konfiguration des AI-Assistant-Projekts
 
-Standardmäßig verbindet sich der KI-Assistent mit dem RESTful-Endpunkt des Vektorspeichers unter `http://localhost:19201`. Falls du den Standardhost in der Datei `docker-compose.yml` geändert hast, musst du die Variable `AiAssistant.OpenSearchVectorStoreUrl` ebenfalls anpassen, um deinen neuen RESTful-Endpunkt widerzuspiegeln.
+Standardmäßig verbindet sich der KI-Assistent mit dem RESTful-Endpunkt des Vektorspeichers unter `http://localhost:19300`. Falls du den Standardhost in der Datei `docker-compose.yml` geändert hast, musst du die Variable `AiAssistant.OpenSearchVectorStoreUrl` ebenfalls anpassen, um deinen neuen RESTful-Endpunkt widerzuspiegeln.
 
 ### Benutzerhandbuch des KI-Assistenten
 

@@ -21,7 +21,7 @@ import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.segment.TextSegment;
 
 public class PortalDocService {
-  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/12.0.0-m266/doc/";
+  private static final String IVY_DOC_HOST = "https://market.axonivy.com/market-cache/portal/portal-guide/12.0.0/doc/";
 
   private static final String HEADER_PREFIX = "# ";
   private static final String SUB_HEADER_PREFIX = "## ";
