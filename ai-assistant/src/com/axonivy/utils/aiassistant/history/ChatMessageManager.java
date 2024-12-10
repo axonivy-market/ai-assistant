@@ -1,117 +1,91 @@
 package com.axonivy.utils.aiassistant.history;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
+import com.axonivy.portal.components.service.IvyCacheService;
 import com.axonivy.utils.aiassistant.dto.history.Conversation;
-import com.axonivy.utils.aiassistant.exception.AiChatException;
-import com.google.gson.Gson;
 
-import ch.ivyteam.ivy.scripting.objects.File;
-import ch.ivyteam.util.crypto.CryptoUtil;
-import ch.ivyteam.util.crypto.CryptoUtil.EncryptionFailedException;
+import ch.ivyteam.ivy.environment.Ivy;
 
 public class ChatMessageManager {
 
-  private static final String CONVERSATION_FILE_PATH = StringUtils.join(
-      "ai_conversations", java.io.File.separator, "%s", java.io.File.separator,
-      "%s.token");
-  private static final String ASSISTANT_FOLDER_PATH = StringUtils
-      .join("ai_conversations", java.io.File.separator, "%s");
-
-  private static final String UTF_8 = StandardCharsets.UTF_8.name();
+  private static final String IDENTIFIER = "AI_ASSISTANT_SESSION_IDENTIFIER";
+  private static final String AI_MESSAGE = "AI_MESSAGE";
 
   private ChatMessageManager() {
   }
 
-  private static String encrypt(String dataToEncrypt) {
-    try {
-      return CryptoUtil.encrypt(dataToEncrypt);
-    } catch (EncryptionFailedException e) {
-      throw new AiChatException("The give data was not encrypted successfully.",
-          e);
+  @SuppressWarnings("unchecked")
+  private static List<Conversation> loadAllConversations() {
+    IvyCacheService cacheService = IvyCacheService.getInstance();
+    Optional<Object> result = cacheService.getSessionCacheValue(AI_MESSAGE,
+        getSessionIdentifier());
+
+    if (result.isEmpty()) {
+      return new ArrayList<>();
     }
+
+    return (List<Conversation>) result.get();
   }
 
-  private static String decrypt(String dataToDecrypt) {
-    return CryptoUtil.decrypt(dataToDecrypt);
+  public static Conversation loadConversation(String conversationId) {
+    List<Conversation> conversations = loadAllConversations();
+    return conversations.stream()
+        .filter(
+            conversation -> conversation.getId().contentEquals(conversationId))
+        .findFirst().orElse(null);
   }
 
-  public static Conversation loadConversation(String assistantId,
-      String conversationId) {
-    String filepath = generateFilePath(assistantId, conversationId);
-    return loadEncryptedConversationFromFilePath(filepath);
-  }
-
-  public static void saveConversation(String assistantId,
-      Conversation conversation) {
-    String filepath = generateFilePath(assistantId, conversation.getId());
-    encryptAndSaveConversationToFile(conversation, filepath);
-  }
-
-  public static void clearConversation(String assistantId,
-      String conversationId) throws IOException {
-    File conversationFile = new File(
-        generateFilePath(assistantId, conversationId));
-    conversationFile.delete();
-
-  }
-
-  private static String generateFilePath(String assistantId, String filename) {
-    return String.format(CONVERSATION_FILE_PATH, assistantId, filename);
-  }
-
-  private static Conversation loadEncryptedConversationFromFilePath(
-      String filepath) {
-    try {
-      File file = new File(filepath);
-      String conversation = file.read(UTF_8);
-      if (StringUtils.isNotEmpty(conversation)) {
-        String decryptedConversation = decrypt(conversation);
-
-        if (StringUtils.isBlank(decryptedConversation)) {
-          return null;
-        }
-
-        return new Gson().fromJson(decryptedConversation, Conversation.class);
+  public static void saveConversation(Conversation conversation) {
+    List<Conversation> conversations = loadAllConversations();
+    boolean existing = false;
+    for (Conversation existingConversation: conversations) {
+      if (existingConversation.getId().contentEquals(conversation.getId())) {
+        existing = true;
+        existingConversation = conversation;
+        break;
       }
-    } catch (IOException e) {
-      throw new AiChatException(
-          "Could not load previous conversation. Chat history file could not be decoded",
-          e);
     }
-    return null;
+
+    if (!existing) {
+      conversations.add(conversation);
+    }
+
+    saveConversationsToCache(conversations);
   }
 
-  private static void encryptAndSaveConversationToFile(
-      Conversation conversation, String filepath) {
-    String converted = new Gson().toJson(conversation);
-    String encrypted = encrypt(converted);
-    try {
-      File conversationFile = new File(filepath);
-
-      if (!conversationFile.exists()) {
-        conversationFile.createNewFile();
+  public static void clearConversation(String conversationId)
+      throws IOException {
+    List<Conversation> conversations = loadAllConversations();
+    for (Conversation conversation : conversations) {
+      if (conversation.getId().contentEquals(conversationId)) {
+        conversations.remove(conversation);
       }
-
-      conversationFile.write(encrypted, UTF_8);
-    } catch (IOException e) {
-      new AiChatException("Could not save the conversation", e);
     }
+
+    saveConversationsToCache(conversations);
   }
 
-  public static void deleteAssistantConversationFolder(String assistantId) {
-    try {
-      String filePath = String.format(ASSISTANT_FOLDER_PATH, assistantId);
-      File assistantFolder = new File(filePath);
-      FileUtils.deleteDirectory(assistantFolder.getJavaFile());
-    } catch (IOException e) {
-      new AiChatException(
-          "Could not delete the conversations of the assistant " + assistantId,
-          e);
+  public static void clearAllConversations() {
+    IvyCacheService cacheService = IvyCacheService.getInstance();
+    cacheService.invalidateSessionEntry(AI_MESSAGE, getSessionIdentifier());
+  }
+
+  private static String getSessionIdentifier() {
+    if (Ivy.session().getAttribute(IDENTIFIER) == null) {
+      Ivy.session().setAttribute(IDENTIFIER, UUID.randomUUID().toString());
     }
+    return (String) Ivy.session().getAttribute(IDENTIFIER);
+  }
+
+  private static void saveConversationsToCache(
+      List<Conversation> conversations) {
+    IvyCacheService cacheService = IvyCacheService.getInstance();
+    cacheService.setSessionCache(AI_MESSAGE, getSessionIdentifier(),
+        conversations);
   }
 }

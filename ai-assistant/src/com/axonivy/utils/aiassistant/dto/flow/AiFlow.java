@@ -66,7 +66,6 @@ public class AiFlow extends AiFunction {
   public void init() {
     if (metadatas == null) {
       metadatas = AssistantUtils.getMetadatas();
-
     }
 
     if (getWorkingStep() == null) {
@@ -116,8 +115,7 @@ public class AiFlow extends AiFunction {
             .add(ChatMessage.newAIFlowMessage(finalResult.getResult()));
         conversation.getMemory()
             .add(ChatMessage.newAIFlowMessage(finalResult.getResultForAI()));
-        ChatMessageManager.saveConversation(assistant.getId(),
-            conversation);
+        ChatMessageManager.saveConversation(conversation);
       }
 
       // If forward message, update to the field "forwardMessage"
@@ -318,8 +316,7 @@ public class AiFlow extends AiFunction {
       conversation.getMemory().add(notification);
     }
 
-    ChatMessageManager.saveConversation(assistant.getId(),
-        conversation);
+    ChatMessageManager.saveConversation(conversation);
   }
 
   public boolean isInProgress() {
