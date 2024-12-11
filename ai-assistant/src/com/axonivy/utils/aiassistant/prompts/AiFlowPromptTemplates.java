@@ -12,8 +12,10 @@ public class AiFlowPromptTemplates {
 
       Instruction:
       1. Read the chat history carefully. The last message of "User" is the request.
-      2. Analyze the request and all conditions then choose the right condition.
-      3. Put the value of the "action" field from the selected condition as a tag <>. Example <2>
+      2. Analyze the request and all conditions then choose the right condition. One action could have multiple conditions, so choose carefully.
+      3. Double check your choice, criticize the logic.
+      4. Put the value of the "action" field of the selected condition inside '<<' and '>>'. Example: <<1>>, <<2>>
+      5. Show message from user and the result from step 2, 3 and 4 together
       """;
 
   public static final String RE_PHRASE_STEP = """

@@ -104,19 +104,20 @@ For a quick setup on your machine, follow one of these guides:
 - [Quick Setup for OpenSearch on Windows](#quick-setup-for-opensearch-on-windows)
 - [Quick Setup for OpenSearch on Linux and macOS](#quick-setup-for-opensearch-on-linux-and-macos)
 
-The only precondition is that your system has a Docker distro such as [DockerDesktop](https://www.docker.com/products/docker-desktop/) or [RancherDesktop](https://rancherdesktop.io/).
+The only precondition is that your system has a running Docker distro such as [DockerDesktop](https://www.docker.com/products/docker-desktop/) or [RancherDesktop](https://rancherdesktop.io/).
 
-#### Quick Setup for OpenSearch on Windows
+##### Quick Setup for OpenSearch on Windows
 
 In this guide, we’ll use the folder `C:\axon-ivy-vector-store` to store all logs and files related to the OpenSearch instance. You can change this location as needed.
 
-##### Step 1:
+**Step 1:**
 
-Copy the PowerShell script [run-vector-store.ps1](./doc/files/run-vector-store.ps1) to `C:\axon-ivy-vector-store`
+- Make sure the system has a running Docker distro such as [DockerDesktop](https://www.docker.com/products/docker-desktop/) or [RancherDesktop](https://rancherdesktop.io/)
+- Copy the PowerShell script [run-vector-store.ps1](./doc/files/run-vector-store.ps1) to `C:\axon-ivy-vector-store`
 
-##### Step 2:
+**Step 2:**
 
-Run the `run-vector-store.ps1` PowerShell script. This will:
+Execute the `run-vector-store.ps1` PowerShell script. This will:
 
 - create a Docker container for the Axon Ivy vector store, named `axon-ivy-open-search-vector-store`
 - generate necessary configuration files:
@@ -130,25 +131,29 @@ Run the `run-vector-store.ps1` PowerShell script. This will:
 
 - download and start the Docker container `axon-ivy-open-search-vector-store`.
 
-The RESTful endpoint for the container will be available at `http://localhost:19201/`.
+The RESTful endpoint for the container will be available at `http://localhost:19300/`.
 
-##### Step 3:
+> [!TIP]
+> If you encounter a permission issue when running the `run-vector-store.ps1` script, open Windows PowerShell as an administrator and run the command `Set-ExecutionPolicy Unrestricted`.
+> Then, execute the `run-vector-store.ps1` script again.
 
-Wait a few minutes for the Docker container to start. You can verify that the OpenSearch container is ready by opening `http://localhost:19201/` in a web browser. If the page displays OpenSearch results, your vector store is ready.
+**Step 3:**
+
+Wait a few minutes for the Docker container to start. You can verify that the OpenSearch container is ready by opening `http://localhost:19300/` in a web browser. If the page displays OpenSearch results, your vector store is ready.
 
 <img src="./doc/img/quick-setup-opensearch-result.png" width="50%" alt="OpenSearch result">
 
-##### Step 4:
+**Step 4:**
 
 To configure the Docker container for the Axon Ivy vector store, modify the `docker-compose.yml` file as needed.
 
-#### Quick Setup for OpenSearch on Linux and macOS
+##### Quick Setup for OpenSearch on Linux and macOS
 
 The setup process is almost the same as for Windows. The only difference is that you'll run the bash script [run-vector-store.sh](./doc/files/run-vector-store.sh) instead of the PowerShell script.
 
 #### Configure the ai-assistant project
 
-By default, the AI Assistant connects to the vector store's RESTful endpoint at `http://localhost:19201`. If you changed the default host in the `docker-compose.yml` file, you’ll also need to update the `AiAssistant.OpenSearchVectorStoreUrl` variable to match your new RESTful endpoint.
+By default, the AI Assistant connects to the vector store's RESTful endpoint at `http://localhost:19300`. If you changed the default host in the `docker-compose.yml` file, you’ll also need to update the `AiAssistant.OpenSearchVectorStoreUrl` variable to match your new RESTful endpoint.
 
 ### User guide
 

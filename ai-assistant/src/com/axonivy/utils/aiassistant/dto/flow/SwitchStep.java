@@ -58,7 +58,7 @@ public class SwitchStep extends AiStep {
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
         AiFlowPromptTemplates.FULFILL_CONDITIONAL_STEP);
     setOnSuccess(NumberUtils
-        .toInt(AiFunctionUtils.extractTextInsideTag(resultFromAI), -1));
+        .toInt(AiFunctionUtils.extractTextInsideDoubleTag(resultFromAI), -1));
   }
 
   private String generateConditionsString() {

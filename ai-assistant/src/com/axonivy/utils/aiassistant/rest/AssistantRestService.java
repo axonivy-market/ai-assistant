@@ -50,6 +50,7 @@ import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -71,8 +72,7 @@ public class AssistantRestService {
       @PathParam(AiConstants.CONVERSATION_ID) String conversationId) {
     Conversation conversation = new Conversation();
     conversation.setId(conversationId);
-    conversation = ChatMessageManager.loadConversation(assistantId,
-        conversationId);
+    conversation = ChatMessageManager.loadConversation(conversationId);
     return Response.ok(BusinessEntityConverter.entityToJsonValue(conversation))
         .build();
   }
@@ -86,7 +86,7 @@ public class AssistantRestService {
       throws WebApplicationException, IOException, InterruptedException {
 
     Conversation conversation = ChatMessageManager
-        .loadConversation(payload.getAssistantId(), conversationId);
+        .loadConversation(conversationId);
 
     if (conversation == null) {
       conversation = new Conversation();
@@ -99,7 +99,7 @@ public class AssistantRestService {
     conversation.getHistory().add(userMessage);
     conversation.getMemory().add(userMessage);
 
-    ChatMessageManager.saveConversation(payload.getAssistantId(), conversation);
+    ChatMessageManager.saveConversation(conversation);
 
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
@@ -127,7 +127,7 @@ public class AssistantRestService {
 
     conversation.getHistory().add(systemMessageHistory);
     conversation.getMemory().add(systemMessage);
-    ChatMessageManager.saveConversation(assistant.getId(), conversation);
+    ChatMessageManager.saveConversation(conversation);
 
     response.resume(BusinessEntityConverter.entityToJsonValue(payload));
 
@@ -142,7 +142,7 @@ public class AssistantRestService {
       throws WebApplicationException, IOException, InterruptedException {
 
     Conversation conversation = ChatMessageManager
-        .loadConversation(payload.getAssistantId(), conversationId);
+        .loadConversation(conversationId);
 
     if (conversation == null) {
       conversation = new Conversation();
@@ -198,7 +198,7 @@ public class AssistantRestService {
         RagPromptTemplates.DEFAULT_RAG_ANSWER, messageHandler);
     if (StringUtils.isNotBlank(error)) {
       conversation.getHistory().add(ChatMessage.newErrorMessage(error));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      ChatMessageManager.saveConversation(conversation);
       response.resume(
           BusinessEntityConverter.entityToJsonValue(new ErrorPayload(error)));
       messageHandler = null;
@@ -223,7 +223,7 @@ public class AssistantRestService {
         BasicPromptTemplates.DEFAULT_ANSWER, messageHandler);
     if (StringUtils.isNotBlank(error)) {
       conversation.getHistory().add(ChatMessage.newErrorMessage(error));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      ChatMessageManager.saveConversation(conversation);
       response.resume(
           BusinessEntityConverter.entityToJsonValue(new ErrorPayload(error)));
       messageHandler = null;
@@ -288,7 +288,7 @@ public class AssistantRestService {
     Assistant assistant = AssistantService.getInstance()
         .findById(payload.getAssistantId());
     Conversation conversation = ChatMessageManager
-        .loadConversation(payload.getAssistantId(), conversationId);
+        .loadConversation(conversationId);
 
     if (payload.getIsSkipMessage()) {
       flow.proceed(null, conversation, assistant);
@@ -297,8 +297,7 @@ public class AssistantRestService {
           .add(ChatMessage.newUserMessage(payload.getMessage()));
       conversation.getHistory()
           .add(ChatMessage.newUserMessage(payload.getMessage()));
-      ChatMessageManager.saveConversation(payload.getAssistantId(),
-          conversation);
+      ChatMessageManager.saveConversation(conversation);
 
       flow.proceed(payload.getMessage(), conversation, assistant);
     }
@@ -327,7 +326,7 @@ public class AssistantRestService {
         flow.getFunctionToTrigger().generateSelectedFunctionMessage());
     conversation.getHistory().add(systemMessage);
     conversation.getMemory().add(systemMessage);
-    ChatMessageManager.saveConversation(assistant.getId(), conversation);
+    ChatMessageManager.saveConversation(conversation);
   }
 
   private void handleRetrievalQATool(AsyncResponse response, String message,
@@ -343,7 +342,7 @@ public class AssistantRestService {
     if (StringUtils.isNotBlank(testEmbeddingConnectionResult)) {
       conversation.getHistory()
           .add(ChatMessage.newErrorMessage(testEmbeddingConnectionResult));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      ChatMessageManager.saveConversation(conversation);
       response.resume(BusinessEntityConverter
           .entityToJsonValue(new ErrorPayload(testEmbeddingConnectionResult)));
       return;
@@ -408,10 +407,10 @@ public class AssistantRestService {
       if (matcher.find()) {
 
         Conversation conversation = ChatMessageManager
-            .loadConversation(assistantId, conversationId);
+            .loadConversation(conversationId);
         conversation.getHistory()
             .add(ChatMessage.newErrorMessage(matcher.group(1)));
-        ChatMessageManager.saveConversation(assistantId, conversation);
+        ChatMessageManager.saveConversation(conversation);
 
         response.resume(BusinessEntityConverter
             .entityToJsonValue(new ErrorPayload(matcher.group(1))));
@@ -420,11 +419,11 @@ public class AssistantRestService {
 
       if (result.startsWith(conversationId)) {
         Conversation conversation = ChatMessageManager
-            .loadConversation(assistantId, conversationId);
+            .loadConversation(conversationId);
         conversation.getHistory()
             .add(ChatMessage.newAIMessage(
                 result.replace(conversationId, StringUtils.EMPTY)));
-        ChatMessageManager.saveConversation(assistantId, conversation);
+        ChatMessageManager.saveConversation(conversation);
       }
 
       response.resume(BusinessEntityConverter.entityToJsonValue(
@@ -438,8 +437,8 @@ public class AssistantRestService {
   public void useKnowledgeBase(@Suspended AsyncResponse response,
       AssistantChatPayload payload) throws JsonProcessingException {
 
-    Conversation conversation = ChatMessageManager.loadConversation(
-        payload.getAssistantId(), payload.getConversationId());
+    Conversation conversation = ChatMessageManager
+        .loadConversation(payload.getConversationId());
     if (conversation == null) {
       return;
     }
@@ -476,7 +475,8 @@ public class AssistantRestService {
 
     String selectedFunction = getFunctionIdFromBotAnswer(
         assistant.getAiModel().getAiBot().chat(
-        params, BasicPromptTemplates.CHOOSE_FUNCTION), assistant.getTools());
+            params, BasicPromptTemplates.CHOOSE_FUNCTION),
+        assistant.getTools());
 
     if (StringUtils.isBlank(selectedFunction)) {
       params.put(AiConstants.FUNCTIONS, assistant.formatFunctionsForChoose());
@@ -497,13 +497,16 @@ public class AssistantRestService {
       return answer;
     }
 
+    String selectedFunction = AiFunctionUtils
+        .extractTextInsideDoubleTag(answer);
+
     List<String> sortedFunctionIds = Optional.ofNullable(functionsIds)
         .orElseGet(() -> new ArrayList<>()).stream()
         .sorted((s1, s2) -> Integer.compare(s2.length(), s1.length()))
         .collect(Collectors.toList());
 
     for (String functionId : sortedFunctionIds) {
-      if (answer.contains(functionId)) {
+      if (selectedFunction.contains(functionId)) {
         return functionId;
       }
     }
