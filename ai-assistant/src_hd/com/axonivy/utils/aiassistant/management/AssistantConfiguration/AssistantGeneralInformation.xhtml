@@ -114,17 +114,17 @@
 
 <!-- ETHICAL RULES -->
 <div class="ui-g-12">
-  <p:outputLabel styleClass="assistant-label" for="assistant-ethical-rules"
+  <p:outputLabel styleClass="assistant-label" for="ethical-rules-container"
     value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/EthicalGuideline')}" />
 </div>
-<div class="ui-g-12 ui-fluid ethical-rules-container">
-  <ui:repeat id="assistant-ethical-rules" var="rule" value="#{assistant.ethicalRules}">
+<h:panelGroup layout="block" id="ethical-rules-container" styleClass="ui-g-12 ui-fluid ethical-rules-container">
+  <ui:repeat var="rule" value="#{assistant.ethicalRules}">
     <div class="ethical-rule-item">
       <span class="si si-check-circle-1" />
       <h:outputText value="#{rule}" />
     </div>
   </ui:repeat>
-</div>
+</h:panelGroup>
 
 <!-- EMAIL -->
 <div class="ui-g-12">

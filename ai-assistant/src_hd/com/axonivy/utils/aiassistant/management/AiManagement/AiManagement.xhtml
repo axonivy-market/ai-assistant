@@ -41,7 +41,7 @@
                         #{ivy.cms.co("/Dialogs/com/axonivy/utils/aiassistant/management/AiManagement/AddNewAssistant")}
                       </div>
                       <p:ajax event="click" listener="#{aiManagementBean.navigateToAssistantConfiguration('')}"
-                        global="false" immediate="true" rendered="#{!aiManagementBean.isEmptyModels()}" />
+                        global="false" immediate="true" disabled="#{aiManagementBean.isEmptyModels()}" />
                     </div>
                   </h:form>
                 </div>

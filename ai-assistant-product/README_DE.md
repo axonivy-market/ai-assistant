@@ -107,15 +107,16 @@ Für eine schnelle Einrichtung auf deinem Rechner folge einer dieser Anleitungen
 
 Die einzige Voraussetzung ist, dass auf deinem System eine Docker-Distribution wie [DockerDesktop](https://www.docker.com/products/docker-desktop/) oder [RancherDesktop](https://rancherdesktop.io/) installiert ist.
 
-#### Schnelle Einrichtung von OpenSearch auf Windows
+##### Schnelle Einrichtung von OpenSearch auf Windows
 
 Schnelle Einrichtung von OpenSearch auf Windows. In dieser Anleitung verwenden wir den Ordner `C:\axon-ivy-vector-store`, um alle Protokolle und Dateien der OpenSearch-Instanz zu speichern. Du kannst diesen Speicherort bei Bedarf anpassen.
 
-##### Schritt 1
+**Schritt 1**
 
-Kopiere das PowerShell-Skript [run-vector-store.ps1](./doc/files/run-vector-store.ps1) in den Ordner `C:\axon-ivy-vector-store`.
+- Stelle sicher, dass auf dem System eine Docker-Distribution wie [DockerDesktop](https://www.docker.com/products/docker-desktop/) oder [RancherDesktop](https://rancherdesktop.io/) läuft.
+- Kopiere das PowerShell-Skript [run-vector-store.ps1](./doc/files/run-vector-store.ps1) in den Ordner `C:\axon-ivy-vector-store`.
 
-##### Schritt 2
+**Schritt 2**
 
 Führe das PowerShell-Skript `run-vector-store.ps1` aus. Dieses Skript wird:
 
@@ -132,17 +133,21 @@ Führe das PowerShell-Skript `run-vector-store.ps1` aus. Dieses Skript wird:
 
 Der RESTful-Endpunkt des Containers wird unter `http://localhost:19300/` verfügbar sein.
 
-##### Schritt 3
+> [!TIP]
+> Wenn du auf ein Berechtigungsproblem stößt, während du das Skript `run-vector-store.ps1` ausführst, öffne Windows PowerShell als Administrator und führe den Befehl `Set-ExecutionPolicy Unrestricted` aus.
+> Führe anschließend das Skript `run-vector-store.ps1` erneut aus.
+
+**Schritt 3**
 
 Warte ein paar Minuten, bis der Docker-Container gestartet ist. Du kannst überprüfen, ob der OpenSearch-Container bereit ist, indem du `http://localhost:19300/` in einem Webbrowser öffnest. Wenn die Seite OpenSearch-Ergebnisse anzeigt, ist dein Vektorspeicher einsatzbereit.
 
 <img src="./doc/img/quick-setup-opensearch-result.png" width="50%" alt="OpenSearch-Ergebnis">
 
-##### Schritt 4
+**Schritt 4**
 
 Um den Docker-Container für den Axon Ivy Vektorspeicher zu konfigurieren, passe die Datei `docker-compose.yml` nach Bedarf an.
 
-#### Schnelle Einrichtung von OpenSearch auf Linux und macOS
+##### Schnelle Einrichtung von OpenSearch auf Linux und macOS
 
 Der Einrichtungsprozess ist fast identisch mit dem auf Windows. Der einzige Unterschied besteht darin, dass du das Bash-Skript [run-vector-store.sh](./doc/files/run-vector-store.sh) anstelle des PowerShell-Skripts ausführst.
 
