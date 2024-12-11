@@ -3,7 +3,7 @@ package com.axonivy.utils.aiassistant.core;
 import java.util.List;
 import java.util.Map;
 
-import com.axonivy.utils.aiassistant.core.embedding.IvyElasticSearchEmbeddingStore;
+import com.axonivy.utils.aiassistant.core.embedding.IvyOpenSearchEmbeddingStore;
 import com.axonivy.utils.aiassistant.enums.ModelType;
 
 import dev.langchain4j.data.message.AiMessage;
@@ -15,7 +15,7 @@ public abstract class AbstractAIBot {
 
   private ModelType modelType;
 
-  private IvyElasticSearchEmbeddingStore embeddingStore;
+  private IvyOpenSearchEmbeddingStore embeddingStore;
 
   public ModelType getModelType() {
     return modelType;
@@ -25,11 +25,11 @@ public abstract class AbstractAIBot {
     this.modelType = modelType;
   }
 
-  public IvyElasticSearchEmbeddingStore getEmbeddingStore() {
+  public IvyOpenSearchEmbeddingStore getEmbeddingStore() {
     return embeddingStore;
   }
 
-  public void setEmbeddingStore(IvyElasticSearchEmbeddingStore embeddingStore) {
+  public void setEmbeddingStore(IvyOpenSearchEmbeddingStore embeddingStore) {
     this.embeddingStore = embeddingStore;
   }
 
@@ -46,6 +46,8 @@ public abstract class AbstractAIBot {
 
   public abstract String chat(Map<String, Object> variables,
       String promptTemplate);
+
+  public abstract String chat(String message);
 
   public abstract String streamChat(Map<String, Object> variables,
       String promptTemplate, StreamingResponseHandler<AiMessage> handler);

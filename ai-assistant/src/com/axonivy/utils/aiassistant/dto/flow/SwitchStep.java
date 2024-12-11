@@ -15,6 +15,7 @@ import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.enums.StepType;
 import com.axonivy.utils.aiassistant.prompts.AiFlowPromptTemplates;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SwitchStep extends AiStep {
@@ -56,7 +57,8 @@ public class SwitchStep extends AiStep {
 
     String resultFromAI = assistant.getAiModel().getAiBot().chat(params,
         AiFlowPromptTemplates.FULFILL_CONDITIONAL_STEP);
-    setOnSuccess(NumberUtils.toInt(extractTextInsideTag(resultFromAI), -1));
+    setOnSuccess(NumberUtils
+        .toInt(AiFunctionUtils.extractTextInsideDoubleTag(resultFromAI), -1));
   }
 
   private String generateConditionsString() {

@@ -17,7 +17,6 @@ import com.axonivy.portal.components.service.IvyAdapterService;
 import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.core.AbstractAIBot;
 import com.axonivy.utils.aiassistant.dto.Assistant;
-import com.axonivy.utils.aiassistant.dto.flow.AiStep;
 import com.axonivy.utils.aiassistant.dto.history.ChatMessage;
 import com.axonivy.utils.aiassistant.dto.history.Conversation;
 import com.axonivy.utils.aiassistant.dto.history.StreamingMessage;
@@ -113,7 +112,7 @@ public class IvyTool extends AiFunction {
 
       conversation.getHistory().add(ChatMessage.newAIMessage(result));
       conversation.getMemory().add(ChatMessage.newAIMessage(resultForMemory));
-      ChatMessageManager.saveConversation(assistant.getId(), conversation);
+      ChatMessageManager.saveConversation(conversation);
       return aiConversation;
     } catch (Exception e) {
       return BusinessEntityConverter.entityToJsonValue(new ErrorPayload(
@@ -157,8 +156,8 @@ public class IvyTool extends AiFunction {
 
     try {
       fulfilled = BusinessEntityConverter
-        .jsonValueToEntities(
-            AiStep.extractJsonArray(AiStep.extractTextInsideTag(
+          .jsonValueToEntities(AiFunctionUtils
+              .extractJsonArray(AiFunctionUtils.extractTextInsideTag(
                 bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL))),
             IvyToolAttribute.class);
     } catch (Exception e) {
@@ -206,7 +205,7 @@ public class IvyTool extends AiFunction {
       params.put(AiConstants.METADATA, metadata);
 
       return BusinessEntityConverter.jsonValueToEntity(
-          AiStep.extractTextInsideTag(
+          AiFunctionUtils.extractTextInsideTag(
               bot.chat(params, BasicPromptTemplates.FULFILL_IVY_ATTRIBUTE)),
           IvyToolAttribute.class);
 

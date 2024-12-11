@@ -5,12 +5,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
+import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
@@ -65,7 +67,18 @@ public class RetrievalQATool extends AiFunction {
         BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
 
+    int requestType = analyzeRequestType(assistant, message);
+    params.put("structureGuidelines",
+        RagPromptTemplates.getStructuredOutputInstruction(requestType));
+
     return assistant.getAiModel().getAiBot().chat(params,
         RagPromptTemplates.RAG_PROMPT_TEMPLATE);
+  }
+
+  public static int analyzeRequestType(Assistant assistant, String message) {
+    String messageFromAI = assistant.getAiModel().getAiBot()
+        .chat(RagPromptTemplates.getAnalyzeRequestTypePromptTemplate(message));
+    return NumberUtils
+        .toInt(AiFunctionUtils.extractTextInsideTag(messageFromAI), 1);
   }
 }

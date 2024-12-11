@@ -7,6 +7,6 @@ import com.axonivy.utils.aiassistant.service.AiModelService;
 public class BotUtils {
 
   public static AbstractAIBot getBot() {
-    return new OpenAIBot(AiModelService.getSecondaryOpenAIModel());
+    return new OpenAIBot(AiModelService.getPrimaryOpenAIModel());
   }
 }

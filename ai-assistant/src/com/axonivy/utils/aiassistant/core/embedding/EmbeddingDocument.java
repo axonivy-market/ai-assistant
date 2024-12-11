@@ -2,7 +2,7 @@ package com.axonivy.utils.aiassistant.core.embedding;
 
 import java.util.Map;
 
-public class EsDocument {
+public class EmbeddingDocument {
   private float[] vector;
   private String text;
   private Map<String, Object> metadata;
