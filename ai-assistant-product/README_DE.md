@@ -1,6 +1,6 @@
 # ai-assistant
 
-Der **KI-Assistent** ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um Ihre tägliche Arbeit im Portal zu optimieren.
+Der **KI-Assistent** ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um Ihre tägliche Arbeit im Portal zu optimieren. 
 
 Als Ihr persönlicher Assistent bietet er nahtlose Unterstützung bei einer Vielzahl von Aufgaben, von der Navigation durch Dokumentationen über das Starten von Prozessen bis hin zur Verwaltung von Aufgaben und Fällen. Mit dem KI-Assistenten an Ihrer Seite können Sie effizienter und effektiver arbeiten und wertvolle Zeit für das widmen, was wirklich wichtig ist.
 
@@ -81,79 +81,11 @@ Beispiel:
 
 ## Einrichtung
 
-### Einrichtung der ai-assistant-Anwendung
-
 1. Deploye das **ai-assistant** Artefakt in derselben Anwendung indem sich auch das **Portal** befindet.
 
 2. Starte die Engine und melden dich im Portal an.
 
 3. Klicke in der Kopfzeile des Portals auf das **KI-Assistent** Symbol, um auf den Chat des **KI-Assistenten** zuzugreifen.
-
-### Einrichtung des Vektorspeichers
-
-#### Installiere OpenSearch
-
-Der KI-Assistent verwendet OpenSearch 2.17.1 als Vektorspeicher, der alle Wissensdatenbanken speichert. Informationen zur Einrichtung findest du unter [OpenSearch 2.17.1](https://opensearch.org/versions/opensearch-2-17-1.html).
-
-Nachdem du OpenSearch erfolgreich installiert hast, stelle bitte sicher:
-
-- dass das Plugin `opensearch-knn` installiert ist,
-- und dass deine OpenSearch-Instanz einen RESTful-Endpoint hat.
-
-Für eine schnelle Einrichtung auf deinem Rechner folge einer dieser Anleitungen:
-
-- [Schnelle Einrichtung von OpenSearch auf Windows](#schnelle-einrichtung-von-opensearch-auf-windows)
-- [Schnelle Einrichtung von OpenSearch auf Linux und macOS](#schnelle-einrichtung-von-opensearch-auf-linux-und-macos)
-
-Die einzige Voraussetzung ist, dass auf deinem System eine Docker-Distribution wie [DockerDesktop](https://www.docker.com/products/docker-desktop/) oder [RancherDesktop](https://rancherdesktop.io/) installiert ist.
-
-##### Schnelle Einrichtung von OpenSearch auf Windows
-
-Schnelle Einrichtung von OpenSearch auf Windows. In dieser Anleitung verwenden wir den Ordner `C:\axon-ivy-vector-store`, um alle Protokolle und Dateien der OpenSearch-Instanz zu speichern. Du kannst diesen Speicherort bei Bedarf anpassen.
-
-**Schritt 1**
-
-- Stelle sicher, dass auf dem System eine Docker-Distribution wie [DockerDesktop](https://www.docker.com/products/docker-desktop/) oder [RancherDesktop](https://rancherdesktop.io/) läuft.
-- Kopiere das PowerShell-Skript [run-vector-store.ps1](./doc/files/run-vector-store.ps1) in den Ordner `C:\axon-ivy-vector-store`.
-
-**Schritt 2**
-
-Führe das PowerShell-Skript `run-vector-store.ps1` aus. Dieses Skript wird:
-
-- einen Docker-Container für den Axon Ivy Vektorspeicher erstellen, benannt als `axon-ivy-open-search-vector-store`,
-- die erforderlichen Konfigurationsdateien generieren:
-    + `.env`: Enthält das Standardpasswort.
-    + `docker-compose.yml`: Definiert die Docker-Einrichtung für `axon-ivy-open-search-vector-store`.
-    + Ordner `opensearch-logs`: Speichert alle Protokolle des Vektorspeichers.
-    + Ordner `opensearch-data`: Speichert alle Daten des Vektorspeichers.
-
-    <img src="./doc/img/quick-setup-opensearch-windows.png" width="50%" alt="Alle benötigten Dateien für den Docker-Container">
-
-- den Docker-Container `axon-ivy-open-search-vector-store` herunterladen und starten.
-
-Der RESTful-Endpunkt des Containers wird unter `http://localhost:19300/` verfügbar sein.
-
-> [!TIP]
-> Wenn du auf ein Berechtigungsproblem stößt, während du das Skript `run-vector-store.ps1` ausführst, öffne Windows PowerShell als Administrator und führe den Befehl `Set-ExecutionPolicy Unrestricted` aus.
-> Führe anschließend das Skript `run-vector-store.ps1` erneut aus.
-
-**Schritt 3**
-
-Warte ein paar Minuten, bis der Docker-Container gestartet ist. Du kannst überprüfen, ob der OpenSearch-Container bereit ist, indem du `http://localhost:19300/` in einem Webbrowser öffnest. Wenn die Seite OpenSearch-Ergebnisse anzeigt, ist dein Vektorspeicher einsatzbereit.
-
-<img src="./doc/img/quick-setup-opensearch-result.png" width="50%" alt="OpenSearch-Ergebnis">
-
-**Schritt 4**
-
-Um den Docker-Container für den Axon Ivy Vektorspeicher zu konfigurieren, passe die Datei `docker-compose.yml` nach Bedarf an.
-
-##### Schnelle Einrichtung von OpenSearch auf Linux und macOS
-
-Der Einrichtungsprozess ist fast identisch mit dem auf Windows. Der einzige Unterschied besteht darin, dass du das Bash-Skript [run-vector-store.sh](./doc/files/run-vector-store.sh) anstelle des PowerShell-Skripts ausführst.
-
-#### Konfiguration des AI-Assistant-Projekts
-
-Standardmäßig verbindet sich der KI-Assistent mit dem RESTful-Endpunkt des Vektorspeichers unter `http://localhost:19300`. Falls du den Standardhost in der Datei `docker-compose.yml` geändert hast, musst du die Variable `AiAssistant.OpenSearchVectorStoreUrl` ebenfalls anpassen, um deinen neuen RESTful-Endpunkt widerzuspiegeln.
 
 ### Benutzerhandbuch des KI-Assistenten
 
