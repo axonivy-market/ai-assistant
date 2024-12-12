@@ -7,6 +7,12 @@
         "projects": [
           {
             "groupId": "com.axonivy.utils.aiassistant",
+            "artifactId": "ai-assistant",
+            "version": "${version}",
+            "type": "iar"
+          },
+          {
+            "groupId": "com.axonivy.utils.aiassistant",
             "artifactId": "ai-assistant-demo",
             "version": "${version}",
             "type": "iar"
