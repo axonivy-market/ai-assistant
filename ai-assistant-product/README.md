@@ -21,7 +21,7 @@ Embrace the future of work with the AI Assistant, your personalized companion fo
 
 ## Demo
 
-### Demo project
+### AI-Demo project
 
 In the **ai-assistant-demo** Ivy project, we created demo assistants which can help you understand and develop your own AI assistant more efficiently.
 
