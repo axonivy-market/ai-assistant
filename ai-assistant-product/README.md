@@ -3,12 +3,12 @@
 The AI Assistant is a powerful tool designed to streamline your daily work within the portal. Acting as your personal assistant, it provides seamless support for a wide range of tasks, from navigating documentation to launching processes and managing tasks and cases. With the AI Assistant at your side, you can work more efficiently and effectively, freeing up valuable time for what truly matters.
 Engage in a more interactive and intuitive workflow by conversing with the assistant about your processes instead of merely executing them. This dynamic interaction enhances your experience, allowing you to explore options and gain insights as you work. With multilingual capabilities, the AI Assistant communicates effortlessly in English, German, Spanish, and more, ensuring you receive support in your preferred language.
 
-<img src="./doc/img/chat-dashboard.png" width="50%" alt="Chat Dashboard">
+![Chat Dashboad](doc/img/chat-dashboard.png)
 
 Beyond providing immediate assistance, the AI Assistant empowers you to create and manage custom models and assistants tailored to your unique needs. With the management overview feature, designing, configuring, and organizing these models is a breeze. You can craft personalized assistants, assign specific behaviors, or leverage predefined templates to guide their actions. This level of customization ensures that your AI Assistant aligns perfectly with your preferences and work style.
 Embrace the future of work with the AI Assistant, your personalized companion for enhanced productivity and seamless task management.
 
-<img src="./doc/img/assistant-management.png" width="50%" alt="Assistant Management">
+![Assistant Management](doc/img/assistant-management.png)
 
 **List of capabilities:**
 
@@ -97,19 +97,19 @@ The AI Management screen serves as a central hub for configuring and managing al
 
 - [Manage AI functions](#manage-ai-functions): control and organize various AI functions, defining the actions your AI can perform and how it interacts with users to provide accurate and efficient results
 
-<img src="./doc/img/ai-functions-management.png" width="50%" alt="AI Functions management">
+![AI Functions management](doc/img/ai-functions-management.png)
 
 ##### Manage AI Assistants
 
 This section lists all the AI assistants that the logged-in user has permission to access, along with their names, avatars, and short descriptions.
 
-<img src="./doc/img/assistant-management.png" width="50%" alt="Assistant management">
+![Assistant management](doc/img/assistant-management.png)
 
 You can create a new AI assistant by clicking the **Add new assistant** button, or modify an existing AI assistant's details by selecting the corresponding assistant from the list.
 
 Once you've selected an AI assistant, its details page will be displayed.
 
-<img src="./doc/img/assistant-details.png" width="50%" alt="AI assistant details">
+![AI assistant details](doc/img/assistant-details.png)
 
 There are some settings you can change:
 
@@ -135,7 +135,7 @@ You can quickly configure all the necessary settings for an AI assistant by usin
 
 2. The **Assistant Templates** dialog will appear. Select a template from the list by clicking it.
 
-    <img src="./doc/img/assistant-templates-dialog.png" width="50%" alt="Assistant Templates">
+    ![Assistant Templates](doc/img/assistant-templates-dialog.png)
 
 3. The template's settings will be applied to your AI assistant. You can then modify them to suit your needs.
 
@@ -143,13 +143,13 @@ You can quickly configure all the necessary settings for an AI assistant by usin
 
 On the right side is a table listing the AI functions available to the AI assistant. You can view general information about each function, such as its name, type, description, permissions, and usage.
 
-<img src="./doc/img/assistant-details-functions.png" width="50%" alt="Functions">
+![Functions](doc/img/assistant-details-functions.png)
 
 You can prevent the AI assistant from using a function by removing it from this table.
 
 When you click the **Add** button, the **Add function** dialog will appear. To add a function, click on the row of the function you want to select, then click **Add** to add the selected functions.
 
-<img src="./doc/img/assistant-details-add-functions.png" width="50%" alt="Add function dialog">
+![Add function dialog](doc/img/assistant-details-add-functions.png)
 
 Afterward, the selected functions will appear in the **Functions** table.
 
@@ -163,7 +163,7 @@ As time goes by, an AI assistant may become obsoleted and you may want to delete
 
 A confim dialog will appear, you can delete the AI assistant completely by clicking the **Remove** button on that dialog.
 
-<img src="./doc/img/assistant-details-delete.png" width="50%" alt="Delete AI Assistant dialog">
+![Delete AI Assistant dialog](doc/img/assistant-details-delete.png)
 
 But please aware that, all conversations between the AI assistant and Ivy users will be deleted.
 
@@ -171,7 +171,7 @@ But please aware that, all conversations between the AI assistant and Ivy users 
 
 AI Models is a list of model options which a AI assistant can use to perform its functionalities.
 
-<img src="./doc/img/models-management.png" width="50%" alt="Model management">
+![Model management](doc/img/models-management.png)
 
 The AI Assistant need 2 AI models to works: a GPT model, and a text embedding model. Therefore, AI Assistant offers 2 tailored options that tested and ready to use:
 
@@ -187,7 +187,7 @@ When you clicking on a model item in the AI Models list, you will be redirected 
 
 Furthermore, you can test to connection to OpenAI platform by clicking the button **Test Connection**. If something went wrong, we will show the details error
 
-<img src="./doc/img/ai-model-test-connection.png" width="50%" alt="Test connection">
+![Test connection](doc/img/ai-model-test-connection.png)
 
 Once you click the **Save** button, all the settings, including the API Key will be saved as Axon Ivy variables, and you will be redirected to the [AI Management](#ai-management).
 
@@ -199,7 +199,7 @@ All AI functions that the logged in user can access are listed in the **AI Funct
 - `Ivy Flow` function: disabled when system detected that there could be an error when running the flow. For example: a required Ivy callable process could not be found
 - `Knowkedge Base` function: disabled when the system cannot find the corresponding vector store
 
-<img src="./doc/img/all-ai-functions-list.png" width="50%" alt="AI Function list">
+![AI Function list](doc/img/all-ai-functions-list.png)
 
 You can also see all non-startable AI functions by toggling the option **Show non-startable AI functions**.
 
@@ -207,7 +207,7 @@ You can also see all non-startable AI functions by toggling the option **Show no
 
 You can delete the AI function completely from the AI Assistant by clicking the **Delete** button (has the trash bin icon) placed in the last column of the corresponding row of that AI function. A confirmation dialog will show as below
 
-<img src="./doc/img/delete-ai-function.png" width="30%" alt="Delete AI Function">
+![Delete AI Function](doc/img/delete-ai-function.png)
 
 Please read the confirmation carefully before delete the AI function. The AI function could be using by some AI assitants, and once you delete it, the AI assistants cannot work on the functions any more, or worser, some errors may arise.
 
@@ -216,7 +216,7 @@ Please read the confirmation carefully before delete the AI function. The AI fun
 AI Assistant allows admin users (with has role `AXONIVY_PORTAL_ADMIN`) to create knowledge bases for use by the AI function of type `Knowledge Base`.
 Simply start the process `Create knowledge base for AI Assistant` and follow the instructions there, you can create create knowledge bases which could be use by `Knowledge Base` functions.
 
-<img src="./doc/img/create-knowledge-page-ui.png" width="50%" alt="create Knowledge Base section">
+![Create Knowledge Base section](doc/img/create-knowledge-page-ui.png)
 
 Currently, you can create knowledge base for 2 types: Portal Support and Others.
 
@@ -226,7 +226,7 @@ The AI Assistant includes a built-in tool called `Portal support` which can answ
 
 To generate the knowledge base for this function, please visit the [Portal download page](https://market.axonivy.com/portal) on the Axon Ivy Market and download the latest document, as shown in the image below.
 
-<img src="./doc/img/download-portal-doc.png" width="50%" alt="Download Portal Document">
+![Download Portal Document](doc/img/download-portal-doc.png)
 
 Then, just simply upload the downloaded file as instructed in [Create knowledge bases](#create-knowledge-bases) above.
 

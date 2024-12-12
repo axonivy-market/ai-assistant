@@ -6,11 +6,11 @@ Als Ihr persönlicher Assistent bietet er nahtlose Unterstützung bei einer Viel
 
 Treten Sie in einen interaktiveren und intuitiveren Workflow ein, indem Sie mit dem Assistenten über Ihre Prozesse sprechen, anstatt sie lediglich auszuführen. Diese dynamische Interaktion verbessert Ihr Erlebnis, sodass Sie Optionen erkunden und Einblicke gewinnen können, während Sie arbeiten. Mit mehrsprachigen Fähigkeiten kommuniziert der KI-Assistent mühelos in Englisch, Deutsch, Spanisch und mehr, sodass Sie Unterstützung in Ihrer bevorzugten Sprache erhalten.
 
-<img src="./doc/img/chat-dashboard.png" width="50%" alt="Chat-Dashboard">
+![Chat-Dashboard](doc/img/chat-dashboard.png)
 
 Über die unmittelbare Unterstützung hinaus ermöglicht Ihnen der KI-Assistent, benutzerdefinierte Modelle und Assistenten zu erstellen und zu verwalten, die auf Ihre individuellen Bedürfnisse zugeschnitten sind. Mit der Verwaltungsübersicht ist es ein Kinderspiel, diese Modelle zu entwerfen, zu konfigurieren und zu organisieren. Sie können personalisierte Assistenten erstellen, spezifische Verhaltensweisen zuweisen oder vordefinierte Vorlagen verwenden, um deren Aktionen zu steuern. Dieses Maß an Anpassung stellt sicher, dass Ihr KI-Assistent perfekt auf Ihre Vorlieben und Arbeitsweise abgestimmt ist.
 
-<img src="./doc/img/assistant-management.png" width="50%" alt="Assistentenverwaltung">
+![Assistentenverwaltung](doc/img/assistant-management.png)
 
 **Liste der Funktionen**
 
@@ -101,19 +101,19 @@ Von hier aus kannst du:
 
 - [KI-Funktionen verwalten](#ki-funktionen-verwalten):Kontrolliere und organisiere die verschiedenen KI-Funktionen, definiere die Aktionen, die die KI ausführen kann, und lege fest, wie sie mit Benutzern interagiert, um präzise und effiziente Ergebnisse zu liefern.
 
-<img src="./doc/img/ai-functions-management.png" width="50%" alt="Verwaltung von KI-Funktionen">
+![Verwaltung von KI-Funktionen](doc/img/ai-functions-management.png)
 
 ##### KI-Assistenten verwalten
 
 In diesem Abschnitt werden alle KI-Assistenten aufgelistet, auf die der eingeloggte Benutzer Zugriff hat, zusammen mit ihren Namen, Avataren und kurzen Beschreibungen.
 
-<img src="./doc/img/assistant-management.png" width="50%" alt="Assistentenverwaltung">
+![Assistentenverwaltung](doc/img/assistant-management.png)
 
 Du kannst einen neuen KI-Assistenten erstellen, indem du auf die Schaltfläche **Neuen Assistenten hinzufügen** klickst, oder die Details eines vorhandenen KI-Assistenten ändern, indem du den entsprechenden Assistenten aus der Liste auswählst.
 
 Sobald du einen KI-Assistenten ausgewählt hast, wird dessen Detailseite angezeigt.
 
-<img src="./doc/img/assistant-details.png" width="50%" alt="Details zum KI-Assistenten">
+![Details zum KI-Assistenten](doc/img/assistant-details.png)
 
 Für den KI-Assistenten können folgende Werte und Einstellungen konfiguriert werden:
 
@@ -138,7 +138,7 @@ Du kannst schnell alle erforderlichen Einstellungen für einen KI-Assistenten mi
 1. Klicke im Detailbildschirm des KI-Assistenten oben rechts auf die Schaltfläche Vorlage verwenden.
 2. Der Dialog Assistentenvorlagen wird angezeigt. Wähle eine Vorlage aus der Liste aus. 
 
-    <img src="./doc/img/assistant-templates-dialog.png" width="50%" alt="Assistentenvorlagen">
+    ![Assistentenvorlagen](doc/img/assistant-templates-dialog.png)
 
 3. Die Einstellungen der Vorlage werden auf den KI-Assistenten angewendet. Diese können anschließend nach Bedarf angepasst werden.
 
@@ -146,13 +146,13 @@ Du kannst schnell alle erforderlichen Einstellungen für einen KI-Assistenten mi
 
 Auf der rechten Seite befindet sich eine Tabelle, die die dem KI-Assistenten verfügbaren KI-Funktionen auflistet. Du kannst allgemeine Informationen zu jeder Funktion einsehen, wie Name, Typ, Beschreibung, Berechtigungen und Nutzung.
 
-<img src="./doc/img/assistant-details-functions.png" width="50%" alt="Funktionen">
+![Funktionen](doc/img/assistant-details-functions.png)
 
 Du kannst verhindern, dass der KI-Assistent eine Funktion verwendet, indem du diese aus der Tabelle entfernst.
 
 Wenn du auf die Schaltfläche **Hinzufügen** klickst, erscheint der Dialog **Funktion hinzufügen**. Um eine Funktion hinzuzufügen, klicke auf die Zeile der gewünschten Funktion und dann auf **Hinzufügen**, um die ausgewählten Funktionen hinzuzufügen.
 
-<img src="./doc/img/assistant-details-add-functions.png" width="50%" alt="Dialog zum Hinzufügen von Funktionen">
+![Dialog zum Hinzufügen von Funktionen](doc/img/assistant-details-add-functions.png)
 
 Anschließend erscheinen die ausgewählten Funktionen in der **Funktionen** Tabelle.
 
@@ -166,7 +166,7 @@ Mit der Zeit kann ein KI-Assistent veraltet sein und du möchtest ihn möglicher
 
 Ein **Bestätigungsdialog** wird angezeigt, in dem du den KI-Assistenten vollständig löschen kannst. Klicke auf die Schaltfläche Entfernen, um den KI-Assistenten zu entfernen.
 
-<img src="./doc/img/assistant-details-delete.png" width="50%" alt="Dialog zum Löschen des KI-Assistenten">
+![Dialog zum Löschen des KI-Assistenten](doc/img/assistant-details-delete.png)
 
 Bitte beachte, dass dabei alle Gespräche zwischen dem KI-Assistenten und dem Ivy-Benutzern gelöscht werden.
 
@@ -174,7 +174,7 @@ Bitte beachte, dass dabei alle Gespräche zwischen dem KI-Assistenten und dem Iv
 
 **KI-Modelle** ist eine Liste von Modelloptionen, die ein KI-Assistent verwenden kann, um seine Funktionen auszuführen.
 
-<img src="./doc/img/models-management.png" width="50%" alt="Modellverwaltung">
+![Modellverwaltung](doc/img/models-management.png)
 
 Der KI-Assistent benötigt zwei KI-Modelle, um zu funktionieren: ein GPT-Modell und ein Text-Embedding-Modell. Daher bietet der KI-Assistent zwei maßgeschneiderte, getestete und einsatzbereite Optionen an:
 
@@ -190,7 +190,7 @@ Wenn du auf ein Modell in der Liste der KI-Modelle klickst, wirst du zur Details
 
 Darüber hinaus kannst du die Verbindung zur OpenAI-Plattform testen, indem du auf die Schaltfläche **Verbindung testen** klickst. Wenn ein Fehler auftritt, werden die Details des Fehlers angezeigt.
 
-<img src="./doc/img/ai-model-test-connection.png" width="50%" alt="Verbindung testen">
+![Verbindung testen](doc/img/ai-model-test-connection.png)
 
 Sobald du auf die Schaltfläche **Speichern** klickst, werden alle Einstellungen, einschließlich des API-Keys, als Axon Ivy-Variablen gespeichert und du wirst zurück zum [KI-Management](#ki-management) weitergeleitet.
 
@@ -204,7 +204,7 @@ Es gibt einige Gründe, warum eine KI-Funktion nicht startbar ist:
 - `Ivy Flow` Funktion: deaktiviert, wenn das System feststellt, dass ein Fehler beim Ausführen des Flows auftreten könnte, z. B., wenn ein erforderlicher Ivy-Aufrufprozess nicht gefunden wurde.
 - `Wissensbasis` Funktion: deaktiviert, wenn das System den entsprechenden Vektorspeicher nicht finden kann.
 
-<img src="./doc/img/all-ai-functions-list.png" width="50%" alt="Liste der KI-Funktionen">
+![Liste der KI-Funktionen](doc/img/all-ai-functions-list.png)
 
 Du kannst auch alle nicht startbaren KI-Funktionen anzeigen, indem du die Option **Nicht startbare KI-Funktionen anzeigen** umschaltest.
 
@@ -212,7 +212,7 @@ Du kannst auch alle nicht startbaren KI-Funktionen anzeigen, indem du die Option
 
 Du kannst die KI-Funktion vollständig aus dem KI-Assistenten löschen, indem du auf die Schaltfläche Löschen (mit dem Mülleimer-Symbol) in der letzten Spalte der entsprechenden Zeile dieser KI-Funktion klickst. Ein Bestätigungsdialog wird wie unten angezeigt:
 
-<img src="./doc/img/delete-ai-function.png" width="30%" alt="KI-Funktion löschen">
+![KI-Funktion löschen](doc/img/delete-ai-function.png)
 
 Bitte lies die Bestätigung sorgfältig, bevor du die KI-Funktion löschst. Die KI-Funktion könnte von einigen KI-Assistenten verwendet werden und sobald du sie löschst, können die KI-Assistenten die Funktion nicht mehr ausführen oder es können Fehler auftreten.
 
@@ -222,7 +222,7 @@ Der **KI-Assistent** ermöglicht es **Administratorbenutzern** (mit der Rolle `A
 
 Starte einfach den Prozess **Wissensdatenbank für KI-Assistenten erstellen** und folge den Anweisungen dort, um eine neue Wissensdatenbanken zu erstellen, die von Funktionen des Typs Wissensdatenbank genutzt werden können.
 
-<img src="./doc/img/create-knowledge-page-ui.png" width="50%" alt="Wissensdatenbank erstellen UI">
+![Wissensdatenbank erstellen UI](doc/img/create-knowledge-page-ui.png)
 
 Derzeit kannst du Wissensdatenbanken für zwei Typen erstellen: `Portal-Unterstützung` und `Sonstiges`.
 
@@ -231,8 +231,8 @@ Derzeit kannst du Wissensdatenbanken für zwei Typen erstellen: `Portal-Unterst�
 Der KI-Assistent enthält ein integriertes Tool namens `Portal support`, das Fragen zum Axon Ivy Portal beantworten kann.
 
 Um die Wissensdatenbank für diese Funktion zu erstellen, besuche bitte die [Portal-Downloadseite](https://market.axonivy.com/portal) auf dem Axon Ivy Market und lade das neueste Dokument herunter, wie im untenstehenden Bild gezeigt.
-
-<img src="./doc/img/download-portal-doc.png" width="30%" alt="Portal-Dokument herunterladen">
+  
+![Portal-Dokument herunterladen](doc/img/download-portal-doc.png)
 
 Anschließend lädst du die heruntergeladene Datei wie in  [Wissensdatenbanken erstellen](#wissensdatenbanken-erstellen) oben beschrieben hoch.
 
@@ -718,7 +718,7 @@ Das Ausgaberesultat des Ivy-Callable-Prozesses muss ein Objekt mit dem Namen res
 }
 ```
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Bitte beachte:
 > - Die Namen der Attribute müssen mit den Namen der Parameter des oben genannten Callable-Prozesses übereinstimmen.
 > - Das Attribut `signature` im JSON-Objekt ist die Signatur des Callable-Prozesses.
