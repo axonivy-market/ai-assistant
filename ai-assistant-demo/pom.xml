@@ -5,6 +5,9 @@
   <artifactId>ai-assistant-demo</artifactId>
   <version>12.0.2-SNAPSHOT</version>
   <packaging>iar</packaging>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.axonivy.portal</groupId>
