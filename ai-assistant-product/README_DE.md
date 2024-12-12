@@ -79,7 +79,7 @@ Beispiel:
 
 `Ich möchte den Besprechungsraum C finden.`
 
-## Einrichtung
+## Setup
 
 1. Deploye das **ai-assistant** Artefakt in derselben Anwendung indem sich auch das **Portal** befindet.
 
