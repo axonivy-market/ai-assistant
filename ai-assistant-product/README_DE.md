@@ -24,7 +24,7 @@ Treten Sie in einen interaktiveren und intuitiveren Workflow ein, indem Sie mit 
 
 ## Demo
 
-### Demoprojekt
+### KI-Demoprojekt
 
 Im **ai-assistant-demo** Ivy-Projekt haben wir einen Demo-Assistenten entwickelt, der dir dabei hilft, das Konzept der KI-Assistenten besser zu verstehen. Er bietet dir wertvolle Unterstützung, damit du deine eigenen KI-Assistenten einfacher entwickeln und optimal konfigurieren kannst.
 
