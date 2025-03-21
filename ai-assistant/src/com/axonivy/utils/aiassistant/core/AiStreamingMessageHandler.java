@@ -5,12 +5,11 @@ import java.util.Queue;
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
 import com.axonivy.utils.aiassistant.core.error.OpenAIErrorResponse;
 
-import dev.langchain4j.data.message.AiMessage;
-import dev.langchain4j.model.StreamingResponseHandler;
-import dev.langchain4j.model.output.Response;
+import dev.langchain4j.model.chat.response.ChatResponse;
+import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 
 public class AiStreamingMessageHandler
-    implements StreamingResponseHandler<AiMessage> {
+    implements StreamingChatResponseHandler {
 
   private static final String ERROR_PATTERN = "<error>%s</error>";
   private static final String COMPLETE_PATTERN = "%s %s";
@@ -25,9 +24,9 @@ public class AiStreamingMessageHandler
   }
 
   @Override
-  public void onNext(String token) {
+  public void onPartialResponse(String partialResponse) {
     synchronized (this.contents) {
-      this.contents.offer(token);
+      this.contents.offer(partialResponse);
     }
   }
 
@@ -49,11 +48,11 @@ public class AiStreamingMessageHandler
   }
 
   @Override
-  public void onComplete(Response<AiMessage> response) {
+  public void onCompleteResponse(ChatResponse completeResponse) {
     synchronized (this.contents) {
       this.contents.clear();
       this.contents.offer(String.format(COMPLETE_PATTERN, this.completedToken,
-          response.content().text()));
+          completeResponse.aiMessage().text()));
     }
   }
 
@@ -72,5 +71,4 @@ public class AiStreamingMessageHandler
   public void setCompletedToken(String completedToken) {
     this.completedToken = completedToken;
 }
-
 }

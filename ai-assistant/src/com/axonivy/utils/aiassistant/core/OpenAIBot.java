@@ -26,23 +26,22 @@ import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 import ch.ivyteam.ivy.environment.Ivy;
 import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.embedding.Embedding;
-import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.model.StreamingResponseHandler;
+import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.input.PromptTemplate;
-import dev.langchain4j.model.openai.OpenAiChatModel;
-import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
-import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
+import dev.langchain4j.model.openaiofficial.OpenAiOfficialChatModel;
+import dev.langchain4j.model.openaiofficial.OpenAiOfficialEmbeddingModel;
+import dev.langchain4j.model.openaiofficial.OpenAiOfficialStreamingChatModel;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 
 public class OpenAIBot extends AbstractAIBot {
 
   private String modelName;
   private String embeddingModelName;
-  private OpenAiChatModel model;
-  private OpenAiStreamingChatModel chatModel;
-  private OpenAiEmbeddingModel embeddingModel;
+  private OpenAiOfficialChatModel model;
+  private OpenAiOfficialStreamingChatModel chatModel;
+  private OpenAiOfficialEmbeddingModel embeddingModel;
   private String apiKey;
 
   public OpenAIBot(AiModel aiModel) {
@@ -82,47 +81,48 @@ public class OpenAIBot extends AbstractAIBot {
     this.embeddingModelName = embeddingModelName;
   }
 
-  public OpenAiChatModel getModel() {
+  public OpenAiOfficialChatModel getModel() {
     return model;
   }
 
-  public void setModel(OpenAiChatModel model) {
+  public void setModel(OpenAiOfficialChatModel model) {
     this.model = model;
   }
 
-  public OpenAiStreamingChatModel getChatModel() {
+  public OpenAiOfficialStreamingChatModel getChatModel() {
     return chatModel;
   }
 
-  public void setChatModel(OpenAiStreamingChatModel chatModel) {
+  public void setChatModel(OpenAiOfficialStreamingChatModel chatModel) {
     this.chatModel = chatModel;
   }
 
-  public OpenAiEmbeddingModel getEmbeddingModel() {
+  public OpenAiOfficialEmbeddingModel getEmbeddingModel() {
     return embeddingModel;
   }
 
-  public void setEmbeddingModel(OpenAiEmbeddingModel embeddingModel) {
+  public void setEmbeddingModel(OpenAiOfficialEmbeddingModel embeddingModel) {
     this.embeddingModel = embeddingModel;
   }
 
   @Override
   public void initModel() {
     setModel(
-        OpenAiChatModel.builder().apiKey(apiKey).modelName(modelName)
+        OpenAiOfficialChatModel.builder().apiKey(apiKey).modelName(modelName)
             .temperature(Double.valueOf(0)).build());
   }
 
   @Override
   public void initEmbeddingModel() {
-    setEmbeddingModel(OpenAiEmbeddingModel.builder().apiKey(apiKey)
+    setEmbeddingModel(OpenAiOfficialEmbeddingModel.builder().apiKey(apiKey)
         .modelName(embeddingModelName)
         .dimensions(DEFAULT_DIMENSIONS).build());
   }
 
   @Override
   public void initStreamingChatModel() {
-    setChatModel(OpenAiStreamingChatModel.builder().apiKey(apiKey).modelName(modelName).temperature(Double.valueOf(0)).build());
+    setChatModel(OpenAiOfficialStreamingChatModel.builder().apiKey(apiKey)
+        .modelName(modelName).temperature(Double.valueOf(0)).build());
   }
 
   @Override
@@ -184,8 +184,8 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String chat(Map<String, Object> variables, String promptTemplate) {
     try {
-      return getModel().generate(
-          PromptTemplate.from(promptTemplate).apply(variables).text());
+      return getModel()
+          .chat(PromptTemplate.from(promptTemplate).apply(variables).text());
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);
@@ -196,7 +196,7 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String chat(String message) {
     try {
-      return getModel().generate(message);
+      return getModel().chat(message);
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);
@@ -206,9 +206,9 @@ public class OpenAIBot extends AbstractAIBot {
 
   @Override
   public String streamChat(Map<String, Object> variables, String promptTemplate,
-      StreamingResponseHandler<AiMessage> handler) {
+      StreamingChatResponseHandler handler) {
     try {
-      getChatModel().generate(
+      getChatModel().chat(
           PromptTemplate.from(promptTemplate).apply(variables).text(),
           handler);
     } catch (Exception e) {
@@ -239,7 +239,7 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String testConnection() {
     try {
-      getModel().generate(Arrays.asList(new UserMessage("hello")));
+      getModel().chat(Arrays.asList(new UserMessage("hello")));
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);

@@ -6,9 +6,8 @@ import java.util.Map;
 import com.axonivy.utils.aiassistant.core.embedding.IvyOpenSearchEmbeddingStore;
 import com.axonivy.utils.aiassistant.enums.ModelType;
 
-import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.model.StreamingResponseHandler;
+import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 
 public abstract class AbstractAIBot {
   protected static final int DEFAULT_DIMENSIONS = 300;
@@ -50,7 +49,7 @@ public abstract class AbstractAIBot {
   public abstract String chat(String message);
 
   public abstract String streamChat(Map<String, Object> variables,
-      String promptTemplate, StreamingResponseHandler<AiMessage> handler);
+      String promptTemplate, StreamingChatResponseHandler handler);
 
   public abstract String retrieveDocumentsAsString(String collectionName,
       String query);
