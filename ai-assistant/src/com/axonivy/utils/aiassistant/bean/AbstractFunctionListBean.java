@@ -196,4 +196,12 @@ public abstract class AbstractFunctionListBean implements Serializable {
   public void setCreation(boolean isCreation) {
     this.isCreation = isCreation;
   }
+
+  public String getFunctionDialogHeader() {
+    String headerCms = isCreation
+        ? "/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/CreateNewAiFunction"
+        : "/Dialogs/com/axonivy/utils/aiassistant/component/AIFunctionList/EditAIFunction";
+
+    return Ivy.cms().co(headerCms);
+  }
 }

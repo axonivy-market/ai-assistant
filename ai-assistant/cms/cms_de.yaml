@@ -5,10 +5,12 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
-              AddAIFunction: |+
-                Füge eine KI-Funktion hinzu
-
+              CreateNewAiFunction: |
+                Erstelle eine neue KI-Funktion
               EditAIFunction: Bearbeite die KI-Funktion
+              NonStartableTooltip: |+
+                Nicht startbare KI-Funktionen sind Funktionen, die aufgrund von Fehlern nicht gestartet werden können oder nur indirekt von anderen KI-Funktionen genutzt werden können.
+
               OpenFunctionDetailsWarningDialogHeader: Öffne die Detailseite der KI-Funktion "{0}"
               OpenFunctionDetailsWarningDialogMessage: Nicht gespeicherte Änderungen gehen verloren. Möchten Sie fortfahren?
               RemoveFunctionDialogHeader: Entfernen Sie die „{0}“ AI-Funktion

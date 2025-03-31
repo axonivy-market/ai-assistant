@@ -36,6 +36,7 @@ public class KnowledgeBaseListBean implements Serializable {
 
   public void init() {
     knowledgeBases = KnowledgeBaseService.getInstance().getPublicConfig();
+    knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
     setModels(AiModelService.getInstance().findAll());
   }
 
@@ -70,12 +71,20 @@ public class KnowledgeBaseListBean implements Serializable {
     selectedKnowledgeBase.deleteIndex();
     KnowledgeBaseService.getInstance().delete(selectedKnowledgeBase.getId());
     knowledgeBases = KnowledgeBaseService.getInstance().findAll();
+    knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
   }
 
   public void createKnowledgeBase() {
     KnowledgeBaseService.getInstance().save(selectedKnowledgeBase);
     knowledgeBases = KnowledgeBaseService.getInstance().getPublicConfig();
+    knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
     selectedKnowledgeBase.createIndex();
+  }
+
+  public void updateKnowledgeBase() {
+    KnowledgeBaseService.getInstance().save(selectedKnowledgeBase);
+    knowledgeBases = KnowledgeBaseService.getInstance().getPublicConfig();
+    knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
   }
 
   public void onSelectModel() {

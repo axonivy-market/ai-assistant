@@ -5,8 +5,24 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
-              AddAIFunction: Agregar una función de IA
+              CreateNewAiFunction: |+
+                Crear una nueva función de IA
+
+
+
+
+
+
+
               EditAIFunction: Editar la función de IA
+              NonStartableTooltip: |+
+                Las funciones de IA no iniciables son funciones que no pueden iniciarse debido a errores o que solo pueden ser utilizadas indirectamente por otras funciones de IA.
+
+
+
+
+
+
               OpenFunctionDetailsWarningDialogHeader: Abrir la página de detalles de la función de IA "{0}"
               OpenFunctionDetailsWarningDialogMessage: Los cambios no guardados se perderán. ¿Desea continuar?
               RemoveFunctionDialogHeader: Eliminar la función AI “{0}”

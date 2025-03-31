@@ -5,8 +5,12 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
-              AddAIFunction: Add AI function
+              CreateNewAiFunction: |+
+                Create new AI function
+
+
               EditAIFunction: Edit AI Function
+              NonStartableTooltip: Non-startable AI functions are functions that cannot be started due to errors or can only be used indirectly by other AI functions.
               OpenFunctionDetailsWarningDialogHeader: Open AI function "{0}" details page
               OpenFunctionDetailsWarningDialogMessage: Unsaved changes will be lost. Do you want to proceed?
               RemoveFunctionDialogHeader: Remove the "{0}" AI function
