@@ -17,4 +17,7 @@ public final class AiConstants {
   public static final String NONE_RESULT = "<None>";
   public static final String ASSISTANT_ID = "assistantId";
   public static final String CONVERSATION_ID = "conversationId";
+  public static final String DEFAULT_EMBEDDING_MODEL = "";
+  public static final int DEFAULT_DIMENSIONS = 300;
+  public static final int MAX_DIMENSIONS = 1000;
 }

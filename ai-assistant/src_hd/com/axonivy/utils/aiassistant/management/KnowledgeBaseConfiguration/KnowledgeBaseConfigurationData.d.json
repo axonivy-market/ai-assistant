@@ -1,0 +1,11 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "KnowledgeBaseConfigurationData",
+  "namespace" : "com.axonivy.utils.aiassistant.management.KnowledgeBaseConfiguration",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "knowledgeBaseId",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}

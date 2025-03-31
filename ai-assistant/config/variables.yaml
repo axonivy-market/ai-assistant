@@ -29,3 +29,5 @@ Variables:
     Suggestions:
     # [file: json]
     AssistantTemplates:
+    # [file: json]
+    KnowledgeBases:

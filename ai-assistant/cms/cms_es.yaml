@@ -5,6 +5,8 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
+              AddAIFunction: Agregar una función de IA
+              EditAIFunction: Editar la función de IA
               OpenFunctionDetailsWarningDialogHeader: Abrir la página de detalles de la función de IA "{0}"
               OpenFunctionDetailsWarningDialogMessage: Los cambios no guardados se perderán. ¿Desea continuar?
               RemoveFunctionDialogHeader: Eliminar la función AI “{0}”
@@ -27,6 +29,27 @@ Dialogs:
 
 
               Title: Cuadro de mandos auxiliar
+            KnowledgeBaseList:
+              CreateNewBase: Crear una nueva base de conocimientos
+              EditKnowledge: Editar la base de conocimientos
+              RemoveKnowledgeBaseDialogHeader: Eliminar la base de conocimientos "{0}"
+              RemoveKnowledgeBaseMessage: ¿Estás seguro de que deseas eliminar esta base de conocimientos?
+              RemoveKnowledgeBaseUsingByMessage: |+
+                Esta base de conocimientos está siendo utilizada por funciones de IA:
+
+                <br/>
+
+                <strong>{0}</strong>
+
+                <br/><br/>
+
+                ¿Estás seguro de que deseas eliminar esta base de conocimientos?
+
+
+
+
+
+
           helper:
             UploadPortalDocument:
               Information: |-
@@ -74,8 +97,35 @@ Dialogs:
               Settings: Configuración
               Title: Asistente de configuración
               UseTemplate: Usar plantilla
+            KnowledgeBaseConfiguration:
+              AddSource: Agregar otra fuente...
+              CreateDraftDocuments: Crear documentos borrador
+              CreateNewDocument: Crear un nuevo documento
+              EmbedAllDocuments: Integrar todos los documentos
+              KnowledgeBase: Configuración de la Base de Conocimientos
+              NewKnowledge: Nueva Base de Conocimientos
+              SaveAndEmbedDocument: Guardar e integrar el documento
+              SelectedSourcesInfo: '{0} fuente(s) seleccionada(s).'
+              Sources: Fuentes
+              TextSegmentDetails: Detalles del segmento de texto
+              ToUploadSources: 'Para cargar fuentes de documentos, arrastra y suelta o '
+          validation:
+            CannotConnectToServerMessage: No se puede conectar al servidor OpenSearch con la URL {0}
+            CannotConnectToVectorStoreMessage: No se puede encontrar el almacén de vectores [{0}]
+            ErrorOccurredWhenAddingDocuments: Ocurrió un error al agregar los documentos
+            ErrorOccurredWhenDeleteDocumentsMessage: Ocurrió un error al eliminar los documentos
+            ErrorOccurredWhenDeleteVectorStoreMessage: Ocurrió un error al eliminar el almacén de vectores
+            VectorStoreExistMessage: Ya existe un almacén de vectores con el ID {0}
 Labels:
+  Cancel: Cancelar
+  Configure: Configure
+  Content: Contenido
+  Documents: Documentos
+  Edit: Editar
   Enums:
+    EmbeddingDocumentStatus:
+      DRAFT: Borrador
+      EMBEDDED: Integrado
     ToolType:
       FLOW: Flujo Ivy
       IVY: Herramienta Ivy
@@ -83,6 +133,9 @@ Labels:
     UploadDocumentType:
       OTHERS: Otras
       PORTAL_SUPPORT: Soporte del portal
+  Generate: Generar
+  KnowledgeBase: Base de conocimientos
+  KnowledgeBases: Bases de conocimiento
   Message:
     InvalidEmailFormat: Formato de Email inválido
     InvalidUrl: URL no válida
@@ -94,8 +147,12 @@ Labels:
     OpenAI:
       PrimaryModel: Modelo principal de Open AI
       SecondaryModel: Modelo secundario de Open AI
+  More: Más
   Portal:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  Select: Seleccionar
+  Status: Estado
+  UploadHere: Cargue aquí
   common:
     AIFunctions: Funciones AI
     Actions: Acciones

@@ -5,6 +5,8 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
+              AddAIFunction: Add AI function
+              EditAIFunction: Edit AI Function
               OpenFunctionDetailsWarningDialogHeader: Open AI function "{0}" details page
               OpenFunctionDetailsWarningDialogMessage: Unsaved changes will be lost. Do you want to proceed?
               RemoveFunctionDialogHeader: Remove the "{0}" AI function
@@ -21,6 +23,20 @@ Dialogs:
               ClearConversationHistory: Clear history
               ExportHistory: Export history
               Title: Assistant Dashboard
+            KnowledgeBaseList:
+              CreateNewBase: Create new knowledge base
+              EditKnowledge: Edit knowledge base
+              RemoveKnowledgeBaseDialogHeader: |+
+                Remove the "{0}" Knowledge base
+
+
+              RemoveKnowledgeBaseMessage: Are you sure you want to delete this knowledge base?
+              RemoveKnowledgeBaseUsingByMessage: |-
+                This knowledge base is using by AI functions:
+                <br/>
+                <strong>{0}</strong>
+                <br/><br/>
+                Are you sure you want to delete this knowledge base?
           helper:
             UploadPortalDocument:
               Information: |2
@@ -64,8 +80,35 @@ Dialogs:
               Settings: Settings
               Title: Assistant Configuration
               UseTemplate: Use template
+            KnowledgeBaseConfiguration:
+              AddSource: Add more source...
+              CreateDraftDocuments: Create draft documents
+              CreateNewDocument: Create new document
+              EmbedAllDocuments: Embed all documents
+              KnowledgeBase: Knowledge Base Configuration
+              NewKnowledge: New Knowledge Base
+              SaveAndEmbedDocument: Save and embed document
+              SelectedSourcesInfo: '{0} source(s) are selected.'
+              Sources: Sources
+              TextSegmentDetails: Text segment details
+              ToUploadSources: 'To upload document sources, drag & drop or '
+          validation:
+            CannotConnectToServerMessage: Cannot connect to the OpenSearch server with URL {0}
+            CannotConnectToVectorStoreMessage: Cannot find vector store [{0}]
+            ErrorOccurredWhenAddingDocuments: An error occurred while adding documents
+            ErrorOccurredWhenDeleteDocumentsMessage: An error occurred while deleting documents
+            ErrorOccurredWhenDeleteVectorStoreMessage: An error occurred while deleting the vector store
+            VectorStoreExistMessage: A vector store with ID {0} already exists
 Labels:
+  Cancel: Cancel
+  Configure: Configure
+  Content: Content
+  Documents: Documents
+  Edit: Edit
   Enums:
+    EmbeddingDocumentStatus:
+      DRAFT: Draft
+      EMBEDDED: Embedded
     ToolType:
       FLOW: Ivy Flow
       IVY: Ivy Tool
@@ -73,6 +116,9 @@ Labels:
     UploadDocumentType:
       OTHERS: Others
       PORTAL_SUPPORT: Portal Support
+  Generate: Generate
+  KnowledgeBase: Knowledge base
+  KnowledgeBases: Knowledge Bases
   Message:
     InvalidEmailFormat: Invalid email format
     InvalidUrl: Invalid URL
@@ -84,8 +130,12 @@ Labels:
     OpenAI:
       PrimaryModel: Primary Open AI Model
       SecondaryModel: Secondary Open AI Model
+  More: More
   Portal:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  Select: Select
+  Status: Status
+  UploadHere: Upload here
   common:
     AIFunctions: AI Functions
     Actions: Actions

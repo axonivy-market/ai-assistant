@@ -6,10 +6,13 @@ import static java.util.Collections.singletonList;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hc.client5.http.auth.AuthScope;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
@@ -22,6 +25,8 @@ import org.opensearch.client.json.jackson.JacksonJsonpMapper;
 import org.opensearch.client.opensearch.OpenSearchClient;
 import org.opensearch.client.opensearch._types.FieldValue;
 import org.opensearch.client.opensearch._types.InlineScript;
+import org.opensearch.client.opensearch._types.OpenSearchException;
+import org.opensearch.client.opensearch._types.SortOrder;
 import org.opensearch.client.opensearch._types.Time;
 import org.opensearch.client.opensearch._types.mapping.KnnVectorMethod;
 import org.opensearch.client.opensearch._types.mapping.Property;
@@ -34,8 +39,15 @@ import org.opensearch.client.opensearch.core.BulkRequest;
 import org.opensearch.client.opensearch.core.BulkResponse;
 import org.opensearch.client.opensearch.core.DeleteByQueryRequest;
 import org.opensearch.client.opensearch.core.DeleteByQueryResponse;
+import org.opensearch.client.opensearch.core.DeleteRequest;
+import org.opensearch.client.opensearch.core.DeleteResponse;
+import org.opensearch.client.opensearch.core.IndexRequest;
+import org.opensearch.client.opensearch.core.IndexResponse;
 import org.opensearch.client.opensearch.core.SearchRequest;
 import org.opensearch.client.opensearch.core.SearchResponse;
+import org.opensearch.client.opensearch.core.UpdateRequest;
+import org.opensearch.client.opensearch.core.UpdateResponse;
+import org.opensearch.client.opensearch.indices.CreateIndexResponse;
 import org.opensearch.client.opensearch.indices.DeleteIndexRequest;
 import org.opensearch.client.opensearch.indices.DeleteIndexResponse;
 import org.opensearch.client.opensearch.indices.ExistsRequest;
@@ -49,6 +61,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.store.embedding.opensearch.OpenSearchEmbeddingStore;
 import dev.langchain4j.store.embedding.opensearch.OpenSearchRequestFailedException;
@@ -63,9 +76,6 @@ public class IvyOpenSearchEmbeddingStore {
   private final String indexName;
   private final OpenSearchClient client;
   private final String serverUrl;
-
-  private static final String INDEX_NOT_EXIST_ERROR = "Cannot find vector store [%s]";
-  private static final String CANNOT_CONNECT_TO_OPEN_SEARCH = "Cannot connect to the OpenSearch server with URL %s";
 
   // Possible values: 'faiss' 'lucene', 'nmslib'
   // Use Meta's FAISS by default
@@ -244,6 +254,21 @@ public class IvyOpenSearchEmbeddingStore {
   }
 
   /**
+   * Check connection to the OpenSearch vector store
+   * 
+   * @return
+   */
+  public boolean checkConnection() {
+    BooleanResponse response;
+    try {
+      response = client.ping();
+    } catch (Exception e) {
+      return false;
+    }
+    return response.value();
+  }
+
+  /**
    * This implementation uses the exact k-NN with scoring script to calculate
    * See https://opensearch.org/docs/latest/search-plugins/knn/knn-score-script/
    */
@@ -285,15 +310,28 @@ public class IvyOpenSearchEmbeddingStore {
     // 1]
   }
 
-  public void createIndexIfNotExist(int dimension) throws IOException {
+  public String createIndexIfNotExist(int dimension) {
     BooleanResponse response;
-    response = client.indices().exists(c -> c.index(indexName));
-    if (!response.value()) {
-      client.indices()
-          .create(c -> c.index(indexName)
-              .settings(s -> s.knn(true).knnAlgoParamEfSearch(100))
-          .mappings(getDefaultMappings(dimension)));
+    try {
+      response = client.indices().exists(c -> c.index(indexName));
+      if (!response.value()) {
+        CreateIndexResponse createResponse = client.indices()
+            .create(c -> c.index(indexName)
+                .settings(s -> s.knn(true).knnAlgoParamEfSearch(100))
+                .mappings(getDefaultMappings(dimension)));
+        if (!createResponse.acknowledged()) {
+          return Ivy.cms().co(
+              "/Dialogs/com/axonivy/utils/aiassistant/validation/VectorStoreExistMessage",
+              Arrays.asList(indexName));
+        }
+      }
+    } catch (OpenSearchException | IOException e) {
+      return Ivy.cms().co(
+          "/Dialogs/com/axonivy/utils/aiassistant/validation/VectorStoreExistMessage",
+          Arrays.asList(indexName));
     }
+
+    return StringUtils.EMPTY;
   }
 
   private TypeMapping getDefaultMappings(int dimension) {
@@ -311,8 +349,11 @@ public class IvyOpenSearchEmbeddingStore {
     return TypeMapping.of(c -> c.properties(properties));
   }
 
-  public BulkResponse bulkIndex(String indexName,
-      List<EmbeddingDocument> docs) throws IOException {
+  public String bulkAddNewDocuments(List<EmbeddingDocument> docs) {
+
+    // Empty id before persist documents because OpenSearch will do it
+    // automatically
+    docs.forEach(doc -> doc.setId(null));
 
     BulkRequest.Builder bulkBuilder = new BulkRequest.Builder();
     for (int i = 0; i < docs.size(); i++) {
@@ -322,11 +363,21 @@ public class IvyOpenSearchEmbeddingStore {
           .document(docs.get(finalI))));
     }
 
-    return client.bulk(bulkBuilder.build());
+    try {
+      BulkResponse response = client.bulk(bulkBuilder.build());
+      if (response.errors()) {
+        return Ivy.cms().co(
+            "/Dialogs/com/axonivy/utils/aiassistant/validation/ErrorOccurredWhenAddingDocuments");
+      }
+    } catch (OpenSearchException | IOException e) {
+      return Ivy.cms().co(
+          "/Dialogs/com/axonivy/utils/aiassistant/validation/ErrorOccurredWhenAddingDocuments");
+    }
+    return StringUtils.EMPTY;
   }
 
   public boolean removeIndex() throws IOException {
-    if (StringUtils.isNotBlank(isIndexActive())) {
+    if (StringUtils.isNotBlank(getIndexStatus())) {
       return false;
     }
     DeleteIndexRequest request = new DeleteIndexRequest.Builder()
@@ -336,26 +387,90 @@ public class IvyOpenSearchEmbeddingStore {
     return response.acknowledged();
   }
 
-  public String isIndexActive() {
+  /**
+   * Delete all documents of an index synchronously
+   * 
+   * @return
+   */
+  public String deleteAllDocuments() {
+    DeleteByQueryRequest request = new DeleteByQueryRequest.Builder()
+        .index(indexName)
+        .query(q -> q.matchAll(m -> m)) // Match all documents in the index
+        .waitForCompletion(true)       // Wait for the deletion to complete
+        .refresh(true)                 // Refresh the index after deletion
+        .build();
+
+    // Execute the delete-by-query request
     try {
+      DeleteByQueryResponse response = client.deleteByQuery(request);
+
+      // Check if the operation succeeded
+      if (CollectionUtils.isNotEmpty(response.failures())) {
+        Ivy.cms().co(
+            "/Dialogs/com/axonivy/utils/aiassistant/validation/ErrorOccurredWhenDeleteDocumentsMessage");
+      }
+    } catch (OpenSearchException | IOException e) {
+      return Ivy.cms().co(
+          "/Dialogs/com/axonivy/utils/aiassistant/validation/ErrorOccurredWhenDeleteDocumentsMessage");
+    }
+    return StringUtils.EMPTY;
+  }
+  
+  public DeleteResponse deleteDocumentById(String documentId)
+      throws IOException {
+    // Build the delete request
+    DeleteRequest request = new DeleteRequest.Builder().index(indexName)
+        .id(documentId).build();
+
+    // Execute the delete request
+    return client.delete(request);
+  }
+
+
+  public String getIndexStatus() {
+    try {
+      if (!checkConnection()) {
+        Ivy.cms().co(
+            "/Dialogs/com/axonivy/utils/aiassistant/validation/CannotConnectToServerMessage",
+            Arrays.asList(serverUrl));
+      }
+
       ExistsRequest request = new ExistsRequest.Builder().index(indexName)
           .build();
       BooleanResponse existsResponse = client.indices().exists(request);
       return existsResponse.value() ? StringUtils.EMPTY
-          : String.format(INDEX_NOT_EXIST_ERROR, indexName);
+          : Ivy.cms().co(
+              "/Dialogs/com/axonivy/utils/aiassistant/validation/CannotConnectToVectorStoreMessage",
+              Arrays.asList(indexName));
     } catch (Exception e) {
-      return String.format(CANNOT_CONNECT_TO_OPEN_SEARCH, serverUrl);
+      return Ivy.cms().co(
+          "/Dialogs/com/axonivy/utils/aiassistant/validation/CannotConnectToServerMessage",
+          Arrays.asList(serverUrl));
     }
-
   }
 
-  public BulkResponse bulkEmbeddingDocumentById(String indexName,
+  public UpdateResponse<EmbeddingDocument> updateEmbeddingDocumentById(
       String documentId, EmbeddingDocument doc) throws IOException {
 
-    BulkRequest.Builder bulkBuilder = new BulkRequest.Builder();
-    bulkBuilder.operations(op -> op
-        .index(idx -> idx.index(indexName).id(documentId).document(doc)));
-    return client.bulk(bulkBuilder.build());
+    doc.setId(null);
+
+    UpdateRequest<EmbeddingDocument, EmbeddingDocument> request = new UpdateRequest.Builder<EmbeddingDocument, EmbeddingDocument>()
+        .index(indexName).id(documentId).doc(doc).docAsUpsert(true)
+        .build();
+
+    return client.update(request, EmbeddingDocument.class);
+  }
+
+  public IndexResponse createEmbeddingDocument(EmbeddingDocument doc)
+      throws IOException {
+    doc.setId(null);
+
+    // Build the index request
+    IndexRequest<EmbeddingDocument> request = new IndexRequest.Builder<EmbeddingDocument>()
+        .index(indexName).document(doc).build();
+
+    // Execute the index request
+    return client.index(request);
   }
 
   public boolean removeEmbeddingDocumentById(String id) throws IOException {
@@ -367,5 +482,42 @@ public class IvyOpenSearchEmbeddingStore {
 
     DeleteByQueryResponse response = client.deleteByQuery(request);
     return response.deleted() != 0;
+  }
+
+  public boolean removeEmbeddingDocumentByDocumentId(String documentId)
+      throws IOException {
+    DeleteByQueryRequest request = new DeleteByQueryRequest.Builder()
+        .index(indexName)
+        .query(
+            TermQuery
+                .of(t -> t.field("documentId").value(FieldValue.of(documentId)))
+                .toQuery())
+        .timeout(new Time.Builder().time("1m").build()).build();
+
+    DeleteByQueryResponse response = client.deleteByQuery(request);
+    return response.deleted() != 0;
+  }
+
+  public List<EmbeddingDocument> findAllEmbeddingDocuments()
+      throws OpenSearchException, IOException {
+    // Build the search request with a match_all query
+    // Sort ascending by id
+    SearchRequest request = new SearchRequest.Builder().index(indexName)
+        .query(q -> q.matchAll(m -> m))
+        .sort(s -> s.field(f -> f.field("_id").order(SortOrder.Asc)))
+        .build();
+
+    // Execute the search request
+    SearchResponse<EmbeddingDocument> response = client.search(request,
+        EmbeddingDocument.class);
+
+    // Map each Hit to an EmbeddingDocument and set the "_id" manually
+    return response.hits().hits().stream().map(hit -> {
+      EmbeddingDocument document = hit.source();
+      if (document != null) {
+        document.setId(hit.id()); // Set the "_id" field manually
+      }
+      return document;
+    }).collect(Collectors.toList());
   }
 }

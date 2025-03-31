@@ -1,0 +1,149 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+  xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+  xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<cc:interface componentType="IvyComponent">
+</cc:interface>
+
+<cc:implementation>
+  <f:event listener="#{knowledgeBaseListBean.init}" type="preRenderComponent" />
+  <h:form id="knowledge-base-list-form">
+    <div class="w-full">
+      <p:commandButton id="create-knowledge-base-button" value="Create" process="@this"
+        actionListener="#{knowledgeBaseListBean.createNewKnowledgeBase}"
+        update="#{p:resolveFirstComponentWithId('knowledge-base-details-dialog', view).clientId}"
+        oncomplete="PF('knowledge-base-details-dialog').show();" />
+    </div>
+    
+    <p:dataTable id="knowledge-base-table" value="#{knowledgeBaseListBean.knowledgeBases}" var="knowledge">
+      <p:column headerText="#{ivy.cms.co('/Labels/common/Name')}">
+        <h:outputText value="#{knowledge.name}" />
+      </p:column>
+      <p:column headerText="#{ivy.cms.co('/Labels/common/Description')}">
+        <h:outputText value="#{knowledge.description}" />
+      </p:column>
+      <p:column headerText="#{ivy.cms.co('/Labels/common/Actions')}" width="130" styleClass="text-center">
+        <div class="flex justify-content-center">
+          <p:commandButton id="edit-knowledge-base"
+            icon="si si-pencil"
+            styleClass="rounded-button ui-button-outlined u-mar-right-5"
+            actionListener="#{knowledgeBaseListBean.editKnowledgeBase(knowledge)}"
+            title="#{ivy.cms.co('/Labels/Edit')}" global="false"
+            update="#{p:resolveFirstComponentWithId('knowledge-base-details-dialog', view).clientId}"
+            oncomplete="PF('knowledge-base-details-dialog').show();"/>
+  
+          <p:commandButton id="configure-knowledge-base"
+            icon="si si-cog"
+            styleClass="rounded-button ui-button-outlined u-mar-right-5"
+            actionListener="#{knowledgeBaseListBean.navigateToKnowledgeBaseConfiguration(knowledge.id)}"
+            title="#{ivy.cms.co('/Labels/Configure')}" ajax="false"/>
+  
+          <p:commandButton id="delete-knowledge-base" process="@this"
+            styleClass="rounded-button ui-button-outlined ui-button-danger" icon="si si-bin-1"
+            actionListener="#{knowledgeBaseListBean.onDeleteKnowledgeBase(knowledge)}"
+            update="#{p:resolveFirstComponentWithId('remove-knowledge-base-dialog', view).clientId}"
+            title="#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/common/delete')}"
+            oncomplete="PF('remove-knowledge-base-dialog').show();"/>
+        </div>
+      </p:column>
+    </p:dataTable>
+  </h:form>
+
+  <ui:decorate template="/layouts/decorator/dialog-with-icon.xhtml">
+    <ui:param name="id" value="remove-knowledge-base-dialog" />
+    <ui:param name="widgetVar" value="remove-knowledge-base-dialog" />
+    <ui:param name="appendTo" value="@(body)" />
+    <ui:param name="iconClass" value="si si-delete-1" />
+    <ui:param name="dynamic" value="true" />
+    <ui:param name="iconStyleClass" value="portal-dialog-error-icon portal-dialog-icon" />
+    <ui:param name="headerText"
+      value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/KnowledgeBaseList/RemoveKnowledgeBaseDialogHeader', [knowledgeBaseListBean.selectedKnowledgeBase.name])}" />
+    <ui:param name="dialogContent" value="#{knowledgeBaseListBean.removeMessage}" />
+
+    <ui:define name="dialogFooter">
+      <p:link href="#" value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Cancel')}"
+        onclick="PF('remove-function-dialog').hide();" styleClass="u-mar-right-15" />
+      <p:commandButton id="remove-knowledge-base-button"
+        value="#{ivy.cms.co('/Labels/common/Remove')}"
+        icon="si si-remove-circle">
+        <p:ajax event="click" listener="#{knowledgeBaseListBean.deleteKnowledgeBase}"
+          update="#{p:resolveFirstComponentWithId('knowledge-base-table', view).clientId}"
+          oncomplete="PF('remove-knowledge-base-dialog').hide();" />
+      </p:commandButton>
+    </ui:define>
+  </ui:decorate>
+
+  <p:dialog id="knowledge-base-details-dialog" widgetVar="knowledge-base-details-dialog"
+    appendTo="@(body)" closeOnEscape="true" draggable="false"
+    fitViewport="true" responsive="true" modal="true"
+    minWidth="300" styleClass="w-30rem" header="#{knowledgeBaseListBean.knowledgeBaseDetailsDialogHeader}">
+    <h:form id="knowledge-base-details-form" styleClass="grid">
+      <div class="col-12">
+        <p:messages id="knowledge-base-details-messages" />
+      </div>
+      <div class="col-12">
+        <p:outputLabel for="@next" styleClass="font-semibold" value="#{ivy.cms.co('/Labels/common/Name')}" />
+      </div>
+      <div class="col-12">
+        <p:inputText id="name" value="#{knowledgeBaseListBean.selectedKnowledgeBase.name}"
+          styleClass="w-full" required="true"
+          requiredMessage="#{ivy.cms.co('/Labels/common/Name')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}" />
+      </div>
+      <div class="col-12">
+        <p:outputLabel for="@next" styleClass="font-semibold" value="#{ivy.cms.co('/Labels/common/Description')}" />
+      </div>
+      <div class="col-12">
+        <p:inputText id="description" value="#{knowledgeBaseListBean.selectedKnowledgeBase.description}" styleClass="w-full" />
+      </div>
+      <div class="col-12">
+        <p:outputLabel for="@next" styleClass="font-semibold" value="#{ivy.cms.co('/Labels/common/Model')}" />
+      </div>
+      <div class="col-12">
+        <p:selectOneMenu id="model" value="#{knowledgeBaseListBean.selectedKnowledgeBase.aiModelName}"
+          required="true" styleClass="w-full"
+          requiredMessage="#{ivy.cms.co('/Labels/common/Model')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}">
+          <f:selectItem itemLabel="" itemValue="#{null}" />
+          <f:selectItems value="#{knowledgeBaseListBean.models}"
+            var="model" itemValue="#{model.name}" itemLabel="#{model.displayName}" />
+          <p:ajax event="change" process="@this" listener="#{knowledgeBaseListBean.onSelectModel}"
+            update="model-info knowledge-base-details-messages"
+            oncomplete="PF('knowledge-base-details-dialog').initPosition();" />
+        </p:selectOneMenu>
+        <h:panelGroup layout="block" id="model-info" 
+          styleClass="w-full selected-model-info mt-3">
+          <h:panelGroup styleClass="model-info small u-margin-0" rendered="#{not empty knowledgeBaseListBean.selectedKnowledgeBase.aiModelName}">
+              <ic:com.axonivy.utils.aiassistant.component.AIModelItem isReadOnly="true" model="#{knowledgeBaseListBean.selectedKnowledgeBase.aiModel}" />
+            </h:panelGroup>
+          </h:panelGroup>
+      </div>
+    </h:form>
+
+    <f:facet name="footer">
+      <h:panelGroup layout="block" styleClass="text-right">
+        <p:commandButton id="knowledge-base-detail-save-button" styleClass="w-full"
+          rendered="#{!knowledgeBaseListBean.creation}"
+          value="#{ivy.cms.co('/Labels/common/Save')}"
+          actionListener="#{knowledgeBaseListBean.updateKnowledgeBase}"
+          process="knowledge-base-details-form" partialSubmit="true"
+          update="knowledge-base-details-form knowledge-base-list-form"
+          oncomplete="if (args &amp;&amp; !args.validationFailed) {PF('knowledge-base-details-dialog').hide();}" />
+        <p:commandButton id="knowledge-base-detail-create-button" styleClass="w-full"
+          rendered="#{knowledgeBaseListBean.creation}"
+          value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/KnowledgeBaseList/CreateNewBase')}"
+          actionListener="#{knowledgeBaseListBean.createKnowledgeBase()}"
+          process="knowledge-base-details-form"
+          update="knowledge-base-details-form knowledge-base-list-form"
+          partialSubmit="true"
+          oncomplete="if (args &amp;&amp; !args.validationFailed) {PF('knowledge-base-details-dialog').hide();}" />
+      </h:panelGroup>
+    </f:facet>
+  </p:dialog>
+</cc:implementation>
+</html>

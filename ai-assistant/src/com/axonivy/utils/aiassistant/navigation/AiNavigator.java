@@ -16,6 +16,7 @@ public class AiNavigator extends BaseNavigator {
   private static final String ASSISTANT_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AssistantConfiguration.ivp";
   private static final String FUNCTION_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/FunctionConfiguration.ivp";
   private static final String AI_MODEL_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AiModelConfiguration.ivp";
+  private static final String KNOWLEDGE_BASE_CONFIGURATION_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/KnowledgeBaseConfiguration.ivp";
   private static final String ASSISTANT_DASHBOARD_FRIENDLY_REQUEST_PATH = "Start Processes/AiStart/AssistantDashboard.ivp";
 
   public static void navigateToAIManagement() {
@@ -66,6 +67,18 @@ public class AiNavigator extends BaseNavigator {
       ProcessStartUtils.redirect(PortalNavigatorInFrameAPI
           .findAbsoluteUrlByProcessStartFriendlyRequestPath(
               ASSISTANT_DASHBOARD_FRIENDLY_REQUEST_PATH));
+    } catch (IOException e) {
+      throw new AiChatException(e);
+    }
+  }
+
+  public static void navigateToKnowledgeBaseConfiguration(
+      String knowledgeBaseId) {
+    try {
+      Map<String, String> params = new HashMap<>();
+      params.put("knowledgeBaseId", knowledgeBaseId);
+      ProcessStartUtils.redirect(buildAbsoluteUrl(
+          KNOWLEDGE_BASE_CONFIGURATION_FRIENDLY_REQUEST_PATH, params));
     } catch (IOException e) {
       throw new AiChatException(e);
     }

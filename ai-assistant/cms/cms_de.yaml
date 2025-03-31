@@ -5,6 +5,10 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
+              AddAIFunction: |+
+                Füge eine KI-Funktion hinzu
+
+              EditAIFunction: Bearbeite die KI-Funktion
               OpenFunctionDetailsWarningDialogHeader: Öffne die Detailseite der KI-Funktion "{0}"
               OpenFunctionDetailsWarningDialogMessage: Nicht gespeicherte Änderungen gehen verloren. Möchten Sie fortfahren?
               RemoveFunctionDialogHeader: Entfernen Sie die „{0}“ AI-Funktion
@@ -21,6 +25,23 @@ Dialogs:
               ClearConversationHistory: Verlauf löschen
               ExportHistory: Verlauf exportieren
               Title: Assistent Dashboard
+            KnowledgeBaseList:
+              CreateNewBase: Erstelle eine neue Wissensdatenbank
+              EditKnowledge: Bearbeite die Wissensdatenbank
+              RemoveKnowledgeBaseDialogHeader: |+
+                Entferne die Wissensdatenbank "{0}"
+
+              RemoveKnowledgeBaseMessage: Bist du sicher, dass du diese Wissensdatenbank löschen möchtest?
+              RemoveKnowledgeBaseUsingByMessage: |-
+                Diese Wissensdatenbank wird von KI-Funktionen verwendet:
+
+                <br/>
+
+                <strong>{0}</strong>
+
+                <br/><br/>
+
+                Bist du sicher, dass du diese Wissensdatenbank löschen möchtest?
           helper:
             UploadPortalDocument:
               Information: |-
@@ -70,8 +91,39 @@ Dialogs:
               Settings: Einstellungen
               Title: Assistent Konfiguration
               UseTemplate: Vorlage verwenden
+            KnowledgeBaseConfiguration:
+              AddSource: Füge eine weitere Quelle hinzu...
+              CreateDraftDocuments: Erstelle Entwurfsdokumente
+              CreateNewDocument: Erstelle ein neues Dokument
+              EmbedAllDocuments: Betten Sie alle Dokumente ein
+              KnowledgeBase: Wissensdatenbank-Konfiguration
+              NewKnowledge: Neue Wissensdatenbank
+              SaveAndEmbedDocument: Speichere und bette das Dokument ein
+              SelectedSourcesInfo: '{0} Quelle(n) sind ausgewählt.'
+              Sources: Quellen
+              TextSegmentDetails: Details zum Textsegment
+              ToUploadSources: 'Um Dokumentquellen hochzuladen, zieh sie per Drag & Drop oder '
+          validation:
+            CannotConnectToServerMessage: Keine Verbindung zum OpenSearch-Server mit der URL {0} möglich
+            CannotConnectToVectorStoreMessage: Vektorspeicher [{0}] nicht gefunden
+            ErrorOccurredWhenAddingDocuments: Ein Fehler ist beim Hinzufügen der Dokumente aufgetreten
+            ErrorOccurredWhenDeleteDocumentsMessage: |+
+              Ein Fehler ist beim Löschen der Dokumente aufgetreten
+
+            ErrorOccurredWhenDeleteVectorStoreMessage: |+
+              Ein Fehler ist beim Löschen des Vektorspeichers aufgetreten
+
+            VectorStoreExistMessage: Ein Vektorspeicher mit der ID {0} existiert bereits
 Labels:
+  Cancel: Abbrechen
+  Configure: Configure
+  Content: Inhalt
+  Documents: Dokumente
+  Edit: Bearbeiten
   Enums:
+    EmbeddingDocumentStatus:
+      DRAFT: Entwurf
+      EMBEDDED: Eingebettet
     ToolType:
       FLOW: Ivy-Fluss
       IVY: Ivy-Tool
@@ -79,6 +131,9 @@ Labels:
     UploadDocumentType:
       OTHERS: Sonstiges
       PORTAL_SUPPORT: Portal-Unterstützung
+  Generate: Erstellen
+  KnowledgeBase: Wissensdatenbank
+  KnowledgeBases: Wissensdatenbanken
   Message:
     InvalidEmailFormat: Ungültiges E-Mail-Format
     InvalidUrl: "Ungültige URL\t"
@@ -90,8 +145,12 @@ Labels:
     OpenAI:
       PrimaryModel: Primäres Open AI-Modell
       SecondaryModel: Sekundäres Open AI-Modell
+  More: Mehr
   Portal:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  Select: Auswählen
+  Status: Status
+  UploadHere: Hier hochladen
   common:
     AIFunctions: AI-Funktionen
     Actions: Aktionen

@@ -8,6 +8,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.dto.AiResultDTO;
+import com.axonivy.portal.components.dto.SecurityMemberDTO;
 import com.axonivy.portal.components.enums.AIState;
 import com.axonivy.utils.aiassistant.dto.AbstractConfiguration;
 import com.axonivy.utils.aiassistant.dto.flow.AiFlow;
@@ -34,6 +35,11 @@ public abstract class AiFunction extends AbstractConfiguration
   private String description;
   private String usage;
   private List<String> permissions;
+
+  @JsonIgnore
+  private List<SecurityMemberDTO> permissionDTOs;
+  @JsonIgnore
+  private String displayedPermission;
 
   @JsonIgnore
   private boolean isDisabled;
@@ -152,5 +158,21 @@ public abstract class AiFunction extends AbstractConfiguration
   @JsonIgnore
   public boolean isEnabled() {
     return !isDisabled;
+  }
+
+  public List<SecurityMemberDTO> getPermissionDTOs() {
+    return permissionDTOs;
+  }
+
+  public void setPermissionDTOs(List<SecurityMemberDTO> permissionDTOs) {
+    this.permissionDTOs = permissionDTOs;
+  }
+
+  public String getDisplayedPermission() {
+    return displayedPermission;
+  }
+
+  public void setDisplayedPermission(String displayedPermission) {
+    this.displayedPermission = displayedPermission;
   }
 }

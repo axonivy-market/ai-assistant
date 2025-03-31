@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -24,7 +26,6 @@ import com.axonivy.utils.aiassistant.enums.ModelType;
 import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 
 import ch.ivyteam.ivy.environment.Ivy;
-import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.data.segment.TextSegment;
@@ -154,30 +155,25 @@ public class OpenAIBot extends AbstractAIBot {
     Ivy.log().info("Recreate index " + collectionName);
     initEmbeddingStore(collectionName);
 
-    try {
-      getEmbeddingStore().createIndexIfNotExist(DEFAULT_DIMENSIONS);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    getEmbeddingStore().createIndexIfNotExist(DEFAULT_DIMENSIONS);
 
     Ivy.log().info("Start embed vector store");
 
     List<EmbeddingDocument> embeddings = new ArrayList<>();
     for (TextSegment segment : textSegments) {
       EmbeddingDocument doc = new EmbeddingDocument();
-      doc.setMetadata(segment.metadata().toMap());
+
+      Map<String, String> newMetadata = new HashMap<>();
+      for (Entry<String, Object> entry : segment.metadata().toMap()
+          .entrySet()) {
+        newMetadata.put(entry.getKey(), entry.getValue().toString());
+      }
       doc.setText(segment.text());
       doc.setVector(getEmbeddingModel().embed(segment).content().vector());
       embeddings.add(doc);
     }
 
-    try {
-      getEmbeddingStore().bulkIndex(collectionName, embeddings);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    getEmbeddingStore().bulkAddNewDocuments(embeddings);
     Ivy.log().info("End embed vector store");
   }
 
@@ -255,7 +251,7 @@ public class OpenAIBot extends AbstractAIBot {
     } catch (Exception e) {
       return e.getCause().getMessage();
     }
-    return getEmbeddingStore().isIndexActive();
+    return getEmbeddingStore().getIndexStatus();
   }
 
   private List<EmbeddingMatch<TextSegment>> toEmbeddingMatch(
@@ -265,8 +261,7 @@ public class OpenAIBot extends AbstractAIBot {
             .map(document -> new EmbeddingMatch<>(hit.score(), hit.id(),
                 new Embedding(document.getVector()),
                 document.getText() == null ? null
-                    : TextSegment.from(document.getText(),
-                        new Metadata(document.getMetadata()))))
+                    : TextSegment.from(document.getText())))
             .orElse(null))
         .collect(toList());
   }

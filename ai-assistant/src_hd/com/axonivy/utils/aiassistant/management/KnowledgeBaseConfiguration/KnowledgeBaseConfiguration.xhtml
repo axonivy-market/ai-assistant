@@ -1,0 +1,144 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:body>
+  <ui:composition template="/layouts/frame-10-full-width.xhtml">
+    <ui:define name="title">#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/KnowledgeBase')}</ui:define>
+    <ui:define name="content">
+      <h:outputStylesheet library="css" name="ai-management.css" />
+      <h:outputStylesheet library="css" name="utility.css" />
+
+      <ic:com.axonivy.portal.components.IFrameTaskConfig isWorkingOnATask="false"
+        isHideCaseInfo="true" isHideTaskName="true" isHideTaskAction="true" />
+
+      <f:event listener="#{knowledgeBaseConfigurationBean.init(data.knowledgeBaseId)}" type="preRenderComponent" />
+      <div class="card w-full grid knowledge-base-panel align-content-start ">
+        <h:form id="remote-commands-form" styleClass="p-0">
+          <p:remoteCommand actionListener="#{knowledgeBaseConfigurationBean.checkIndexStatus()}" autoRun="true" global="false"
+            update="knowledge-base-messages document-header-form" />
+        </h:form>
+        <div class="col-12 p-0 mb-3">
+          <p:messages id="knowledge-base-messages" styleClass="w-full" />
+        </div>
+        <div class="col-12 p-0 grid flex-column flex-auto knowledge-base-container">
+          <div class="col-3 grid p-0 min-h-full">
+            <h:form id="document-upload-form" styleClass="w-full flex flex-column">
+              <div class="col-12">
+                <h:outputText value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/Sources')}"
+                  styleClass="ml-2 text-xl font-semibold" />
+              </div>
+              <div class="w-full flex-auto flex #{empty knowledgeBaseConfigurationBean.uploadedSources ? 'align-items-center' : ''}">
+                 <h:panelGroup layout="block" id="initial-sources-upload-panel"
+                   styleClass="col-12 flex flex-column justify-content-center h-full"
+                   rendered="#{empty knowledgeBaseConfigurationBean.uploadedSources}">
+                   <ui:include src="InitialSourcesUpload.xhtml" />
+                 </h:panelGroup>
+
+                 <h:panelGroup layout="block" id="sources-upload-panel" styleClass="col-12"
+                   rendered="#{not empty knowledgeBaseConfigurationBean.uploadedSources}">
+                   <ui:include src="SourcesUpload.xhtml" />
+                 </h:panelGroup>
+              </div>
+            </h:form>
+          </div>
+
+          <p:divider layout="vertical" />
+
+          <div class="col-9 grid p-0 min-h-full">
+            <div class="col-12">
+              <h:panelGroup layout="block" id="documents-header-section"
+                styleClass="col-12 flex flex-nowrap align-items-center">
+                <h:outputText value="#{ivy.cms.co('/Labels/Documents')}"
+                   styleClass="text-xl flex-auto" />
+                 <h:form id="document-header-form">
+
+                  <p:commandButton id="update-embeddings" styleClass="primary-color-light-button mr-2"
+                    rendered="#{not empty knowledgeBaseConfigurationBean.knowledgeBase.documents}"
+                    disabled="#{!knowledgeBaseConfigurationBean.isIndexActive}"
+                    value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/EmbedAllDocuments')}"
+                    actionListener="#{knowledgeBaseConfigurationBean.updateEmpbeddings}"
+                    update="documents-form #{p:resolveFirstComponentWithId('document-upload-form', view).clientId}" />
+
+                  <p:commandButton id="create-new-document" styleClass="primary-color-light-button"
+                    value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/CreateNewDocument')}"
+                    disabled="#{!knowledgeBaseConfigurationBean.isIndexActive}"
+                    actionListener="#{knowledgeBaseConfigurationBean.onCreateNewDocument}"
+                    update="#{p:resolveFirstComponentWithId('document-details-dialog', view).clientId}"
+                    oncomplete="PF('document-details-dialog').show();" />
+                 </h:form>
+              </h:panelGroup>
+               <h:form id="documents-form" styleClass="col-12 mt-3 flex-auto">
+                 <p:dataTable id="document-table" widgetVar="document-table"
+                   value="#{knowledgeBaseConfigurationBean.knowledgeBase.documents}" var="doc"
+                   rowKey="#{doc.id}" styleClass="knowledge-base-document-table">
+                   <p:column headerText="#{ivy.cms.co('/Labels/Content')}" styleClass="white-space-nowrap text-overflow-ellipsis"
+                     sortable="true" sortBy="#{doc.text}"
+                     filterable="true" filterBy="#{doc.text}" filterMatchMode="contains" >
+                     <h:outputText value="#{doc.text}" />
+                   </p:column>
+                   <p:column headerText="#{ivy.cms.co('/Labels/Status')}" width="120" styleClass="text-center"
+                     sortable="true" sortBy="#{ivy.cms.co(doc.status.cmsLabel)}"
+                     filterable="true" filterBy="#{ivy.cms.co(doc.status.cmsLabel)}">
+
+                     <f:facet name="filter">
+                       <p:selectOneMenu onchange="PF('document-table').filter()" styleClass="ui-custom-filter">
+                         <f:selectItem itemLabel="#{ivy.cms.co('/Labels/common/All')}" itemValue="#{null}" noSelectionOption="true" />
+                         <f:selectItems value="#{knowledgeBaseConfigurationBean.statusTypes}" var="status"
+                           itemValue="#{status}" itemLabel="#{ivy.cms.co(status.cmsLabel)}" />
+                       </p:selectOneMenu>
+                     </f:facet>
+
+                     <p:tag rounded="true" value="#{ivy.cms.co(doc.status.cmsLabel)}"
+                       styleClass="doc-status #{doc.status.name()} pl-3 pr-3" />
+                   </p:column>
+                   <p:column headerText="#{ivy.cms.co('/Labels/common/Actions')}" styleClass="text-center" width="100">
+                     <div class="flex justify-content-center">
+                       <p:commandButton id="document-edit"
+                         icon="si si-pencil"
+                         styleClass="rounded-button ui-button-outlined u-mar-right-5"
+                         title="#{ivy.cms.co('/Labels/Edit')}" global="false"
+                         actionListener="#{knowledgeBaseConfigurationBean.editDocument(doc.documentId)}"
+                         update="#{p:resolveFirstComponentWithId('document-details-dialog', view).clientId}"
+                         oncomplete="PF('document-details-dialog').show();"/>
+
+                       <p:commandButton id="delete-document" process="@this"
+                         styleClass="rounded-button ui-button-outlined ui-button-danger" icon="si si-bin-1"
+                         actionListener="#{knowledgeBaseConfigurationBean.deleteDocument(doc)}"
+                         update="@form"
+                         title="#{ivy.cms.co('/ch.ivy.addon.portalkit.ui.jsf/common/delete')}" />
+                     </div>
+                   </p:column>
+                 </p:dataTable>
+               </h:form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-full mt-3 flex justify-content-end">
+          <p:commandLink id="close-link" actionListener="#{knowledgeBaseConfigurationBean.onClose}" value="Close" styleClass="" />
+
+          <ui:decorate template="/layouts/decorator/dialog-with-icon.xhtml">
+            <ui:param name="id" value="close-confirm-dialog" />
+            <ui:param name="widgetVar" value="close-confirm-dialog" />
+            <ui:param name="appendTo" value="@(body)" />
+            <ui:param name="iconClass" value="si si-road-sign-warning" />
+            <ui:param name="dynamic" value="true" />
+            <ui:param name="iconStyleClass" value="portal-dialog-warning-icon portal-dialog-icon" />
+            <ui:param name="headerText" value="Leave this page?" />
+            <ui:param name="dialogContent" value="All draft documents will be lost. Are you sure you want to leave this page?" />
+
+            <ui:define name="dialogFooter">
+              <p:link href="#" value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/No')}"
+                onclick="PF('close-confirm-dialog').hide();" styleClass="u-mar-right-15" />
+              <p:commandButton value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Yes')}"
+                onclick="click" actionListener="#{knowledgeBaseConfigurationBean.novigateToAiManagement}" ajax="false" />
+            </ui:define>
+          </ui:decorate>
+        </div>
+      </div>
+      <ui:include src="DocumentDetailsDialog.xhtml" />
+    </ui:define>
+  </ui:composition>
+</h:body>
+</html>

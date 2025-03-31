@@ -16,10 +16,12 @@ import org.apache.commons.lang3.StringUtils;
 import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.flow.AiFlow;
+import com.axonivy.utils.aiassistant.dto.knowledgebase.KnowledgeBase;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
 import com.axonivy.utils.aiassistant.dto.tool.RetrievalQATool;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
+import com.axonivy.utils.aiassistant.service.KnowledgeBaseService;
 
 import ch.ivyteam.ivy.environment.Ivy;
 
@@ -31,6 +33,7 @@ public class FunctionListBean extends AbstractFunctionListBean
   private static final long serialVersionUID = 5915528319848497892L;
   private List<AiFunction> allFunctions;
   private boolean showNonStartableAiFunction;
+  private List<KnowledgeBase> knowledgeBases;
 
   @Override
   public void init(Assistant selectedAssistant) {
@@ -92,12 +95,12 @@ public class FunctionListBean extends AbstractFunctionListBean
   }
 
   public String getRemoveAiFunctionMessage() {
-    if (Optional.ofNullable(selectedFunction).map(AiFunction::getId)
+    if (Optional.ofNullable(getSelectedFunction()).map(AiFunction::getId)
         .isEmpty()) {
       return StringUtils.EMPTY;
     }
 
-    List<Assistant> assistants = AssistantService.getInstance().findAssistantByFunctionId(selectedFunction.getId());
+    List<Assistant> assistants = AssistantService.getInstance().findAssistantByFunctionId(getSelectedFunction().getId());
     String formattedUsingAssistants = String.join(
         AiConstants.COMMA,
         assistants.stream().map(Assistant::getName).toList());
@@ -110,21 +113,13 @@ public class FunctionListBean extends AbstractFunctionListBean
   @Override
   public void deleteFunction() {
     for (AiFunction function : allFunctions) {
-      if (function.getId().contentEquals(selectedFunction.getId())) {
+      if (function.getId().contentEquals(getSelectedFunction().getId())) {
         AiFunctionService.getInstance().delete(function.getId());
         allFunctions.remove(function);
         toggleNonStartable();
         break;
       }
     }
-  }
-
-  public AiFunction getSelectedFunction() {
-    return selectedFunction;
-  }
-
-  public void setSelectedFunction(AiFunction selectedFunction) {
-    this.selectedFunction = selectedFunction;
   }
 
   public List<AiFunction> getAllFunctions() {
@@ -142,5 +137,12 @@ public class FunctionListBean extends AbstractFunctionListBean
   public void setShowNonStartableAiFunction(
       boolean showNonStartableAiFunction) {
     this.showNonStartableAiFunction = showNonStartableAiFunction;
+  }
+
+  public List<KnowledgeBase> getKnowledgeBases() {
+    if (knowledgeBases == null) {
+      knowledgeBases = KnowledgeBaseService.getInstance().findAll();
+    }
+    return knowledgeBases;
   }
 }
