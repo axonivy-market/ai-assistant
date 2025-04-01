@@ -19,7 +19,7 @@
 
 <cc:implementation>
   <c:set var="model" value="#{cc.attrs.model}" />
-  <h:panelGroup id="model-item-panel" styleClass="flex w-full card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'}">
+  <h:panelGroup id="model-item-panel" styleClass="flex w-full card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'} align-content-center align-items-center">
     <h:panelGroup layout="block" styleClass="flex w-10rem justify-content-center flex-wrap align-items-center avatar-container">
       <p:graphicImage name="#{model.modelType.logoCms}" alt="#{model.name}" library="ivy-cms"
         width="#{cc.attrs.avatarWidth}" height="#{cc.attrs.avatarHeight}" styleClass="ai-assistant-avatar" rendered="#{ivyFreyaTheme.mode eq 'light'}" />

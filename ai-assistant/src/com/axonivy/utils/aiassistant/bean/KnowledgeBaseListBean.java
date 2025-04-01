@@ -47,7 +47,6 @@ public class KnowledgeBaseListBean implements Serializable {
   public void createNewKnowledgeBase() {
     selectedKnowledgeBase = new KnowledgeBase();
     selectedKnowledgeBase.setIsPublic(true);
-    selectedKnowledgeBase.setNumberOfDimensions(AiConstants.DEFAULT_DIMENSIONS);
     knowledgeBaseDetailsDialogHeader = Ivy.cms().co(
         "/Dialogs/com/axonivy/utils/aiassistant/component/KnowledgeBaseList/CreateNewBase");
     isCreation = true;

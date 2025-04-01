@@ -8,6 +8,10 @@ Dialogs:
               CreateNewAiFunction: |
                 Erstelle eine neue KI-Funktion
               EditAIFunction: Bearbeite die KI-Funktion
+              LogicalAnswer: Logische Antwortstruktur
+              LogicalAnswerTooltip: |+
+                Wenn diese Option aktiviert ist, organisiert die KI Antworten in einem klaren, logischen Format, das Kohärenz und strukturiertes Denken gewährleistet. Dieser Prozess benötigt jedoch zusätzliche Zeit, um eine gut strukturierte Antwort zu erzeugen.
+
               NonStartableTooltip: |+
                 Nicht startbare KI-Funktionen sind Funktionen, die aufgrund von Fehlern nicht gestartet werden können oder nur indirekt von anderen KI-Funktionen genutzt werden können.
 
@@ -78,6 +82,7 @@ Dialogs:
               Title: AI-Modell Konfiguration
               UsingBy: Assistenten, die dieses Modell verwenden
             AssistantConfiguration:
+              AddAIFunction: Füge eine KI-Funktion hinzu
               AddFunction: Funktion hinzufügen
               AssistantSavedMessage: Assistent "{0}" wurde erfolgreich gespeichert
               AssistantTemplates: Assistentenvorlagen
@@ -92,7 +97,9 @@ Dialogs:
                 Sind Sie sicher, dass Sie diesen Assistenten löschen möchten?
               Settings: Einstellungen
               Title: Assistent Konfiguration
-              UseTemplate: Vorlage verwenden
+              UseTemplate: |+
+                Verwende eine KI-Assistenten-Vorlage
+
             KnowledgeBaseConfiguration:
               AddSource: Füge eine weitere Quelle hinzu...
               CreateDraftDocuments: Erstelle Entwurfsdokumente

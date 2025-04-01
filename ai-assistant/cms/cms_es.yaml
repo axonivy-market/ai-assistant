@@ -15,6 +15,8 @@ Dialogs:
 
 
               EditAIFunction: Editar la función de IA
+              LogicalAnswer: Estructura lógica de respuesta
+              LogicalAnswerTooltip: Cuando esta opción está habilitada, la IA organiza las respuestas en un formato claro y lógico, asegurando coherencia y un razonamiento estructurado. Sin embargo, este proceso requiere tiempo adicional para generar una respuesta bien estructurada.
               NonStartableTooltip: |+
                 Las funciones de IA no iniciables son funciones que no pueden iniciarse debido a errores o que solo pueden ser utilizadas indirectamente por otras funciones de IA.
 
@@ -98,6 +100,7 @@ Dialogs:
               Title: Configuración del modelo AI
               UsingBy: Asistentes que utilizan este modelo
             AssistantConfiguration:
+              AddAIFunction: Agregar una función de IA
               AddFunction: Agregar función
               AssistantSavedMessage: El asistente "{0}" se ha guardado correctamente
               AssistantTemplates: Plantillas de asistente
@@ -112,7 +115,16 @@ Dialogs:
                 ¿Estás seguro de que quieres borrar este asistente?
               Settings: Configuración
               Title: Asistente de configuración
-              UseTemplate: Usar plantilla
+              UseTemplate: |+
+                Usar una plantilla de asistente de IA
+
+
+
+
+
+
+
+
             KnowledgeBaseConfiguration:
               AddSource: Agregar otra fuente...
               CreateDraftDocuments: Crear documentos borrador

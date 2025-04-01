@@ -19,6 +19,8 @@ public class TextSplitter {
    */
   private static final String NEW_LINE_REGEX = "\\s*\\R\\s*";
 
+  private static final String WHITE_SPACE_REGEX = "\\s+";
+
   private static final int PARAGRAPH_MAX_LENGTH = 1000;
 
   private static List<String> splitByNewLine(String content) {
@@ -61,5 +63,9 @@ public class TextSplitter {
       }
     }
     return result;
+  }
+
+  public static String[] splitByWhitespace(String content) {
+    return content.trim().split(WHITE_SPACE_REGEX);
   }
 }

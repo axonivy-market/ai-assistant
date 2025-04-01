@@ -7,6 +7,8 @@ Dialogs:
             AIFunctionList:
               CreateNewAiFunction: Créer une nouvelle fonction IA
               EditAIFunction: Modifier la fonction IA
+              LogicalAnswer: Structure de réponse logique
+              LogicalAnswerTooltip: Lorsque cette option est activée, l'IA organise les réponses dans un format clair et logique, garantissant la cohérence et un raisonnement structuré. Cependant, ce processus nécessite un temps supplémentaire pour générer une réponse bien structurée.
               NonStartableTooltip: Les fonctions IA non démarrables sont des fonctions qui ne peuvent pas être lancées en raison d'erreurs ou qui ne peuvent être utilisées qu'indirectement par d'autres fonctions IA.
               OpenFunctionDetailsWarningDialogHeader: Ouvrir la page des détails de la fonction d'IA "{0}"
               OpenFunctionDetailsWarningDialogMessage: Les modifications non enregistrées seront perdues. Voulez-vous continuer?
@@ -73,6 +75,7 @@ Dialogs:
               Title: Configuration du modèle AI
               UsingBy: Assistants utilisant ce modèle
             AssistantConfiguration:
+              AddAIFunction: Ajouter une fonction IA
               AddFunction: Ajouter une fonction
               AssistantSavedMessage: L'assistant "{0}" est sauvegardé avec succès
               AssistantTemplates: Modèles d'assistant
@@ -87,7 +90,9 @@ Dialogs:
                 Êtes-vous sûr de vouloir supprimer cet assistant ?
               Settings: Paramètres
               Title: Configuration de l'assistant
-              UseTemplate: Utiliser le modèle
+              UseTemplate: |+
+                Utiliser un modèle d'assistant IA
+
             KnowledgeBaseConfiguration:
               AddSource: Ajouter une autre source...
               CreateDraftDocuments: Créer des documents brouillons

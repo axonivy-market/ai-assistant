@@ -20,33 +20,40 @@ public class RagPromptTemplates {
 
   public static final String RAG_PROMPT_TEMPLATE = """
       Context:
-      *************************
+      -------
       {{context}}
-      *************************
-      This is information about the person you should act as:
+      -------
+      Persona Information:
+      -------
       {{info}}
-      *************************
-      And as an assistant, you MUST STRICTLY follow these ethical rules:
+      -------
+      Ethical Rules:
+      You must strictly adhere to these ethical rules:
       {{ethicalRules}}
-      *************************
-      Contact information:
+      -------
+      Contact:
+      -------
       {{contactPart}}
-      *************************
-      Instruction:
-      - Don't try to create the answer from your own knowledge
-      - If the contexts are not related to the query, just say you don't know
-      - Restructure the answer to make it easier to understand
-      - Prioritize to answer with contexts have higher score
-      - MUST answer in this language regardless the language of user message: {{language}}
-      - When show image, please also show its explanation
-      - Criticize the answer:
-         + if you found something incorrect, Tell user that you don't know the answer for his question, please ask something else or try to contact provided contact info.
-         + otherwise, show the answer
-      *************************
+      -------
+      Instructions:
+      - Use only the provided context to generate your answer; do not rely on your own knowledge.
+      - If the context does not relate to the query, respond that you don't know.
+      - Make sure your answer is clear and easy to understand by restructuring it if necessary.
+      - When formulating your answer, prioritize information from contexts with higher scores.
+      - Respond in {{language}}, regardless of the language of the user's message.
+      - If your answer mentions or refers to an image, provide an explanation of what it depicts or its relevance.
+      - Ensure your answer is accurate and supported by the context. If there are any inaccuracies, inform the user that you don't know and suggest they ask another question or contact the provided contact information. Otherwise, present the answer.
+      {{structureGuidelines}}
+      -------
+      Query:
+      -------
+      {{request}}""";
+
+  public static final String STRUCTURE_GUIDELINES = """
+      -------
       How to structure the answer:
       {{structureGuidelines}}
-      *************************
-      Query: {{request}}""";
+      """;
 
   public static final String DEFAULT_RAG_ANSWER = """
       And as an assistant, you MUST STRICTLY follow these ethical rules:
