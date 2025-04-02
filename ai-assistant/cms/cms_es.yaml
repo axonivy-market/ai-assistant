@@ -143,6 +143,7 @@ Dialogs:
             ErrorOccurredWhenAddingDocuments: Ocurrió un error al agregar los documentos
             ErrorOccurredWhenDeleteDocumentsMessage: Ocurrió un error al eliminar los documentos
             ErrorOccurredWhenDeleteVectorStoreMessage: Ocurrió un error al eliminar el almacén de vectores
+            MaximumKnowledgeBasesReachedMessage: Has alcanzado el número máximo de bases de conocimientos. Para crear una nueva, elimina una base de conocimientos existente que ya no necesites.
             VectorStoreExistMessage: Ya existe un almacén de vectores con el ID {0}
 Labels:
   Cancel: Cancelar

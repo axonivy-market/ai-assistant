@@ -108,6 +108,7 @@ Dialogs:
             ErrorOccurredWhenAddingDocuments: An error occurred while adding documents
             ErrorOccurredWhenDeleteDocumentsMessage: An error occurred while deleting documents
             ErrorOccurredWhenDeleteVectorStoreMessage: An error occurred while deleting the vector store
+            MaximumKnowledgeBasesReachedMessage: You have reached the maximum number of knowledge bases. To create a new one, please delete an existing knowledge base that is no longer needed.
             VectorStoreExistMessage: A vector store with ID {0} already exists
 Labels:
   Cancel: Cancel

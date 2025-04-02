@@ -130,8 +130,15 @@ public class RetrievalQATool extends AiFunction {
     // Apply structure guidelines only if context has more than 50 words
     if (wordCount > 50) {
       int requestType = RetrievalQATool.analyzeRequestType(assistant, message);
-      structureGuidelines = RagPromptTemplates
-          .getStructuredOutputInstruction(requestType);
+      if (this.collection
+          .contentEquals(AiConstants.DEFAULT_PORTAL_GUIDE_KNOWLEDGE_BASE_ID)) {
+        structureGuidelines = RagPromptTemplates
+            .getPortalOutputInstruction(requestType);
+      } else {
+        structureGuidelines = RagPromptTemplates
+            .getStructuredOutputInstruction(requestType);
+      }
+
     }
     params.put("structureGuidelines", structureGuidelines);
   }

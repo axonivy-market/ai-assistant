@@ -113,6 +113,7 @@ Dialogs:
             ErrorOccurredWhenAddingDocuments: Une erreur s'est produite lors de l'ajout des documents
             ErrorOccurredWhenDeleteDocumentsMessage: Une erreur s'est produite lors de la suppression des documents
             ErrorOccurredWhenDeleteVectorStoreMessage: Une erreur s'est produite lors de la suppression du magasin de vecteurs
+            MaximumKnowledgeBasesReachedMessage: Vous avez atteint le nombre maximal de bases de connaissances. Pour en créer une nouvelle, veuillez supprimer une base de connaissances existante qui n'est plus nécessaire.
             VectorStoreExistMessage: Un magasin de vecteurs avec l'ID {0} existe déjà
 Labels:
   Cancel: Annuler

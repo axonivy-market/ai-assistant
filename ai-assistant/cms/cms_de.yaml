@@ -122,6 +122,9 @@ Dialogs:
             ErrorOccurredWhenDeleteVectorStoreMessage: |+
               Ein Fehler ist beim Löschen des Vektorspeichers aufgetreten
 
+            MaximumKnowledgeBasesReachedMessage: |+
+              Du hast die maximale Anzahl an Wissensdatenbanken erreicht. Um eine neue zu erstellen, lösche bitte eine nicht mehr benötigte Wissensdatenbank.
+
             VectorStoreExistMessage: Ein Vektorspeicher mit der ID {0} existiert bereits
 Labels:
   Cancel: Abbrechen

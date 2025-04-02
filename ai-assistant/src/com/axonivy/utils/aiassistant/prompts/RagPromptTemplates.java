@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.axonivy.utils.aiassistant.constant.AiConstants;
 
 import dev.langchain4j.data.segment.TextSegment;
@@ -53,6 +55,8 @@ public class RagPromptTemplates {
       -------
       How to structure the answer:
       {{structureGuidelines}}
+
+      Double check the result, don't show anything didn't mentioned in the context, don't made up answer. And also hide parts which don't have information to show.
       """;
 
   public static final String DEFAULT_RAG_ANSWER = """
@@ -88,41 +92,30 @@ public class RagPromptTemplates {
       Instruction:
       1. Analyze the query
       2. Choose the right condition.
-      3. Show the number of the selected condition as a tag <>.
-         Example: If the correct condition is "2", then you should show "<2>"
+      3. Put the value of the selected condition inside '<<' and '>>'. Example: <<1>>, <<2>>
       """;
 
   private static final String QUESTION_TYPE_WHAT_INSTRUCTION = """
       The query is about the definition. Structure your format as follow:
 
-      The definition of the subject
+      - The definition of the subject
+      - Only show if provided by the context, list out aspects of the subject such as its subtypes, use case, example,...
+      - Only show if provided by the context, list out aspect of details of features or subtypes
+      - Only show if provided by the context, list out restrictions or limitations of the subject
+      - Only show if provided by the context, show all images related to the subject
 
-      ---
-
-      List out aspects of the subject such as its subtypes, use case, example,...
-      List out aspect of details of features or subtypes
-
-      ---
-
-      List out restrictions or limitations of the subject
-
-      ---
-
-      Show all images related to the subject
+      Only show avaiable information, each information above should be separated by line seperator, except the last info: "---"
       """;
 
   private static final String QUESTION_TYPE_HOW_INSTRUCTION = """
       The query is about how to do something. Structure your format as follow:
 
-      List out steps to archive the goal, analyze and explain them. Show related images for each step as much as possible
+      - Only show if provided by the context, list out steps to archive the goal, analyze and explain them.
+      - Only show if provided by the context, show related images for each step as much as possible
+      - Only show if provided by the context, list out limitations or risks if any
+      - Summary
 
-      ---
-
-      List out limitations or risks if any
-
-      ---
-
-      Summary
+      Only show avaiable information, each information above should be separated by line seperator, except the last info: "---"
       """;
 
   private static final String QUESTION_TYPE_COMPARE_INSTRUCTION = """
@@ -141,13 +134,75 @@ public class RagPromptTemplates {
   private static final String QUESTION_TYPE_LIST_INSTRUCTION = """
       The query is about list out something. Structure your format as follow:
 
+      - Only show if provided by the context, list out details of the related list.
+      - Only show if provided by the context, sub lists if you can found.
+      - a brief summary of the list above
+
+      Only show avaiable information, each information above should be separated by line seperator, except the last info: "---"
+      """;
+
+  private static final String QUESTION_TYPE_WHY_CANNOT_INSTRUCTION = """
+      The query is about asking why something cannot be achived. Structure your format as follow:
+
+      Only show if provided by the context, list out found solutions and their details, how to perform the solution
+      """;
+
+  private static final String PORTAL_QUESTION_TYPE_WHAT_INSTRUCTION = """
+      The query is about the definition. Structure your format as follow:
+
+      The definition of the subject
+
+      ---
+
+      List out aspects of the subject such as its subtypes, use case, example,...
+      List out aspect of details of features or subtypes
+
+      ---
+
+      List out restrictions or limitations of the subject
+
+      ---
+
+      Show all images related to the subject
+      """;
+
+  private static final String PORTAL_QUESTION_TYPE_HOW_INSTRUCTION = """
+      The query is about how to do something. Structure your format as follow:
+
+      List out steps to archive the goal, analyze and explain them. Show related images for each step as much as possible
+
+      ---
+
+      List out limitations or risks if any
+
+      ---
+
+      Summary
+      """;
+
+  private static final String PORTAL_QUESTION_TYPE_COMPARE_INSTRUCTION = """
+      The query is about compare something. Structure your format as follow:
+
+      The header about the comparison
+
+      Then show a table about the all the differences and their details or related information
+      Highlight the important differences points
+
+      ---
+
+      Give a brief summary
+      """;
+
+  private static final String PORTAL_QUESTION_TYPE_LIST_INSTRUCTION = """
+      The query is about list out something. Structure your format as follow:
+
       List out details of the related list. Even sub lists if you can found.
       ---
 
       a brief summary of the list above
       """;
 
-  private static final String QUESTION_TYPE_WHY_CANNOT_INSTRUCTION = """
+  private static final String PORTAL_QUESTION_TYPE_WHY_CANNOT_INSTRUCTION = """
       The query is about asking why something cannot be achived. Structure your format as follow:
 
       List out found solutions and their details, how to perform the solution
@@ -192,7 +247,18 @@ public class RagPromptTemplates {
       case QUESTION_TYPE_LIST -> QUESTION_TYPE_LIST_INSTRUCTION;
       case QUESTION_TYPE_COMPARE -> QUESTION_TYPE_COMPARE_INSTRUCTION;
       case QUESTION_TYPE_WHY_CANNOT -> QUESTION_TYPE_WHY_CANNOT_INSTRUCTION;
-      default -> "";
+      default -> StringUtils.EMPTY;
+    };
+  }
+  
+  public static String getPortalOutputInstruction(int requestType) {
+    return switch (requestType) {
+      case QUESTION_TYPE_WHAT -> PORTAL_QUESTION_TYPE_WHAT_INSTRUCTION;
+      case QUESTION_TYPE_HOW -> PORTAL_QUESTION_TYPE_HOW_INSTRUCTION;
+      case QUESTION_TYPE_LIST -> PORTAL_QUESTION_TYPE_LIST_INSTRUCTION;
+      case QUESTION_TYPE_COMPARE -> PORTAL_QUESTION_TYPE_COMPARE_INSTRUCTION;
+      case QUESTION_TYPE_WHY_CANNOT -> PORTAL_QUESTION_TYPE_WHY_CANNOT_INSTRUCTION;
+      default -> StringUtils.EMPTY;
     };
   }
 }

@@ -8,8 +8,8 @@
      chooseIcon="si si-add-small"
      style="display: none;" dragDropSupport="true"
      label="#{ivy.cms.co('/Labels/Select')}"
-     auto="true" multiple="true"
-     update="@form"
+     allowTypes="/(\.|\/)(md|txt)$/i" accept=".md,.txt"
+     auto="true" update="@form"
      dropZone="initial-drop-upload" widgetVar="initialDocumentUpload" />
 </div>
 <div class="w-full flex align-item-center justify-content-center mb-3">
