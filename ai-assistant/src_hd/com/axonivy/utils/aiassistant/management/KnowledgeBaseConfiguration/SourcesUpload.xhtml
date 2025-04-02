@@ -12,6 +12,7 @@
       label="#{ivy.cms.co('/Labels/Select')}"
       allowTypes="/(\.|\/)(md|txt)$/i" accept=".md,.txt"
       auto="true" update="@form"
+      onvalidationfailure="handleUploadFileFail();"
       dropZone="source-upload" widgetVar="sourceUpload" />
 
   <div class="col-12 p-0 pb-3">
@@ -35,4 +36,14 @@
     actionListener="#{knowledgeBaseConfigurationBean.generate}"
     update="documents-form documents-header-section" />
 </div>
+
+  <script type="text/javascript">
+    function handleUploadFileFail() {
+      let errorMessageElement = $("[id $= 'knowledge-base-messages']").get(0);
+      let uploadError = document.getElementsByClassName('ui-messages ui-widget ui-helper-hidden ui-fileupload-messages');
+      let uploadErrorElement = uploadError[0];
+      errorMessageElement.style.display = 'block';
+      errorMessageElement.appendChild(uploadErrorElement);
+    }
+  </script>
 </html>
