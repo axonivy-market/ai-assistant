@@ -44,7 +44,6 @@ public class RagPromptTemplates {
          + otherwise, show the answer
       *************************
       How to structure the answer:
-
       {{structureGuidelines}}
       *************************
       Query: {{request}}""";

@@ -5,15 +5,14 @@
 
 <div class="w-full h-full align-content-start flex flex-column">
   <div class="flex-auto">
-    <p:fileUpload id="source-upload"
-      listener="#{knowledgeBaseConfigurationBean.handleUploadSource}" mode="advanced"
-      chooseIcon="si si-add-small"
-      allowTypes="/(\.|\/)(md|txt)$/i" accept=".md,.txt"
-      style="display: none;" dragDropSupport="true"
-      label="#{ivy.cms.co('/Labels/Select')}"
-      auto="true" update="@form"
-      dropZone="source-upload" widgetVar="sourceUpload"
-      onvalidationfailure="handleUploadFileFail();" />
+      <p:fileUpload id="source-upload"
+     listener="#{knowledgeBaseConfigurationBean.handleUploadSource}" mode="advanced"
+     chooseIcon="si si-add-small"
+     style="display: none;" dragDropSupport="true"
+     label="#{ivy.cms.co('/Labels/Select')}"
+     auto="true" multiple="true"
+     update="@form"
+     dropZone="source-upload" widgetVar="sourceUpload" />
 
   <div class="col-12 p-0 pb-3">
     <p:commandButton value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/AddSource')}"
@@ -35,15 +34,5 @@
     disabled="#{empty knowledgeBaseConfigurationBean.selectedSources}"
     actionListener="#{knowledgeBaseConfigurationBean.generate}"
     update="documents-form documents-header-section" />
-
-    <script type="text/javascript">
-    function handleUploadFileFail() {
-      let errorMessageElement = $("[id $= 'knowledge-base-messages']").get(0);
-      let uploadError = document.getElementsByClassName('ui-messages ui-widget ui-helper-hidden ui-fileupload-messages');
-      let uploadErrorElement = uploadError[0];
-      errorMessageElement.style.display = 'block';
-      errorMessageElement.appendChild(uploadErrorElement);
-    }
-    </script>
 </div>
 </html>

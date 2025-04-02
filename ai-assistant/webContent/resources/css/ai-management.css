@@ -255,10 +255,10 @@ body.light .ui-button.primary-color-light-button:hover {
 }
 
 .knowledge-base-container {
-  height: 76vh;
+  height: 83vh;
 }
 
 .knowledge-base-document-table {
-  max-height: 64vh;
+  max-height: 68vh;
   overflow: auto;
 }

@@ -6,13 +6,11 @@
   <p:fileUpload id="initial-upload"
      listener="#{knowledgeBaseConfigurationBean.handleUploadSource}" mode="advanced"
      chooseIcon="si si-add-small"
-     allowTypes="/(\.|\/)(md|txt)$/i" accept=".md,.txt"
      style="display: none;" dragDropSupport="true"
      label="#{ivy.cms.co('/Labels/Select')}"
      auto="true" multiple="true"
      update="@form"
-     dropZone="initial-drop-upload" widgetVar="initialDocumentUpload"
-     onvalidationfailure="handleInitialUploadFileFail();" />
+     dropZone="initial-drop-upload" widgetVar="initialDocumentUpload" />
 </div>
 <div class="w-full flex align-item-center justify-content-center mb-3">
   <i class="si si-file-code-upload-1 text-6xl" id="ui-document-upload-file-icon" />
@@ -24,14 +22,5 @@
         onclick="PF('initialDocumentUpload').show();return false" />
     </p:outputLabel>
   </span>
-  <script type="text/javascript">
-    function handleInitialUploadFileFail() {
-      let errorMessageElement = $("[id $= 'knowledge-base-messages']").get(0);
-      let uploadError = document.getElementsByClassName('ui-messages ui-widget ui-helper-hidden ui-fileupload-messages');
-      let uploadErrorElement = uploadError[0];
-      errorMessageElement.style.display = 'block';
-      errorMessageElement.appendChild(uploadErrorElement);
-    }
-  </script>
 </p:outputPanel>
 </html>

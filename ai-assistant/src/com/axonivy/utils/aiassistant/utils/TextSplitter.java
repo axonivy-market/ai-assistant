@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class TextSplitter {
@@ -61,10 +60,6 @@ public class TextSplitter {
         contentBuilder.setLength(0);
       }
     }
-    if (CollectionUtils.isEmpty(result)) {
-      return Arrays.asList(document);
-    }
-
     return result;
   }
 }
