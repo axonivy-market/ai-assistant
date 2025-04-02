@@ -87,9 +87,9 @@ Beispiel:
 
 3. Klicke in der Kopfzeile des Portals auf das **KI-Assistent** Symbol, um auf den Chat des **KI-Assistenten** zuzugreifen.
 
-### Benutzerhandbuch des KI-Assistenten
+## Benutzerhandbuch des KI-Assistenten
 
-#### KI-Management
+### KI-Management
 
 Der Tab KI-Management dient als zentrale Anlaufstelle für die Konfiguration und Verwaltung aller Aspekte des KI-Assistenten.
 
@@ -103,7 +103,7 @@ Von hier aus kannst du:
 
 ![Verwaltung von KI-Funktionen](doc/img/ai-functions-management.png)
 
-##### KI-Assistenten verwalten
+#### KI-Assistenten verwalten
 
 In diesem Abschnitt werden alle KI-Assistenten aufgelistet, auf die der eingeloggte Benutzer Zugriff hat, zusammen mit ihren Namen, Avataren und kurzen Beschreibungen.
 
@@ -131,7 +131,7 @@ Um die Sicherheit des KI-Assistenten für die Benutzer und die Einhaltung ethisc
 
 Standardmäßig sind diese Einstellungen schreibgeschützt, um Fehler zu vermeiden, die zu falschen Antworten führen könnten. KI-Ingenieure können jedoch neue Vorlagen entwickeln, die Informationen und ethische Regeln für Assistenten bereitstellen. Um zu erfahren, wie das funktioniert, siehe hier: [Assistentenvorlagen](#assistentenvorlagen).
 
-###### Vorlage verwenden
+##### Vorlage verwenden
 
 Du kannst schnell alle erforderlichen Einstellungen für einen KI-Assistenten mit einer Vorlage konfigurieren. Gehe wie folgt vor, um eine Vorlage anzuwenden:
 
@@ -142,7 +142,7 @@ Du kannst schnell alle erforderlichen Einstellungen für einen KI-Assistenten mi
 
 3. Die Einstellungen der Vorlage werden auf den KI-Assistenten angewendet. Diese können anschließend nach Bedarf angepasst werden.
 
-###### KI-Funktionen verwalten
+##### KI-Funktionen verwalten
 
 Auf der rechten Seite befindet sich eine Tabelle, die die dem KI-Assistenten verfügbaren KI-Funktionen auflistet. Du kannst allgemeine Informationen zu jeder Funktion einsehen, wie Name, Typ, Beschreibung, Berechtigungen und Nutzung.
 
@@ -156,11 +156,11 @@ Wenn du auf die Schaltfläche **Hinzufügen** klickst, erscheint der Dialog **Fu
 
 Anschließend erscheinen die ausgewählten Funktionen in der **Funktionen** Tabelle.
 
-###### Änderungen speichern
+##### Änderungen speichern
 
 Um alle Änderungen, die du an den Details des KI-Assistenten vorgenommen hast, zu übernehmen, klicke bitte auf die Schaltfläche **Speichern** in der unteren rechten Ecke. Du wirst dann zum Bildschirm [KI-Management](#ki-management) weitergeleitet.
 
-###### KI-Assistent löschen
+##### KI-Assistent löschen
 
 Mit der Zeit kann ein KI-Assistent veraltet sein und du möchtest ihn möglicherweise löschen und einen neuen erstellen. Um dies zu tun, klicke auf die Schaltfläche **Löschen** unten links auf der Detailseite des KI-Assistenten.
 
@@ -170,7 +170,7 @@ Ein **Bestätigungsdialog** wird angezeigt, in dem du den KI-Assistenten vollst�
 
 Bitte beachte, dass dabei alle Gespräche zwischen dem KI-Assistenten und dem Ivy-Benutzern gelöscht werden.
 
-##### KI-Modelle konfigurieren
+#### KI-Modelle konfigurieren
 
 **KI-Modelle** ist eine Liste von Modelloptionen, die ein KI-Assistent verwenden kann, um seine Funktionen auszuführen.
 
@@ -194,7 +194,7 @@ Darüber hinaus kannst du die Verbindung zur OpenAI-Plattform testen, indem du a
 
 Sobald du auf die Schaltfläche **Speichern** klickst, werden alle Einstellungen, einschließlich des API-Keys, als Axon Ivy-Variablen gespeichert und du wirst zurück zum [KI-Management](#ki-management) weitergeleitet.
 
-##### KI-Funktionen verwalten
+#### KI-Funktionen verwalten
 
 Alle **KI-Funktionen**, auf die der eingeloggte Benutzer zugreifen kann, sind im Abschnitt **KI-Funktionen** aufgelistet, zusammen mit allgemeinen Informationen wie `Name`, `Typ`, `Berechtigungen zur Nutzung` der Funktion und `Beschreibung`. 
 
@@ -208,7 +208,7 @@ Es gibt einige Gründe, warum eine KI-Funktion nicht startbar ist:
 
 Du kannst auch alle nicht startbaren KI-Funktionen anzeigen, indem du die Option **Nicht startbare KI-Funktionen anzeigen** umschaltest.
 
-###### KI-Funktion löschen
+##### KI-Funktion löschen
 
 Du kannst die KI-Funktion vollständig aus dem KI-Assistenten löschen, indem du auf die Schaltfläche Löschen (mit dem Mülleimer-Symbol) in der letzten Spalte der entsprechenden Zeile dieser KI-Funktion klickst. Ein Bestätigungsdialog wird wie unten angezeigt:
 
@@ -216,7 +216,7 @@ Du kannst die KI-Funktion vollständig aus dem KI-Assistenten löschen, indem du
 
 Bitte lies die Bestätigung sorgfältig, bevor du die KI-Funktion löschst. Die KI-Funktion könnte von einigen KI-Assistenten verwendet werden und sobald du sie löschst, können die KI-Assistenten die Funktion nicht mehr ausführen oder es können Fehler auftreten.
 
-#### Wissensdatenbanken erstellen
+### Wissensdatenbanken erstellen
 
 Der **KI-Assistent** ermöglicht es **Administratorbenutzern** (mit der Rolle `AXONIVY_PORTAL_ADMIN`), Wissensdatenbanken zu erstellen, die von der **KI-Funktion** des Typs **Wissensdatenbank** verwendet werden können.
 
@@ -226,7 +226,7 @@ Starte einfach den Prozess **Wissensdatenbank für KI-Assistenten erstellen** un
 
 Derzeit kannst du Wissensdatenbanken für zwei Typen erstellen: `Portal-Unterstützung` und `Sonstiges`.
 
-##### Wissensdatenbank: Portal-Unterstützung
+#### Wissensdatenbank: Portal-Unterstützung
 
 Der KI-Assistent enthält ein integriertes Tool namens `Portal support`, das Fragen zum Axon Ivy Portal beantworten kann.
 
@@ -238,7 +238,7 @@ Anschließend lädst du die heruntergeladene Datei wie in  [Wissensdatenbanken e
 
 Nach dem Hochladen der ZIP-Datei warte bitte einige Minuten, bis sich das Upload-Fenster schließt. Dies kann etwas dauern, da der KI-Assistent Zeit benötigt, um die Aufgabe zu erledigen.
 
-##### Wissensdatenbank: Sonstiges
+#### Wissensdatenbank: Sonstiges
 
 Bevor du andere Wissensdatenbanken hochlädst, beachte bitte:
   
@@ -254,9 +254,9 @@ Bevor du andere Wissensdatenbanken hochlädst, beachte bitte:
 
 Nach dem Hochladen der ZIP-Datei warte bitte einige Minuten, bis sich das Upload-Fenster schließt. Dies kann etwas dauern, da der KI-Assistent Zeit benötigt, um die Aufgabe zu erledigen.
 
-### Entwicklerhandbuch
+## Entwicklerhandbuch
 
-#### Assistentenvorlagen
+### Assistentenvorlagen
 
 Der KI-Assistent bieten Entwicklern die Möglichkeit, Vorlagen für KI-Assistenten vorab zu definieren. Um diese Vorlagen zu aktualisieren, musst du die JSON-Datei für die Ivy-Variable `variable.AiAssistant.AssistantTemplates.json` im Engine-Ordner unter `<engine folder>/configuration/applications/<application folder>` ändern.
 
@@ -309,9 +309,9 @@ Standardmäßig bietet der **KI-Assistent** vier Vorlagen an:
 
 - **ICT-Assistent**: Eine Vorlage für KI-Assistenten, die zur Fehlerbehebung von IT-Problemen im Backoffice eingesetzt werden kann. Diese Vorlage enthält ebenfalls keine Tools.
 
-#### AI Flow
+### AI Flow
 
-##### Intelligente Aufgabenautomatisierung fördern
+#### Intelligente Aufgabenautomatisierung fördern
 
 Um die KI-Assistenten in die Lage zu versetzen, komplexe Aufgaben mit ausgeklügelter Logik zu bewältigen, hat Axon Ivy die **AI Flows** eingeführt – ein fortschrittliches KI-Workflow-Framework, das darauf ausgelegt ist, die Abläufe von KI-Prozessen zu optimieren.
 
@@ -323,7 +323,7 @@ Um die KI-Assistenten in die Lage zu versetzen, komplexe Aufgaben mit ausgeklüg
 - Den Zugriff auf KI-Funktionen zu verwalten.
 - Dieses Framework wurde entwickelt, um Benutzer dabei zu unterstützen, KI-Workflows effektiv zu entwerfen und zu verwalten und ein intelligenteres, anpassungsfähigeres KI-Erlebnis zu ermöglichen.
 
-##### Reales Anwendungsbeispiel
+#### Reales Anwendungsbeispiel
 
 Stell dir vor, du möchtest eine Funktion entwickeln, die es HR-Mitarbeitern ermöglicht, Informationen über Mitarbeiter anhand von Kriterien wie Name, Geburtsdatum, Niederlassung oder Position leicht zu finden.
 
@@ -333,7 +333,7 @@ Im Zeitalter der KI möchtest du jedoch eine intelligentere Lösung. Eine KI-ges
 
 Hier kommt AI Flow ins Spiel. Es beschleunigt nicht nur den Suchprozess, sondern hilft auch bei Aufgaben wie der Korrektur von Tippfehlern und der Validierung unlogischer Daten, indem es beispielsweise verhindert, dass nach Mitarbeitern mit zukünftigen Geburtstagen gesucht wird!
 
-##### So funktioniert es
+#### So funktioniert es
 
 AI Flow funktioniert als Workflow-Framework in Form von JSON. Es besteht aus mehreren AI-Schritten, die jeweils auf benutzerdefinierten Konfigurationen basierend miteinander verknüpft sind.
 
@@ -384,9 +384,9 @@ Grundlegende Attribute eines AI Flow:
 > [!TIP]
 > Um zu erfahren, wie Sie Ihren eigenen AI Flow erstellen können, siehe [AI Flow-Demo](#erstellen-sie-ihren-eigenen-ai-flow).
 
-##### AI-Schritt
+#### AI-Schritt
 
-###### Attribute
+##### Attribute
 
 - **stepType**: Art des Schritts. Gültige Werte:
     - IVY_TOOL: [Ivy-Tool-Schritt](#ivy-tool-schritt).
@@ -430,7 +430,7 @@ In der bereitgestellten Struktur prüft die KI die Fallbeschreibungen innerhalb 
 }
 ```
 
-##### Ivy-Tool-Schritt
+#### Ivy-Tool-Schritt
 
 Der **Ivy-Tool-Schritt** ist ein spezialisierter Anweisungsmechanismus, der die KI anweist, bestimmte Tools oder Funktionen in ihrem Entscheidungsprozess zu verwenden. Dieser Schritt stellt sicher, dass die KI mit vordefinierten Tools (bezeichnet durch ihre toolId) interagiert und Aufgaben gemäß den festgelegten Bedingungen und benutzerdefinierten Anweisungen ausführt. Er ermöglicht der KI, spezialisierte Aktionen auszuführen und bietet Flexibilität durch optionale Parameter wie Erfolg, Fehlerbehandlung und benutzerdefinierte Anweisungen.
 
@@ -459,7 +459,7 @@ Der **Ivy-Tool-Schritt** ist ein spezialisierter Anweisungsmechanismus, der die 
 }
 ```
 
-##### Text-Schritt
+#### Text-Schritt
 
 Der **Text-Schritt** ist eine zentrale Komponente in KI-Workflows, die darauf ausgelegt ist, textbasierte Inhalte für die Benutzerinteraktion anzuzeigen oder zu generieren. Abhängig von seiner Konfiguration kann der Text-Schritt feste Nachrichten, KI-generierte Inhalte, Ergebnisse vorheriger Schritte oder sogar versteckte Nachrichten für die interne KI-Verarbeitung anzeigen. Diese Flexibilität ermöglicht es der KI, effektiv mit den Benutzern zu kommunizieren und gleichzeitig Entscheidungsprozesse zu steuern.
 
@@ -547,7 +547,7 @@ Der **Text-Schritt** ist eine zentrale Komponente in KI-Workflows, die darauf au
 }
 ```
 
-##### Rephrase-Schritt
+#### Rephrase-Schritt
 
 Der **Rephrase-Schritt** ist dazu gedacht, der KI zu helfen, Benutzereingaben zu verfeinern, bevor spezifische Aktionen ausgeführt oder Tools verwendet werden. Dies ist besonders nützlich, wenn die Nachricht des Benutzers unklar, unvollständig oder nicht in einer Weise strukturiert ist, die die KI sofort verarbeiten kann. Durch die Umformulierung der Eingabe stellt die KI sicher, dass die Informationen präziser sind und sich besser für die Verwendung mit Zielwerkzeugen oder -funktionen eignen.
 
@@ -592,7 +592,7 @@ Der **Rephrase-Schritt** ist dazu gedacht, der KI zu helfen, Benutzereingaben zu
 }
 ```
 
-##### Trigger-Flow-Schritt
+#### Trigger-Flow-Schritt
 
 Der **Trigger-Flow-Schritt** startet einen neuen Flow innerhalb des KI-Prozesses, entweder durch Übermittlung einer spezifischen Auslöse-Nachricht oder durch Nutzung des Ergebnisses eines vorherigen Schritts. Dies ermöglicht nahtlose Übergänge zwischen verschiedenen Workflows und die Weitergabe relevanter Daten zwischen ihnen.
 
@@ -624,7 +624,7 @@ Der **Trigger-Flow-Schritt** startet einen neuen Flow innerhalb des KI-Prozesses
 }
 ```
 
-##### Knowledge-Base-Schritt
+#### Knowledge-Base-Schritt
 
 Beim Arbeiten an einem Schritt können Benutzer Fragen haben, die nicht direkt mit dem Arbeitsablauf zusammenhängen. Wenn ein Benutzer beispielsweise eine Aufgabe nicht delegieren kann, möchte er möglicherweise wissen, warum die Delegation nicht möglich ist. Der **Knowledge-Base-Schritt** wurde entwickelt, um Benutzern zu helfen, schnell Antworten auf solche Fragen zu finden.
 
@@ -640,9 +640,9 @@ Beim Arbeiten an einem Schritt können Benutzer Fragen haben, die nicht direkt m
 }
 ```
 
-##### KI-Ergebnis-DTO
+#### KI-Ergebnis-DTO
 
-###### Einführung
+##### Einführung
 
 Das Ergebnis-DTO stellt sicher, dass der KI-Assistent zuverlässige und konsistente Ergebnisse liefert, indem es eine standardisierte Struktur für alle Ausgaben einhält, was Effizienz und Klarheit bei allen KI-Interaktionen fördert.
 
@@ -658,7 +658,7 @@ Das Ergebnis-DTO stellt sicher, dass der KI-Assistent zuverlässige und konsiste
 | resultForAI | String | Ergebnis für das KI-Modell |
 | state | com.axonivy.portal.components.enums.AIState | Status des Ergebnisses (DONE, ERROR) |
 
-#### Erstelle deinen eigenen AI Flow
+### Erstelle deinen eigenen AI Flow
 
 In diesem Abschnitt erklären wir, wie du deinen eigenen AI Flow entwickeln kannst, wobei das [Reales Anwendungsbeispiel](#reales-anwendungsbeispiel) als Use Case dient.
 
