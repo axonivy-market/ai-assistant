@@ -50,11 +50,16 @@ public class FunctionListBean extends AbstractFunctionListBean
         .subtract(allFunctions,
         startables);
 
-    startables.sort(Comparator.comparing(AiFunction::getName));
-    nonStartables.sort(Comparator.comparing(AiFunction::isEnabled)
-        .thenComparing(AiFunction::getType)
-        .thenComparing(AiFunction::getName));
-    startables.addAll(nonStartables);
+    if (CollectionUtils.isNotEmpty(startables)) {
+      startables.sort(Comparator.comparing(AiFunction::getName));
+    }
+
+    if (CollectionUtils.isNotEmpty(nonStartables)) {
+      nonStartables.sort(Comparator.comparing(AiFunction::isEnabled)
+          .thenComparing(AiFunction::getType)
+          .thenComparing(AiFunction::getName));
+      startables.addAll(nonStartables);
+    }
     allFunctions = startables;
   }
 

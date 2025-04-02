@@ -7,6 +7,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.portal.components.persistence.converter.BusinessEntityConverter;
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.dto.knowledgebase.KnowledgeBase;
 import com.axonivy.utils.aiassistant.enums.AiVariable;
 
@@ -41,7 +42,11 @@ public class KnowledgeBaseService
       return new ArrayList<>();
     }
 
-    return BusinessEntityConverter.jsonValueToEntities(jsonValue, getType());
+    List<KnowledgeBase> result = BusinessEntityConverter
+        .jsonValueToEntities(jsonValue, getType());
+    return result.size() > AiConstants.MAX_KNOWLEDGE_BASES
+        ? result.subList(0, AiConstants.MAX_KNOWLEDGE_BASES - 1)
+        : result;
   }
 
   public KnowledgeBase load(String id) {

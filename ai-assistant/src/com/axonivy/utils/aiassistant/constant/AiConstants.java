@@ -2,6 +2,7 @@ package com.axonivy.utils.aiassistant.constant;
 
 public final class AiConstants {
   public static final String DEFAULT_AXON_IVY_VECTOR_STORE_PREFIX = "axon-ivy-vector-store";
+  public static final String DEFAULT_PORTAL_GUIDE_KNOWLEDGE_BASE_ID = "axon-ivy-vector-store-portal-user-guide";
   public static final String COMMA = ",";
   public static final String METADATA = "metadata";
   public static final String MEMORY = "memory";
@@ -20,4 +21,6 @@ public final class AiConstants {
   public static final String DEFAULT_EMBEDDING_MODEL = "";
   public static final int DEFAULT_DIMENSIONS = 300;
   public static final int MAX_DIMENSIONS = 1000;
+  
+  public static final int MAX_KNOWLEDGE_BASES = 5;
 }

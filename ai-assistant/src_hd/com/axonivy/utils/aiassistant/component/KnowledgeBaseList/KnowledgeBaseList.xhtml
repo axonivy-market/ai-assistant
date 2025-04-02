@@ -15,8 +15,10 @@
 <cc:implementation>
   <f:event listener="#{knowledgeBaseListBean.init}" type="preRenderComponent" />
   <h:form id="knowledge-base-list-form">
+    <p:messages id="knowledge-base-list-messages" />
     <div class="w-full flex mb-2">
       <p:commandButton id="create-knowledge-base-button"
+        disabled="#{knowledgeBaseListBean.reachedMaxAmount}"
         value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/KnowledgeBaseList/CreateNewBase')}"
         styleClass="w-full primary-color-light-button"
         actionListener="#{knowledgeBaseListBean.createNewKnowledgeBase}"
@@ -95,7 +97,7 @@
         value="#{ivy.cms.co('/Labels/common/Remove')}"
         icon="si si-remove-circle">
         <p:ajax event="click" listener="#{knowledgeBaseListBean.deleteKnowledgeBase}"
-          update="#{p:resolveFirstComponentWithId('knowledge-base-table', view).clientId}"
+          update="#{p:resolveFirstComponentWithId('knowledge-base-list-form', view).clientId}"
           oncomplete="PF('remove-knowledge-base-dialog').hide();" />
       </p:commandButton>
     </ui:define>
@@ -158,7 +160,7 @@
         <p:commandButton id="knowledge-base-detail-create-button" styleClass="w-full"
           rendered="#{knowledgeBaseListBean.creation}"
           value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/component/KnowledgeBaseList/CreateNewBase')}"
-          actionListener="#{knowledgeBaseListBean.createKnowledgeBase()}"
+          actionListener="#{knowledgeBaseListBean.onCreateKnowledgeBase()}"
           process="knowledge-base-details-form"
           update="knowledge-base-details-form knowledge-base-list-form"
           partialSubmit="true"

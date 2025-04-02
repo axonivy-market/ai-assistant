@@ -25,6 +25,7 @@ import com.axonivy.utils.aiassistant.enums.ToolType;
 import com.axonivy.utils.aiassistant.history.ChatMessageManager;
 import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
+import com.axonivy.utils.aiassistant.utils.StringProcessingUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -156,9 +157,9 @@ public class IvyTool extends AiFunction {
 
     try {
       fulfilled = BusinessEntityConverter
-          .jsonValueToEntities(AiFunctionUtils
-              .extractJsonArray(AiFunctionUtils.extractTextInsideTag(
-                bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL))),
+          .jsonValueToEntities(
+              StringProcessingUtils.standardizeResult(
+                  bot.chat(params, BasicPromptTemplates.FULFILL_IVY_TOOL)),
             IvyToolAttribute.class);
     } catch (Exception e) {
       return false;
@@ -205,7 +206,7 @@ public class IvyTool extends AiFunction {
       params.put(AiConstants.METADATA, metadata);
 
       return BusinessEntityConverter.jsonValueToEntity(
-          AiFunctionUtils.extractTextInsideTag(
+          StringProcessingUtils.standardizeResult(
               bot.chat(params, BasicPromptTemplates.FULFILL_IVY_ATTRIBUTE)),
           IvyToolAttribute.class);
 

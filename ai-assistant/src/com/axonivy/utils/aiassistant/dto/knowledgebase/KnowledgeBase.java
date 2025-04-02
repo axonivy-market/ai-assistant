@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.axonivy.utils.aiassistant.constant.AiConstants;
 import com.axonivy.utils.aiassistant.core.embedding.EmbeddingDocument;
 import com.axonivy.utils.aiassistant.core.embedding.IvyOpenSearchEmbeddingStore;
 import com.axonivy.utils.aiassistant.dto.AbstractConfiguration;
@@ -29,7 +30,6 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
   private String description;
   private String embeddingModelName;
   private String aiModelName;
-  private int numberOfDimensions;
 
   @JsonIgnore
   private AiModel aiModel;
@@ -95,14 +95,6 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
     this.aiModel = aiModel;
   }
 
-  public int getNumberOfDimensions() {
-    return numberOfDimensions;
-  }
-
-  public void setNumberOfDimensions(int numberOfDimensions) {
-    this.numberOfDimensions = numberOfDimensions;
-  }
-
   public void initModel() {
     if (StringUtils.isBlank(aiModelName) || aiModel != null) {
       return;
@@ -128,7 +120,8 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
   }
 
   public String createIndex() {
-    return getEmbeddingStore().createIndexIfNotExist(numberOfDimensions);
+    return getEmbeddingStore()
+        .createIndexIfNotExist(AiConstants.DEFAULT_DIMENSIONS);
   }
 
   public String createIndexAndEmbedAllDocuments() {
@@ -146,7 +139,7 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
 
     Ivy.log().info("Start embed vector store");
     getDocuments().forEach(doc -> {
-          doc.setDimensions(numberOfDimensions);
+      doc.setDimensions(AiConstants.DEFAULT_DIMENSIONS);
           doc.setVector(
               getEmbeddingModel().embed(doc.getText()).content().vector());
         });
@@ -160,7 +153,7 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
 
   private void prepareToEmbedDocument(EmbeddingDocument doc) {
     initModel();
-    doc.setDimensions(numberOfDimensions);
+    doc.setDimensions(AiConstants.DEFAULT_DIMENSIONS);
     doc.setVector(getEmbeddingModel().embed(doc.getText()).content().vector());
   }
 
@@ -214,7 +207,7 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
     if (embeddingModel == null) {
       embeddingModel = (OpenAiOfficialEmbeddingModel.builder()
           .apiKey(aiModel.getApiKey()).modelName(embeddingModelName)
-          .dimensions(numberOfDimensions)
+          .dimensions(AiConstants.DEFAULT_DIMENSIONS)
           .build());
     }
     return embeddingModel;

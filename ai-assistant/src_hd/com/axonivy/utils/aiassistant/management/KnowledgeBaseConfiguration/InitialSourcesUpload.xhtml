@@ -8,8 +8,9 @@
      chooseIcon="si si-add-small"
      style="display: none;" dragDropSupport="true"
      label="#{ivy.cms.co('/Labels/Select')}"
-     auto="true" multiple="true"
-     update="@form"
+     allowTypes="/(\.|\/)(md|txt)$/i" accept=".md,.txt"
+     auto="true" update="@form"
+     onvalidationfailure="handleInitialUploadFileFail();"
      dropZone="initial-drop-upload" widgetVar="initialDocumentUpload" />
 </div>
 <div class="w-full flex align-item-center justify-content-center mb-3">
@@ -23,4 +24,14 @@
     </p:outputLabel>
   </span>
 </p:outputPanel>
+
+  <script type="text/javascript">
+    function handleInitialUploadFileFail() {
+      let errorMessageElement = $("[id $= 'knowledge-base-messages']").get(0);
+      let uploadError = document.getElementsByClassName('ui-messages ui-widget ui-helper-hidden ui-fileupload-messages');
+      let uploadErrorElement = uploadError[0];
+      errorMessageElement.style.display = 'block';
+      errorMessageElement.appendChild(uploadErrorElement);
+    }
+  </script>
 </html>

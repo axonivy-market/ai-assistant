@@ -1,12 +1,15 @@
 package com.axonivy.utils.aiassistant.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +31,8 @@ public class KnowledgeBaseListBean implements Serializable {
 
   private static final long serialVersionUID = 6797999548881499812L;
 
+  private static final String MESSAGE_COMPONENT_ID = "ai-management-tab-view:knowledge-base-list:knowledge-base-list-form:knowledge-base-list-messages";
+
   private List<KnowledgeBase> knowledgeBases;
   private KnowledgeBase selectedKnowledgeBase;
   private String knowledgeBaseDetailsDialogHeader;
@@ -38,6 +43,22 @@ public class KnowledgeBaseListBean implements Serializable {
     knowledgeBases = KnowledgeBaseService.getInstance().getPublicConfig();
     knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
     setModels(AiModelService.getInstance().findAll());
+
+    checkAndShowReachedMaxAmountMessage();
+  }
+
+  /**
+   * Check and show warning message if the maximum amount of knowledge bases is
+   * reached.
+   * 
+   */
+  private void checkAndShowReachedMaxAmountMessage() {
+    if (isReachedMaxAmount()) {
+      String message = Ivy.cms().co(
+          "/Dialogs/com/axonivy/utils/aiassistant/validation/MaximumKnowledgeBasesReachedMessage");
+      FacesContext.getCurrentInstance().addMessage(MESSAGE_COMPONENT_ID,
+          new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+    }
   }
 
   public void navigateToKnowledgeBaseConfiguration(String knowledgeBaseId) {
@@ -47,7 +68,6 @@ public class KnowledgeBaseListBean implements Serializable {
   public void createNewKnowledgeBase() {
     selectedKnowledgeBase = new KnowledgeBase();
     selectedKnowledgeBase.setIsPublic(true);
-    selectedKnowledgeBase.setNumberOfDimensions(AiConstants.DEFAULT_DIMENSIONS);
     knowledgeBaseDetailsDialogHeader = Ivy.cms().co(
         "/Dialogs/com/axonivy/utils/aiassistant/component/KnowledgeBaseList/CreateNewBase");
     isCreation = true;
@@ -74,11 +94,12 @@ public class KnowledgeBaseListBean implements Serializable {
     knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
   }
 
-  public void createKnowledgeBase() {
+  public void onCreateKnowledgeBase() {
     KnowledgeBaseService.getInstance().save(selectedKnowledgeBase);
     knowledgeBases = KnowledgeBaseService.getInstance().getPublicConfig();
     knowledgeBases.forEach(knowledgeBase -> knowledgeBase.initModel());
     selectedKnowledgeBase.createIndex();
+    checkAndShowReachedMaxAmountMessage();
   }
 
   public void updateKnowledgeBase() {
@@ -155,5 +176,11 @@ public class KnowledgeBaseListBean implements Serializable {
 
   public void setCreation(boolean isCreation) {
     this.isCreation = isCreation;
+  }
+
+  public boolean isReachedMaxAmount() {
+    return Optional.ofNullable(knowledgeBases)
+        .orElseGet(() -> new ArrayList<>())
+        .size() >= AiConstants.MAX_KNOWLEDGE_BASES;
   }
 }

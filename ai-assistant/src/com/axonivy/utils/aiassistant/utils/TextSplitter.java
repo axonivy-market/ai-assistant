@@ -3,6 +3,7 @@ package com.axonivy.utils.aiassistant.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,6 +20,8 @@ public class TextSplitter {
    */
   private static final String NEW_LINE_REGEX = "\\s*\\R\\s*";
 
+  private static final String WHITE_SPACE_REGEX = "\\s+";
+
   private static final int PARAGRAPH_MAX_LENGTH = 1000;
 
   private static List<String> splitByNewLine(String content) {
@@ -30,6 +33,13 @@ public class TextSplitter {
   }
 
   public static List<String> splitDocumentByParagraph(String document) {
+    // If the document has length less than the default max length, return it
+    // instead
+    if (Optional.ofNullable(document).orElse(StringUtils.EMPTY)
+        .length() <= PARAGRAPH_MAX_LENGTH) {
+      return Arrays.asList(document);
+    }
+
     List<String> result = new ArrayList<>();
     List<String> paragraphs = splitByNewLine(document);
     List<Integer> paragraphLengths = paragraphs.stream().map(String::length)
@@ -61,5 +71,9 @@ public class TextSplitter {
       }
     }
     return result;
+  }
+
+  public static String[] splitByWhitespace(String content) {
+    return content.trim().split(WHITE_SPACE_REGEX);
   }
 }
