@@ -61,7 +61,7 @@
               <h:panelGroup layout="block" id="add-function-button-container" styleClass="col-12">
                   <p:commandButton id="add-function-button"
                     value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/AssistantConfiguration/AddAIFunction')}"
-                    disabled="#{empty assistantFunctionListBean.functionsCanAddToAssistant}"
+                    disabled="#{assistantFunctionListBean.functionsCanAddToAssistant.size() eq 0}"
                     styleClass="w-full primary-color-light-button">
                     <p:ajax event="click" listener="#{assistantFunctionListBean.updateFunctionsCanAddToAssistant()}"
                       process="@(none)" global="false"
