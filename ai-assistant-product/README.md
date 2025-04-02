@@ -85,9 +85,9 @@ Example:
 
 3. In the header of Portal, click the **AI Assistant** icon to access the **AI Assistant** app.
 
-### User guide
+## User guide
 
-#### AI Management
+### AI Management
 
 The AI Management screen serves as a central hub for configuring and managing all aspects of your AI assistant system. From here, you can:
 
@@ -97,9 +97,9 @@ The AI Management screen serves as a central hub for configuring and managing al
 
 - [Manage AI functions](#manage-ai-functions): control and organize various AI functions, defining the actions your AI can perform and how it interacts with users to provide accurate and efficient results
 
-![AI Functions management](doc/img/ai-functions-management.png)
+- [Manage knowledge base](#manage-knowledge-base): Manage knowledge bases and their vector stores, which support the AI function type `Knowledge base` that allows users to extract insights from documents stored within the system.
 
-##### Manage AI Assistants
+#### Manage AI Assistants
 
 This section lists all the AI assistants that the logged-in user has permission to access, along with their names, avatars, and short descriptions.
 
@@ -127,11 +127,11 @@ To ensure the AI assistant's safety for users and alignment with ethical guideli
 
 By default, these settings are read-only to prevent errors that could lead to incorrect responses. However, AI engineers can develop new templates that provide information and ethical rules for assistants. To learn how to do this, please refer to [Assistant templates](#assistant-templates).
 
-###### Use template
+##### Use template
 
 You can quickly configure all the necessary settings for an AI assistant by using a template. To apply a template, follow these steps:
 
-1. On the AI assistant details screen, click the **Use template** button in the top right corner.
+1. On the AI assistant details screen, click the **Use AI Assistant template** button in the top right corner.
 
 2. The **Assistant Templates** dialog will appear. Select a template from the list by clicking it.
 
@@ -139,7 +139,7 @@ You can quickly configure all the necessary settings for an AI assistant by usin
 
 3. The template's settings will be applied to your AI assistant. You can then modify them to suit your needs.
 
-###### Manage AI functions
+##### Manage AI functions
 
 On the right side is a table listing the AI functions available to the AI assistant. You can view general information about each function, such as its name, type, description, permissions, and usage.
 
@@ -147,17 +147,17 @@ On the right side is a table listing the AI functions available to the AI assist
 
 You can prevent the AI assistant from using a function by removing it from this table.
 
-When you click the **Add** button, the **Add function** dialog will appear. To add a function, click on the row of the function you want to select, then click **Add** to add the selected functions.
+When you click the **Add AI function** button, the **Add function** dialog will appear. To add a function, click on the row of the function you want to select, then click **Add** to add the selected functions.
 
 ![Add function dialog](doc/img/assistant-details-add-functions.png)
 
 Afterward, the selected functions will appear in the **Functions** table.
 
-###### Save your changes
+##### Save your changes
 
 To apply all the changes you've made to the AI assistant details, please click the **Save** button in the bottom right corner. You will then be redirected to the [AI management](#ai-management) screen.
 
-###### Delete AI assistant
+##### Delete AI assistant
 
 As time goes by, an AI assistant may become obsoleted and you may want to delete it and create a new AI assistant. To do that, please click the **Delete** button placed on the bottom left corner of the AI assistant details page.
 
@@ -167,7 +167,7 @@ A confim dialog will appear, you can delete the AI assistant completely by click
 
 But please aware that, all conversations between the AI assistant and Ivy users will be deleted.
 
-##### Configure AI Models
+#### Configure AI Models
 
 AI Models is a list of model options which a AI assistant can use to perform its functionalities.
 
@@ -176,12 +176,12 @@ AI Models is a list of model options which a AI assistant can use to perform its
 The AI Assistant need 2 AI models to works: a GPT model, and a text embedding model. Therefore, AI Assistant offers 2 tailored options that tested and ready to use:
 
 - Primary OpenAI Model:
-    - GPT model: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
-    - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+  - GPT model: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
+  - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
 - Secondary OpenAI Model
-    - GPT model: [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini)
-    - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+  - GPT model: [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini)
+  - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
 When you clicking on a model item in the AI Models list, you will be redirected to the details page of that model. There you can find more model informations and change the API Key to the OpenAI platform. Your API Key is encrypted and completely secured.
 
@@ -191,7 +191,7 @@ Furthermore, you can test to connection to OpenAI platform by clicking the butto
 
 Once you click the **Save** button, all the settings, including the API Key will be saved as Axon Ivy variables, and you will be redirected to the [AI Management](#ai-management).
 
-##### Manage AI Functions
+#### Manage AI Functions
 
 All AI functions that the logged in user can access are listed in the **AI Functions** section with general information such as name, type, permissions to use the function,and description. There are some reasons why an AI function is non-startable:
 
@@ -203,7 +203,18 @@ All AI functions that the logged in user can access are listed in the **AI Funct
 
 You can also see all non-startable AI functions by toggling the option **Show non-startable AI functions**.
 
-###### Delete AI function
+##### Create AI function
+
+To create a new AI function of type `Knowledge Base`, click the **Create new AI function** button. A creation dialog will appear, prompting you to fill these fields:
+
+- `Name`: The name of the AI function
+- `Description`: A brief description of the AI function
+- `Usage`: Specifies when to use this AI function. The AI model will refer to this field when selecting the most appropriate function to handle a request
+- `Permissions`: Defines which users or roles can access this AI function
+- `Knowledge base`: The knowledge base from which the AI function retrieves information to answer requests
+- `Logical answer structure`: When enabled, responses will be more structured based on the type of question. However, this option may increase response time
+
+##### Delete AI function
 
 You can delete the AI function completely from the AI Assistant by clicking the **Delete** button (has the trash bin icon) placed in the last column of the corresponding row of that AI function. A confirmation dialog will show as below
 
@@ -211,7 +222,57 @@ You can delete the AI function completely from the AI Assistant by clicking the 
 
 Please read the confirmation carefully before delete the AI function. The AI function could be using by some AI assitants, and once you delete it, the AI assistants cannot work on the functions any more, or worser, some errors may arise.
 
-#### Create knowledge bases
+#### Manage knowledge base
+
+In this page, we list out all knowledge bases in a table where you can edit, and configure relevant documents of all knowledge bases. And in this page, you can create a new knowledge base also.
+
+##### Create knowledge base
+
+To begin, click the **Create new knowledge base** button to open the corresponding dialog. Enter the basic information for your knowledge base, including its name and description, and select the target AI model. Then, click **Create new knowledge base** button to complete the process. Along with the knowledge base, the AI Assistant will automatically create a vector store using the same auto-generated ID.
+
+Please select the target AI model cautiously, as the AI Assistant uses its predefined embedding model to generate embedding vectors for documents. Changing the target AI model may result in compatibility issues.
+
+![Create knowledge base](doc/img/create-knowledge-base-dialog.png)
+
+> [!NOTE]
+> Currently, AI Assistant only supports maximum 5 knowledge bases.
+
+##### Delete knowledge base
+
+Click the **Delete** button (represented by a trash bin icon) in the **Actions** column of the corresponding row to delete a knowledge base and its associated vector store. Once you confirm the deletion, the AI Assistant will completely remove the knowledge base, its relevant documents, and the vector store.
+
+##### Configure knowledge base
+
+To manage or add documents, click the **Configure** button (cog icon) in the **Actions** column. This will take you to the **Knowledge Base Configuration** screen.
+
+![Knowledge base configuration](doc/img/knowledge-base-configuration.png)
+
+The **Sources** section is where you upload and select sources for creating documents. The Documents section allows you to manage documents extracted from these sources, including those with the `Draft` status, and documents stored in the vector store with the `Embedded` status.
+
+**Add documents**
+
+Follow these steps to add documents:
+
+1. Upload Sources: Use the Sources section to upload new sources
+
+2. Select Sources: Choose which sources to use for creating documents
+
+3. Create Drafts: Click the **Create draft documents** to create draft documents
+
+4. Review & Edit: In the **Documents** section, review and edit draft documents using the **Edit** button of the corresponding document
+
+5. Add document manually: To manually create a new document, click the **Create new document** button in the **Documents** section. An document dialog will appear which allows you to input content for the document manually
+
+6. Embed Documents: Click **Embed all documents** to create and store embedding vectors
+
+> [!NOTE]
+> Currently, AI Assistant only supports sources type `txt` and `md`.
+
+**Edit document**
+
+AI Assistant allow you to edit both draft and embedded documents. To do so, click the **Edit** button (pencil icon) next to the document you wish to modify. A document dialog will open, allowing you to input new content. Once you've made your changes, click **Save and embed document** to generate a new vector for the document and update it in the vector store.
+
+### Create Portal support knowledge base
 
 AI Assistant allows admin users (with has role `AXONIVY_PORTAL_ADMIN`) to create knowledge bases for use by the AI function of type `Knowledge Base`.
 Simply start the process `Create knowledge base for AI Assistant` and follow the instructions there, you can create create knowledge bases which could be use by `Knowledge Base` functions.
@@ -220,7 +281,7 @@ Simply start the process `Create knowledge base for AI Assistant` and follow the
 
 Currently, you can create knowledge base for 2 types: Portal Support and Others.
 
-##### Knowledge base: Portal Support
+#### Knowledge base: Portal Support
 
 The AI Assistant includes a built-in tool called `Portal support` which can answer questions related to the Axon Ivy Portal.
 
@@ -232,7 +293,7 @@ Then, just simply upload the downloaded file as instructed in [Create knowledge 
 
 After upload the zip file, please wait for some minutes till the the upload panel closed. It may takes some minutes because it takes time for AI Assistant to do the job.
 
-##### Knowledge base: Others
+#### Knowledge base: Others
 
 Before upload other knowledge bases, please keep in mind:
 
@@ -248,9 +309,9 @@ Before upload other knowledge bases, please keep in mind:
 
 After upload the zip file, please wait for some minutes till the the upload panel closed. It may takes some minutes because it takes time for AI Assistant to do the job.
 
-### Developer guide
+## Developer guide
 
-#### Assistant templates
+### Assistant templates
 
 AI assistants provide an approach for developers to predefine templates for AI assistants. To update these templates, you need to modify the JSON file for the Ivy variable`variable.AiAssistant.AssistantTemplates.json` located in the engine folder at `<engine folder>/configuration/applications/<application folder>`.
 
@@ -303,9 +364,9 @@ By default, the AI assistant provides four templates:
 
 - **ICT Assistant**: a template for AI assistants used to troubleshoot IT issues in the back office. This template also doesn't include any tools
 
-#### AI Flow
+### AI Flow
 
-##### Empowering Intelligent Task Automation
+#### Empowering Intelligent Task Automation
 
 To enable AI Assistants to handle complex tasks with sophisticated logic, Axon Ivy introduced **AI Flow** - an advanced AI workflow framework designed to streamline how AI processes and operates.
 
@@ -317,7 +378,7 @@ To enable AI Assistants to handle complex tasks with sophisticated logic, Axon I
 - Manage access to AI functions
 - This framework is built to empower users to design and manage AI workflows effectively, enabling a smarter, more adaptable AI experience.
 
-##### Real world problem
+#### Real world problem
 
 Imagine you want to develop a feature that allows HR employees to easily find information about staff based on criteria like name, date of birth, branch, or position.
 
@@ -327,7 +388,8 @@ However, in the AI era, you want a smarter solution. An AI-powered function can 
 
 That's where AI Flow comes in. It not only speeds up the search process but also helps with tasks like correcting typos and validating illogical data, such as preventing searches for employees with future birthdays!
 
-##### How it works
+#### How it works
+
 AI Flow operates as a workflow framework in the form of JSON. It consists of multiple AI Steps, each of which is linked together based on user-defined configurations.
 
 Basic attributes of an AI Flow:
@@ -361,33 +423,31 @@ Basic attributes of an AI Flow:
 
 - **steps**: Lists the AI Steps that the AI Flow should execute to handle the user's request. Available step types:
 
-   - **Switch**: decision-making element that guide AI in selecting the appropriate next action based on specific conditions.
+  - **Switch**: decision-making element that guide AI in selecting the appropriate next action based on specific conditions.
 
-   - **Ivy Tool**: directs AI to use specific Ivy tools (Ivy callable) in its decision-making process.
+  - **Ivy Tool**: directs AI to use specific Ivy tools (Ivy callable) in its decision-making process.
 
-   - **Text**: display or generate text-based content for user interaction.
+  - **Text**: display or generate text-based content for user interaction.
 
-   - **Re-phrase**: help AI refine user input before executing specific actions or using tools.
+  - **Re-phrase**: help AI refine user input before executing specific actions or using tools.
 
-   - **Trigger Flow**: initiates a new flow within the AI process, either by passing a specific trigger message or using the result of a previous step. This allows for seamless transitions between different workflows and the ability to pass relevant data between them.
+  - **Trigger Flow**: initiates a new flow within the AI process, either by passing a specific trigger message or using the result of a previous step. This allows for seamless transitions between different workflows and the ability to pass relevant data between them.
 
 > [!TIP]
 > To learn more about the AI Steps, please refer to [AI Step](#ai-step)
-
-> [!TIP]
 > To learn how to create your own AI Flow, please refer to [AI Flow Demo](#create-your-own-ai-flow)
 
-##### AI Step
+#### AI Step
 
-###### Attributes
+##### Attributes
 
 - **stepType**: type of step. Valid values:
-   - IVY_TOOL: [Ivy tool step](#ivy-tool-step).
-   - SWITCH: [Switch step](#switch-step).
-   - TEXT: [Text step](#text-step).
-   - RE_PHRASE: [Rephrase step](#re-phrase-step).
-   - TRIGGER_FLOW: [Trigger flow step](#trigger-flow-step).
-   - KNOWLEDGE_BASE: [Knowledge base step](#knowledge-base-step)
+  - IVY_TOOL: [Ivy tool step](#ivy-tool-step).
+  - SWITCH: [Switch step](#switch-step).
+  - TEXT: [Text step](#text-step).
+  - RE_PHRASE: [Rephrase step](#re-phrase-step).
+  - TRIGGER_FLOW: [Trigger flow step](#trigger-flow-step).
+  - KNOWLEDGE_BASE: [Knowledge base step](#knowledge-base-step)
 
 - **stepNo**: Number of step in the flow.
 
@@ -403,7 +463,7 @@ Basic attributes of an AI Flow:
 
 - **customInstruction**: instruction for a specific requirement for AI.
 
-##### Switch step
+#### Switch step
 
 The **Switch step** is a decision-making element designed to guide AI in selecting the appropriate next action based on specific conditions. It functions by evaluating a list of predefined cases, each representing a potential scenario the AI might encounter. Based on the case that matches the current situation, the AI chooses the corresponding action to take.
 
@@ -423,7 +483,7 @@ In the provided structure, the AI examines the case descriptions within the list
 }
 ```
 
-##### Ivy tool step
+#### Ivy tool step
 
 The **Ivy tool step** is a specialized instruction mechanism that directs AI to use specific tools or functions in its decision-making process. This step ensures that the AI interacts with predefined tools (referred to by their toolId) and executes tasks according to the defined conditions and custom instructions. It enables the AI to perform specialized actions and provides flexibility through optional parameters such as success, error handling, and custom instructions.
 
@@ -452,7 +512,7 @@ The **Ivy tool step** is a specialized instruction mechanism that directs AI to 
 }
 ```
 
-##### Text step
+#### Text step
 
 The **Text Step** is a crucial component in AI workflows designed to display or generate text-based content for user interaction. Depending on its configuration, the Text Step can show fixed messages, AI-generated content, results of prior steps, or even hidden messages for internal AI processing. This flexibility enables the AI to communicate effectively with users while guiding decision-making processes.
 
@@ -540,15 +600,15 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
 }
 ```
 
-##### Re-phrase step
+#### Re-phrase step
 
 The **Rephrase step** is designed to help AI refine user input before executing specific actions or using tools. This is particularly useful when the user's message is vague, incomplete, or not structured in a way that the AI can immediately process. By rephrasing the input, the AI ensures that the information is more precise, making it easier to use with target tools or functions.
 
 - **toolId**: Refers to the tool the AI will use as the target. AI should use JSON schema of the corresponding tool to rephrase the message. By defining this attribute, you ensures that the rephrased input is compatible with the tool’s requirements.
-    - Example:
-        - user input “find my sick leave task”
-        - You have a tool to find task by name, description, priority,… but user didn’t tell you that which field he want to use. Therefore you should rephrase the message before use it with the ivy tool.
-        - → find task with name ‘sick leave’
+  - Example:
+    - user input “find my sick leave task”
+    - You have a tool to find task by name, description, priority,… but user didn’t tell you that which field he want to use. Therefore you should rephrase the message before use it with the ivy tool.
+    - → find task with name ‘sick leave’
 
 - **customInstruction**: Provides specific guidelines for how the AI should rephrase the message. This helps the AI handle particular cases such as abstract terms or dates, formatting them into more useful data.
 
@@ -557,8 +617,8 @@ The **Rephrase step** is designed to help AI refine user input before executing 
 - **onSuccess**: Specifies the step to run if the AI does not need to rephrase the message.
 
 - **examples**: A list of predefined examples that guide the AI in understanding how to rephrase user messages. Each example consists of:
-    - **before**: The original, unstructured message from the user.
-    - **after**: The rephrased message that the AI would generate for better clarity and actionability
+  - **before**: The original, unstructured message from the user.
+  - **after**: The rephrased message that the AI would generate for better clarity and actionability
 
 ```json
 {
@@ -586,7 +646,7 @@ The **Rephrase step** is designed to help AI refine user input before executing 
 }
 ```
 
-##### Trigger flow step
+#### Trigger flow step
 
 The **Trigger flow step** initiates a new flow within the AI process, either by passing a specific trigger message or using the result of a previous step. This allows for seamless transitions between different workflows and the ability to pass relevant data between them.
 
@@ -618,7 +678,8 @@ The **Trigger flow step** initiates a new flow within the AI process, either by 
     "useConversationMemory": false
 }
 ```
-##### Knowledge base step
+
+#### Knowledge base step
 
 When working on a step, users may have questions that aren't directly related to the workflow. For instance, if a user is unable to delegate a task, they might want to know why delegation isn't possible. The **Knowledge Base** step is designed to help users quickly find answers to such questions.
 
@@ -634,9 +695,9 @@ When working on a step, users may have questions that aren't directly related to
 }
 ```
 
-##### AI Result DTO
+#### AI Result DTO
 
-###### Introduction
+##### Introduction
 
 The Result DTO ensures that the AI Assistant provides reliable and consistent results by adhering to a standardized structure for all outputs, promoting efficiency and clarity across AI interactions.
 
@@ -651,7 +712,7 @@ The Result DTO ensures that the AI Assistant provides reliable and consistent re
 | resultForAI | String | result for AI model |
 | state | com.axonivy.portal.components.enums.AIState | state of the result (DONE, ERROR) |
 
-#### Create your own AI Flow
+### Create your own AI Flow
 
 In this section, we will explain how to develop your own AI Flow using the [Real world problem](#real-world-problem) as a use case.
 
@@ -713,16 +774,18 @@ The output result of the Ivy Callable process must be an object has name `result
 
 > [!IMPORTANT]
 > Please keep in mind:
+>
 > - the name of the attributes must be same as name of parameters of the callable process above.
 > - `signature` attribute in the JSON object is the signature of the callable process.
 
 4. In the variable file **AiFunctions.json** add an AI Flow to handle the request to find employees from user.
 
 This is an example of a simple AI Flow with 4 steps:
+
 - Step 0: Rephrase the request of user to make it align with the Ivy tool `find-employees-info`
 - Step 1: Call the Ivy Tool, using the rephrased request at **Step 0** as input
-    - If has error or cannot find any employee matched the request, show an error (**Step 2**)
-    - If success: Show the result (**Step 3**)
+  - If has error or cannot find any employee matched the request, show an error (**Step 2**)
+  - If success: Show the result (**Step 3**)
 - Step 2: Show an message to user then end the flow.
 - Step 3: Show information of found employees in a well-structured format then end the flow.
 
