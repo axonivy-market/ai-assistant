@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -125,17 +124,18 @@ public class KnowledgeBaseConfigurationBean implements Serializable {
       return;
     }
 
-    List<String> selectedDocuments = uploadedSources.entrySet().stream()
-        .filter(source -> selectedSources.contains(source.getKey()))
-        .map(Entry::getValue).collect(Collectors.toList());
+    for (String selectedSource : selectedSources) {
+      String selectedDocument = uploadedSources.entrySet().stream()
+          .filter(source -> selectedSource.contentEquals(source.getKey()))
+          .map(Entry::getValue).findFirst().orElseGet(() -> StringUtils.EMPTY);
 
-    for (String selectedDocument : selectedDocuments) {
       if (!selectedDocument.isBlank()) {
         List<String> splittedDocuments = TextSplitter
             .splitDocumentByParagraph(selectedDocument);
         
         for (String splitted : splittedDocuments) {
-          EmbeddingDocument newDoc = EmbeddingDocument.create(splitted);
+          EmbeddingDocument newDoc = EmbeddingDocument.create(splitted,
+              selectedSource);
 
           if (knowledgeBase.getDocuments() == null) {
             knowledgeBase.setDocuments(new ArrayList<>());
@@ -173,8 +173,8 @@ public class KnowledgeBaseConfigurationBean implements Serializable {
   public void updateDocument() {
     if (StringUtils.isBlank(selectedDocument.getId())) {
       knowledgeBase.createEmbeddingDocument(selectedDocument);
-      knowledgeBase.getDocuments().add(selectedDocument);
     } else {
+      selectedDocument.setSourceFile(StringUtils.EMPTY);
       knowledgeBase.updateEmbeddingDocument(selectedDocument);
     }
   }
@@ -185,7 +185,8 @@ public class KnowledgeBaseConfigurationBean implements Serializable {
   }
 
   public void onCreateNewDocument() {
-    selectedDocument = EmbeddingDocument.create(StringUtils.EMPTY);
+    selectedDocument = EmbeddingDocument.create(StringUtils.EMPTY,
+        StringUtils.EMPTY);
   }
 
   private void showError(String error) {
@@ -199,11 +200,11 @@ public class KnowledgeBaseConfigurationBean implements Serializable {
         .findFirst().isPresent()) {
       PrimeFaces.current().executeScript("PF('close-confirm-dialog').show();");
     } else {
-      novigateToAiManagement();
+      navigateToAiManagement();
     }
   }
 
-  public void novigateToAiManagement() {
+  public void navigateToAiManagement() {
     AiNavigator.navigateToAIManagement();
   }
 

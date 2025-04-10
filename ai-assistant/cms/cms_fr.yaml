@@ -97,13 +97,18 @@ Dialogs:
               AddSource: Ajouter une autre source...
               CreateDraftDocuments: Créer des documents brouillons
               CreateNewDocument: Créer un nouveau document
+              DiscardDraftDocumentMessage: Tous les documents brouillons seront perdus. Êtes-vous sûr de vouloir quitter cette page ?
               EmbedAllDocuments: Intégrer tous les documents
               KnowledgeBase: |+
                 Configuration de la Base de Connaissances
 
+              LeaveThisPage: |+
+                Quitter cette page ?
+
               NewKnowledge: Nouvelle Base de Connaissances
               SaveAndEmbedDocument: Enregistrer et intégrer le document
               SelectedSourcesInfo: '{0} source(s) sont sélectionnées.'
+              SourceFile: Fichier source
               Sources: Sources
               TextSegmentDetails: Détails du segment de texte
               ToUploadSources: 'Pour télécharger des sources de documents, glissez-déposez ou '

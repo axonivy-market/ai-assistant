@@ -20,6 +20,7 @@ public class EmbeddingDocument {
   private int dimensions;
   private Date createdDate;
   private Date lastModifiedDate;
+  private String sourceFile;
 
   @JsonIgnore
   private String documentId;
@@ -91,12 +92,21 @@ public class EmbeddingDocument {
     this.documentId = documentId;
   }
 
-  public static EmbeddingDocument create(String text) {
+  public String getSourceFile() {
+    return sourceFile;
+  }
+
+  public void setSourceFile(String sourceFile) {
+    this.sourceFile = sourceFile;
+  }
+
+  public static EmbeddingDocument create(String text, String sourceFileName) {
     EmbeddingDocument doc = new EmbeddingDocument();
     doc.setDocumentId(
         UUID.randomUUID().toString().replace("-", StringUtils.EMPTY));
 
     doc.setText(text);
+    doc.setSourceFile(sourceFileName);
     doc.setCreatedDate(new Date());
     doc.setLastModifiedDate(new Date());
     return doc;

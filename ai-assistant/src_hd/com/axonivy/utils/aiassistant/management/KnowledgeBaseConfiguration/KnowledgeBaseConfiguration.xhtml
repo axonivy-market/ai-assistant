@@ -76,6 +76,12 @@
                      filterable="true" filterBy="#{doc.text}" filterMatchMode="contains" >
                      <h:outputText value="#{doc.text}" />
                    </p:column>
+                   <p:column headerText="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/SourceFile')}"
+                     width="150" styleClass="white-space-nowrap text-overflow-ellipsis"
+                     sortable="true" sortBy="#{doc.sourceFile}"
+                     filterable="true" filterBy="#{doc.sourceFile}">
+                     <h:outputText value="#{doc.sourceFile}" />
+                   </p:column>
                    <p:column headerText="#{ivy.cms.co('/Labels/Status')}" width="120" styleClass="text-center"
                      sortable="true" sortBy="#{ivy.cms.co(doc.status.cmsLabel)}"
                      filterable="true" filterBy="#{ivy.cms.co(doc.status.cmsLabel)}">
@@ -115,23 +121,23 @@
         </div>
         
         <div class="w-full mt-3 flex justify-content-end">
-          <p:commandLink id="close-link" actionListener="#{knowledgeBaseConfigurationBean.onClose}" value="Close" styleClass="" />
+          <p:commandLink id="close-link" actionListener="#{knowledgeBaseConfigurationBean.onClose}"
+            value="#{ivy.cms.co('/Labels/common/Close')}"/>
 
           <ui:decorate template="/layouts/decorator/dialog-with-icon.xhtml">
             <ui:param name="id" value="close-confirm-dialog" />
             <ui:param name="widgetVar" value="close-confirm-dialog" />
             <ui:param name="appendTo" value="@(body)" />
             <ui:param name="iconClass" value="si si-road-sign-warning" />
-            <ui:param name="dynamic" value="true" />
             <ui:param name="iconStyleClass" value="portal-dialog-warning-icon portal-dialog-icon" />
-            <ui:param name="headerText" value="Leave this page?" />
-            <ui:param name="dialogContent" value="All draft documents will be lost. Are you sure you want to leave this page?" />
+            <ui:param name="headerText" value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/LeaveThisPage')}" />
+            <ui:param name="dialogContent" value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/DiscardDraftDocumentMessage')}" />
 
             <ui:define name="dialogFooter">
               <p:link href="#" value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/No')}"
                 onclick="PF('close-confirm-dialog').hide();" styleClass="u-mar-right-15" />
               <p:commandButton value="#{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/Yes')}"
-                onclick="click" actionListener="#{knowledgeBaseConfigurationBean.novigateToAiManagement}" ajax="false" />
+                actionListener="#{knowledgeBaseConfigurationBean.navigateToAiManagement}" />
             </ui:define>
           </ui:decorate>
         </div>

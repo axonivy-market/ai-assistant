@@ -104,11 +104,16 @@ Dialogs:
               AddSource: Füge eine weitere Quelle hinzu...
               CreateDraftDocuments: Erstelle Entwurfsdokumente
               CreateNewDocument: Erstelle ein neues Dokument
+              DiscardDraftDocumentMessage: |+
+                Alle Entwurfsdokumente gehen verloren. Bist du sicher, dass du diese Seite verlassen möchtest?
+
               EmbedAllDocuments: Betten Sie alle Dokumente ein
               KnowledgeBase: Wissensdatenbank-Konfiguration
+              LeaveThisPage: Diese Seite verlassen?
               NewKnowledge: Neue Wissensdatenbank
               SaveAndEmbedDocument: Speichere und bette das Dokument ein
               SelectedSourcesInfo: '{0} Quelle(n) sind ausgewählt.'
+              SourceFile: Quelldatei
               Sources: Quellen
               TextSegmentDetails: Details zum Textsegment
               ToUploadSources: 'Um Dokumentquellen hochzuladen, zieh sie per Drag & Drop oder '

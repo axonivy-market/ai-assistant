@@ -129,11 +129,23 @@ Dialogs:
               AddSource: Agregar otra fuente...
               CreateDraftDocuments: Crear documentos borrador
               CreateNewDocument: Crear un nuevo documento
+              DiscardDraftDocumentMessage: |+
+                Todos los documentos borrador se perderán. ¿Estás seguro de que deseas salir de esta página?
+
+
+
+
+
+
+
+
               EmbedAllDocuments: Integrar todos los documentos
               KnowledgeBase: Configuración de la Base de Conocimientos
+              LeaveThisPage: ¿Salir de esta página?
               NewKnowledge: Nueva Base de Conocimientos
               SaveAndEmbedDocument: Guardar e integrar el documento
               SelectedSourcesInfo: '{0} fuente(s) seleccionada(s).'
+              SourceFile: Archivo fuente
               Sources: Fuentes
               TextSegmentDetails: Detalles del segmento de texto
               ToUploadSources: 'Para cargar fuentes de documentos, arrastra y suelta o '

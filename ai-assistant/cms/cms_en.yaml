@@ -94,11 +94,14 @@ Dialogs:
               AddSource: Add more source...
               CreateDraftDocuments: Create draft documents
               CreateNewDocument: Create new document
+              DiscardDraftDocumentMessage: All draft documents will be lost. Are you sure you want to leave this page?
               EmbedAllDocuments: Embed all documents
               KnowledgeBase: Knowledge Base Configuration
+              LeaveThisPage: Leave this page?
               NewKnowledge: New Knowledge Base
               SaveAndEmbedDocument: Save and embed document
               SelectedSourcesInfo: '{0} source(s) are selected.'
+              SourceFile: Source file
               Sources: Sources
               TextSegmentDetails: Text segment details
               ToUploadSources: 'To upload document sources, drag & drop or '
