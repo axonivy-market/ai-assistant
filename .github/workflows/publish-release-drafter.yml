@@ -6,6 +6,20 @@ on:
     types:
       - completed
 
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+  discussions: write
+  pages: write
+
 jobs:
   publish_release_drafter:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -25,6 +39,15 @@ jobs:
     # - publish: (optional) Controls whether the release is published automatically.
     #            Defaults to 'true'. Set to 'false' to create a draft release 
     #            without immediate publication.
+    #
+    # Note: Both 'tag' and 'commitish' are configured to run with sensible defaults,
+    #       so manual input is not required unless custom values are needed.
+    #
+    # Uncomment and modify the inputs as needed:
+    # with:
+    #   tag: v10.0.0
+    #   commitish: release/10.0
+    #   publish: false
     #
     # Note: Both 'tag' and 'commitish' are configured to run with sensible defaults,
     #       so manual input is not required unless custom values are needed.
