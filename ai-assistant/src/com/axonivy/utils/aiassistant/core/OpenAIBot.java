@@ -31,18 +31,18 @@ import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.input.PromptTemplate;
-import dev.langchain4j.model.openaiofficial.OpenAiOfficialChatModel;
-import dev.langchain4j.model.openaiofficial.OpenAiOfficialEmbeddingModel;
-import dev.langchain4j.model.openaiofficial.OpenAiOfficialStreamingChatModel;
+import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
+import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 
 public class OpenAIBot extends AbstractAIBot {
 
   private String modelName;
   private String embeddingModelName;
-  private OpenAiOfficialChatModel model;
-  private OpenAiOfficialStreamingChatModel chatModel;
-  private OpenAiOfficialEmbeddingModel embeddingModel;
+  private OpenAiChatModel model;
+  private OpenAiStreamingChatModel chatModel;
+  private OpenAiEmbeddingModel embeddingModel;
   private String apiKey;
 
   public OpenAIBot(AiModel aiModel) {
@@ -82,47 +82,47 @@ public class OpenAIBot extends AbstractAIBot {
     this.embeddingModelName = embeddingModelName;
   }
 
-  public OpenAiOfficialChatModel getModel() {
+  public OpenAiChatModel getModel() {
     return model;
   }
 
-  public void setModel(OpenAiOfficialChatModel model) {
+  public void setModel(OpenAiChatModel model) {
     this.model = model;
   }
 
-  public OpenAiOfficialStreamingChatModel getChatModel() {
+  public OpenAiStreamingChatModel getChatModel() {
     return chatModel;
   }
 
-  public void setChatModel(OpenAiOfficialStreamingChatModel chatModel) {
+  public void setChatModel(OpenAiStreamingChatModel chatModel) {
     this.chatModel = chatModel;
   }
 
-  public OpenAiOfficialEmbeddingModel getEmbeddingModel() {
+  public OpenAiEmbeddingModel getEmbeddingModel() {
     return embeddingModel;
   }
 
-  public void setEmbeddingModel(OpenAiOfficialEmbeddingModel embeddingModel) {
+  public void setEmbeddingModel(OpenAiEmbeddingModel embeddingModel) {
     this.embeddingModel = embeddingModel;
   }
 
   @Override
   public void initModel() {
     setModel(
-        OpenAiOfficialChatModel.builder().apiKey(apiKey).modelName(modelName)
+        OpenAiChatModel.builder().apiKey(apiKey).modelName(modelName)
             .temperature(Double.valueOf(0)).build());
   }
 
   @Override
   public void initEmbeddingModel() {
-    setEmbeddingModel(OpenAiOfficialEmbeddingModel.builder().apiKey(apiKey)
+    setEmbeddingModel(OpenAiEmbeddingModel.builder().apiKey(apiKey)
         .modelName(embeddingModelName)
         .dimensions(DEFAULT_DIMENSIONS).build());
   }
 
   @Override
   public void initStreamingChatModel() {
-    setChatModel(OpenAiOfficialStreamingChatModel.builder().apiKey(apiKey)
+    setChatModel(OpenAiStreamingChatModel.builder().apiKey(apiKey)
         .modelName(modelName).temperature(Double.valueOf(0)).build());
   }
 

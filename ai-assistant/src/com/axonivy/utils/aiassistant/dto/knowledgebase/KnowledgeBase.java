@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ch.ivyteam.ivy.environment.Ivy;
-import dev.langchain4j.model.openaiofficial.OpenAiOfficialEmbeddingModel;
+import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class KnowledgeBase extends AbstractConfiguration implements Serializable {
@@ -38,7 +38,7 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
   private IvyOpenSearchEmbeddingStore embeddingStore;
 
   @JsonIgnore
-  private OpenAiOfficialEmbeddingModel embeddingModel;
+  private OpenAiEmbeddingModel embeddingModel;
 
   @JsonIgnore
   private List<EmbeddingDocument> documents;
@@ -203,9 +203,9 @@ public class KnowledgeBase extends AbstractConfiguration implements Serializable
     }
   }
 
-  private OpenAiOfficialEmbeddingModel getEmbeddingModel() {
+  private OpenAiEmbeddingModel getEmbeddingModel() {
     if (embeddingModel == null) {
-      embeddingModel = (OpenAiOfficialEmbeddingModel.builder()
+      embeddingModel = (OpenAiEmbeddingModel.builder()
           .apiKey(aiModel.getApiKey()).modelName(embeddingModelName)
           .dimensions(AiConstants.DEFAULT_DIMENSIONS)
           .build());
