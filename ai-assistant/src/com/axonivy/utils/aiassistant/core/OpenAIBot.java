@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -24,12 +26,10 @@ import com.axonivy.utils.aiassistant.enums.ModelType;
 import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 
 import ch.ivyteam.ivy.environment.Ivy;
-import dev.langchain4j.data.document.Metadata;
 import dev.langchain4j.data.embedding.Embedding;
-import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.model.StreamingResponseHandler;
+import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.input.PromptTemplate;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
@@ -122,7 +122,8 @@ public class OpenAIBot extends AbstractAIBot {
 
   @Override
   public void initStreamingChatModel() {
-    setChatModel(OpenAiStreamingChatModel.builder().apiKey(apiKey).modelName(modelName).temperature(Double.valueOf(0)).build());
+    setChatModel(OpenAiStreamingChatModel.builder().apiKey(apiKey)
+        .modelName(modelName).temperature(Double.valueOf(0)).build());
   }
 
   @Override
@@ -154,38 +155,33 @@ public class OpenAIBot extends AbstractAIBot {
     Ivy.log().info("Recreate index " + collectionName);
     initEmbeddingStore(collectionName);
 
-    try {
-      getEmbeddingStore().createIndexIfNotExist(DEFAULT_DIMENSIONS);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    getEmbeddingStore().createIndexIfNotExist(DEFAULT_DIMENSIONS);
 
     Ivy.log().info("Start embed vector store");
 
     List<EmbeddingDocument> embeddings = new ArrayList<>();
     for (TextSegment segment : textSegments) {
       EmbeddingDocument doc = new EmbeddingDocument();
-      doc.setMetadata(segment.metadata().toMap());
+
+      Map<String, String> newMetadata = new HashMap<>();
+      for (Entry<String, Object> entry : segment.metadata().toMap()
+          .entrySet()) {
+        newMetadata.put(entry.getKey(), entry.getValue().toString());
+      }
       doc.setText(segment.text());
       doc.setVector(getEmbeddingModel().embed(segment).content().vector());
       embeddings.add(doc);
     }
 
-    try {
-      getEmbeddingStore().bulkIndex(collectionName, embeddings);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    getEmbeddingStore().bulkAddNewDocuments(embeddings);
     Ivy.log().info("End embed vector store");
   }
 
   @Override
   public String chat(Map<String, Object> variables, String promptTemplate) {
     try {
-      return getModel().generate(
-          PromptTemplate.from(promptTemplate).apply(variables).text());
+      return getModel()
+          .chat(PromptTemplate.from(promptTemplate).apply(variables).text());
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);
@@ -196,7 +192,7 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String chat(String message) {
     try {
-      return getModel().generate(message);
+      return getModel().chat(message);
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);
@@ -206,9 +202,9 @@ public class OpenAIBot extends AbstractAIBot {
 
   @Override
   public String streamChat(Map<String, Object> variables, String promptTemplate,
-      StreamingResponseHandler<AiMessage> handler) {
+      StreamingChatResponseHandler handler) {
     try {
-      getChatModel().generate(
+      getChatModel().chat(
           PromptTemplate.from(promptTemplate).apply(variables).text(),
           handler);
     } catch (Exception e) {
@@ -239,7 +235,7 @@ public class OpenAIBot extends AbstractAIBot {
   @Override
   public String testConnection() {
     try {
-      getModel().generate(Arrays.asList(new UserMessage("hello")));
+      getModel().chat(Arrays.asList(new UserMessage("hello")));
     } catch (Exception e) {
       OpenAIErrorResponse error = BusinessEntityConverter.jsonValueToEntity(
           e.getCause().getMessage(), OpenAIErrorResponse.class);
@@ -255,7 +251,7 @@ public class OpenAIBot extends AbstractAIBot {
     } catch (Exception e) {
       return e.getCause().getMessage();
     }
-    return getEmbeddingStore().isIndexActive();
+    return getEmbeddingStore().getIndexStatus();
   }
 
   private List<EmbeddingMatch<TextSegment>> toEmbeddingMatch(
@@ -265,8 +261,7 @@ public class OpenAIBot extends AbstractAIBot {
             .map(document -> new EmbeddingMatch<>(hit.score(), hit.id(),
                 new Embedding(document.getVector()),
                 document.getText() == null ? null
-                    : TextSegment.from(document.getText(),
-                        new Metadata(document.getMetadata()))))
+                    : TextSegment.from(document.getText())))
             .orElse(null))
         .collect(toList());
   }

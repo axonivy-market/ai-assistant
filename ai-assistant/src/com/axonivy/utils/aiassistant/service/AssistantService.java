@@ -2,6 +2,7 @@ package com.axonivy.utils.aiassistant.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -82,7 +83,8 @@ public class AssistantService extends JsonConfigurationService<Assistant> {
     List<Assistant> result = new ArrayList<>();
 
     findAll().forEach(assistant -> {
-      if (assistant.getTools().stream()
+      if (Optional.ofNullable(assistant).map(Assistant::getTools)
+          .orElseGet(() -> new ArrayList<>()).stream()
           .filter(tool -> tool.contentEquals(functionId)).count() > 0) {
         result.add(assistant);
       }

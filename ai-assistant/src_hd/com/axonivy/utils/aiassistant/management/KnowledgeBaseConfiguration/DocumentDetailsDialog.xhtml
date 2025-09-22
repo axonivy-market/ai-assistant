@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<p:dialog id="document-details-dialog" widgetVar="document-details-dialog"
+  appendTo="@(body)" closeOnEscape="true" draggable="false"
+  fitViewport="true" responsive="true" modal="true" styleClass="max-h-screen"
+  width="650" onShow="PF('document-details-dialog').initPosition();"
+  header="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/TextSegmentDetails')}">
+  <h:form id="document-details-form" styleClass="grid">
+    <div class="col-12">
+      <p:messages id="document-details-messages" />
+    </div>
+    <div class="col-12">
+      <p:outputLabel for="@next" styleClass="font-semibold" value="#{ivy.cms.co('/Labels/Content')}" />
+    </div>
+    <div class="col-12">
+      <p:inputTextarea value="#{knowledgeBaseConfigurationBean.selectedDocument.text}"
+        styleClass="w-full" required="true"
+        onchange="PF('document-details-dialog').initPosition();"
+        requiredMessage="#{ivy.cms.co('/Labels/Content')}: #{ivy.cms.co('/Dialogs/com/axonivy/portal/components/Common/RequiredFieldMessage')}" />
+    </div>
+  </h:form>
+
+  <f:facet name="footer">
+    <h:panelGroup layout="block" styleClass="text-right">
+      <p:commandButton id="save-button" styleClass="w-full"
+        value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/SaveAndEmbedDocument')}"
+        actionListener="#{knowledgeBaseConfigurationBean.updateDocument}"
+        process="document-details-form"
+        update="document-details-form documents-form"
+        partialSubmit="true"
+        oncomplete="if (args &amp;&amp; !args.validationFailed) {PF('document-details-dialog').hide();}" />
+    </h:panelGroup>
+  </f:facet>
+</p:dialog>
+</html>

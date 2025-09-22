@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.axonivy.utils.aiassistant</groupId>
   <artifactId>ai-assistant-demo</artifactId>
@@ -12,7 +13,7 @@
     <dependency>
       <groupId>com.axonivy.portal</groupId>
       <artifactId>portal-components</artifactId>
-      <version>12.0.0</version>
+      <version>12.0.9</version>
       <type>iar</type>
     </dependency>
   </dependencies>
@@ -24,6 +25,16 @@
     <repository>
       <id>snapshots-nexus-axonivy-repo</id>
       <url>https://nexus.axonivy.com/repository/maven-snapshots/</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>maven.axonivy.com</id>
+      <url>https://maven.axonivy.com</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -40,7 +51,7 @@
       <plugin>
         <groupId>com.axonivy.ivy.ci</groupId>
         <artifactId>project-build-plugin</artifactId>
-        <version>12.0.0</version>
+        <version>12.0.8</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>

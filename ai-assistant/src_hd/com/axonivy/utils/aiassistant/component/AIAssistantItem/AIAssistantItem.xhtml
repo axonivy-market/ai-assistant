@@ -17,7 +17,7 @@
 
 <cc:implementation>
   <c:set var="assistant" value="#{cc.attrs.assistant}" />
-  <h:panelGroup styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'}">
+  <h:panelGroup styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'} align-content-center align-items-center">
     <h:panelGroup layout="block" styleClass="ui-g-3 ui-xl-2 avatar-container" rendered="#{not empty assistant.avatarLocation}">
       <p:graphicImage name="#{assistant.avatarLocation}" alt="#{assistant.name}" library="ivy-cms"
         width="80" height="80" styleClass="ai-assistant-avatar" />

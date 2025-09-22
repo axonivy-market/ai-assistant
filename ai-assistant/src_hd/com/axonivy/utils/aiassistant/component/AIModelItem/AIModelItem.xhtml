@@ -13,23 +13,25 @@
   <cc:attribute name="model" />
   <cc:attribute name="clickEventListener" />
   <cc:attribute name="isReadOnly" default="false" />
+  <cc:attribute name="avatarWidth" default="80" />
+  <cc:attribute name="avatarHeight" default="80" />
 </cc:interface>
 
 <cc:implementation>
   <c:set var="model" value="#{cc.attrs.model}" />
-  <h:panelGroup id="model-item-panel" styleClass="ui-g card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'}">
-    <h:panelGroup layout="block" styleClass="ui-g-3 ui-xl-2 avatar-container">
+  <h:panelGroup id="model-item-panel" styleClass="flex w-full card ai-assistant-card #{cc.attrs.isReadOnly ? '' : 'active'} align-content-center align-items-center">
+    <h:panelGroup layout="block" styleClass="flex w-10rem justify-content-center flex-wrap align-items-center avatar-container">
       <p:graphicImage name="#{model.modelType.logoCms}" alt="#{model.name}" library="ivy-cms"
-        width="80" height="80" styleClass="ai-assistant-avatar" rendered="#{ivyFreyaTheme.mode eq 'light'}" />
+        width="#{cc.attrs.avatarWidth}" height="#{cc.attrs.avatarHeight}" styleClass="ai-assistant-avatar" rendered="#{ivyFreyaTheme.mode eq 'light'}" />
       <p:graphicImage name="#{model.modelType.darkLogoCms}" alt="#{model.name}" library="ivy-cms"
-        width="80" height="80" styleClass="ai-assistant-avatar" rendered="#{ivyFreyaTheme.mode ne 'light'}" />
+        width="#{cc.attrs.avatarWidth}" height="#{cc.attrs.avatarHeight}" styleClass="ai-assistant-avatar" rendered="#{ivyFreyaTheme.mode ne 'light'}" />
     </h:panelGroup>
-    <div class="ui-g-9 ui-xl-10 ui-g">
-      <div class="ui-g-12 assistant-name">
+    <div class="grid flex-auto">
+      <div class="col-12 assistant-name mt-3">
         <h:outputText id="model-name" styleClass="name" value="#{model.displayName}" />
         <p:tooltip for="model-name" trackMouse="true" value="#{model.displayName}" />
       </div>
-      <div class="ui-g-12 ai-assistant-info u-no-padding-top">
+      <div class="col-12 ai-assistant-info p-0">
         <ul>
           <li>#{ivy.cms.co('/Labels/common/Model')}: #{model.model}</li>
           <li>#{ivy.cms.co('/Labels/common/EmbeddingModel')}: #{model.embeddingModel}</li>

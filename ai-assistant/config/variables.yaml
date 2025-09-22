@@ -29,3 +29,6 @@ Variables:
     Suggestions:
     # [file: json]
     AssistantTemplates:
+    # [file: json]
+    # NEVER change this variable. Knowledge bases need to be configure on the UI to interact with vector store correctly.
+    KnowledgeBases:
