@@ -7,9 +7,16 @@ on:
     - cron:  '21 21 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: write
+  actions: write
+  checks: write
+
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v5
+    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
     with:
       javaVersion: 21
       mvnVersion: 3.9.8

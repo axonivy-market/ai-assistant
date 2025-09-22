@@ -4,13 +4,24 @@ on:
   push:
     branches:
       - master
+      - release/*
   pull_request:
     types: [opened, reopened, synchronize]
 
 permissions:
+  actions: write
+  checks: write
   contents: write
+  deployments: write
+  issues: write
+  packages: write
   pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+  discussions: write
+  pages: write
 
 jobs:
-  build:
-    uses: axonivy-market/github-workflows/.github/workflows/release-drafter.yml@v5
+  release_drafter:
+    uses: axonivy-market/github-workflows/.github/workflows/release-drafter.yml@v6

@@ -2,6 +2,9 @@ name: Release-Build
 
 on: workflow_dispatch
 
+permissions:
+  contents: write
+
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/release.yml@v5
+    uses: axonivy-market/github-workflows/.github/workflows/release.yml@v6
