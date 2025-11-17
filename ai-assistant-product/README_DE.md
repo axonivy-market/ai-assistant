@@ -1,380 +1,408 @@
-# AI Assistant
+# AI Assistent
 
-The AI Assistant is a powerful tool designed to streamline your daily work
-within the portal. Acting as your personal assistant, it provides seamless
-support for a wide range of tasks, from navigating documentation to launching
-processes and managing tasks and cases. With the AI Assistant at your side, you
-can work more efficiently and effectively, freeing up valuable time for what
-truly matters. Engage in a more interactive and intuitive workflow by conversing
-with the assistant about your processes instead of merely executing them. This
-dynamic interaction enhances your experience, allowing you to explore options
-and gain insights as you work. With multilingual capabilities, the AI Assistant
-communicates effortlessly in English, German, Spanish, and more, ensuring you
-receive support in your preferred language.
+Das AI Assistent ist ein kraftvolles Tool gestaltet zu #windschlüpfig machen
+eure tägliche Arbeit innerhalb das Portal. Tätig da eurem persönlichen
+Assistenten, es versieht nahtlose Unterstützung für einen weiten Bereich von
+Tasks, von befahren Dokumentation zu ausstoßen Arbeitsgänge und #regelnd Tasks
+und Fälle. Mit das AI Assistent an eurem Hang, du kannst arbeiten #mehr genügend
+und effektiv, #freilassen oben kostbar Zeit für was wahrlich bedeutet. Verlob in
+einer More interaktiv und intuitiv workflow bei #konversieren mit dem
+Assistenten von eure Arbeitsgänge statt lediglich exekutieren jene. Diese
+dynamische Interaktion erweitert eure Erfahrung, erlaubend du zu erkunden
+Optionen und gewinnen Einblicke da du arbeitest. Mit mehrsprachig Fähigkeiten,
+die AI Assistent kommuniziert mühelos auf Englisch, Deutsch, spanisch, und More,
+sichernd du empfängst Unterstützung in eurer #vorzugsberechtigt Sprache.
 
-![Chat Dashboad](doc/img/chat-dashboard.png)
+![Plauder Dashboad](doc/img/chat-dashboard.png)
 
-Beyond providing immediate assistance, the AI Assistant empowers you to create
-and manage custom models and assistants tailored to your unique needs. With the
-management overview feature, designing, configuring, and organizing these models
-is a breeze. You can craft personalized assistants, assign specific behaviors,
-or leverage predefined templates to guide their actions. This level of
-customization ensures that your AI Assistant aligns perfectly with your
-preferences and work style. Embrace the future of work with the AI Assistant,
-your personalized companion for enhanced productivity and seamless task
-management.
+Jenseits versehen sofortige Hilfe, die AI Assistent ermächtigt du zu schaffen
+und fertigbringen #benutzerdefiniert Models und Assistenten schneiderten zu
+euren einmaligen Notwendigkeiten. Mit den Management Überblick Charakterzug,
+gestaltend, konfigurierend, und organisierend diese Models sind eine Brise. Du
+kannst fertigen personalisiertest Assistenten, weist zu spezifische #Benehmen,
+oder #aushebeln #vordefiniert Vorlagen zu steuern ihre Aktionen. Dieser Level
+#Gewöhnung sichert dass eure AI Assistenten stimmt ab geradezu mit euren
+Präferenzen und Arbeit Stil. Umarm die Zukunft Arbeit mit die AI Assistenten,
+eure personalisiert Begleiter für #erweitert Produktivität und nahtloses Task
+Management.
 
-![Assistant Management](doc/img/assistant-management.png)
+![Stellvertretendes Management](doc/img/assistant-management.png)
 
-**List of capabilities:**
+**Liste von Fähigkeiten:**
 
-- Portal Support: The AI Assistant knows the Axon Ivy documentation.
-- Task and Process Management: The AI Assistant can initiate tasks and
-  processes.
-- Search and Filter: It can search and filter tasks and cases.
-- Multilingual Support: It offers support in multiple languages.
-- Customizable Assistants: Create topic-based and personalized assistants.
-- Model-based AI: Assistants are built and managed using custom models.
+- Portal Unterstützung: Das AI Assistent kennt den #Axon Efeu Dokumentation.
+- Task und Arbeitsgang Management: Das AI Assistent können anlaufen beschäftigt
+  und verarbeitet.
+- Suche und Filter: Es kann suchen und filtern Tasks und Fälle.
+- Mehrsprachige Unterstützung: Es bietet an Unterstützung in mehrfach Sprachen.
+- Customizable Assistenten: Schaff Gegenstand-basisbezogen und personalisierte
+  Assistenten.
+- Model-basisbezogen AI: Assistenten sind gebaut und brachten fertig benutzen
+  #benutzerdefiniert Models.
 
 ## Demo
 
-### AI-Demo project
+### AI-Demo Projekt
 
-In the **ai-assistant-demo** Ivy project, we created demo assistants which can
-help you understand and develop your own AI assistant more efficiently.
+Herein das **ai-Assistent-Demo** Efeu projiziert, wir schafften Demo Assistenten
+#welche können helfen du verstehst und entfalten eure eigenes AI stellvertretend
+#mehr genügend.
 
-> [!IMPORTANT] This demo project will create Ivy users and roles, as well as
-> override the primary AI Assistant variables. It is **HIGHLY RECOMMENDED** to
-> run it in demo mode on an Ivy engine to safeguard your data.
+> [!WICHTIG] Dieses Demo Projekt will Efeu Nutzer und Rollen schaffen, sowie
+> Überbrückung das primäres AI Stellvertretende Variablen. Es ist **HOCH
+> WEITEREMPFOHLEN** zu rennen ihm in Demo Verfahren auf einen Efeu Motor zu
+> Schutz #eure #Daten.
 > 
-> If you choose to run this demo in a production environment, ensure that you
-> back up all AI Assistant-related Ivy variables. Create backups of the
-> following files on your engine:
+> Ob du wählst aus zu rennen diese Demo in eine Produktion Umwelt, sicher jener
+> du unterstützt oben jede AI Stellvertretend-verwandte Efeu Variablen. Schaff
+> Sicherheitskopien von den folgenden Dateien auf eurem Motor:
 > 
-> - `<engine folder>/configuration/applications/<application
->   folder>/variables.AiAssistant.Assistants.json`
-> - `<engine folder>/configuration/applications/<application
->   folder>/variables.AiAssistant.AiFunctions.json`
+> - `<engine folder="">/Konfiguration/Anträge/<application
+>   folder="">/Variablen.AiAssistant.Assistenten.json`</application></engine>
+> - `<engine folder="">/Konfiguration/Anträge/<application
+>   folder="">/Variablen.AiAssistant.AiFunctions.json`</application></engine>
 > 
-> After the demo is complete, replace the modified variable files with the
-> backups.
+> Nach der Demo ist #vervollständigen, tausch aus der modifiziert variable
+> Dateien mit den Sicherheitskopien.
 
-#### Complex Demo
+#### Vielschichtige Demo
 
-**Use case**
+**Nutzung Fall**
 
-User can plan a software project with AI Assistant. The AI Assistant enables
-users to efficiently plan a software project by organizing information into a
-structured format. It can:
+Nutzer kann ein Software Projekt planen mit AI Assistenten. Das AI Assistent
+aktiviert Nutzer zu genügend planen ein Software Projekt mal organisieren
+Auskunft hinein ein #gegliedert Format. Es kann:
 
-- create the project and persist it in the database
-- assist in finding and selecting suitable team members for the project
-- help users prepare for the project kick-off meeting
-- create and assign tasks to invite team members to the meeting
+- Schaff das Projekt und beharr ihm in der Datenbank
+- Vorlage in finden und #auswählen passende Gruppenmitglieder für das Projekt
+- Hilfe Nutzer vorbereiten für den Projekt Stoß-ab treffend
+- Schaff und weis zu Tasks zu einladen Gruppenmitglieder zu dem Treffen
 
-**How to use**
+**Wie zu benutzen**
 
-1. Run the process `startComplexDemo` to create test data and replace the
-   original AI Assistant with the **Complex Demo Assistant**
+1. Renn den Arbeitsgang `startComplexDemo` zu schaffen Klausur #Daten und
+   austauschen das originales AI Assistenten mit den **Vielschichtigen Demo
+   Assistenten**
 
-2. From **Portal**, open the AI Assistant app
+2. Von **Portal**, öffnet das AI Stellvertretendes #App
 
-3. Now you can use the assistant to plan and create an software project by input
-   the details of the project, and maybe number of members, or technologies.
+3. Jetzt kannst du benutzen das stellvertretendes zu planen und schaffen mal ein
+   Software Projekt #einlesen die Details von dem Projekt, und vielleicht
+   Mitgliederzahl, oder Technologien.
 
-Example:
+Beispiel:
 
-`The XYZ Solutions Web Development Project aims to build a state-of-the-art web
-application that enhances user experience and supports the company's growth
-objectives. Mainly use basic web technologies such as HTML and CSS, the project
-will deliver a secure, scalable, and efficient platform that aligns with
-industry standards and best practices. We need 3 engineer, 1 web designer and 2
-tester for it.`
+`Das XYZ Lösungen Web Entwicklung Projekt Programmatiken zu bauen ein #der Stand
+der Technik Web Antrag erweitert jener Nutzer erfährt und unterstützt die
+GesellschaftAuswuchs Zielsetzungen. Hauptsächlich benutzen einfache Web
+Technologien wie #HTML und CSS, das Projekt wollen ein festes anliefern,
+scalable, und leistungsstarker Bahnsteig stimmt ab jener mit Industrie Standards
+und #gut Fahrpraxen. Wir brauchen 3 #einfädeln, 1 Web Designer und 2 Prüfer als
+ihm.`
 
-#### Eror Handling Demo
+#### Eror Handing Demo
 
-**Use case**
+**Nutzung Fall**
 
-There are no data for the meeting room. Therefore, whenever a user searches for
-a meeting room, the AI Assistant will show an error. This is a simple example of
-how to help the AI Assistant handle errors properly.
+Dort ist #kein #Daten für den Sitzungsraum. Deswegen, #wann immer #suchen ein
+Nutzer einen Sitzungsraum, den AI Assistent will einen Fehler zeigen. Dies ist
+ein simples Beispiel von wie zu helfen das AI Stellvertretende Henkel Fehler
+geeignet.
 
-**How to use**
+**Wie zu benutzen**
 
-1. Run the process `startErrorHandlingDemo` to create test data and replace the
-   original AI Assistant with the **Error Handling Demo Assistant**
+1. Renn den Arbeitsgang `startErrorHandlingDemo` zu schaffen Klausur #Daten und
+   austauschen das originales AI Assistenten mit den **Fehler Handing Demo
+   Assistenten**
 
-2. From **Portal**, open the AI Assistant app
+2. Von **Portal**, öffnet das AI Stellvertretendes #App
 
-3. Now you can run the demo by request to information of some room with **Error
-   Handling Demo Assistant**.
+3. Jetzt kannst du rennen die Demo bei fordert auf zu Auskunft von einigem
+   Zimmer mit **Fehler Handing Demo Assistenten**.
 
-Example:
+Beispiel:
 
-`I want to find meeting room C`
+`Ich möchte Sitzungsraum finden C`
 
-## Setup
+## Einrichtung
 
-1. Deploy the **ai-assistant** artifact in the same application with **Portal**.
+1. #Aufbieten das **ai-Assistenten** Werkzeug in ebensolchem gleichen Antrag mit
+   **Portal**.
 
-2. Start the Engine, login to Portal.
+2. Starte den Motor, Anmeldung zu Portal.
 
-3. In the header of Portal, click the **AI Assistant** icon to access the **AI
-   Assistant** app.
+3. In dem Kopfball von Portal, klickt das **AI Assistenten** Ikone zu zugreifen
+   die **AI Assistent** #App.
 
-### User guide
+### Nutzer Fremdenführer
 
 #### AI Management
 
-The AI Management screen serves as a central hub for configuring and managing
-all aspects of your AI assistant system. From here, you can:
+Das AI Management Screen serviert da einer zentralen #Nabe für konfigurieren und
+#regelnd alle Gesichtspunkte von eure AI stellvertretendes System. Von hier, du
+kannst:
 
-- [Manage AI assistants](#manage-ai-assistants): oversee and modify the AI
-  assistants, including change visualization, personality, adjusting their
-  behavior, and managing the functions they can handle
+- [Bringen fertig AI Assistenten](#manage-ai-assistants): Überwach und
+  modifizier das AI Assistenten, einschließlich Änderung #Visualisierung,
+  Persönlichkeit, #anpassen ihr Benehmen, und #regelnd die Aufgaben können sie
+  bedienen
 
-- [Configure AI models](#configure-ai-models): modify settings for AI models
-  such as API Key that powers your applications
+- [Konfigurieren AI Models](#configure-ai-models): Modifizier Lagen für AI
+  Models wie API #Eintasten jene Kräfte eure Anträge
 
-- [Manage AI functions](#manage-ai-functions): control and organize various AI
-  functions, defining the actions your AI can perform and how it interacts with
-  users to provide accurate and efficient results
+- [Bringen fertig AI Aufgaben](#manage-ai-functions): Regulier und organisieren
+  verschieden AI Aufgaben, definierend die Aktionen eure AI können aufführen und
+  wie interagiert es mit Nutzer zu versehen #präzise und leistungsstarke
+  Resultate
 
-![AI Functions management](doc/img/ai-functions-management.png)
+![AI Funktioniert Management](doc/img/ai-functions-management.png)
 
-##### Manage AI Assistants
+##### Bring fertig AI Assistenten
 
-This section lists all the AI assistants that the logged-in user has permission
-to access, along with their names, avatars, and short descriptions.
+Diese Sektion Listen alle die AI Assistenten dass die #loggen-in Nutzer hat
+Erlaubnis zu zugreifen, zusammen mit ihre Namen, Offenbarungen, und kurze
+Steckbriefe.
 
-![Assistant management](doc/img/assistant-management.png)
+![Stellvertretendes Management](doc/img/assistant-management.png)
 
-You can create a new AI assistant by clicking the **Add new assistant** button,
-or modify an existing AI assistant's details by selecting the corresponding
-assistant from the list.
+Du kannst ein neues schaffen AI Assistenten klicken mal den **Fügt zu neuen
+Assistenten** Knopf, oder modifizieren ein #existierend AI Assistenten Details
+auswählen mal den #entsprechend Assistenten von der Liste.
 
-Once you've selected an AI assistant, its details page will be displayed.
+Einmal ausgewählt hast du ein AI Assistent, seine Details Seite will sein
+gezeigt.
 
-![AI assistant details](doc/img/assistant-details.png)
+![AI Stellvertretende Details](doc/img/assistant-details.png)
 
-There are some settings you can change:
+Dort sind einige Lagen du kannst wechseln:
 
-- `Name`: name of the AI assistant
-- `Permissions`: a list of Ivy roles that can use the AI assistant
-- `Model`: the AI model the assistant will use to perform its functions (for
-  more details, please refer to [Configure AI Models](#configure-ai-models))
-- `Avatar`: the avatar of the AI assistant. Only the following image file types
-  are accepted: `*.png`, `*.jpg`, `*.jpeg`. By default, the AI Assistant logo is
-  used as the avatar
-- `Contact Email`: the contact email that the AI assistant can provide to users
-  if needed
-- `Contact Website`: the website email that the AI assistant can provide to
-  users if needed
+- `Name`: Name von der AI Assistent
+- `Erlaubnisse`: Eine Liste Efeu Rollen kann jener benutzen die AI Assistenten
+- `Model`: Das AI modellieren den Assistenten will benutzen zu aufführen seine
+  Aufgaben (für #mehr Details, bitte übergeben zu [Konfigurieren AI
+  Models](#configure-ai-models))
+- `Offenbarung`: Die Offenbarung von die AI Assistent. Nur das folgende Image
+  Datei Typen sind akzeptiert: `*.png`, `*.jpg`, `*.jpeg`. Bei #voreingestellt,
+  das AI Stellvertretendes Logo ist benutzt da die Offenbarung
+- `Kontakt #Email`: Die Kontakt #Email dass die AI Assistent kann zu Nutzer
+  versehen #erforderlichenfalls
+- `Kontakt Website`: Die Website #Email dass die AI Assistent kann zu Nutzer
+  versehen #erforderlichenfalls
 
-To ensure the AI assistant's safety for users and alignment with ethical
-guidelines, we have introduced advanced settings:
+Zu sichern das AI Assistenten Sicherheit für Nutzer und Ausrichtung mit ethisch
+Leitfäden, wir haben fortgeschrittene Lagen hereingebracht:
 
-- `Information`: defines how you want the AI assistant to behave when replying
-  to users, including personality, role, and the business sector it should focus
-  on
-- `Ethical guidelines`: ethical principles the AI assistant must strictly follow
+- `Auskunft`: Definiert wie willst du das AI Assistent zu verhalten #wann zu
+  Nutzer erwidern, #einschließen Persönlichkeit, Rolle, und der dienstliche
+  Kreisausschnitt sollte es fokussieren weiter
+- `Ethische Leitfäden`: Ethische Prinzipe/Prinzipien die AI Assistent muss
+  strikt folgen
 
-By default, these settings are read-only to prevent errors that could lead to
-incorrect responses. However, AI engineers can develop new templates that
-provide information and ethical rules for assistants. To learn how to do this,
-please refer to [Assistant templates](#assistant-templates).
+Bei #voreingestellt, diese Lagen sind gelesen-einzige zu verhindern Fehler jener
+konnte inkorrekte Antworten zeitigen. Indes, AI Ingenieure können neue Vorlagen
+entfalten jener versieht Auskunft und ethische Regeln für Assistenten. Zu lernen
+wie zu tun dieses, bitte übergeben zu [Stellvertretende
+Vorlagen](#assistant-templates).
 
-###### Use template
+###### Nutzung Vorlage
 
-You can quickly configure all the necessary settings for an AI assistant by
-using a template. To apply a template, follow these steps:
+Du kannst schnell alle konfigurieren die nötigen Lagen für #ein AI Assistenten
+benutzen mal eine Vorlage. Zu bewerben eine Vorlage, folg diese Stufen:
 
-1. On the AI assistant details screen, click the **Use template** button in the
-   top right corner.
+1. Weiter das AI stellvertretender Details Screen, klickt der **Nutzung
+   Vorlage** Knopf in dem #oberste #Rechter Ecke.
 
-2. The **Assistant Templates** dialog will appear. Select a template from the
-   list by clicking it.
+2. Das **Stellvertretende Vorlagen** Zwiegespräch will fungieren. Wähl aus eine
+   Vorlage von der Liste klicken mal ihm.
 
-   ![Assistant Templates](doc/img/assistant-templates-dialog.png)
+   ![Stellvertretende Vorlagen](doc/img/assistant-templates-dialog.png)
 
-3. The template's settings will be applied to your AI assistant. You can then
-   modify them to suit your needs.
+3. Die VorlageLagen wollen sein beworben zu eure AI Assistenten. Du kannst dann
+   modifizieren jene zu passen eure Notwendigkeiten.
 
-###### Manage AI functions
+###### Bring fertig AI Aufgaben
 
-On the right side is a table listing the AI functions available to the AI
-assistant. You can view general information about each function, such as its
-name, type, description, permissions, and usage.
+Auf das rechtes ist #Seite eine Tisch Liste die AI Aufgaben verfügbar zu die AI
+Assistent. Du können allgemeine Auskunft von jede Aufgabe anschauen, wie seinen
+Namen, Typ, Steckbrief, Erlaubnisse, und Gebrauch.
 
-![Functions](doc/img/assistant-details-functions.png)
+![Funktioniert](doc/img/assistant-details-functions.png)
 
-You can prevent the AI assistant from using a function by removing it from this
-table.
+Du kannst verhindern das AI Assistenten von benutzen mal eine Aufgabe entfernen
+es von diesem Tisch.
 
-When you click the **Add** button, the **Add function** dialog will appear. To
-add a function, click on the row of the function you want to select, then click
-**Add** to add the selected functions.
+Wann du klickst das **Fügst zu** Knopf, den **Fügt zu Aufgabe** Zwiegespräch
+will fungieren. Zu zufügen eine Aufgabe, Klick auf der Zeile von der Aufgabe
+mögen du auswählen, dann Klick **Fügt zu** zu zufügen die exklusiven Aufgaben.
 
-![Add function dialog](doc/img/assistant-details-add-functions.png)
+![Fügt zu Aufgabe Zwiegespräch](doc/img/assistant-details-add-functions.png)
 
-Afterward, the selected functions will appear in the **Functions** table.
+Danach, die exklusiven Aufgaben wollen fungieren herein die **Aufgaben** Tisch.
 
-###### Save your changes
+###### Speicher eure Änderungen
 
-To apply all the changes you've made to the AI assistant details, please click
-the **Save** button in the bottom right corner. You will then be redirected to
-the [AI management](#ai-management) screen.
+Zu bewerben alle die Änderungen hast du gemacht zu die AI stellvertretende
+Details, bitte klicken die **Speichern** Knopf in dem #untere #Rechter Ecke. Du
+willst dann sein umgeleitet zu das [AI Management](#ai-management) #durchsieben.
 
-###### Delete AI assistant
+###### Streich AI Assistenten
 
-As time goes by, an AI assistant may become obsoleted and you may want to delete
-it and create a new AI assistant. To do that, please click the **Delete** button
-placed on the bottom left corner of the AI assistant details page.
+Da #messen geht mal, ein AI Assistent darf werden obsoleted und du darfst mögen
+streichen ihm und schaffen ein neues AI Assistenten. Zu tun jener, bitte klicken
+das **Streicht** #zuknöpfen plaziert auf der #untere #linke Seite Ecke von die
+AI stellvertretende Details Seite.
 
-A confim dialog will appear, you can delete the AI assistant completely by
-clicking the **Remove** button on that dialog.
+Ein confim Zwiegespräch will fungieren, du kannst streichen das AI Assistenten
+völlig mal klicken den **Entfernt** Knopf auf jenem Zwiegespräch.
 
-![Delete AI Assistant dialog](doc/img/assistant-details-delete.png)
+![Streichen AI Stellvertretendes
+Zwiegespräch](doc/img/assistant-details-delete.png)
 
-But please aware that, all conversations between the AI assistant and Ivy users
-will be deleted.
+Aber bitte bewusst jener, alle Unterhaltungen zwischen die AI Assistent und Efeu
+Nutzer wollen sein gestrichen.
 
-##### Configure AI Models
+##### Konfigurier AI Models
 
-AI Models is a list of model options which a AI assistant can use to perform its
-functionalities.
+AI Models sind eine Liste Model Optionen #welche #ein AI Assistent kann benutzen
+zu aufführen seine Funktionalitäten.
 
-![Model management](doc/img/models-management.png)
+![Model Management](doc/img/models-management.png)
 
-The AI Assistant need 2 AI models to works: a GPT model, and a text embedding
-model. Therefore, AI Assistant offers 2 tailored options that tested and ready
-to use:
+Das AI Stellvertretende Notwendigkeit 2 AI Models zu Arbeiten: Ein GPT Model,
+und ein Text #eingraben Model. Deswegen, AI Stellvertretende Angebote 2
+schneiderten Optionen jener getestet und bereit zu benutzen:
 
-- Primary OpenAI Model:
-    - GPT model: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
-    - Text embedding model:
-      [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+- Primär OpenAI Model:
+    - GPT Model: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
+    - Text #eingraben Model:
+      [Text-#eingraben-3-groß](https://platform.openai.com/docs/guides/embeddings)
 
-- Secondary OpenAI Model
-    - GPT model: [GPT-4o
+- Sekundär OpenAI Model
+    - GPT Model: [GPT-4o
       mini](https://platform.openai.com/docs/models/gpt-4o-mini)
-    - Text embedding model:
-      [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
+    - Text #eingraben Model:
+      [Text-#eingraben-3-groß](https://platform.openai.com/docs/guides/embeddings)
 
-When you clicking on a model item in the AI Models list, you will be redirected
-to the details page of that model. There you can find more model informations
-and change the API Key to the OpenAI platform. Your API Key is encrypted and
-completely secured.
+Wann du klicken auf ein Model Stück herein das AI Models Liste, du willst sein
+umgeleitet zu die Details Seite von jenem Model. Dort kannst du finden #mehr
+Model Auskünfte und wechseln die API Schlüssel zu den OpenAI Bahnsteig. Eure API
+Schlüssel ist #kodieren und völlig befestigt.
 
-Furthermore, you can test to connection to OpenAI platform by clicking the
-button **Test Connection**. If something went wrong, we will show the details
-error
+Ferner, du kannst zu Zusammenhang testen zu OpenAI Bahnsteig klicken mal den
+Knopf **Klausur Zusammenhang**. Ob #irgendetwas ging schief, wir wollen den
+Details Fehler zeigen
 
-![Test connection](doc/img/ai-model-test-connection.png)
+![Klausur Zusammenhang](doc/img/ai-model-test-connection.png)
 
-Once you click the **Save** button, all the settings, including the API Key will
-be saved as Axon Ivy variables, and you will be redirected to the [AI
-Management](#ai-management).
+Einmal klickst du das **Speicherst** Knopf, jede die Lagen, #eingerechnet die
+API Schlüssel will sein gespeichert wie #Axon Efeu Variablen, und du willst sein
+umgeleitet zu die [AI Management](#ai-management).
 
-##### Manage AI Functions
+##### Bring fertig AI Aufgaben
 
-All AI functions that the logged in user can access are listed in the **AI
-Functions** section with general information such as name, type, permissions to
-use the function,and description. There are some reasons why an AI function is
-non-startable:
+Jede AI Aufgaben dass die #loggen in Nutzer können zugreifen ist gelistet herein
+den **AI Aufgaben** Sektion mit allgemein Auskunft wie Namen, Typ, Erlaubnisse
+zu benutzen die Aufgabe,und Steckbrief. Dort sind einige Gründe wieso #ein AI
+Aufgabe ist nicht-startable:
 
-- `Ivy Tool` function: disabled by default because it's only be used by `Ivy
-  Flow` functions
-- `Ivy Flow` function: disabled when system detected that there could be an
-  error when running the flow. For example: a required Ivy callable process
-  could not be found
-- `Knowkedge Base` function: disabled when the system cannot find the
-  corresponding vector store
+- `Efeu Tool` Aufgabe: Ausgeschaltet bei #voreingestellt weil ist es nur sein
+  benutzt mal `Efeu Mündet` Aufgaben
+- `Efeu Mündet` Aufgabe: Invalid als fand heraus System jener konnte dort sein
+  #wann ein Fehler rennend die Strömung. Beispielsweise: Ein bedürft Efeu
+  callable Arbeitsgang konnte nicht sein gefunden
+- `Knowkedge Basis` Aufgabe: #Wann invalid das System kann nicht den
+  #entsprechend Vektor Vorrat finden
 
-![AI Function list](doc/img/all-ai-functions-list.png)
+![AI Funktioniert Liste](doc/img/all-ai-functions-list.png)
 
-You can also see all non-startable AI functions by toggling the option **Show
-non-startable AI functions**.
+Du kannst auch alle sehen nicht-startable AI Aufgaben #festknebeln mal die
+Option **Zeigt nicht-startable AI Aufgaben**.
 
-###### Delete AI function
+###### Streich AI Aufgabe
 
-You can delete the AI function completely from the AI Assistant by clicking the
-**Delete** button (has the trash bin icon) placed in the last column of the
-corresponding row of that AI function. A confirmation dialog will show as below
+Du kannst streichen das AI Aufgabe völlig von die AI Assistenten klicken mal den
+**Streicht** Knopf (hat den Kitsch Mülleimer Ikone) plaziert in der letzten
+Spalte von der #entsprechend Zeile von jener AI Aufgabe. Ein Bestätigung
+Zwiegespräch will zeigen da unten
 
-![Delete AI Function](doc/img/delete-ai-function.png)
+![Streichen AI Aufgabe](doc/img/delete-ai-function.png)
 
-Please read the confirmation carefully before delete the AI function. The AI
-function could be using by some AI assitants, and once you delete it, the AI
-assistants cannot work on the functions any more, or worser, some errors may
-arise.
+Bitte #lesen die Bestätigung vorsichtig bevor streichen die AI Aufgabe. Das AI
+Aufgabe konnte sein benutzen bei #welche AI assitants, und #sobald streichst du
+ihm, die AI Assistenten können nicht auf den Aufgaben arbeiten mehr, oder
+worser, einige Fehler dürfen entstehen.
 
-#### Create knowledge bases
+#### Schaff Kenntnis Basen
 
-AI Assistant allows admin users (with has role `AXONIVY_PORTAL_ADMIN`) to create
-knowledge bases for use by the AI function of type `Knowledge Base`. Simply
-start the process `Create knowledge base for AI Assistant` and follow the
-instructions there, you can create create knowledge bases which could be use by
-`Knowledge Base` functions.
+AI Assistent erlaubt admin Nutzer (mit haben Rolle `AXONIVY_PORTAL_ADMIN`) zu
+schaffen Kenntnis Basen für benutzen mal die AI Aufgabe von Typ `Kenntnis
+Basis`. Einfach #starten den Arbeitsgang `Schafft Kenntnis Basis für AI
+Assistenten` und folgen dort die Weisungen, du kannst schaffen schaffen Kenntnis
+gründet #welche konnte sein mal Nutzung `Kenntnis Basis` Aufgaben.
 
-![Create Knowledge Base section](doc/img/create-knowledge-page-ui.png)
+![Schafft Kenntnis Basis Sektion](doc/img/create-knowledge-page-ui.png)
 
-Currently, you can create knowledge base for 2 types: Portal Support and Others.
+Zurzeit, du kannst Kenntnis Basis für 2 schaffen tippt: Portal Unterstützung und
+andere.
 
-##### Knowledge base: Portal Support
+##### Kenntnis Basis: Portal Unterstützung
 
-The AI Assistant includes a built-in tool called `Portal support` which can
-answer questions related to the Axon Ivy Portal.
+Das AI Assistent schließt ein ein #errichtet-in Tool gerufen `Portal
+Unterstützung` #welche kann antworten Fragen erzählt zu den #Axon Efeu Portal.
 
-To generate the knowledge base for this function, please visit the [Portal
-download page](https://market.axonivy.com/portal) on the Axon Ivy Market and
-download the latest document, as shown in the image below.
+Zu generieren die Kenntnis Basis für diese Aufgabe, bitte besuchen die [Portal
+#Herunterladen Seite](https://market.axonivy.com/portal) auf den #Axon Efeu
+Vermarktet und herunterladen das späteste Dokument, da gezeigt in dem Image
+unten.
 
-![Download Portal Document](doc/img/download-portal-doc.png)
+![#Herunterladen Portal Dokument](doc/img/download-portal-doc.png)
 
-Then, just simply upload the downloaded file as instructed in [Create knowledge
-bases](#create-knowledge-bases) above.
+Dann, gerade einfach #hochladen das heruntergeladen da Datei belehrt herein
+[Schafft Kenntnis Basen](#create-knowledge-bases) droben.
 
-After upload the zip file, please wait for some minutes till the the upload
-panel closed. It may takes some minutes because it takes time for AI Assistant
-to do the job.
+#Nachdem #hochladen die Reißverschluss Datei, bitte warten auf einige Minuten
+bis zu das das #Hochladen Diskussionsrunde geschlossen. Es darf einige Minuten
+nehmen weil nimmt es Zeit für AI Assistenten zu tun den Beruf.
 
-##### Knowledge base: Others
+##### Kenntnis Basis: Andere
 
-Before upload other knowledge bases, please keep in mind:
+Bevor #hochladen anderen Kenntnis Basen, bitte Unterhalt in pass auf:
 
-1. The name of the uploaded file will be the ID of an index in the vector store,
-   therefore:
+1. Der Name von der #hochladen Datei will sein die ID von einem Verzeichnis in
+   den Vektor Vorrat, deswegen:
 
-   - The name must be strictly follow `dash-case`, otherwise you will get errors
-     when AI Assistant create knowledge base.
+   - Der Name muss sein strikt folgen `schleudert-Fall`, andernfalls willst du
+     bekommen #wann Fehler AI Assistenten schafft Kenntnis Basis.
 
-   - The name must be unique, otherwise you will override existing knowledge
-     base!
+   - Der Name muss sein einmalig, andernfalls willst du Überbrückung
+     #existierend Kenntnis Basis!
 
-2. All files you put inside the zip file must be a text file (type `.txt`). AI
-   Assistant will skip other file types when reading content to create knowledge
-   base.
+2. Alle Dateien legst du innerhalb die Reißverschluss Datei muss eine Text Datei
+   sein (Typ `.txt`). AI Assistent wollen anderen Datei Typen auslassen #wann
+   lesend Inhalt zu schaffen Kenntnis Basis.
 
-3. Vector stores created by Axon Ivy are prefixed with `axon-ivy-vector-store`
-   followed by the name of uploaded file. For example, if you upload a file
-   named `customer-support.zip`, the resulting vector store ID will be
-   `axon-ivy-vector-store-customer-support`.
+3. Vektor Vorräte geschafft bei #Axon Efeu ist vorangestellt mit
+   `#Axon-Efeu-Vektor-Vorrat` gefolgt #bei dem Namen von #hochladen Datei.
+   Beispielsweise, ob du #hochladen eine Datei geheißen
+   `Kundin-unterstütz.Reißverschluss`, der resultierend Vektor lagert ID will
+   sein `#Axon-Efeu-Vektor-Vorrat-Kundin-Unterstützung`.
 
-After upload the zip file, please wait for some minutes till the the upload
-panel closed. It may takes some minutes because it takes time for AI Assistant
-to do the job.
+#Nachdem #hochladen die Reißverschluss Datei, bitte warten auf einige Minuten
+bis zu das das #Hochladen Diskussionsrunde geschlossen. Es darf einige Minuten
+nehmen weil nimmt es Zeit für AI Assistenten zu tun den Beruf.
 
-### Developer guide
+### Entwickler Fremdenführer
 
-#### Assistant templates
+#### Stellvertretende Vorlagen
 
-AI assistants provide an approach for developers to predefine templates for AI
-assistants. To update these templates, you need to modify the JSON file for the
-Ivy variable`variable.AiAssistant.AssistantTemplates.json` located in the engine
-folder at `<engine folder>/configuration/applications/<application folder>`.
+AI Assistenten versehen ein Konzept für Entwickler zu predefine Vorlagen für AI
+Assistenten. Zu verbessern diese Vorlagen, du brauchst zu modifizieren die JSON
+Datei für die Efeu Variable`Variable.AiAssistant.AssistantTemplates.json`
+Lokalisierte in den Motor Ordner an `<engine
+folder="">/Konfiguration/Anträge/<application
+folder="">`.</application></engine>
 
-Here’s an example of an AI assistant template:
+Hier ist ein Beispiel von ein AI stellvertretende Vorlage:
 
 ```json
 [
@@ -401,82 +429,93 @@ Here’s an example of an AI assistant template:
 ]
 ```
 
-Attributes of an AI assistant template:
+Misst bei von ein AI stellvertretende Vorlage:
 
-- `id`: the unique ID of the template
-- `version`: the template version. It must match the version of the AI Assistant
-- `name`: the name of the assistant. When this template is selected, this value
-  will be set as the default name for the assistant
-- `info`: defines how you want the AI assistant to behave when replying to
-  users, including personality, role, and the business sector it should focus on
-- `ethicalRules`: ethical principles the AI assistant must strictly follow
-- `contactEmail`: the contact email the AI assistant can provide to users if
-  needed
-- `contactWebsite`: the website the AI assistant can provide to users if needed
-- `tools`: IDs of the AI functions the assistant using this template can access
-- `description`: a short description of the template. This attribute won't
-  affect the assistant's behavior
+- `id`: Das einmaliges ID von der Vorlage
+- `Version`: Die Vorlage Version. Es muss die Version passen von die AI
+  Assistenten
+- `Name`: Der Name von dem Assistenten. Wann diese Vorlage ist #auswählen,
+  dieser Wert will sein gesetzt da dem #voreingestellt Namen für den Assistenten
+- `info`: Definiert wie willst du das AI Assistent zu verhalten #wann zu Nutzer
+  erwidern, #einschließen Persönlichkeit, Rolle, und der dienstliche
+  Kreisausschnitt sollte es fokussieren weiter
+- `ethicalRules`: Ethische Prinzipe/Prinzipien die AI Assistent muss strikt
+  folgen
+- `contactEmail`: Die Kontakt #Email die AI Assistent kann zu Nutzer versehen
+  #erforderlichenfalls
+- `contactWebsite`: Die Website die AI Assistent kann zu Nutzer versehen
+  #erforderlichenfalls
+- `Tools`: IDs Von das AI funktioniert den Assistenten benutzend diese Vorlage
+  können zugreifen
+- `Steckbrief`: Ein kurzer Steckbrief von der Vorlage. Dieses Attribut will
+  nicht den AssistentenBenehmen angehen
 
-By default, the AI assistant provides four templates:
+Bei #voreingestellt, das AI Assistent versieht vier Vorlagen:
 
-- **Portal Assistant**: a template for the Axon Ivy Portal assistant, with
-  functions to interact with the Axon Ivy system, such as finding tasks, cases,
-  and processes, and accessing a knowledge base about the Axon Ivy Portal
+- **Portal Assistent**: Eine Vorlage für den #Axon Efeu Portal Assistent, mit
+  Aufgaben zu interagieren mit den #Axon Efeu System, wie finden Tasks, Fälle,
+  und Arbeitsgänge, und #zugreifen eine Kenntnis Basis von den #Axon Efeu Portal
 
-- **HR Assistant**: a template designed for AI assistants in the Human Resources
-  sector. This template doesn't include any tools but features clear information
-  and a strong ethical rule set tailored for HR
+- **STUNDE Assistent**: Eine Vorlage gestaltet für AI Assistenten in den
+  Menschlichen Ressourcen Kreisausschnitt. Diese Vorlage #einschließen nicht
+  irgendwelche Tools aber bieten klare Auskunft und eine kräftige ethische Regel
+  Apparat geschneidert für STUNDE
 
-- **Sales Assistant**: a template for AI assistants that support sales teams.
-  Like the HR Assistant, it doesn't include tools but offers clear information
-  and a strong ethical rule set
+- **Vertriebsassistent**: Eine Vorlage für AI Assistenten jene Unterstützung
+  Verkäufe Mannschaften. Wie den STUNDE Assistenten, es #einschließen nicht
+  Tools aber bieten an klare Auskunft und eine kräftige ethische Regel Apparat
 
-- **ICT Assistant**: a template for AI assistants used to troubleshoot IT issues
-  in the back office. This template also doesn't include any tools
+- **ICT Assistent**: Eine Vorlage für AI Assistenten benutzten zu troubleshoot
+  IT gibt heraus in dem rückwärtigen Büro. Diese Vorlage #einschließen nicht
+  auch irgendwelche Tools
 
-#### AI Flow
+#### AI Strömung
 
-##### Empowering Intelligent Task Automation
+##### Ermächtigend Intelligente Task Automatisierung
 
-To enable AI Assistants to handle complex tasks with sophisticated logic, Axon
-Ivy introduced **AI Flow** - an advanced AI workflow framework designed to
-streamline how AI processes and operates.
+Zu aktivieren AI Assistenten zu bedienen vielschichtige Tasks mit komplex Logik,
+#Axon Efeu hereingebracht **AI Strömung** - ein fortgeschrittenes AI workflow
+Fachwerk gestaltet zu #windschlüpfig machen wie AI verarbeitet und operiert.
 
-**AI Flow** allows users to:
+**AI Strömung** erlaubt Nutzer zu:
 
-- Seamlessly interact with the Ivy system, ensuring efficient integration.
-- Accurately detect, interpret, and handle user requests.
-- Maintain simplicity while offering flexible control and easy extensibility for
-  evolving needs.
-- Manage access to AI functions
-- This framework is built to empower users to design and manage AI workflows
-  effectively, enabling a smarter, more adaptable AI experience.
+- #Bruchlos #interagieren mit das Efeu System, sichernd leistungsstarke
+  Integration.
+- Genau finde heraus, deute, und Henkel Nutzer Bitten.
+- Erhalte aufrecht #während Einfachheit #anbieten flexible Aufsicht und leichte
+  #Erweiterbarkeit für entwickeln Notwendigkeiten.
+- Bring fertig Zugang zu AI Aufgaben
+- Dieses Fachwerk ist gebaut zu ermächtigen Nutzer zu gestalten und
+  fertigbringen AI workflows effektiv, aktivierend ein pfiffigeres,
+  anpassungsfähiger AI Erfahrung.
 
-##### Real world problem
+##### Reales Welt Problem
 
-Imagine you want to develop a feature that allows HR employees to easily find
-information about staff based on criteria like name, date of birth, branch, or
-position.
+Stell vor dir möchtest entfalten einen Charakterzug jener erlaubt STUNDE
+Angestellte zu sicher finden Auskunft von Lehrkörper gegründet auf Kriterien
+gleichnamigen Namen, Datum von Geburt, Zweig, oder Stelle.
 
-In the past, this would require building a search page with multiple filters
-(e.g., name, date of birth), where HR employees manually filter out the desired
-information from a data table.
+Ehemals, dies wollte bedürfen bauen eine Suche Seite mit mehrfach Filter (#z.B.,
+Name, Datum von Geburt), manuell #wo STUNDE Angestellte filtern aus die
+gewünscht Auskunft von einen #Daten Tisch.
 
-However, in the AI era, you want a smarter solution. An AI-powered function can
-help HR employees perform these tasks more efficiently using natural language
-queries like "list all web developers in Boston" or "find the info of Sandy, who
-has a birthday this Thursday."
+Indes, herein das AI Ära, du willst eine pfiffigere Lösung. Ein AI-#ausrüsten
+Aufgabe kann helfen STUNDE Angestellte aufführen diese Tasks #mehr genügend
+benutzend naturale Sprache Anfragen gleichnamige "Liste alle Web Entwickler in
+Boston" oder "finden das info von Sandig, wer hat einen Geburtstag diesen
+Donnerstag."
 
-That's where AI Flow comes in. It not only speeds up the search process but also
-helps with tasks like correcting typos and validating illogical data, such as
-preventing searches for employees with future birthdays!
+Jener ist #wo AI Strömung kommt herein. Es nicht einzige Geschwindigkeiten oben
+den Suche Arbeitsgang aber auch Hilfen mit Tasks wie #verbessernd typos und
+validierend #unlogisch #Daten, wie verhindern #suchen Angestellte mit künftig
+Geburtstage!
 
-##### How it works
-AI Flow operates as a workflow framework in the form of JSON. It consists of
-multiple AI Steps, each of which is linked together based on user-defined
-configurations.
+##### Wie es arbeitet
+AI Strömung operiert da eine workflow Fachwerk in der Form von JSON. Es besteht
+von mehrfach AI Stufen, #jede von #welche ist verbunden miteinander auf Nutzer
+gegründet-#abgesteckt Konfigurationen.
 
-Basic attributes of an AI Flow:
+Einfache Attribute von #ein AI Strömung:
 
 ``` json
 {
@@ -491,95 +530,104 @@ Basic attributes of an AI Flow:
 }
 ```
 
-- **version**: Specifies the version of the AI Flow, which must align with the
-  Ivy version.
+- **Version**: Präzisiert die Version von die AI Strömung, #welche müssen
+  abstimmen mit die Efeu Version.
 
-- **id**: The unique identifier for the AI Flow.
+- **id**: Die einmalige Bezeichnung für die AI Strömung.
 
-- **name**: The name of the AI Flow.
+- **Name**: Der Name von der AI Münde.
 
-- **type**: Always set to "FLOW". The AI Assistant can access various tools like
-  Ivy tools, Knowledge Base tools, and AI Flows. By defining the type as "FLOW",
-  you indicate that this tool is an AI Flow, allowing the AI Assistant to use it
-  correctly.
+- **Typ**: Immer gesetzt zu "MÜNDEN". Das AI Assistent können verschiedene Tools
+  gleichnamig Efeu Tools zugreifen, Kenntnis Basis Tools, und AI Münden. Mal
+  definieren den Typ da "MÜNDE", du deutest hin dass dieses Tool ist ein AI
+  Münde, erlaubend das AI Assistenten zu benutzen ihm richtig.
 
-- **permissions**: Defines the roles or usernames of users authorized to use
-  this AI Flow.
+- **Erlaubnisse**: Definiert die Rollen oder Benutzernamen von Nutzer
+  autorisierten zu benutzen diese AI Mündet.
 
-- **description**: A detailed explanation of the AI Flow. The more thorough the
-  description, the better the AI can understand how to use the AI Flow.
+- **Steckbrief**: Eine detaillierte Erklärung von die AI Münde. Die More
+  eingehend der Steckbrief, das besseres der AI kann verstehen wie zu benutzen
+  der AI Münde.
 
-- **usage**: Specifies when to use the AI Flow. A clearer explanation ensures
-  the AI can accurately select the appropriate flow to fulfill user requests.
+- **Gebrauch**: Präzisiert #wann zu benutzen das AI Münde. Eine klarere
+  Erklärung sichert die AI kann genau auswählen die #angemessenen Strömung zu
+  #nachkommen Nutzer Bitten.
 
-- **steps**: Lists the AI Steps that the AI Flow should execute to handle the
-  user's request. Available step types:
+- **Stufen**: Listet das AI Stufen dass die AI Strömung sollte exekutieren zu
+  bedienen den NutzersBitte. Verfügbare Stufe Typen:
 
-   - **Switch**: decision-making element that guide AI in selecting the
-     appropriate next action based on specific conditions.
+   - **Schalter**: Entscheid-machend Element jenen Fremdenführer AI in
+     #auswählen die #angemessenen nächste Aktion gegründet auf spezifisch
+     Zustände.
 
-   - **Ivy Tool**: directs AI to use specific Ivy tools (Ivy callable) in its
-     decision-making process.
+   - **Efeu Tool**: Leitet AI zu benutzen spezifische Efeu Tools (#Ivy callable)
+     in seinem Entscheid-machend Arbeitsgang.
 
-   - **Text**: display or generate text-based content for user interaction.
+   - **Text**: Zeig oder generieren Text-basisbezogenen Inhalt für Nutzer
+     Interaktion.
 
-   - **Re-phrase**: help AI refine user input before executing specific actions
-     or using tools.
+   - **Re-#Frasieren**: Hilf AI frischt Nutzer Input vor exekutieren spezifische
+     Aktionen oder benutzend Tools.
 
-   - **Trigger Flow**: initiates a new flow within the AI process, either by
-     passing a specific trigger message or using the result of a previous step.
-     This allows for seamless transitions between different workflows and the
-     ability to pass relevant data between them.
+   - **#Auslösen #Münden**: Läuft an #innerhalb eine neue Strömung die AI
+     verarbeite, auch mal abspielen einen spezifischen Auslöser Meldung oder
+     benutzend das Resultat von einer vorausgehenden Stufe. Dies erlaubt für
+     nahtlos Wechsel zwischen verschieden workflows und die Fähigkeit zu
+     abspielen #relevant #Daten zwischen jene.
 
-> [!TIP] To learn more about the AI Steps, please refer to [AI Step](#ai-step)
+> [!#EIN TRINKGELD GEBEN] Zu lernen #mehr etwa das AI Stufen, bitte übergeben zu
+> [AI Stufe](#ai-step)
 
-> [!TIP] To learn how to create your own AI Flow, please refer to [AI Flow
-> Demo](#create-your-own-ai-flow)
+> [!#EIN TRINKGELD GEBEN] Zu lernen wie eure eigenes zu schaffen AI Strömung,
+> bitte übergeben zu [AI Strömung Demo](#create-your-own-ai-flow)
 
-##### AI Step
+##### AI Stufe
 
-###### Attributes
+###### Attribute
 
-- **stepType**: type of step. Valid values:
-   - IVY_TOOL: [Ivy tool step](#ivy-tool-step).
-   - SWITCH: [Switch step](#switch-step).
-   - TEXT: [Text step](#text-step).
-   - RE_PHRASE: [Rephrase step](#re-phrase-step).
-   - TRIGGER_FLOW: [Trigger flow step](#trigger-flow-step).
-   - KNOWLEDGE_BASE: [Knowledge base step](#knowledge-base-step)
+- **stepType**: Typ von schreite. Gültige Werte:
+   - #IVY_TOOL: [Efeu Tool Stufe](#ivy-tool-step).
+   - SCHALTER: [#Schalten #schreiten](#switch-step).
+   - TEXT: [Text Stufe](#text-step).
+   - RE_PHRASE: [Rephrase Stufe](#re-phrase-step).
+   - #AUSLÖSEN_#MÜNDEN: [#Auslösen #münden schreite](#trigger-flow-step).
+   - KENNTNIS_BASIS: [Kenntnis Basis Stufe](#knowledge-base-step)
 
-- **stepNo**: Number of step in the flow.
+- **stepNo**: Nummer von eintreten die Strömung.
 
-- **result**: Result of a step (Refer [AI Result DTO](#ai-result-dto) ).
+- **Resultat**: Resultat von einer Stufe (Übergibt [AI Resultiert
+  DTO](#ai-result-dto) ).
 
-- **onSuccess**: The step that will be execute if this step is run successfully.
+- **onSuccess**: Die Stufe will jener sein exekutieren ob diese Stufe ist
+  gerannt erfolgreich.
 
-- **onError**: The step that will be execute if we got trouble when running this
-  step.
+- **onError**: Die Stufe will jener sein exekutieren ob wir bekamen #wann Kummer
+  rennend diese Stufe.
 
-- **useConversationMemory**: Set to true to include all chat messages of the
-  conversation when running the step. Otherwise the AI step only include chat
-  messages of the running AI flow.
+- **useConversationMemory**: Apparat zu wahr zu einschließen alle Schwatz
+  Meldungen von der Unterhaltung rennend #wann die Stufe. Andernfalls das AI
+  schreiten nur Schwatz Meldungen einschließen von dem Laufen AI Strömung.
 
-- **saveToHistory**: Set to false to exclude the message from conversation
-  history, only save to the memory.
+- **saveToHistory**: Apparat zu falsch zu herausnehmen die Meldung von
+  Unterhaltung Geschichte, nur speichern zu dem Gedächtnis.
 
-- **customInstruction**: instruction for a specific requirement for AI.
+- **customInstruction**: Weisung für eine spezifische Forderung für AI.
 
-##### Switch step
+##### #Schalten #schreiten
 
-The **Switch step** is a decision-making element designed to guide AI in
-selecting the appropriate next action based on specific conditions. It functions
-by evaluating a list of predefined cases, each representing a potential scenario
-the AI might encounter. Based on the case that matches the current situation,
-the AI chooses the corresponding action to take.
+Das **Schalter Stufe** ist ein Entscheid-machend Element gestaltet zu steuern AI
+in #auswählen die #angemessenen nächste Aktion gegründet auf spezifisch
+Zustände. Es funktioniert mal eine Liste auswerten von #vordefiniert Fälle,
+#jede vertretend ein potentielles Szenario das AI darf begegnen. Gegründet auf
+dem Fall jene Wettkämpfe die gängige Situation, die AI wählt aus die
+#entsprechend Aktion zu nehmen.
 
-In the provided structure, the AI examines the case descriptions within the list
-and assigns the correct action number to proceed. This allows the AI to
-dynamically adjust its behavior based on different outcomes or states, ensuring
-a tailored response for various circumstances.
+In der #versehen Struktur, der AI prüft die Fall Steckbriefe innerhalb die Liste
+und weist zu die richtige Aktion Nummer zu verfahren. Dies erlaubt das AI zu
+#dynamisch anpassen sein Benehmen gegründet auf verschieden Ergebnisse oder
+Staaten, sichernd #ein geschneidert Antwort für verschiedene Umstände.
 
-- **cases**: A list of possible scenarios with corresponding actions.
+- **Fälle**: Eine Liste von möglich Szenarios mit #entsprechend Aktionen.
 
 ```json
 {
@@ -593,19 +641,19 @@ a tailored response for various circumstances.
 }
 ```
 
-##### Ivy tool step
+##### #Ivy Tool Stufe
 
-The **Ivy tool step** is a specialized instruction mechanism that directs AI to
-use specific tools or functions in its decision-making process. This step
-ensures that the AI interacts with predefined tools (referred to by their
-toolId) and executes tasks according to the defined conditions and custom
-instructions. It enables the AI to perform specialized actions and provides
-flexibility through optional parameters such as success, error handling, and
-custom instructions.
+Das **Efeu Tool Stufe** ist eine spezialisiert Weisung Mechanismus jener leitet
+AI zu benutzen spezifische Tools oder Aufgaben in seinem Entscheid-machend
+Arbeitsgang. Diese Stufe sichert dass die AI interagiert mit #vordefiniert Tools
+(übergeben zu mal ihr toolId) und exekutiert Tasks gemäß den #abgesteckt
+Zuständen und #benutzerdefiniert Weisungen. Es aktiviert das AI zu aufführen
+spezialisierte Aktionen und versehen Flexibilität durch optional Parameter wie
+Erfolg, Fehler Handing, und #benutzerdefiniert Weisungen.
 
-- **toolId**: Refers to the ID of a tool from the list of available AI functions
-  (as described in the variable AiFunctions), such as "find-tasks" or
-  "find-web-developer".
+- **toolId**: Übergibt zu das ID von einem Tool von der Liste von verfügbar AI
+  Aufgaben (da beschrieben in das variables AiFunctions), wie
+  "finden-beschäftigen" oder "finden-Web-Entwickler".
 
 ```json
 {
@@ -616,9 +664,9 @@ custom instructions.
 }
 ```
 
-- **customInstruction**: Provides specific instructions for the AI to follow in
-  executing the tool. For instance, the AI might be directed to "Find employees
-  who have the role 'WEB_DEVELOPER'".
+- **customInstruction**: Versieht spezifische Weisungen für die AI zu folgen in
+  exekutieren das Tool. Für Instanz, die AI darf sein geleitet zu "Finden
+  Angestellte wer haben die Rolle 'WEB_ENTWICKLER'".
 
 ```json
 {
@@ -632,24 +680,25 @@ custom instructions.
 }
 ```
 
-##### Text step
+##### Text Stufe
 
-The **Text Step** is a crucial component in AI workflows designed to display or
-generate text-based content for user interaction. Depending on its
-configuration, the Text Step can show fixed messages, AI-generated content,
-results of prior steps, or even hidden messages for internal AI processing. This
-flexibility enables the AI to communicate effectively with users while guiding
-decision-making processes.
+Das **Text Stufe** ist herein eine unerlässliche Komponente AI workflows
+gestaltet zu zeigen oder generieren Text-basisbezogenen Inhalt für Nutzer
+Interaktion. #Abhängen auf seiner Konfiguration, die Text Stufe kann feste
+Meldungen zeigen, AI-generiert Inhalt, Resultate von vorherig Stufen, oder
+gleichmäßige unsichtbare Meldungen für innerparteilich AI Verarbeitung. Diese
+Flexibilität aktiviert die AI zu kommunizieren #während effektiv mit Nutzer
+steuernd Entscheid-machend Arbeitsgänge.
 
-**Fixed text**
+**Fester Text**
 
-- **text**: The fixed text to be displayed on the UI.
+- **Text**: Der feste Text zu sein gezeigt weiter der UI.
 
-- **showResultOfStep**: Option to display the result of a previous step by
-  referencing its number.
+- **showResultOfStep**: Option zu zeigen das Resultat von einer vorausgehenden
+  Stufe #referenzieren mal seine Nummer.
 
-- **onSuccess**: Defines the next step when the user provides input after
-  reading the text.
+- **onSuccess**: Definiert als die nächste Stufe den Nutzer versieht Input nach
+  lesen den Text.
 
 ```json
 {
@@ -661,15 +710,15 @@ decision-making processes.
 }
 ```
 
-**AI generated**
+**AI Generiert**
 
-- **useAI**: Set to true to allow AI to generate content dynamically, such as
-  summaries or reports.
+- **useAI**: Gesetzt zu wahr zu erlauben AI zu generieren #dynamisch
+  #einverstanden, wie Übersichten oder Berichte.
 
-- **customInstruction**: A guiding instruction to help the AI generate
-  appropriate text based on context or user inputs
+- **customInstruction**: Ein steuernd Weisung zu helfen die AI generiert
+  #angemessenen Text gegründet auf Kontext oder Nutzer Inputs
 
-- **onSuccess**: The next step to execute after user interaction.
+- **onSuccess**: Die nächste Stufe zu exekutieren #nachdem Nutzer Interaktion.
 
 ```json
 {
@@ -681,9 +730,9 @@ decision-making processes.
 },
 ```
 
-**Show result of other step**
+**Vorstellung Resultat von anderen Stufe**
 
-- **showResultOfStep**: Displays the result from a previously executed step.
+- **showResultOfStep**: Zeigt das Resultat von ein vorher exekutiert Stufe.
 
 ```json
 {
@@ -706,11 +755,12 @@ decision-making processes.
 }
 ```
 
-**Hidden Text step**
+**Unsichtbare Text Stufe**
 
-- **isHidden**: Set to true to hide the text from the user but allow the AI to
-  read and process it. This is useful when generating content that the AI needs
-  for further processing without displaying it on the UI.
+- **isHidden**: Gesetzt zu wahr zu verstecken den Text von dem Nutzer aber
+  erlauben dem AI zu lesen und verarbeiten ihm. Dies ist #wann nützlich
+  generierend #einverstanden dass das AI Notwendigkeiten für ferner Verarbeitung
+  ohne zeigen ihm weiter die UI.
 
 ```json
 {
@@ -731,41 +781,43 @@ decision-making processes.
 }
 ```
 
-##### Re-phrase step
+##### Re-#Frasieren #schreiten
 
-The **Rephrase step** is designed to help AI refine user input before executing
-specific actions or using tools. This is particularly useful when the user's
-message is vague, incomplete, or not structured in a way that the AI can
-immediately process. By rephrasing the input, the AI ensures that the
-information is more precise, making it easier to use with target tools or
-functions.
+Das **Rephrase Stufe** ist gestaltet zu helfen AI frischt Nutzer Input vor
+exekutieren spezifische Aktionen oder benutzend Tools. Dies ist #genauer
+nützlich als ist der NutzersMeldung vag, unvollständig, oder nicht strukturiert
+in einem Weg dass dem AI kann sofort verarbeiten. Mal rephrasing der Input, der
+AI sichert dass die Auskunft ist More präzis, machend ihm leichter zu benutzen
+mit Soll Tools oder Aufgaben.
 
-- **toolId**: Refers to the tool the AI will use as the target. AI should use
-  JSON schema of the corresponding tool to rephrase the message. By defining
-  this attribute, you ensures that the rephrased input is compatible with the
-  tool’s requirements.
-    - Example:
-        - user input “find my sick leave task”
-        - You have a tool to find task by name, description, priority,… but user
-          didn’t tell you that which field he want to use. Therefore you should
-          rephrase the message before use it with the ivy tool.
-        - → find task with name ‘sick leave’
+- **toolId**: Übergibt zu dem Tool dem AI will benutzen da das Soll. AI Sollten
+  benutzen JSON Schema von dem #entsprechend Tool zu rephrase die Meldung. Mal
+  definieren dieses Attribut, du sicherst dass das rephrased Input ist vereinbar
+  mit das ToolsForderungen.
+    - Beispiel:
+        - Nutzer Input “findet meinen üblen Abschied Task”
+        - Du hast ein Tool zu finden #namhaft Task, Steckbrief, Vorrang,… aber
+          Nutzer erzählte nicht dir dass #welche #auffangen er möchte benutzen.
+          Deswegen solltest du rephrase die Meldung benutzen bevor ihm mit das
+          Efeu Tool.
+        - → Finde Task mit heißt ‘üblen Abschied'
 
-- **customInstruction**: Provides specific guidelines for how the AI should
-  rephrase the message. This helps the AI handle particular cases such as
-  abstract terms or dates, formatting them into more useful data.
+- **customInstruction**: Versieht spezifische Leitfäden für wie die AI sollten
+  rephrase die Meldung. Diese Hilfen die AI Henkel speziell Fälle wie abstrakt
+  Trimester oder Daten, #formatieren jene hinein #mehr #nützlich #Daten.
 
-- **onRephrase**: Defines the next step to execute if the AI determines that it
-  needs to rephrase the message.
+- **onRephrase**: Definiert die nächste Stufe zu exekutieren ob die AI ermittelt
+  jener es braucht zu rephrase die Meldung.
 
-- **onSuccess**: Specifies the step to run if the AI does not need to rephrase
-  the message.
+- **onSuccess**: Präzisiert die Stufe zu rennen ob die AI braucht nicht zu
+  rephrase die Meldung.
 
-- **examples**: A list of predefined examples that guide the AI in understanding
-  how to rephrase user messages. Each example consists of:
-    - **before**: The original, unstructured message from the user.
-    - **after**: The rephrased message that the AI would generate for better
-      clarity and actionability
+- **Beispiele**: Eine Liste von #vordefiniert Beispiele jener Fremdenführer der
+  AI herein #begreifend wie zu rephrase Nutzer Meldungen. Jedes Beispiel besteht
+  von:
+    - **#Vor**: Das Original, unstructured Meldung von dem Nutzer.
+    - **#Nachdem**: Das rephrased Meldung dass die AI wollte generieren für
+      besser Klarheit und actionability
 
 ```json
 {
@@ -793,19 +845,20 @@ functions.
 }
 ```
 
-##### Trigger flow step
+##### Auslöser Strömung Stufe
 
-The **Trigger flow step** initiates a new flow within the AI process, either by
-passing a specific trigger message or using the result of a previous step. This
-allows for seamless transitions between different workflows and the ability to
-pass relevant data between them.
+Das **Auslöser Strömung Stufe** Eingeweihte eine neue Strömung #innerhalb die AI
+Arbeitsgang, entweder mal abspielen einen spezifischen Auslöser Meldung oder
+benutzend das Resultat von einer vorausgehenden Stufe. Dies erlaubt für nahtlos
+Wechsel zwischen verschieden workflows und die Fähigkeit zu abspielen #relevant
+#Daten zwischen ihnen.
 
-- **flowId**: ID of the flow you want to trigger
+- **flowId**: ID Von der Strömung mögen du auslösen
 
-**Trigger with trigger message**
+**Auslöser mit Auslöser Meldung**
 
-- **triggerMessage**: The custom message that serves as input to the new flow,
-  guiding the AI on what to do next.
+- **triggerMessage**: Die #benutzerdefiniert Meldung serviert jener da #einlesen
+  zu der neuen Strömung, steuernd der AI auf was zu tun #nächste.
 
 ```json
 {
@@ -816,12 +869,12 @@ pass relevant data between them.
 }
 ```
 
-**Trigger with result of other step**
+**Auslöser mit Resultat von anderen Stufe**
 
-- **showResultOfStep**: Passes the result of a specific preceding step as the
-  trigger message for the new flow. This option is useful when you want to pass
-  result of a flow to another, or the message you want to pass to the new step
-  is get from the system.
+- **showResultOfStep**: Spielt ab das Resultat von einem #Spezifikum #vorangehen
+  Stufe da die Auslöser Meldung für die neue Strömung. Diese Option ist nützlich
+  als mögen du abspielen Resultat von einer Strömung zu anderer, oder die
+  Meldung mögen du abspielen zu der neuen Stufe ist bekommt von dem System.
 
 ```json
 {
@@ -832,15 +885,16 @@ pass relevant data between them.
     "useConversationMemory": false
 }
 ```
-##### Knowledge base step
+##### Kenntnis Basis Stufe
 
-When working on a step, users may have questions that aren't directly related to
-the workflow. For instance, if a user is unable to delegate a task, they might
-want to know why delegation isn't possible. The **Knowledge Base** step is
-designed to help users quickly find answers to such questions.
+Wann arbeiten auf einer Stufe, Nutzer dürfen Fragen haben jene sind nicht direkt
+erzählt zu die workflow. Für Instanz, ob ein Nutzer ist unfähig zu abordnen ein
+Task, sie dürfen mögen kennen wieso Delegation ist nicht möglich. Das **Kenntnis
+Basis** #schreiten ist gestaltet zu helfen schnell Nutzer finden Antworten zu
+solchen Fragen.
 
-- **toolId**: Refers to the tool of type `RETRIEVAL_QA` that the AI will use as
-  the knowledge base to provide answers.
+- **toolId**: Übergibt zu dem Tool von Typ `RETTUNG_QA` dass die AI will
+  benutzen da die Kenntnis Basis zu versehen Antworten.
 
 ```json
 {
@@ -852,60 +906,63 @@ designed to help users quickly find answers to such questions.
 }
 ```
 
-##### AI Result DTO
+##### AI Resultat DTO
 
-###### Introduction
+###### Einführung
 
-The Result DTO ensures that the AI Assistant provides reliable and consistent
-results by adhering to a standardized structure for all outputs, promoting
-efficiency and clarity across AI interactions.
+Das Resultat DTO sichert dass das AI Assistenten versieht zuverlässige und
+konstante Resultate bei #anhaften zu einer normgerechten Struktur für alle
+Ausgaben, fördernd darüber Effizienz und Klarheit AI Interaktionen.
 
-- Project: portal-component
-- Class: com.axonivy.portal.components.dto.AiResultDTO
+- Projekt: Portal-Komponente
+- Klasse: com.axonivy.Portal.Komponenten.dto.AiResultDTO
 
-**Attributes**
+**Attribute**
 
-| Name        | Type                                        | Decription                        |
-| ----------- | ------------------------------------------- | --------------------------------- |
-| result      | String                                      | result to show for user           |
-| resultForAI | String                                      | result for AI model               |
-| state       | com.axonivy.portal.components.enums.AIState | state of the result (DONE, ERROR) |
+| Name        | Typ                                          | Decription                             |
+| ----------- | -------------------------------------------- | -------------------------------------- |
+| Resultat    | Schnur                                       | Resultat zu zeigen für Nutzer          |
+| resultForAI | Schnur                                       | Resultat für AI Model                  |
+| Staat       | com.axonivy.Portal.Komponenten.enums.AIState | Staat von dem Resultat (GETAN, FEHLER) |
 
-#### Create your own AI Flow
+#### Schaff eure eigenes AI Strömung
 
-In this section, we will explain how to develop your own AI Flow using the [Real
-world problem](#real-world-problem) as a use case.
+In dieser Sektion, wir wollen erklären wie eure eigenes zu entfalten AI Strömung
+benutzend die [Reales Welt Problem](#real-world-problem) da einen Nutzung Fall.
 
-> [!NOTE] In the [Compex demo](#complex-demo), we have implemented a function to
-> find employee information. Therefore, it is highly recommended not to use that
-> demo in conjunction with this guide.
+> [!BEACHTE] Herein das [Compex Demo](#complex-demo), wir implementiert haben
+> eine Aufgabe zu finden Angestellte Auskunft. Deswegen, es ist hoch nicht
+> weiterempfohlen zu benutzen gemeinsam jene Demo mit diesem Fremdenführer.
 
-1. Create an Ivy project that depends on the `portal-components` project
+1. Schaff einen Efeu projiziert jenen hängt ab weiter den `Portal-Komponenten`
+   Projekt
 
-2. Create an Ivy Callable process with input parameters representing the
-   criteria for finding employees with the signature
-   `findEmployeesInfo(String,String,String,String)`
+2. Schaff einen Efeu Callable Arbeitsgang mit Input Parameter vertretend die
+   Kriterien für finden Angestellte mit der Unterschrift
+   `findEmployeesInfo(Schnur,Schnur,Schnur,Schnur)`
 
-| Name       | Type   | Decription                                   |
-| ---------- | ------ | -------------------------------------------- |
-| `name`     | String | Name of the employee                         |
-| `birthday` | String | Employee's date of birth                     |
-| `branch`   | String | Company branch which the employee working at |
-| `position` | String | Position of the employee in the company      |
+| Name         | Typ    | Decription                                                 |
+| ------------ | ------ | ---------------------------------------------------------- |
+| `Name`       | Schnur | Name von der Angestellter                                  |
+| `Geburtstag` | Schnur | Angestellter Datum von Geburt                              |
+| `Zweig`      | Schnur | Gesellschaft verzweigt #welche die Angestellte arbeiten an |
+| `Stelle`     | Schnur | Stelle von der Angestellter in der Gesellschaft            |
 
-The output result of the Ivy Callable process must be an object has name
-`result`, and type [AI Result DTO](#ai-result-dto).
+Das Ausgabe Resultat von dem Efeu Callable Arbeitsgang muss ein Objekt sein hat
+Namen `Resultat`, und Typ [AI Resultat DTO](#ai-result-dto).
 
-| Name     | Type                                          | Decription                  |
-| -------- | --------------------------------------------- | --------------------------- |
-| `result` | com.axonivy.portal.components.dto.AiResultDTO | Result for the AI Assistant |
+| Name       | Typ                                            | Decription                    |
+| ---------- | ---------------------------------------------- | ----------------------------- |
+| `Resultat` | com.axonivy.Portal.Komponenten.dto.AiResultDTO | Resultat für das AI Assistent |
 
-> [!TIP] You will need to implement the logic to find employees yourself. For
-> reference, you can examine the code in the [Complex Demo](#complex-demo)
-> within the **ai-assistant-demo** Ivy project.
+> [!#EIN TRINKGELD GEBEN] Du willst brauchen zu implementieren die Logik zu
+> finden Angestellte #du. Für Verweis, du kannst den Code prüfen herein den
+> [Vielschichtige Demo](#complex-demo) #innerhalb die **ai-Assistenten-Demo**
+> Efeu projiziert.
 
-3. In the variable file **AiFunctions.json** add an Ivy tool which will interact
-   with the callable process above to query for list of employees
+3. In der variablen Datei **AiFunctions.json** Fügt zu ein Efeu Tool #welche
+   will interagieren mit das callable Arbeitsgang zu #abfragen droben für Liste
+   von Angestellte
 
 ```json
 {
@@ -938,27 +995,28 @@ The output result of the Ivy Callable process must be an object has name
 }
 ```
 
-> [!IMPORTANT] Please keep in mind:
-> - the name of the attributes must be same as name of parameters of the
->   callable process above.
-> - `signature` attribute in the JSON object is the signature of the callable
->   process.
+> [!WICHTIG] Bitte Unterhalt in pass auf:
+> - Der Name von den Attributen müssen sein gleich da Name von Parameter von die
+>   callable Arbeitsgang droben.
+> - `Unterschrift` misst bei herein die JSON Objekt ist die Unterschrift von die
+>   callable Arbeitsgang.
 
-4. In the variable file **AiFunctions.json** add an AI Flow to handle the
-   request to find employees from user.
+4. In der variablen Datei **AiFunctions.json** Fügen zu ein AI Strömung zu
+   bedienen die Bitte zu finden Angestellte von Nutzer.
 
-This is an example of a simple AI Flow with 4 steps:
-- Step 0: Rephrase the request of user to make it align with the Ivy tool
-  `find-employees-info`
-- Step 1: Call the Ivy Tool, using the rephrased request at **Step 0** as input
-    - If has error or cannot find any employee matched the request, show an
-      error (**Step 2**)
-    - If success: Show the result (**Step 3**)
-- Step 2: Show an message to user then end the flow.
-- Step 3: Show information of found employees in a well-structured format then
-  end the flow.
+Dies ist ein Beispiel von ein simples AI Strömung mit 4 schreitet:
+- Stufe 0: Rephrase Die Bitte Nutzer zu machen ihm abstimmen mit das Efeu Tool
+  `findet-Angestellte-info`
+- Stufe 1: Ruf das Efeu Tool, benutzend das rephrased Bitte an **Stufe 0** da
+  #einlesen
+    - Ob hat Fehler oder kann nicht finden irgendwelche Angestellte passte die
+      Bitte, zeig einen Fehler (**Stufe 2**)
+    - Ob Erfolg: Zeig das Resultat (**Stufe 3**)
+- Stufe 2: Zeig eine Meldung zu Nutzer enden dann die Strömung.
+- Stufe 3: Vorstellung Auskunft von gründen Angestellte in einer
+  Kuhle-#gegliedert Format enden dann die Strömung.
 
-And this is the AI flow:
+Und dies ist das AI Strömung:
 
 ```json
 {
@@ -1012,9 +1070,9 @@ And this is the AI flow:
 }
 ```
 
-5. Open the variable file **Assistants.json** and add the ID of the AI Flow
-   `Find employees information` to the `tools` attribute of your AI Assistant as
-   shown in the example with the AI Assistant `Alex` below.
+5. Offen die variable Datei **Assistenten.json** Und zufügen das ID von das AI
+   Strömung `Findet Angestellte Auskunft` zu die `Tools` Attribut von eure AI
+   Assistenten gezeigt da in dem Beispiel mit dem AI Assistenten `Alex` unten.
 
 ```json
 [
@@ -1045,45 +1103,47 @@ And this is the AI flow:
 ]
 ```
 
-6. The AI Assistant `Alex` now has the functionality to search for employee
-   information. You can open the chat dashboard and try out this new AI feature.
+6. Das AI Assistent `Alex` jetzt hat die Funktionalität zu #suchen Angestellte
+   Auskunft. Du kannst das Schwatz Armaturenbrett öffnen und probieren #hinaus
+   dies neu AI Charakterzug.
 
-This is an example how the conversation look like when user using the
-`find-employees-flow` with the assistant `Alex`:
+Dies ist wie ein Beispiel die Unterhaltung #aussehen als benutzend Nutzer den
+`findet-Angestellte-Strömung` mit dem Assistenten `Alex`:
 
-**legends:**
+**Legenden:**
 
-😄: User message
+😄: Nutzer Meldung
 
-🐼: The message that AI show on the screen
+🐼: Die Meldung dass AI Vorstellung auf dem Screen
 
-✨: The message that AI talking to itself and don't show to user
+✨: Die Meldung dass AI reden zu #sich und zeigt nicht zu Nutzer
 
-**conversation:**
+**Unterhaltung:**
 
-😄: Hello Alex
+😄: Hallo Alex
 
-🐼: Hi User
+🐼: Hi Nutzer
 
-😄: I want to find Sandy, she is a web developer work for our Munich office
+😄: Ich möchte #Sandy finden, sie arbeitet für ein Web Entwickler unser München
+Büro
 
-✨ `find employee has name ‘Sandy’, position ‘web developer’, and work at branch
-‘Munich’`
+✨ `Findet Angestellte hat Namen ‘#Sandy', Stelle ‘Web Entwickler', und Arbeit an
+Zweig ‘München'`
 
-✨: `<use Ivy Tool find-employees to find employees>`
+✨: `
 
-✨: `[ {“name”: “Sandy Williams“, “branch”: “munich”,”position”: “Web Developer”,
-“rank”:“Senior”, “email”: “sandyw@localhost.com”}]`
+✨: `[ {“Heiß”: “#Sandy Williams“, “Zweig”: “munich”,”Stelle”: “Web Entwickler”,
+“Rang”:“#Dienstälter”, “#Email”: “sandyw@localhost.com”}]`
 
-✨: `[ {“name”: “Sandy Brown“, “branch”: “munich”,”position”: “Web Developer”,
-“rank”:“Junior”, “email”: “sandyb@localhost.com”}]`
+✨: `[ {“Heiß”: “#Sandy Braun“, “Zweig”: “munich”,”Stelle”: “Web Entwickler”,
+“Rang”:“#Junior”, “#Email”: “sandyb@localhost.com”}]`
 
-🐼: I found 2 employees matched your request:
+🐼: Ich fand 2 Angestellte passten eure Bitte:
 
-🐼: Sandy Williams: Senior Web developer, email: sandyw@localhost.com, branch:
-Munich
+🐼: #Sandy Williams: #Dienstälter Web Entwickler, #Email: sandyw@localhost.com,
+Zweig: München
 
-🐼: Sandy Brown: Junior Web developer, email: sandyb@localhost.com, branch:
-Munich.
+🐼: #Sandy Braun: #Junior Web Entwickler, #Email: sandyb@localhost.com, Zweig:
+München.
 
-✨: `<end the flow>`
+✨: `<end the="" flow="">`</end>
