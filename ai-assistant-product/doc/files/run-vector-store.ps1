@@ -28,18 +28,24 @@ $acl = Get-Acl "./opensearch-logs"
 $acl.SetAccessRule($accessRule)
 Set-Acl "./opensearch-logs" $acl
 
-# Create an .env file to store environment variables securely if it doesn't exist
-# The provided initial password (OPENSEARCH_INITIAL_ADMIN_PASSWORD) is only for local testing purposes.
-# For any production or customer-facing system, please change this password immediately to ensure security and compliance.
+# Check or create .env file (without hardcoded secrets)
 $envFilePath = ".env"
 if (-not (Test-Path $envFilePath)) {
-    $envContent = @"
-OPENSEARCH_INITIAL_ADMIN_PASSWORD=admin
-"@
-    Set-Content -Path $envFilePath -Value $envContent
-    Write-Host "Created .env file with environment variables."
+    Write-Host "No .env file found."
+    Write-Host "Creating an empty template .env file..."
+    @"
+# Set your admin password here
+# IMPORTANT:
+# - This initial password is ONLY for local testing.
+# - For any production system, change it immediately.
+OPENSEARCH_INITIAL_ADMIN_PASSWORD=
+"@ | Set-Content -Path $envFilePath
+
+    Write-Host ".env template created at: $envFilePath"
+    Write-Host "Please edit the file and set a password before running this script again."
+    exit 1
 } else {
-    Write-Host ".env file already exists."
+    Write-Host ".env file detected."
 }
 
 # Create docker-compose.yml file if it doesn't exist
