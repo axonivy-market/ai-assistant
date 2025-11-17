@@ -11,9 +11,8 @@ import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.axonivy.utils.aiassistant.dto.Assistant;
 import com.axonivy.utils.aiassistant.dto.tool.AiFunction;
@@ -60,8 +59,8 @@ public class AssistantFunctionListBean extends AbstractFunctionListBean
   @Override
   public void deleteFunction() {
     if (CollectionUtils.isNotEmpty(assistant.getAllTools())) {
-      assistant.getAllTools().remove(selectedFunction);
-      selectedFunction = null;
+      assistant.getAllTools().remove(getSelectedFunction());
+      setSelectedFunction(null);
       updateFunctionsCanAddToAssistant();
     }
   }
@@ -96,14 +95,6 @@ public class AssistantFunctionListBean extends AbstractFunctionListBean
         .stream()
         .filter(func -> isEnabled.and(notAddedTool).and(notIvyTool).test(func))
         .collect(Collectors.toList());
-  }
-
-  public AiFunction getSelectedFunction() {
-    return selectedFunction;
-  }
-
-  public void setSelectedFunction(AiFunction selectedFunction) {
-    this.selectedFunction = selectedFunction;
   }
 
   public List<AiFunction> getFunctionsToAdd() {

@@ -158,7 +158,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 136, "y" : 408 }
+        "at" : { "x" : 136, "y" : 424 }
       },
       "connect" : [
         { "id" : "f24", "to" : "f23" }
@@ -167,7 +167,7 @@
       "id" : "f22",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 560, "y" : 408 },
+        "at" : { "x" : 560, "y" : 424 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {
@@ -183,7 +183,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 312, "y" : 408 },
+        "at" : { "x" : 312, "y" : 424 },
         "size" : { "width" : 160, "height" : 62 }
       },
       "connect" : [
@@ -267,6 +267,57 @@
       "type" : "TaskEnd",
       "visual" : {
         "at" : { "x" : 560, "y" : 528 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f28",
+      "type" : "RequestStart",
+      "name" : "KnowledgeBaseConfiguration",
+      "config" : {
+        "signature" : "KnowledgeBaseConfiguration",
+        "input" : {
+          "params" : [
+            { "name" : "knowledgeBaseId", "type" : "String", "desc" : "" }
+          ],
+          "map" : {
+            "out.targetId" : "param.knowledgeBaseId"
+          }
+        },
+        "request" : {
+          "name" : "Assistant Configuration",
+          "isVisibleOnStartList" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 640 }
+      },
+      "connect" : [
+        { "id" : "f31", "to" : "f29" }
+      ]
+    }, {
+      "id" : "f29",
+      "type" : "DialogCall",
+      "name" : "Knowledge Base Configuration",
+      "config" : {
+        "dialog" : "com.axonivy.utils.aiassistant.management.KnowledgeBaseConfiguration:start(String)",
+        "call" : {
+          "map" : {
+            "param.knowledgeBaseId" : "in.targetId"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 640 },
+        "size" : { "width" : 160, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f30" }
+      ]
+    }, {
+      "id" : "f30",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 640 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     } ]

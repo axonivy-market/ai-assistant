@@ -50,8 +50,8 @@ import com.axonivy.utils.aiassistant.prompts.BasicPromptTemplates;
 import com.axonivy.utils.aiassistant.prompts.RagPromptTemplates;
 import com.axonivy.utils.aiassistant.service.AiFunctionService;
 import com.axonivy.utils.aiassistant.service.AssistantService;
-import com.axonivy.utils.aiassistant.utils.AiFunctionUtils;
 import com.axonivy.utils.aiassistant.utils.AssistantUtils;
+import com.axonivy.utils.aiassistant.utils.StringProcessingUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import ch.ivyteam.ivy.security.ISecurityConstants;
@@ -368,10 +368,9 @@ public class AssistantRestService {
     params.put(AiConstants.CONTACT_PART,
         BasicPromptTemplates.generateContactPrompt(
         assistant.getContactEmail(), assistant.getContactWebsite()));
-    
-    int requestType = RetrievalQATool.analyzeRequestType(assistant, message);
-    params.put("structureGuidelines",
-        RagPromptTemplates.getStructuredOutputInstruction(requestType));
+
+    qaTool.applyStructureGuidelines(message, assistant, context,
+        params);
 
     response.resume(BusinessEntityConverter.entityToJsonValue(
         new StreamingMessage(conversation.getId(), AIState.IN_PROGRESS,
@@ -497,8 +496,7 @@ public class AssistantRestService {
       return answer;
     }
 
-    String selectedFunction = AiFunctionUtils
-        .extractTextInsideDoubleTag(answer);
+    String selectedFunction = StringProcessingUtils.standardizeResult(answer);
 
     List<String> sortedFunctionIds = Optional.ofNullable(functionsIds)
         .orElseGet(() -> new ArrayList<>()).stream()

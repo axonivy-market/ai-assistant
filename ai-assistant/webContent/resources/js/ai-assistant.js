@@ -683,13 +683,34 @@ function ViewAI(uri) {
     }
   }
 
+  // Escape HTML for user-supplied text except for <br/> tags
+  function escapeHtmlExceptBr(str) {
+  // Temporarily replace <br/> to a marker
+  const brMarker = '__BR__';
+  str = str.replace(/<br\s*\/?>/gi, brMarker);
+  // Escape HTML special characters
+  str = str.replace(/[&<>"']/g, function (m) {
+    switch (m) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#39;';
+      default: return m;
+      }
+    });
+    // Restore br tags
+    return str.replace(new RegExp(brMarker, 'g'), '<br/>');
+  }
+
   // Helper function for rendering messages
   function renderNewMessageFunc(messageWrapper, isMyMessage) {
     // Clone message template
     const cloneTemplate = originalMessageTemplate.cloneNode(true);
     let message = '';
     if (isMyMessage) {
-      message = messageWrapper.message.replaceAll('\r\n', '<br/>').replaceAll('\n', '<br/>');
+      // Escape meta-characters (preserving <br/>)
+      message = escapeHtmlExceptBr(messageWrapper.message.replaceAll('\r\n', '<br/>').replaceAll('\n', '<br/>'));
     } else {
       message = parseMessage(messageWrapper);
     }

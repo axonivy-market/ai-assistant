@@ -13,7 +13,7 @@ import com.axonivy.ivy.webtest.engine.WebAppFixture;
 import com.axonivy.utils.aiassistant.test.page.AssistantDashboardPage;
 
 @IvyWebTest
-public class AssistanDashboardTest extends BaseTest {
+public class AssistantDashboardTest extends BaseTest {
 
   @BeforeEach
   public void setup(WebAppFixture fixture) {
@@ -26,7 +26,8 @@ public class AssistanDashboardTest extends BaseTest {
     open(EngineUrl.createProcessUrl("/ai-assistant/19198CAD6D9F2F9E/AssistantDashboard.ivp"));
     AssistantDashboardPage assistantDashboardPage = new AssistantDashboardPage();
     assistantDashboardPage.sendMessage("Hello");
-    $("div.chat-message-container.error-response").shouldHave(text("openAiApiKey cannot be null or empty"));
+    $("div.chat-message-container.error-response")
+        .shouldHave(text("You didn't provide an API key"));
   }
 
   @Test
@@ -35,7 +36,8 @@ public class AssistanDashboardTest extends BaseTest {
     open(EngineUrl.createProcessUrl("/ai-assistant/19198CAD6D9F2F9E/AssistantDashboard.ivp"));
     AssistantDashboardPage assistantDashboardPage = new AssistantDashboardPage();
     assistantDashboardPage.choosePreDefinedMessage();
-    $("div.chat-message-container.error-response").shouldHave(text("openAiApiKey cannot be null or empty"));
+    $("div.chat-message-container.error-response")
+        .shouldHave(text("You didn't provide an API key"));
   }
 
 }

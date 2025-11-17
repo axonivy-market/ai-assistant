@@ -1,20 +1,20 @@
-# ai-assistant
+# AI Assistant
 
-Der **KI-Assistent** ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um Ihre tägliche Arbeit im Portal zu optimieren. 
+Der **KI-Assistent** ist ein leistungsstarkes Werkzeug, das entwickelt wurde, um deine tägliche Arbeit im Portal zu optimieren. Als dein persönlicher Assistent bietet er nahtlose Unterstützung bei einer Vielzahl von Aufgaben, von der Navigation durch Dokumentationen über das Starten von Prozessen bis hin zur Verwaltung von Aufgaben und Fällen. Mit dem KI-Assistenten an deiner Seite kannst du effizienter und effektiver arbeiten und wertvolle Zeit für das widmen, was wirklich wichtig ist.
 
-Als Ihr persönlicher Assistent bietet er nahtlose Unterstützung bei einer Vielzahl von Aufgaben, von der Navigation durch Dokumentationen über das Starten von Prozessen bis hin zur Verwaltung von Aufgaben und Fällen. Mit dem KI-Assistenten an Ihrer Seite können Sie effizienter und effektiver arbeiten und wertvolle Zeit für das widmen, was wirklich wichtig ist.
-
-Treten Sie in einen interaktiveren und intuitiveren Workflow ein, indem Sie mit dem Assistenten über Ihre Prozesse sprechen, anstatt sie lediglich auszuführen. Diese dynamische Interaktion verbessert Ihr Erlebnis, sodass Sie Optionen erkunden und Einblicke gewinnen können, während Sie arbeiten. Mit mehrsprachigen Fähigkeiten kommuniziert der KI-Assistent mühelos in Englisch, Deutsch, Spanisch und mehr, sodass Sie Unterstützung in Ihrer bevorzugten Sprache erhalten.
+Tritt in einen interaktiveren und intuitiveren Workflow ein, indem du mit dem Assistenten über deine Prozesse sprichst, anstatt sie lediglich auszuführen. Diese dynamische Interaktion verbessert dein Erlebnis, sodass du Optionen erkunden und Einblicke gewinnen kannst, während du arbeitest. Mit mehrsprachigen Fähigkeiten kommuniziert der KI-Assistent mühelos in Englisch, Deutsch, Spanisch und mehr, sodass du Unterstützung in deiner bevorzugten Sprache erhältst.
 
 ![Chat-Dashboard](doc/img/chat-dashboard.png)
 
-Über die unmittelbare Unterstützung hinaus ermöglicht Ihnen der KI-Assistent, benutzerdefinierte Modelle und Assistenten zu erstellen und zu verwalten, die auf Ihre individuellen Bedürfnisse zugeschnitten sind. Mit der Verwaltungsübersicht ist es ein Kinderspiel, diese Modelle zu entwerfen, zu konfigurieren und zu organisieren. Sie können personalisierte Assistenten erstellen, spezifische Verhaltensweisen zuweisen oder vordefinierte Vorlagen verwenden, um deren Aktionen zu steuern. Dieses Maß an Anpassung stellt sicher, dass Ihr KI-Assistent perfekt auf Ihre Vorlieben und Arbeitsweise abgestimmt ist.
+Über die unmittelbare Unterstützung hinaus ermöglicht dir der KI-Assistent, benutzerdefinierte Modelle und Assistenten zu erstellen und zu verwalten, die auf deine individuellen Bedürfnisse zugeschnitten sind. Mit der Verwaltungsübersicht ist es ein Kinderspiel, diese Modelle zu entwerfen, zu konfigurieren und zu organisieren. Du kannst personalisierte Assistenten erstellen, spezifische Verhaltensweisen zuweisen oder vordefinierte Vorlagen verwenden, um deren Aktionen zu steuern. Dieses Maß an Anpassung stellt sicher, dass dein KI-Assistent perfekt auf deine Vorlieben und Arbeitsweise abgestimmt ist.
+
+Begrüße die Zukunft der Arbeit mit dem KI-Assistenten, deinem personalisierten Begleiter für verbesserte Produktivität und nahtlose Aufgabenverwaltung.
 
 ![Assistentenverwaltung](doc/img/assistant-management.png)
 
-**Liste der Funktionen**
+**Liste der Funktionen:**
 
-- Portal-Suppport: Der KI-Assistent kennt die Axon Ivy Dokumentation. Füge darüberhinaus eigene Dokumentations hinzu. 
+- Portal-Support: Der KI-Assistent kennt die Axon Ivy Dokumentation.
 - Aufgaben- und Prozessmanagement: Der KI-Assistent kann Aufgaben und Prozesse starten.
 - Suche und Filter: Er kann Aufgaben und Fälle durchsuchen und filtern.
 - Mehrsprachige Unterstützung: Unterstützung in mehreren Sprachen.
@@ -24,82 +24,81 @@ Treten Sie in einen interaktiveren und intuitiveren Workflow ein, indem Sie mit 
 
 ## Demo
 
-### KI-Demoprojekt
+### KI-Demo Projekt
 
-Im **ai-assistant-demo** Ivy-Projekt haben wir einen Demo-Assistenten entwickelt, der dir dabei hilft, das Konzept der KI-Assistenten besser zu verstehen. Er bietet dir wertvolle Unterstützung, damit du deine eigenen KI-Assistenten einfacher entwickeln und optimal konfigurieren kannst.
+Im **ai-assistant-demo** Ivy-Projekt haben wir Demo-Assistenten erstellt, die dir helfen können, deinen eigenen KI-Assistenten besser zu verstehen und effizienter zu entwickeln.
 
 > [!IMPORTANT]
-> Dieses Demoprojekt erstellt Ivy-Benutzer und -Rollen und überschreibt die primären Variablen des KI-Assistenten. Es wird **DRINGEND EMPFOHLEN**, das Projekt im Demomodus auf einer Ivy-Engine auszuführen, um deine eigenen Daten und Konfigurationen zu schützen und beizubehalten.
+> Dieses Demo-Projekt erstellt Ivy-Benutzer und -Rollen und überschreibt die primären Variablen des KI-Assistenten. Es wird **DRINGEND EMPFOHLEN**, es im Demomodus auf einer Ivy-Engine auszuführen, um deine Daten zu schützen.
 >
-> Falls du diese Demo in einer Produktionsumgebung ausführen möchtest, stelle sicher, dass du alle mit dem KI-Assistenten verbundenen Ivy-Variablen sicherst. Erstelle dazu Sicherungskopien der folgenden Dateien auf deiner Engine:
+> Falls du diese Demo in einer Produktionsumgebung ausführen möchtest, stelle sicher, dass du alle mit dem KI-Assistenten verbundenen Ivy-Variablen sicherst. Erstelle Sicherungskopien der folgenden Dateien auf deiner Engine:
 >
 > - `<engine folder>/configuration/applications/<application folder>/variables.AiAssistant.Assistants.json`
 > - `<engine folder>/configuration/applications/<application folder>/variables.AiAssistant.AiFunctions.json`
 >
-> Nach Abschluss der Demo ersetze die modifizierten Variablendateien durch die zuvor erstellten Sicherungskopien.
+> Nach Abschluss der Demo ersetze die modifizierten Variablendateien durch die Sicherungskopien.
 
 #### Complex Demo
 
 **Use Case**
 
-Der Benutzer kann mit Hilfe des KI-Assistenten ein Softwareprojekt effizient planen und strukturieren. Der Assistent organisiert die Informationen in einem übersichtlichen Format und bietet folgende Unterstützung:
+Ein Benutzer kann mit dem KI-Assistenten ein Softwareprojekt planen. Der KI-Assistent ermöglicht es Benutzern, ein Softwareprojekt effizient zu planen, indem er Informationen in einem strukturierten Format organisiert. Er kann:
 
-- Erstellung und Speicherung des Projekts in der Datenbank
-- Hilfe bei der Suche und Auswahl geeigneter Teammitglieder für das Projekt
-- Unterstützung bei der Vorbereitung des Kick-off-Meetings
-- Erstellung und Zuweisung von Aufgaben, um Teammitglieder zum Meeting einzuladen
+- das Projekt erstellen und in der Datenbank speichern
+- beim Finden und Auswählen geeigneter Teammitglieder für das Projekt helfen
+- Benutzern bei der Vorbereitung des Projekt-Kick-off-Meetings helfen
+- Aufgaben erstellen und zuweisen, um Teammitglieder zum Meeting einzuladen
 
-**Ausführung der Demo**
+**Verwendung**
 
 1. Führe den Prozess `startComplexDemo` aus, um Testdaten zu erstellen und den ursprünglichen KI-Assistenten durch den **Complex Demo Assistant** zu ersetzen
 
-2. Öffne im **Portal** den Chat für den KI-Assistenten
+2. Öffne im **Portal** die KI-Assistenten App
 
-3. Jetzt kannst du den Assistenten nutzen, um ein Softwareprojekt zu planen und zu erstellen, indem du die Projektdetails eingibst, wie die Anzahl der Teammitglieder oder die verwendeten Technologien.
-
-**Beispiel**
-
-`Das XYZ Solutions Web Development Project zielt darauf ab, eine erstklassige Webanwendung zu entwickeln, die die Benutzererfahrung verbessert und die Wachstumsziele des Unternehmens unterstützt. Hauptsächlich mit grundlegenden Webtechnologien wie HTML und CSS wird das Projekt eine sichere, skalierbare und effiziente Plattform liefern, die den Branchenstandards und bewährten Methoden entspricht. Dafür benötigen wir 3 Ingenieure, 1 Webdesigner und 2 Tester.`
-
-#### Fehlerbehandlung der Demo
-
-**Use Case**
-
-Da keine Daten für Besprechungsräume vorhanden sind, zeigt der KI-Assistent jedes Mal einen Fehler an, wenn der Benutzer nach einem Besprechungsraum sucht. Dies ist ein einfaches Beispiel dafür, wie der KI-Assistent Fehler ordnungsgemäß handhaben kann.
-
-**Wie man vorgeht**
-
-1. Führe den Prozess `startErrorHandlingDemo` aus, um Testdaten zu erstellen und den ursprünglichen KI-Assistenten durch den **Error Handling Demo Assistant** zu ersetzen.
-
-2. Öffne im **Portal** den Chat für den KI-Assistenten.
-
-3. Nun kannst du die Demo starten, indem du mit dem **Error Handling Demo Assistant** Informationen zu einem Raum anforderst.
+3. Jetzt kannst du den Assistenten verwenden, um ein Softwareprojekt zu planen und zu erstellen, indem du die Details des Projekts eingibst und möglicherweise die Anzahl der Mitglieder oder Technologien angibst.
 
 Beispiel:
 
-`Ich möchte den Besprechungsraum C finden.`
+`Das XYZ Solutions Web Development Project zielt darauf ab, eine hochmoderne Webanwendung zu entwickeln, die die Benutzererfahrung verbessert und die Wachstumsziele des Unternehmens unterstützt. Hauptsächlich mit grundlegenden Webtechnologien wie HTML und CSS wird das Projekt eine sichere, skalierbare und effiziente Plattform liefern, die den Branchenstandards und bewährten Methoden entspricht. Wir benötigen 3 Ingenieure, 1 Webdesigner und 2 Tester dafür.`
+
+#### Fehlerbehandlungs-Demo
+
+**Use Case**
+
+Da keine Daten für Besprechungsräume vorhanden sind, zeigt der KI-Assistent jedes Mal einen Fehler an, wenn ein Benutzer nach einem Besprechungsraum sucht.
+Dies ist ein einfaches Beispiel dafür, wie man dem KI-Assistenten hilft, Fehler ordnungsgemäß zu behandeln.
+
+**Verwendung**
+
+1. Führe den Prozess `startErrorHandlingDemo` aus, um Testdaten zu erstellen und den ursprünglichen KI-Assistenten durch den **Error Handling Demo Assistant** zu ersetzen
+
+2. Öffne im **Portal** die KI-Assistenten App
+
+3. Jetzt kannst du die Demo ausführen, indem du mit dem **Error Handling Demo Assistant** Informationen zu einem Raum anforderst.
+
+Beispiel:
+
+`Ich möchte den Besprechungsraum C finden`
 
 ## Setup
 
-1. Deploye das **ai-assistant** Artefakt in derselben Anwendung indem sich auch das **Portal** befindet.
+1. Deploye das **ai-assistant** Artefakt in derselben Anwendung mit dem **Portal**.
 
-2. Starte die Engine und melden dich im Portal an.
+2. Starte die Engine und melde dich im Portal an.
 
-3. Klicke in der Kopfzeile des Portals auf das **KI-Assistent** Symbol, um auf den Chat des **KI-Assistenten** zuzugreifen.
+3. Klicke in der Kopfzeile des Portals auf das **KI-Assistent** Symbol, um auf die **KI-Assistenten** App zuzugreifen.
 
-### Benutzerhandbuch des KI-Assistenten
+### Benutzerhandbuch
 
 #### KI-Management
 
-Der Tab KI-Management dient als zentrale Anlaufstelle für die Konfiguration und Verwaltung aller Aspekte des KI-Assistenten.
+Der KI-Management-Bildschirm dient als zentrale Anlaufstelle für die Konfiguration und Verwaltung aller Aspekte deines KI-Assistenten-Systems. Von hier aus kannst du:
 
-Von hier aus kannst du:
+- [KI-Assistenten verwalten](#ki-assistenten-verwalten): Überwache und modifiziere die KI-Assistenten, einschließlich der Änderung der Visualisierung, Persönlichkeit, Anpassung ihres Verhaltens und Verwaltung der Funktionen, die sie handhaben können
 
-- [KI-Assistenten verwalten](#ki-assistenten-verwalten): Überwache und modifiziere die KI-Assistenten, einschließlich der Anpassung ihrer Visualisierung, Persönlichkeit und ihres Verhaltens sowie der Verwaltung der Funktionen, die sie ausführen können.
+- [KI-Modelle konfigurieren](#ki-modelle-konfigurieren): Ändere Einstellungen für KI-Modelle wie den API-Schlüssel, der deine Anwendungen antreibt
 
-- [KI-Modelle konfigurieren](#ki-modelle-konfigurieren): Ändere Einstellungen für deine KI-Modelle, wie z. B. den API-Key, der für die Verbindung zur Drittapplikation des KI-Modells erforderlich ist.
-
-- [KI-Funktionen verwalten](#ki-funktionen-verwalten):Kontrolliere und organisiere die verschiedenen KI-Funktionen, definiere die Aktionen, die die KI ausführen kann, und lege fest, wie sie mit Benutzern interagiert, um präzise und effiziente Ergebnisse zu liefern.
+- [KI-Funktionen verwalten](#ki-funktionen-verwalten): Kontrolliere und organisiere verschiedene KI-Funktionen, definiere die Aktionen, die deine KI ausführen kann, und wie sie mit Benutzern interagiert, um genaue und effiziente Ergebnisse zu liefern
 
 ![Verwaltung von KI-Funktionen](doc/img/ai-functions-management.png)
 
@@ -258,9 +257,9 @@ Nach dem Hochladen der ZIP-Datei warte bitte einige Minuten, bis sich das Upload
 
 #### Assistentenvorlagen
 
-Der KI-Assistent bieten Entwicklern die Möglichkeit, Vorlagen für KI-Assistenten vorab zu definieren. Um diese Vorlagen zu aktualisieren, musst du die JSON-Datei für die Ivy-Variable `variable.AiAssistant.AssistantTemplates.json` im Engine-Ordner unter `<engine folder>/configuration/applications/<application folder>` ändern.
+KI-Assistenten bieten Entwicklern einen Ansatz, um Vorlagen für KI-Assistenten vorab zu definieren. Um diese Vorlagen zu aktualisieren, musst du die JSON-Datei für die Ivy-Variable `variable.AiAssistant.AssistantTemplates.json` im Engine-Ordner unter `<engine folder>/configuration/applications/<application folder>` ändern.
 
-Hier ist ein Beispiel für eine KI-Assistenten Vorlage:
+Hier ist ein Beispiel für eine KI-Assistenten-Vorlage:
 
 ```json
 [
@@ -287,27 +286,27 @@ Hier ist ein Beispiel für eine KI-Assistenten Vorlage:
 ]
 ```
 
-Attribute einer KI-Assistenten Vorlage:
+Attribute einer KI-Assistenten-Vorlage:
 
 - `id`: die eindeutige ID der Vorlage
 - `version`: die Versionsnummer der Vorlage. Sie muss mit der Version des KI-Assistenten übereinstimmen
 - `name`: der Name des Assistenten. Wenn diese Vorlage ausgewählt wird, wird dieser Wert als Standardname für den Assistenten festgelegt
-- `info`: definiert, wie der KI-Assistent sich bei der Beantwortung von Benutzern verhalten soll, einschließlich Persönlichkeit, Rolle und dem Geschäftsbereich, auf den er sich konzentrieren soll
+- `info`: definiert, wie du möchtest, dass sich der KI-Assistent beim Antworten auf Benutzer verhält, einschließlich Persönlichkeit, Rolle und dem Geschäftsbereich, auf den er sich konzentrieren soll
 - `ethicalRules`: ethische Prinzipien, denen der KI-Assistent strikt folgen muss
 - `contactEmail`: die Kontakt-E-Mail, die der KI-Assistent bei Bedarf den Benutzern zur Verfügung stellen kann
 - `contactWebsite`: die Website, die der KI-Assistent bei Bedarf den Benutzern zur Verfügung stellen kann
 - `tools`: IDs der KI-Funktionen, auf die der Assistent mit dieser Vorlage zugreifen kann
 - `description`: eine kurze Beschreibung der Vorlage. Dieses Attribut beeinflusst nicht das Verhalten des Assistenten
 
-Standardmäßig bietet der **KI-Assistent** vier Vorlagen an:
+Standardmäßig bietet der KI-Assistent vier Vorlagen an:
 
-- **Portal-Assistent**: Eine Vorlage für den Axon Ivy Portal-Assistenten, mit Funktionen zur Interaktion mit dem Axon Ivy-System, wie das Finden von Aufgaben, Fällen und Prozessen sowie dem Zugriff auf eine Wissensdatenbank zum Axon Ivy-Portal.
+- **Portal-Assistent**: Eine Vorlage für den Axon Ivy Portal-Assistenten, mit Funktionen zur Interaktion mit dem Axon Ivy-System, wie das Finden von Aufgaben, Fällen und Prozessen sowie dem Zugriff auf eine Wissensdatenbank zum Axon Ivy-Portal
 
-- **HR-Assistent**: Eine Vorlage für KI-Assistenten im Bereich Human Resources. Diese Vorlage enthält keine Tools, bietet jedoch klare Informationen und eine starke ethische Regelung, die speziell auf HR zugeschnitten ist.
+- **HR-Assistent**: Eine Vorlage für KI-Assistenten im Bereich Human Resources. Diese Vorlage enthält keine Tools, bietet jedoch klare Informationen und eine starke ethische Regelung, die speziell auf HR zugeschnitten ist
 
-- **Sales-Assistent**: Eine Vorlage für KI-Assistenten, die Vertriebsteams unterstützen soll. Wie der HR-Assistent enthält auch diese Vorlage keine Tools, bietet jedoch klare Informationen und eine starke ethische Regelung und einen optimierten Kundenfokus.
+- **Sales-Assistent**: Eine Vorlage für KI-Assistenten, die Vertriebsteams unterstützen. Wie der HR-Assistent enthält auch diese Vorlage keine Tools, bietet jedoch klare Informationen und eine starke ethische Regelung
 
-- **ICT-Assistent**: Eine Vorlage für KI-Assistenten, die zur Fehlerbehebung von IT-Problemen im Backoffice eingesetzt werden kann. Diese Vorlage enthält ebenfalls keine Tools.
+- **ICT-Assistent**: Eine Vorlage für KI-Assistenten, die zur Fehlerbehebung von IT-Problemen im Backoffice eingesetzt werden. Diese Vorlage enthält ebenfalls keine Tools
 
 #### AI Flow
 
@@ -368,9 +367,7 @@ Grundlegende Attribute eines AI Flow:
 
 - **steps**: Listet die KI-Schritte auf, die der **AI Flow** ausführen soll, um die Anfrage des Benutzers zu bearbeiten. Verfügbare Schrittarten:
 
-    - **Switch**: Entscheidungselement, dass der KI hilft, die geeignete nächste Aktion basierend auf bestimmten Bedingungen auszuwählen.
-
-    - **Ivy** Tool: Weist die KI an, bestimmte Ivy-Tools (Ivy callable) im Entscheidungsprozess zu verwenden.
+    - **Ivy Tool**: Weist die KI an, bestimmte Ivy-Tools (Ivy callable) im Entscheidungsprozess zu verwenden.
 
     - **Text**: Zeigt textbasierte Inhalte an oder generiert diese für die Benutzerinteraktion.
 
@@ -382,7 +379,7 @@ Grundlegende Attribute eines AI Flow:
 > Um mehr über die AI-Schritte zu erfahren, siehe [AI-Schritt](#ai-schritt).
 
 > [!TIP]
-> Um zu erfahren, wie Sie Ihren eigenen AI Flow erstellen können, siehe [AI Flow-Demo](#erstellen-sie-ihren-eigenen-ai-flow).
+> Um zu erfahren, wie du deinen eigenen AI Flow erstellen kannst, siehe [AI Flow-Demo](#erstelle-deinen-eigenen-ai-flow).
 
 ##### AI-Schritt
 
@@ -394,19 +391,19 @@ Grundlegende Attribute eines AI Flow:
     - TEXT: [Text-Schritt](#text-schritt).
     - RE_PHRASE: [Rephrase-Schritt](#rephrase-schritt).
     - TRIGGER_FLOW: [Trigger-Flow-Schritt](#trigger-flow-schritt).
-    - KNOWLEDGE_BASE: [Knowledge-Base-Schritt](#trigger-flow-schritt).
+    - KNOWLEDGE_BASE: [Knowledge-Base-Schritt](#knowledge-base-schritt)
 
 - **stepNo**: Nummer des Schritts im Flow.
 
-- **result**: Ergebnis eines Schritts (siehe AI Result DTO).
+- **result**: Ergebnis eines Schritts (siehe [AI Result DTO](#ai-result-dto)).
 
 - **onSuccess**: Der Schritt, der ausgeführt wird, wenn dieser Schritt erfolgreich ausgeführt wird.
 
 - **onError**: Der Schritt, der ausgeführt wird, wenn bei der Ausführung dieses Schritts ein Problem auftritt.
 
-- **useConversationMemory**: Auf „true“ setzen, um alle Chat-Nachrichten des Gesprächs beim Ausführen des Schritts einzubeziehen. Andernfalls werden nur die Chat-Nachrichten des laufenden AI Flows einbezogen.
+- **useConversationMemory**: Auf "true" setzen, um alle Chat-Nachrichten des Gesprächs beim Ausführen des Schritts einzubeziehen. Andernfalls werden nur die Chat-Nachrichten des laufenden AI Flows einbezogen.
 
-- **saveToHistory**: Auf „false“ setzen, um die Nachricht von der Gesprächshistorie auszuschließen, sie wird nur im Speicher gespeichert.
+- **saveToHistory**: Auf "false" setzen, um die Nachricht von der Gesprächshistorie auszuschließen, sie wird nur im Speicher gespeichert.
 
 - **customInstruction**: Anweisung für eine spezifische Anforderung an die KI.
 
@@ -483,7 +480,7 @@ Der **Text-Schritt** ist eine zentrale Komponente in KI-Workflows, die darauf au
 
 **KI-generiert**
 
-- **useAI**: Auf „true“ setzen, um der KI zu erlauben, Inhalte dynamisch zu generieren, wie beispielsweise Zusammenfassungen oder Berichte.
+- **useAI**: Auf "true" setzen, um der KI zu erlauben, Inhalte dynamisch zu generieren, wie beispielsweise Zusammenfassungen oder Berichte.
 
 - **customInstruction**: Eine Leit-Anweisung, um der KI zu helfen, passenden Text basierend auf dem Kontext oder den Benutzereingaben zu erstellen.
 
@@ -526,7 +523,7 @@ Der **Text-Schritt** ist eine zentrale Komponente in KI-Workflows, die darauf au
 
 **versteckter Text Schritt**
 
-- **isHidden**: Auf „true“ setzen, um den Text vor dem Benutzer zu verbergen, aber der KI zu erlauben, ihn zu lesen und zu verarbeiten. Dies ist nützlich, wenn Inhalte generiert werden, die die KI für die weitere Verarbeitung benötigt, ohne sie in der Benutzeroberfläche anzuzeigen.
+- **isHidden**: Auf "true" setzen, um den Text vor dem Benutzer zu verbergen, aber der KI zu erlauben, ihn zu lesen und zu verarbeiten. Dies ist nützlich, wenn Inhalte generiert werden, die die KI für die weitere Verarbeitung benötigt, ohne sie in der Benutzeroberfläche anzuzeigen.
 
 ```json
 {
@@ -553,9 +550,9 @@ Der **Rephrase-Schritt** ist dazu gedacht, der KI zu helfen, Benutzereingaben zu
 
 - **toolId**: Bezieht sich auf das Tool, das die KI als Ziel verwenden wird. Die KI sollte das JSON-Schema des entsprechenden Tools verwenden, um die Nachricht umzuformulieren. Durch die Definition dieses Attributs stellst du sicher, dass die umformulierte Eingabe mit den Anforderungen des Tools kompatibel ist.
     - Beispiel:
-        - Benutzereingabe: „find my sick leave task“
+        - Benutzereingabe: "find my sick leave task"
         - Sie haben ein Tool, um Aufgaben nach Name, Beschreibung, Priorität usw. zu finden, aber der Benutzer hat nicht angegeben, welches Feld er verwenden möchte. Daher solltest du die Nachricht umformulieren, bevor Sie sie mit dem Ivy-Tool verwenden.
-        - → „find the task with the name ‘sick leave’“
+        - → "find the task with the name 'sick leave'"
 - **customInstruction**: Bietet spezifische Richtlinien dafür, wie die KI die Nachricht umformulieren soll. Dies hilft der KI, besondere Fälle wie abstrakte Begriffe oder Datumsangaben zu behandeln und sie in nützlichere Datenformate zu bringen.
 
 - **onRephrase**: Definiert den nächsten Schritt, der ausgeführt wird, wenn die KI feststellt, dass die Nachricht umformuliert werden muss.
@@ -663,7 +660,7 @@ Das Ergebnis-DTO stellt sicher, dass der KI-Assistent zuverlässige und konsiste
 In diesem Abschnitt erklären wir, wie du deinen eigenen AI Flow entwickeln kannst, wobei das [Reales Anwendungsbeispiel](#reales-anwendungsbeispiel) als Use Case dient.
 
 > [!NOTE]
-> In der [Komplexen Demo](#komplexe-demo) haben wir eine Funktion implementiert, um Mitarbeiterinformationen zu finden. Daher wird dringend empfohlen, diese Demo nicht in Verbindung mit dieser Anleitung zu verwenden.
+> In der [Complex Demo](#complex-demo) haben wir eine Funktion implementiert, um Mitarbeiterinformationen zu finden. Daher wird dringend empfohlen, diese Demo nicht in Verbindung mit dieser Anleitung zu verwenden.
 
 1. Erstelle ein Ivy-Projekt, das vom Projekt `portal-components` abhängt.
 
@@ -811,7 +808,7 @@ So kann der entsprechende AI-Flow aussehen:
             "Keep user data confidential by protecting it securely.",
             "Be transparent by clearly stating you're an AI and providing accurate information.",
             "Treat everyone fairly by ensuring equal treatment and avoiding bias.",
-            "Commit to honesty, ensuring that the customer’s trust is maintained at all times",
+            "Commit to honesty, ensuring that the customer's trust is maintained at all times",
             "Providing equal support regardless of customer's technical expertise or business size",
             "Avoid using high-pressure tactics or making suggestions that could manipulate customer decisions"
         ]
@@ -839,7 +836,7 @@ So könnte ein Beispielgespräch aussehen, wenn der Benutzer den `find-employees
 
 😄: I want to find Sandy, she is a web developer working for our office in munich
 
-✨ `find employee has name ‘Sandy’, position ‘web developer’, and work at branch ‘Munich’`
+✨ `find employee has name 'Sandy', position 'web developer', and work at branch 'Munich'`
 
 ✨: `<use Ivy Tool find-employees to find employees>`
 

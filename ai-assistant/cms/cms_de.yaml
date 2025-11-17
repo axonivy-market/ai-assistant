@@ -5,6 +5,16 @@ Dialogs:
         aiassistant:
           component:
             AIFunctionList:
+              CreateNewAiFunction: |
+                Erstelle eine neue KI-Funktion
+              EditAIFunction: Bearbeite die KI-Funktion
+              LogicalAnswer: Logische Antwortstruktur
+              LogicalAnswerTooltip: |+
+                Wenn diese Option aktiviert ist, organisiert die KI Antworten in einem klaren, logischen Format, das Kohärenz und strukturiertes Denken gewährleistet. Dieser Prozess benötigt jedoch zusätzliche Zeit, um eine gut strukturierte Antwort zu erzeugen.
+
+              NonStartableTooltip: |+
+                Nicht startbare KI-Funktionen sind Funktionen, die aufgrund von Fehlern nicht gestartet werden können oder nur indirekt von anderen KI-Funktionen genutzt werden können.
+
               OpenFunctionDetailsWarningDialogHeader: Öffne die Detailseite der KI-Funktion "{0}"
               OpenFunctionDetailsWarningDialogMessage: Nicht gespeicherte Änderungen gehen verloren. Möchten Sie fortfahren?
               RemoveFunctionDialogHeader: Entfernen Sie die „{0}“ AI-Funktion
@@ -21,6 +31,23 @@ Dialogs:
               ClearConversationHistory: Verlauf löschen
               ExportHistory: Verlauf exportieren
               Title: Assistent Dashboard
+            KnowledgeBaseList:
+              CreateNewBase: Erstelle eine neue Wissensdatenbank
+              EditKnowledge: Bearbeite die Wissensdatenbank
+              RemoveKnowledgeBaseDialogHeader: |+
+                Entferne die Wissensdatenbank "{0}"
+
+              RemoveKnowledgeBaseMessage: Bist du sicher, dass du diese Wissensdatenbank löschen möchtest?
+              RemoveKnowledgeBaseUsingByMessage: |-
+                Diese Wissensdatenbank wird von KI-Funktionen verwendet:
+
+                <br/>
+
+                <strong>{0}</strong>
+
+                <br/><br/>
+
+                Bist du sicher, dass du diese Wissensdatenbank löschen möchtest?
           helper:
             UploadPortalDocument:
               Information: |-
@@ -55,6 +82,7 @@ Dialogs:
               Title: AI-Modell Konfiguration
               UsingBy: Assistenten, die dieses Modell verwenden
             AssistantConfiguration:
+              AddAIFunction: Füge eine KI-Funktion hinzu
               AddFunction: Funktion hinzufügen
               AssistantSavedMessage: Assistent "{0}" wurde erfolgreich gespeichert
               AssistantTemplates: Assistentenvorlagen
@@ -69,9 +97,50 @@ Dialogs:
                 Sind Sie sicher, dass Sie diesen Assistenten löschen möchten?
               Settings: Einstellungen
               Title: Assistent Konfiguration
-              UseTemplate: Vorlage verwenden
+              UseTemplate: |+
+                Verwende eine KI-Assistenten-Vorlage
+
+            KnowledgeBaseConfiguration:
+              AddSource: Füge eine weitere Quelle hinzu...
+              CreateDraftDocuments: Erstelle Entwurfsdokumente
+              CreateNewDocument: Erstelle ein neues Dokument
+              DiscardDraftDocumentMessage: |+
+                Alle Entwurfsdokumente gehen verloren. Bist du sicher, dass du diese Seite verlassen möchtest?
+
+              EmbedAllDocuments: Betten Sie alle Dokumente ein
+              KnowledgeBase: Wissensdatenbank-Konfiguration
+              LeaveThisPage: Diese Seite verlassen?
+              NewKnowledge: Neue Wissensdatenbank
+              SaveAndEmbedDocument: Speichere und bette das Dokument ein
+              SelectedSourcesInfo: '{0} Quelle(n) sind ausgewählt.'
+              SourceFile: Quelldatei
+              Sources: Quellen
+              TextSegmentDetails: Details zum Textsegment
+              ToUploadSources: 'Um Dokumentquellen hochzuladen, zieh sie per Drag & Drop oder '
+          validation:
+            CannotConnectToServerMessage: Keine Verbindung zum OpenSearch-Server mit der URL {0} möglich
+            CannotConnectToVectorStoreMessage: Vektorspeicher [{0}] nicht gefunden
+            ErrorOccurredWhenAddingDocuments: Ein Fehler ist beim Hinzufügen der Dokumente aufgetreten
+            ErrorOccurredWhenDeleteDocumentsMessage: |+
+              Ein Fehler ist beim Löschen der Dokumente aufgetreten
+
+            ErrorOccurredWhenDeleteVectorStoreMessage: |+
+              Ein Fehler ist beim Löschen des Vektorspeichers aufgetreten
+
+            MaximumKnowledgeBasesReachedMessage: |+
+              Du hast die maximale Anzahl an Wissensdatenbanken erreicht. Um eine neue zu erstellen, lösche bitte eine nicht mehr benötigte Wissensdatenbank.
+
+            VectorStoreExistMessage: Ein Vektorspeicher mit der ID {0} existiert bereits
 Labels:
+  Cancel: Abbrechen
+  Configure: Configure
+  Content: Inhalt
+  Documents: Dokumente
+  Edit: Bearbeiten
   Enums:
+    EmbeddingDocumentStatus:
+      DRAFT: Entwurf
+      EMBEDDED: Eingebettet
     ToolType:
       FLOW: Ivy-Fluss
       IVY: Ivy-Tool
@@ -79,6 +148,9 @@ Labels:
     UploadDocumentType:
       OTHERS: Sonstiges
       PORTAL_SUPPORT: Portal-Unterstützung
+  Generate: Erstellen
+  KnowledgeBase: Wissensdatenbank
+  KnowledgeBases: Wissensdatenbanken
   Message:
     InvalidEmailFormat: Ungültiges E-Mail-Format
     InvalidUrl: "Ungültige URL\t"
@@ -90,8 +162,12 @@ Labels:
     OpenAI:
       PrimaryModel: Primäres Open AI-Modell
       SecondaryModel: Sekundäres Open AI-Modell
+  More: Mehr
   Portal:
     PortalDocumentLink: https://maven.axonivy.com/com/axonivy/portal/portal-guide/11.3.1/portal-guide-11.3.1.zip
+  Select: Auswählen
+  Status: Status
+  UploadHere: Hier hochladen
   common:
     AIFunctions: AI-Funktionen
     Actions: Aktionen

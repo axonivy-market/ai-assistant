@@ -61,13 +61,16 @@ public class ChatMessageManager {
   public static void clearConversation(String conversationId)
       throws IOException {
     List<Conversation> conversations = loadAllConversations();
+
+    // Duplicate the conversation list to avoid concurrent modification
+    List<Conversation> newConversations = new ArrayList<>();
     for (Conversation conversation : conversations) {
-      if (conversation.getId().contentEquals(conversationId)) {
-        conversations.remove(conversation);
+      if (!conversation.getId().contentEquals(conversationId)) {
+        newConversations.add(conversation);
       }
     }
 
-    saveConversationsToCache(conversations);
+    saveConversationsToCache(newConversations);
   }
 
   public static void clearAllConversations() {

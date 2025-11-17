@@ -34,9 +34,11 @@ set_permissions() {
 }
 
 # Create an .env file to store environment variables securely if it doesn't exist
+# The provided initial password (OPENSEARCH_INITIAL_ADMIN_PASSWORD) is only for local testing purposes.
+# For any production or customer-facing system, please change this password immediately to ensure security and compliance.
 create_env_file() {
     envFilePath=".env"
-    envContent="OPENSEARCH_INITIAL_ADMIN_PASSWORD=1Ae0ce926bb6a0a1d1cf10c9c9e147a50457f9c27e49780c20e103a78036380d"
+    envContent="OPENSEARCH_INITIAL_ADMIN_PASSWORD=admin"
     if [ ! -f "$envFilePath" ]; then
         echo "$envContent" > "$envFilePath"
         echo "Created .env file with environment variables."

@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<div class="w-full">
+  <p:fileUpload id="initial-upload"
+     listener="#{knowledgeBaseConfigurationBean.handleUploadSource}" mode="advanced"
+     chooseIcon="si si-add-small"
+     style="display: none;" dragDropSupport="true"
+     label="#{ivy.cms.co('/Labels/Select')}"
+     allowTypes="/(\.|\/)(md|txt)$/i" accept=".md,.txt"
+     auto="true" update="@form"
+     onvalidationfailure="handleInitialUploadFileFail();"
+     dropZone="initial-drop-upload" widgetVar="initialDocumentUpload" />
+</div>
+<div class="w-full flex align-item-center justify-content-center mb-3">
+  <i class="si si-file-code-upload-1 text-6xl" id="ui-document-upload-file-icon" />
+</div>
+<p:outputPanel id="initial-drop-upload" styleClass="flex">
+  <span class="ui-document-upload-file-label text-center w-full"> 
+    <p:outputLabel value="#{ivy.cms.co('/Dialogs/com/axonivy/utils/aiassistant/management/KnowledgeBaseConfiguration/ToUploadSources')}">
+      <p:link value="#{ivy.cms.co('/Labels/UploadHere')}"
+        onclick="PF('initialDocumentUpload').show();return false" />
+    </p:outputLabel>
+  </span>
+</p:outputPanel>
+
+  <script type="text/javascript">
+    function handleInitialUploadFileFail() {
+      let errorMessageElement = $("[id $= 'knowledge-base-messages']").get(0);
+      let uploadError = document.getElementsByClassName('ui-messages ui-widget ui-helper-hidden ui-fileupload-messages');
+      let uploadErrorElement = uploadError[0];
+      errorMessageElement.style.display = 'block';
+      errorMessageElement.appendChild(uploadErrorElement);
+    }
+  </script>
+</html>
