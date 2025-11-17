@@ -33,15 +33,26 @@ set_permissions() {
     chmod -R 777 ./opensearch-logs
 }
 
-# Create an .env file to store environment variables securely if it doesn't exist
+# Create .env template if not exists (NO hardcoded password)
 create_env_file() {
     envFilePath=".env"
-    envContent="OPENSEARCH_INITIAL_ADMIN_PASSWORD=1Ae0ce926bb6a0a1d1cf10c9c9e147a50457f9c27e49780c20e103a78036380d"
+
     if [ ! -f "$envFilePath" ]; then
-        echo "$envContent" > "$envFilePath"
-        echo "Created .env file with environment variables."
+        echo "⚠️  No .env file found."
+        echo "Creating an empty template .env file..."
+        cat <<EOF > "$envFilePath"
+# Set your admin password here
+# IMPORTANT:
+# - This initial password is ONLY for local testing.
+# - For any production system, change it immediately.
+OPENSEARCH_INITIAL_ADMIN_PASSWORD=
+EOF
+
+        echo ".env template created at: $envFilePath"
+        echo "Please open the file and set a password before running this script again."
+        exit 1
     else
-        echo ".env file already exists."
+        echo ".env file detected."
     fi
 }
 
