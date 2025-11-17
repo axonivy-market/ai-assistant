@@ -29,10 +29,12 @@ $acl.SetAccessRule($accessRule)
 Set-Acl "./opensearch-logs" $acl
 
 # Create an .env file to store environment variables securely if it doesn't exist
+# The provided initial password (OPENSEARCH_INITIAL_ADMIN_PASSWORD) is only for local testing purposes.
+# For any production or customer-facing system, please change this password immediately to ensure security and compliance.
 $envFilePath = ".env"
 if (-not (Test-Path $envFilePath)) {
     $envContent = @"
-OPENSEARCH_INITIAL_ADMIN_PASSWORD=1Ae0ce926bb6a0a1d1cf10c9c9e147a50457f9c27e49780c20e103a78036380d
+OPENSEARCH_INITIAL_ADMIN_PASSWORD=admin
 "@
     Set-Content -Path $envFilePath -Value $envContent
     Write-Host "Created .env file with environment variables."
