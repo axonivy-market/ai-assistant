@@ -1,408 +1,421 @@
-# AI Assistent
+# KI-Assistent
 
-Das AI Assistent ist ein kraftvolles Tool gestaltet zu #windschlüpfig machen
-eure tägliche Arbeit innerhalb das Portal. Tätig da eurem persönlichen
-Assistenten, es versieht nahtlose Unterstützung für einen weiten Bereich von
-Tasks, von befahren Dokumentation zu ausstoßen Arbeitsgänge und #regelnd Tasks
-und Fälle. Mit das AI Assistent an eurem Hang, du kannst arbeiten #mehr genügend
-und effektiv, #freilassen oben kostbar Zeit für was wahrlich bedeutet. Verlob in
-einer More interaktiv und intuitiv workflow bei #konversieren mit dem
-Assistenten von eure Arbeitsgänge statt lediglich exekutieren jene. Diese
-dynamische Interaktion erweitert eure Erfahrung, erlaubend du zu erkunden
-Optionen und gewinnen Einblicke da du arbeitest. Mit mehrsprachig Fähigkeiten,
-die AI Assistent kommuniziert mühelos auf Englisch, Deutsch, spanisch, und More,
-sichernd du empfängst Unterstützung in eurer #vorzugsberechtigt Sprache.
+Der KI-Assistent ist ein leistungsstarkes Tool, das Ihre tägliche Arbeit
+innerhalb des Portals optimiert. Als Ihr persönlicher Assistent bietet er Ihnen
+nahtlose Unterstützung bei einer Vielzahl von Aufgaben, von der Navigation in
+der Dokumentation über das Starten von Prozessen bis hin zur Verwaltung von
+Aufgaben und Fällen. Mit dem KI-Assistenten an Ihrer Seite können Sie
+effizienter und effektiver arbeiten und wertvolle Zeit für das Wesentliche
+gewinnen. Nutzen Sie einen interaktiveren und intuitiveren Arbeitsablauf, indem
+Sie mit dem Assistenten über Ihre Prozesse sprechen, anstatt sie nur
+auszuführen. Diese dynamische Interaktion verbessert Ihre Erfahrung und
+ermöglicht es Ihnen, während der Arbeit Optionen zu erkunden und Erkenntnisse zu
+gewinnen. Dank seiner Mehrsprachigkeit kommuniziert der KI-Assistent mühelos auf
+Englisch, Deutsch, Spanisch und weiteren Sprachen und stellt so sicher, dass Sie
+Unterstützung in Ihrer bevorzugten Sprache erhalten.
 
-![Plauder Dashboad](doc/img/chat-dashboard.png)
+![Chat-Dashboard](doc/img/chat-dashboard.png)
 
-Jenseits versehen sofortige Hilfe, die AI Assistent ermächtigt du zu schaffen
-und fertigbringen #benutzerdefiniert Models und Assistenten schneiderten zu
-euren einmaligen Notwendigkeiten. Mit den Management Überblick Charakterzug,
-gestaltend, konfigurierend, und organisierend diese Models sind eine Brise. Du
-kannst fertigen personalisiertest Assistenten, weist zu spezifische #Benehmen,
-oder #aushebeln #vordefiniert Vorlagen zu steuern ihre Aktionen. Dieser Level
-#Gewöhnung sichert dass eure AI Assistenten stimmt ab geradezu mit euren
-Präferenzen und Arbeit Stil. Umarm die Zukunft Arbeit mit die AI Assistenten,
-eure personalisiert Begleiter für #erweitert Produktivität und nahtloses Task
-Management.
+Der KI-Assistent bietet Ihnen nicht nur sofortige Hilfe, sondern ermöglicht
+Ihnen auch die Erstellung und Verwaltung von benutzerdefinierten Modellen und
+Assistenten, die auf Ihre individuellen Bedürfnisse zugeschnitten sind. Mit der
+Management-Übersichtsfunktion ist das Entwerfen, Konfigurieren und Organisieren
+dieser Modelle ein Kinderspiel. Sie können personalisierte Assistenten
+erstellen, bestimmte Verhaltensweisen zuweisen oder vordefinierte Vorlagen
+nutzen, um deren Aktionen zu steuern. Dieser Grad an Anpassung stellt sicher,
+dass Ihr KI-Assistent perfekt auf Ihre Vorlieben und Ihren Arbeitsstil
+abgestimmt ist. Begrüßen Sie die Zukunft der Arbeit mit dem KI-Assistenten,
+Ihrem persönlichen Begleiter für mehr Produktivität und nahtloses
+Aufgabenmanagement.
 
-![Stellvertretendes Management](doc/img/assistant-management.png)
+![Assistent Management](doc/img/assistant-management.png)
 
-**Liste von Fähigkeiten:**
+**Liste der Funktionen:**
 
-- Portal Unterstützung: Das AI Assistent kennt den #Axon Efeu Dokumentation.
-- Task und Arbeitsgang Management: Das AI Assistent können anlaufen beschäftigt
-  und verarbeitet.
-- Suche und Filter: Es kann suchen und filtern Tasks und Fälle.
-- Mehrsprachige Unterstützung: Es bietet an Unterstützung in mehrfach Sprachen.
-- Customizable Assistenten: Schaff Gegenstand-basisbezogen und personalisierte
+- Portal-Support: Der KI-Assistent kennt die Axon Ivy-Dokumentation.
+- Aufgaben- und Prozessmanagement: Der KI-Assistent kann Aufgaben und Prozesse
+  initiieren.
+- Suchen und Filter: Es kann Aufgaben und Fälle suchen und filtern.
+- Mehrsprachige Unterstützung: Es bietet Unterstützung in mehreren Sprachen.
+- Anpassbare Assistenten: Erstellen Sie themenbasierte und personalisierte
   Assistenten.
-- Model-basisbezogen AI: Assistenten sind gebaut und brachten fertig benutzen
-  #benutzerdefiniert Models.
+- Modellbasierte KI: Assistenten werden mithilfe benutzerdefinierter Modelle
+  erstellt und verwaltet.
 
 ## Demo
 
-### AI-Demo Projekt
+### AI-Demo-Projekt
 
-Herein das **ai-Assistent-Demo** Efeu projiziert, wir schafften Demo Assistenten
-#welche können helfen du verstehst und entfalten eure eigenes AI stellvertretend
-#mehr genügend.
+Im Ivy-Projekt „ **” (ai-assistant-demo** ) haben wir Demo-Assistenten erstellt,
+die Ihnen helfen können, Ihren eigenen KI-Assistenten besser zu verstehen und
+effizienter zu entwickeln.
 
-> [!WICHTIG] Dieses Demo Projekt will Efeu Nutzer und Rollen schaffen, sowie
-> Überbrückung das primäres AI Stellvertretende Variablen. Es ist **HOCH
-> WEITEREMPFOHLEN** zu rennen ihm in Demo Verfahren auf einen Efeu Motor zu
-> Schutz #eure #Daten.
+> [!WICHTIG] Dieses Demo-Projekt erstellt Ivy-Benutzer und -Rollen und
+> überschreibt die primären AI-Assistent-Variablen. Es wird DRINGEND EMPFOHLEN,
+> **** im Demo-Modus auf einer Ivy-Engine auszuführen, um Ihre Daten zu
+> schützen.
 > 
-> Ob du wählst aus zu rennen diese Demo in eine Produktion Umwelt, sicher jener
-> du unterstützt oben jede AI Stellvertretend-verwandte Efeu Variablen. Schaff
-> Sicherheitskopien von den folgenden Dateien auf eurem Motor:
+> Wenn Sie diese Demo in einer Produktionsumgebung ausführen möchten, stellen
+> Sie sicher, dass Sie alle AI Assistant-bezogenen Ivy-Variablen sichern.
+> Erstellen Sie Backups der folgenden Dateien auf Ihrer Engine:
 > 
-> - `<engine folder="">/Konfiguration/Anträge/<application
->   folder="">/Variablen.AiAssistant.Assistenten.json`</application></engine>
-> - `<engine folder="">/Konfiguration/Anträge/<application
->   folder="">/Variablen.AiAssistant.AiFunctions.json`</application></engine>
+> - `/configuration/applications//variables.AiAssistant.Assistants.json`
+> - `/configuration/applications//variables.AiAssistant.AiFunctions.json`
 > 
-> Nach der Demo ist #vervollständigen, tausch aus der modifiziert variable
-> Dateien mit den Sicherheitskopien.
+> Ersetzen Sie nach Abschluss der Demo die geänderten Variablendateien durch die
+> Sicherungskopien.
 
-#### Vielschichtige Demo
+#### Komplexe Demo
 
-**Nutzung Fall**
+**Anwendungsfall**
 
-Nutzer kann ein Software Projekt planen mit AI Assistenten. Das AI Assistent
-aktiviert Nutzer zu genügend planen ein Software Projekt mal organisieren
-Auskunft hinein ein #gegliedert Format. Es kann:
+Benutzer können mit dem KI-Assistenten ein Softwareprojekt planen. Der
+KI-Assistent ermöglicht es Benutzern, ein Softwareprojekt effizient zu planen,
+indem er Informationen in einem strukturierten Format organisiert. Er kann:
 
-- Schaff das Projekt und beharr ihm in der Datenbank
-- Vorlage in finden und #auswählen passende Gruppenmitglieder für das Projekt
-- Hilfe Nutzer vorbereiten für den Projekt Stoß-ab treffend
-- Schaff und weis zu Tasks zu einladen Gruppenmitglieder zu dem Treffen
+- Erstellen Sie das Projekt und speichern Sie es in der Datenbank.
+- Unterstützung bei der Suche und Auswahl geeigneter Teammitglieder für das
+  Projekt
+- Helfen Sie den Benutzern bei der Vorbereitung auf das Projekt-Kickoff-Meeting.
+- Erstellen und weisen Sie Aufgaben zu, um Teammitglieder zur Besprechung
+  einzuladen.
 
-**Wie zu benutzen**
+**Verwendung**
 
-1. Renn den Arbeitsgang `startComplexDemo` zu schaffen Klausur #Daten und
-   austauschen das originales AI Assistenten mit den **Vielschichtigen Demo
-   Assistenten**
+1. Führen Sie den Prozess `startComplexDemo` aus, um Testdaten zu erstellen und
+   den ursprünglichen KI-Assistenten durch den **Complex Demo Assistant zu
+   ersetzen.**
 
-2. Von **Portal**, öffnet das AI Stellvertretendes #App
+2. Öffnen Sie die AI Assistant-App auf dem Portal „ **“**.
 
-3. Jetzt kannst du benutzen das stellvertretendes zu planen und schaffen mal ein
-   Software Projekt #einlesen die Details von dem Projekt, und vielleicht
-   Mitgliederzahl, oder Technologien.
+3. Jetzt können Sie den Assistenten verwenden, um ein Softwareprojekt zu planen
+   und zu erstellen, indem Sie die Details des Projekts und möglicherweise die
+   Anzahl der Mitglieder oder Technologien eingeben.
 
 Beispiel:
 
-`Das XYZ Lösungen Web Entwicklung Projekt Programmatiken zu bauen ein #der Stand
-der Technik Web Antrag erweitert jener Nutzer erfährt und unterstützt die
-GesellschaftAuswuchs Zielsetzungen. Hauptsächlich benutzen einfache Web
-Technologien wie #HTML und CSS, das Projekt wollen ein festes anliefern,
-scalable, und leistungsstarker Bahnsteig stimmt ab jener mit Industrie Standards
-und #gut Fahrpraxen. Wir brauchen 3 #einfädeln, 1 Web Designer und 2 Prüfer als
-ihm.`
+`Das Webentwicklungsprojekt von XYZ Lösungen zielt darauf ab, eine hochmoderne
+Webanwendung zu entwickeln, die die Benutzererfahrung verbessert und die
+Wachstumsziele des Unternehmens unterstützt. Das Projekt nutzt hauptsächlich
+grundlegende Webtechnologien wie HTML und CSS und wird eine sichere, skalierbare
+und effiziente Plattform liefern, die den Industriestandards und Best Practices
+entspricht. Dafür benötigen wir 3 Ingenieure, 1 Webdesigner und 2 Tester.`
 
-#### Eror Handing Demo
+#### Demo zur Fehlerbehandlung
 
-**Nutzung Fall**
+**Anwendungsfall**
 
-Dort ist #kein #Daten für den Sitzungsraum. Deswegen, #wann immer #suchen ein
-Nutzer einen Sitzungsraum, den AI Assistent will einen Fehler zeigen. Dies ist
-ein simples Beispiel von wie zu helfen das AI Stellvertretende Henkel Fehler
-geeignet.
+Es gibt keine Daten für den Besprechungsraum. Wenn ein Benutzer nach einem
+Besprechungsraum sucht, zeigt der KI-Assistent daher eine Fehlermeldung an. Dies
+ist ein einfaches Beispiel dafür, wie Sie dem KI-Assistenten helfen können,
+Fehler richtig zu behandeln.
 
-**Wie zu benutzen**
+**Verwendung**
 
-1. Renn den Arbeitsgang `startErrorHandlingDemo` zu schaffen Klausur #Daten und
-   austauschen das originales AI Assistenten mit den **Fehler Handing Demo
-   Assistenten**
+1. Führen Sie den Prozess `startErrorHandlingDemo` aus, um Testdaten zu
+   erstellen und den ursprünglichen KI-Assistenten durch den **Error Handling
+   Demo Assistant zu ersetzen.**
 
-2. Von **Portal**, öffnet das AI Stellvertretendes #App
+2. Öffnen Sie die AI Assistant-App auf dem Portal „ **“**.
 
-3. Jetzt kannst du rennen die Demo bei fordert auf zu Auskunft von einigem
-   Zimmer mit **Fehler Handing Demo Assistenten**.
+3. Jetzt können Sie die Demo ausführen, indem Sie Informationen zu einem
+   bestimmten Raum anfordern unter **Fehlerbehandlungs-Demo-Assistent**.
 
 Beispiel:
 
-`Ich möchte Sitzungsraum finden C`
+`Ich möchte den Besprechungsraum C finden.`
 
 ## Einrichtung
 
-1. #Aufbieten das **ai-Assistenten** Werkzeug in ebensolchem gleichen Antrag mit
-   **Portal**.
+1. Stellen Sie das Artefakt „ **” ai-assistant** in derselben Anwendung wie
+   **Portal** bereit.
 
-2. Starte den Motor, Anmeldung zu Portal.
+2. Starten Sie den Motor und melden Sie sich beim Portal an.
 
-3. In dem Kopfball von Portal, klickt das **AI Assistenten** Ikone zu zugreifen
-   die **AI Assistent** #App.
+3. Klicken Sie in der Kopfzeile des Portals auf das Symbol „ **-KI-Assistent“**,
+   um auf die App „ **-KI-Assistent“** zuzugreifen.
 
-### Nutzer Fremdenführer
+### Benutzerhandbuch
 
-#### AI Management
+#### KI-Management
 
-Das AI Management Screen serviert da einer zentralen #Nabe für konfigurieren und
-#regelnd alle Gesichtspunkte von eure AI stellvertretendes System. Von hier, du
-kannst:
+Der Bildschirm „KI-Verwaltung” dient als zentrale Anlaufstelle für die
+Konfiguration und Verwaltung aller Aspekte Ihres KI-Assistenten-Systems. Von
+hier aus können Sie:
 
-- [Bringen fertig AI Assistenten](#manage-ai-assistants): Überwach und
-  modifizier das AI Assistenten, einschließlich Änderung #Visualisierung,
-  Persönlichkeit, #anpassen ihr Benehmen, und #regelnd die Aufgaben können sie
-  bedienen
+- [KI-Assistenten verwalten](#manage-ai-assistants): Überwachen und modifizieren
+  Sie die KI-Assistenten, einschließlich der Änderung der Visualisierung, der
+  Persönlichkeit, der Anpassung ihres Verhaltens und der Verwaltung der
+  Funktionen, die sie ausführen können.
 
-- [Konfigurieren AI Models](#configure-ai-models): Modifizier Lagen für AI
-  Models wie API #Eintasten jene Kräfte eure Anträge
+- [KI-Modelle konfigurieren](#configure-ai-models): Ändern Sie die Einstellungen
+  für KI-Modelle wie den API-Schlüssel, der Ihre Anwendungen unterstützt.
 
-- [Bringen fertig AI Aufgaben](#manage-ai-functions): Regulier und organisieren
-  verschieden AI Aufgaben, definierend die Aktionen eure AI können aufführen und
-  wie interagiert es mit Nutzer zu versehen #präzise und leistungsstarke
-  Resultate
+- [KI-Funktionen verwalten](#manage-ai-functions): Steuern und organisieren Sie
+  verschiedene KI-Funktionen, definieren Sie die Aktionen, die Ihre KI ausführen
+  kann, und wie sie mit Benutzern interagiert, um genaue und effiziente
+  Ergebnisse zu liefern.
 
-![AI Funktioniert Management](doc/img/ai-functions-management.png)
+![Verwaltung von KI-Funktionen](doc/img/ai-functions-management.png)
 
-##### Bring fertig AI Assistenten
+##### KI-Assistenten verwalten
 
-Diese Sektion Listen alle die AI Assistenten dass die #loggen-in Nutzer hat
-Erlaubnis zu zugreifen, zusammen mit ihre Namen, Offenbarungen, und kurze
-Steckbriefe.
+In diesem Abschnitt werden alle KI-Assistenten aufgelistet, auf die der
+angemeldete Benutzer Zugriff hat, zusammen mit ihren Namen, Avataren und kurzen
+Beschreibungen.
 
-![Stellvertretendes Management](doc/img/assistant-management.png)
+![Assistenzmanagement](doc/img/assistant-management.png)
 
-Du kannst ein neues schaffen AI Assistenten klicken mal den **Fügt zu neuen
-Assistenten** Knopf, oder modifizieren ein #existierend AI Assistenten Details
-auswählen mal den #entsprechend Assistenten von der Liste.
+** Sie können einen neuen KI-Assistenten erstellen, indem Sie auf die
+Schaltfläche „ **“ (KI-Assistenten hinzufügen) klicken, oder die Details eines
+bestehenden KI-Assistenten ändern, indem Sie den entsprechenden Assistenten aus
+der Liste auswählen.
 
-Einmal ausgewählt hast du ein AI Assistent, seine Details Seite will sein
-gezeigt.
+Sobald Sie einen KI-Assistenten ausgewählt haben, wird dessen Detailseite
+angezeigt.
 
-![AI Stellvertretende Details](doc/img/assistant-details.png)
+![Details zum KI-Assistenten](doc/img/assistant-details.png)
 
-Dort sind einige Lagen du kannst wechseln:
+Es gibt einige Einstellungen, die Sie ändern können:
 
-- `Name`: Name von der AI Assistent
-- `Erlaubnisse`: Eine Liste Efeu Rollen kann jener benutzen die AI Assistenten
-- `Model`: Das AI modellieren den Assistenten will benutzen zu aufführen seine
-  Aufgaben (für #mehr Details, bitte übergeben zu [Konfigurieren AI
-  Models](#configure-ai-models))
-- `Offenbarung`: Die Offenbarung von die AI Assistent. Nur das folgende Image
-  Datei Typen sind akzeptiert: `*.png`, `*.jpg`, `*.jpeg`. Bei #voreingestellt,
-  das AI Stellvertretendes Logo ist benutzt da die Offenbarung
-- `Kontakt #Email`: Die Kontakt #Email dass die AI Assistent kann zu Nutzer
-  versehen #erforderlichenfalls
-- `Kontakt Website`: Die Website #Email dass die AI Assistent kann zu Nutzer
-  versehen #erforderlichenfalls
+- `Name`: Name des KI-Assistenten
+- `Berechtigungen`: Eine Liste der Ivy-Rollen, die den KI-Assistenten verwenden
+  können.
+- `Modell`: Das KI-Modell, das der Assistent zur Ausführung seiner Funktionen
+  verwendet (weitere Informationen finden Sie unter [KI-Modelle
+  konfigurieren](#configure-ai-models)).
+- `Avatar-`: Der Avatar des KI-Assistenten. Es werden nur die folgenden
+  Bilddateitypen akzeptiert: `*.png`, `*.jpg`, `*.jpeg`. Standardmäßig wird das
+  KI-Assistent-Logo als Avatar verwendet.
+- `Kontakt-E-Mail-`: Die Kontakt-E-Mail-Adresse, die der KI-Assistent den
+  Benutzern bei Bedarf zur Verfügung stellen kann.
+- `Kontakt-Website-`: Die E-Mail-Adresse der Website, die der KI-Assistent den
+  Benutzern bei Bedarf zur Verfügung stellen kann.
 
-Zu sichern das AI Assistenten Sicherheit für Nutzer und Ausrichtung mit ethisch
-Leitfäden, wir haben fortgeschrittene Lagen hereingebracht:
+Um die Sicherheit des KI-Assistenten für Benutzer und die Einhaltung ethischer
+Richtlinien zu gewährleisten, haben wir erweiterte Einstellungen eingeführt:
 
-- `Auskunft`: Definiert wie willst du das AI Assistent zu verhalten #wann zu
-  Nutzer erwidern, #einschließen Persönlichkeit, Rolle, und der dienstliche
-  Kreisausschnitt sollte es fokussieren weiter
-- `Ethische Leitfäden`: Ethische Prinzipe/Prinzipien die AI Assistent muss
-  strikt folgen
+- `Informationen zu „` “: Legt fest, wie sich der KI-Assistent bei der
+  Beantwortung von Nutzeranfragen verhalten soll, einschließlich Persönlichkeit,
+  Rolle und dem Geschäftsbereich, auf den er sich konzentrieren soll.
+- `Ethische Richtlinien`: Ethische Grundsätze, die der KI-Assistent strikt
+  befolgen muss
 
-Bei #voreingestellt, diese Lagen sind gelesen-einzige zu verhindern Fehler jener
-konnte inkorrekte Antworten zeitigen. Indes, AI Ingenieure können neue Vorlagen
-entfalten jener versieht Auskunft und ethische Regeln für Assistenten. Zu lernen
-wie zu tun dieses, bitte übergeben zu [Stellvertretende
-Vorlagen](#assistant-templates).
+Standardmäßig sind diese Einstellungen schreibgeschützt, um Fehler zu vermeiden,
+die zu falschen Antworten führen könnten. KI-Ingenieure können jedoch neue
+Vorlagen entwickeln, die Informationen und ethische Regeln für Assistenten
+bereitstellen. Informationen dazu finden Sie unter
+[Assistentenvorlagen](#assistant-templates).
 
-###### Nutzung Vorlage
+###### Vorlage verwenden
 
-Du kannst schnell alle konfigurieren die nötigen Lagen für #ein AI Assistenten
-benutzen mal eine Vorlage. Zu bewerben eine Vorlage, folg diese Stufen:
+Mit einer Vorlage können Sie schnell alle notwendigen Einstellungen für einen
+KI-Assistenten konfigurieren. Um eine Vorlage anzuwenden, gehen Sie wie folgt
+vor:
 
-1. Weiter das AI stellvertretender Details Screen, klickt der **Nutzung
-   Vorlage** Knopf in dem #oberste #Rechter Ecke.
+1. Klicken Sie auf dem Bildschirm mit den Details zum KI-Assistenten oben rechts
+   auf die Schaltfläche „ **Vorlage verwenden“**.
 
-2. Das **Stellvertretende Vorlagen** Zwiegespräch will fungieren. Wähl aus eine
-   Vorlage von der Liste klicken mal ihm.
+2. Der Dialog „ **-Assistent-Vorlagen** “ wird angezeigt. Wählen Sie eine
+   Vorlage aus der Liste aus, indem Sie darauf klicken.
 
-   ![Stellvertretende Vorlagen](doc/img/assistant-templates-dialog.png)
+   ![Assistent-Vorlagen](doc/img/assistant-templates-dialog.png)
 
-3. Die VorlageLagen wollen sein beworben zu eure AI Assistenten. Du kannst dann
-   modifizieren jene zu passen eure Notwendigkeiten.
+3. Die Einstellungen der Vorlage werden auf Ihren KI-Assistenten angewendet. Sie
+   können sie dann nach Ihren Bedürfnissen anpassen.
 
-###### Bring fertig AI Aufgaben
+###### KI-Funktionen verwalten
 
-Auf das rechtes ist #Seite eine Tisch Liste die AI Aufgaben verfügbar zu die AI
-Assistent. Du können allgemeine Auskunft von jede Aufgabe anschauen, wie seinen
-Namen, Typ, Steckbrief, Erlaubnisse, und Gebrauch.
+Auf der rechten Seite befindet sich eine Tabelle mit den AI-Funktionen, die dem
+AI-Assistenten zur Verfügung stehen. Sie können allgemeine Informationen zu
+jeder Funktion anzeigen, z. B. Name, Typ, Beschreibung, Berechtigungen und
+Verwendung.
 
-![Funktioniert](doc/img/assistant-details-functions.png)
+![Funktionen](doc/img/assistant-details-functions.png)
 
-Du kannst verhindern das AI Assistenten von benutzen mal eine Aufgabe entfernen
-es von diesem Tisch.
+Sie können verhindern, dass der KI-Assistent eine Funktion verwendet, indem Sie
+diese aus dieser Tabelle entfernen.
 
-Wann du klickst das **Fügst zu** Knopf, den **Fügt zu Aufgabe** Zwiegespräch
-will fungieren. Zu zufügen eine Aufgabe, Klick auf der Zeile von der Aufgabe
-mögen du auswählen, dann Klick **Fügt zu** zu zufügen die exklusiven Aufgaben.
+Wenn Sie auf die Schaltfläche „ **“ (Funktion hinzufügen) „Add“ (Hinzufügen) „**
+“ (Funktion) klicken, wird das Dialogfeld „ **“ (Funktion hinzufügen) „Add“
+(Hinzufügen) „** “ (Funktion) angezeigt. Um eine Funktion hinzuzufügen, klicken
+Sie auf die Zeile der Funktion, die Sie auswählen möchten, und klicken Sie dann
+auf „ **“ (Funktion hinzufügen) „Add“ (Hinzufügen) „** “ (Funktion), um die
+ausgewählten Funktionen hinzuzufügen.
 
-![Fügt zu Aufgabe Zwiegespräch](doc/img/assistant-details-add-functions.png)
+![Funktion hinzufügen-Dialogfeld](doc/img/assistant-details-add-functions.png)
 
-Danach, die exklusiven Aufgaben wollen fungieren herein die **Aufgaben** Tisch.
+Anschließend werden die ausgewählten Funktionen in der Tabelle „ **-Funktionen“
+(** ) angezeigt.
 
-###### Speicher eure Änderungen
+###### Speichern Sie Ihre Änderungen.
 
-Zu bewerben alle die Änderungen hast du gemacht zu die AI stellvertretende
-Details, bitte klicken die **Speichern** Knopf in dem #untere #Rechter Ecke. Du
-willst dann sein umgeleitet zu das [AI Management](#ai-management) #durchsieben.
+** Um alle Änderungen, die Sie an den Details des KI-Assistenten vorgenommen
+haben, zu übernehmen, klicken Sie bitte auf die Schaltfläche „ **“ (Speichern
+und fortfahren) in der unteren rechten Ecke. Sie werden dann zum Bildschirm
+[KI-Verwaltung](#ai-management) weitergeleitet.
 
-###### Streich AI Assistenten
+###### AI-Assistenten löschen
 
-Da #messen geht mal, ein AI Assistent darf werden obsoleted und du darfst mögen
-streichen ihm und schaffen ein neues AI Assistenten. Zu tun jener, bitte klicken
-das **Streicht** #zuknöpfen plaziert auf der #untere #linke Seite Ecke von die
-AI stellvertretende Details Seite.
+Mit der Zeit kann ein KI-Assistent überflüssig werden, sodass Sie ihn löschen
+und einen neuen KI-Assistenten erstellen möchten. Klicken Sie dazu bitte auf die
+Schaltfläche „ **“ (KI-Assistenten löschen) „Delete** “ ( löschen) unten links
+auf der Detailseite des KI-Assistenten.
 
-Ein confim Zwiegespräch will fungieren, du kannst streichen das AI Assistenten
-völlig mal klicken den **Entfernt** Knopf auf jenem Zwiegespräch.
+Es erscheint ein Bestätigungsdialog. Sie können den KI-Assistenten vollständig
+löschen, indem Sie in diesem Dialog auf die Schaltfläche „ **“ (Entfernen) „** “
+(KI-Assistenten löschen) klicken.
 
-![Streichen AI Stellvertretendes
-Zwiegespräch](doc/img/assistant-details-delete.png)
+![AI-Assistent-Dialogfeld löschen](doc/img/assistant-details-delete.png)
 
-Aber bitte bewusst jener, alle Unterhaltungen zwischen die AI Assistent und Efeu
-Nutzer wollen sein gestrichen.
+Bitte beachten Sie jedoch, dass alle Unterhaltungen zwischen dem KI-Assistenten
+und Ivy-Benutzern gelöscht werden.
 
-##### Konfigurier AI Models
+##### KI-Modelle konfigurieren
 
-AI Models sind eine Liste Model Optionen #welche #ein AI Assistent kann benutzen
-zu aufführen seine Funktionalitäten.
+AI Models ist eine Liste von Modelloptionen, die ein KI-Assistent zur Ausführung
+seiner Funktionen verwenden kann.
 
-![Model Management](doc/img/models-management.png)
+![Modellverwaltung](doc/img/models-management.png)
 
-Das AI Stellvertretende Notwendigkeit 2 AI Models zu Arbeiten: Ein GPT Model,
-und ein Text #eingraben Model. Deswegen, AI Stellvertretende Angebote 2
-schneiderten Optionen jener getestet und bereit zu benutzen:
+Der KI-Assistent benötigt zwei KI-Modelle, um zu funktionieren: ein GPT-Modell
+und ein Text-Embedding-Modell. Daher bietet der KI-Assistent zwei
+maßgeschneiderte Optionen, die getestet und einsatzbereit sind:
 
-- Primär OpenAI Model:
-    - GPT Model: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
-    - Text #eingraben Model:
-      [Text-#eingraben-3-groß](https://platform.openai.com/docs/guides/embeddings)
+- Primäres OpenAI-Modell:
+    - GPT-Modell: [GPT-4o](https://platform.openai.com/docs/models/gpt-4o)
+    - Text-Einbettungsmodell:
+      [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
-- Sekundär OpenAI Model
-    - GPT Model: [GPT-4o
+- Sekundäres OpenAI-Modell
+    - GPT-Modell: [GPT-4o
       mini](https://platform.openai.com/docs/models/gpt-4o-mini)
-    - Text #eingraben Model:
-      [Text-#eingraben-3-groß](https://platform.openai.com/docs/guides/embeddings)
+    - Text-Einbettungsmodell:
+      [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
-Wann du klicken auf ein Model Stück herein das AI Models Liste, du willst sein
-umgeleitet zu die Details Seite von jenem Model. Dort kannst du finden #mehr
-Model Auskünfte und wechseln die API Schlüssel zu den OpenAI Bahnsteig. Eure API
-Schlüssel ist #kodieren und völlig befestigt.
+Wenn Sie auf einen Modellpunkt in der Liste der KI-Modelle klicken, werden Sie
+zur Detailseite dieses Modells weitergeleitet. Dort finden Sie Mehr
+Informationen zum Modell und können den API-Schlüssel für die OpenAI-Plattform
+ändern. Ihr API-Schlüssel ist verschlüsselt und vollständig gesichert.
 
-Ferner, du kannst zu Zusammenhang testen zu OpenAI Bahnsteig klicken mal den
-Knopf **Klausur Zusammenhang**. Ob #irgendetwas ging schief, wir wollen den
-Details Fehler zeigen
+Außerdem können Sie die Verbindung zur OpenAI-Plattform testen, indem Sie auf
+die Schaltfläche „ **-Verbindung testen“** klicken. Sollte etwas schiefgehen,
+zeigen wir Ihnen die Details des Fehlers an.
 
-![Klausur Zusammenhang](doc/img/ai-model-test-connection.png)
+![Verbindung testen](doc/img/ai-model-test-connection.png)
 
-Einmal klickst du das **Speicherst** Knopf, jede die Lagen, #eingerechnet die
-API Schlüssel will sein gespeichert wie #Axon Efeu Variablen, und du willst sein
-umgeleitet zu die [AI Management](#ai-management).
+** Sobald Sie auf die Schaltfläche „ **“ (API-Schlüssel speichern) klicken,
+werden alle Einstellungen, einschließlich des API-Schlüssels, als Axon
+Ivy-Variablen gespeichert und Sie werden zum [AI Management](#ai-management)
+weitergeleitet.
 
-##### Bring fertig AI Aufgaben
+##### KI-Funktionen verwalten
 
-Jede AI Aufgaben dass die #loggen in Nutzer können zugreifen ist gelistet herein
-den **AI Aufgaben** Sektion mit allgemein Auskunft wie Namen, Typ, Erlaubnisse
-zu benutzen die Aufgabe,und Steckbrief. Dort sind einige Gründe wieso #ein AI
-Aufgabe ist nicht-startable:
+Alle KI-Funktionen, auf die der angemeldete Benutzer zugreifen kann, sind im
+Abschnitt „ **-KI-Funktionen“** mit allgemeinen Informationen wie Name, Typ,
+Berechtigungen zur Nutzung der Funktion und Beschreibung aufgeführt. Es gibt
+einige Gründe, warum eine KI-Funktion nicht gestartet werden kann:
 
-- `Efeu Tool` Aufgabe: Ausgeschaltet bei #voreingestellt weil ist es nur sein
-  benutzt mal `Efeu Mündet` Aufgaben
-- `Efeu Mündet` Aufgabe: Invalid als fand heraus System jener konnte dort sein
-  #wann ein Fehler rennend die Strömung. Beispielsweise: Ein bedürft Efeu
-  callable Arbeitsgang konnte nicht sein gefunden
-- `Knowkedge Basis` Aufgabe: #Wann invalid das System kann nicht den
-  #entsprechend Vektor Vorrat finden
+- `Ivy Tool` Funktion: Standardmäßig deaktiviert, da sie nur von `verwendet
+  wird. Ivy Flow` Funktionen
+- `Ivy Flow-` -Funktion: deaktiviert, wenn das System einen möglichen Fehler
+  beim Ausführen des Flows erkannt hat. Beispiel: Ein erforderlicher
+  Ivy-aufrufbarer Prozess konnte nicht gefunden werden.
+- `Knowledgebase-` -Funktion: deaktiviert, wenn das System den entsprechenden
+  Vektorspeicher nicht finden kann.
 
-![AI Funktioniert Liste](doc/img/all-ai-functions-list.png)
+![AI-Funktionsliste](doc/img/all-ai-functions-list.png)
 
-Du kannst auch alle sehen nicht-startable AI Aufgaben #festknebeln mal die
-Option **Zeigt nicht-startable AI Aufgaben**.
+Sie können auch alle nicht startbaren KI-Funktionen anzeigen, indem Sie die
+Option „ **“ auf „Show non-startable AI functions“ (Nicht startbare
+KI-Funktionen anzeigen) umstellen.**.
 
-###### Streich AI Aufgabe
+###### AI-Funktion löschen
 
-Du kannst streichen das AI Aufgabe völlig von die AI Assistenten klicken mal den
-**Streicht** Knopf (hat den Kitsch Mülleimer Ikone) plaziert in der letzten
-Spalte von der #entsprechend Zeile von jener AI Aufgabe. Ein Bestätigung
-Zwiegespräch will zeigen da unten
+Sie können die KI-Funktion vollständig aus dem KI-Assistenten löschen, indem Sie
+auf die Schaltfläche „ **-** löschen“ (mit dem Papierkorb-Symbol) klicken, die
+sich in der letzten Spalte der entsprechenden Zeile dieser KI-Funktion befindet.
+Es wird ein Bestätigungsdialogfeld wie unten angezeigt.
 
-![Streichen AI Aufgabe](doc/img/delete-ai-function.png)
+![AI-Funktion löschen](doc/img/delete-ai-function.png)
 
-Bitte #lesen die Bestätigung vorsichtig bevor streichen die AI Aufgabe. Das AI
-Aufgabe konnte sein benutzen bei #welche AI assitants, und #sobald streichst du
-ihm, die AI Assistenten können nicht auf den Aufgaben arbeiten mehr, oder
-worser, einige Fehler dürfen entstehen.
+Bitte lesen Sie die Bestätigung sorgfältig durch, bevor Sie die KI-Funktion
+löschen. Die KI-Funktion könnte von einigen KI-Assistenten verwendet werden, und
+sobald Sie sie löschen, können die KI-Assistenten die Funktionen nicht mehr
+ausführen, oder schlimmer noch, es können Fehler auftreten.
 
-#### Schaff Kenntnis Basen
+#### Erstellen Sie Wissensdatenbanken
 
-AI Assistent erlaubt admin Nutzer (mit haben Rolle `AXONIVY_PORTAL_ADMIN`) zu
-schaffen Kenntnis Basen für benutzen mal die AI Aufgabe von Typ `Kenntnis
-Basis`. Einfach #starten den Arbeitsgang `Schafft Kenntnis Basis für AI
-Assistenten` und folgen dort die Weisungen, du kannst schaffen schaffen Kenntnis
-gründet #welche konnte sein mal Nutzung `Kenntnis Basis` Aufgaben.
+Mit AI Assistant können Admin-Benutzer (mit der Rolle `AXONIVY_PORTAL_ADMIN`)
+Wissensdatenbanken erstellen, die von der KI-Funktion vom Typ `Knowledge Base`
+verwendet werden können. Starten Sie einfach den Prozess `Create knowledge base
+for AI Assistant` und folgen Sie den dortigen Anweisungen. So können Sie
+Wissensdatenbanken erstellen, die von `Knowledge Base` Funktionen verwendet
+werden können.
 
-![Schafft Kenntnis Basis Sektion](doc/img/create-knowledge-page-ui.png)
+![Abschnitt „Wissensdatenbank erstellen“
+erstellen](doc/img/create-knowledge-page-ui.png)
 
-Zurzeit, du kannst Kenntnis Basis für 2 schaffen tippt: Portal Unterstützung und
-andere.
+Derzeit können Sie Wissensdatenbanken für zwei Typen erstellen: Portal-Support
+und Sonstiges.
 
-##### Kenntnis Basis: Portal Unterstützung
+##### Wissensdatenbank: Portal-Support
 
-Das AI Assistent schließt ein ein #errichtet-in Tool gerufen `Portal
-Unterstützung` #welche kann antworten Fragen erzählt zu den #Axon Efeu Portal.
+Der KI-Assistent enthält ein integriertes Tool namens „ `-Portal-Support“ (` ),
+das Fragen zum Axon Ivy-Portal beantworten kann.
 
-Zu generieren die Kenntnis Basis für diese Aufgabe, bitte besuchen die [Portal
-#Herunterladen Seite](https://market.axonivy.com/portal) auf den #Axon Efeu
-Vermarktet und herunterladen das späteste Dokument, da gezeigt in dem Image
-unten.
+Um die Wissensdatenbank für diese Funktion zu erstellen, besuchen Sie bitte die
+[Portal-Download-Seite](https://market.axonivy.com/portal) auf dem Axon Ivy
+Marktplatz und laden Sie das neueste Dokument herunter, wie in der Abbildung
+unten gezeigt.
 
-![#Herunterladen Portal Dokument](doc/img/download-portal-doc.png)
+![Download Portal Document](doc/img/download-portal-doc.png)
 
-Dann, gerade einfach #hochladen das heruntergeladen da Datei belehrt herein
-[Schafft Kenntnis Basen](#create-knowledge-bases) droben.
+Laden Sie dann einfach die heruntergeladene Datei hoch, wie oben unter
+[Erstellen von Wissensdatenbanken](#create-knowledge-bases) beschrieben.
 
-#Nachdem #hochladen die Reißverschluss Datei, bitte warten auf einige Minuten
-bis zu das das #Hochladen Diskussionsrunde geschlossen. Es darf einige Minuten
-nehmen weil nimmt es Zeit für AI Assistenten zu tun den Beruf.
+Nachdem Sie die ZIP-Datei hochgeladen haben, warten Sie bitte einige Minuten,
+bis das Hochladen-Fenster geschlossen wird. Dies kann einige Minuten dauern, da
+der KI-Assistent einige Zeit benötigt, um die Aufgabe auszuführen.
 
-##### Kenntnis Basis: Andere
+##### Wissensdatenbank: Sonstiges
 
-Bevor #hochladen anderen Kenntnis Basen, bitte Unterhalt in pass auf:
+Bevor Sie weitere Wissensdatenbanken hochladen, beachten Sie bitte Folgendes:
 
-1. Der Name von der #hochladen Datei will sein die ID von einem Verzeichnis in
-   den Vektor Vorrat, deswegen:
+1. Der Name der hochgeladenen Datei ist die ID eines Index im Vektorspeicher,
+   daher:
 
-   - Der Name muss sein strikt folgen `schleudert-Fall`, andernfalls willst du
-     bekommen #wann Fehler AI Assistenten schafft Kenntnis Basis.
+   - Der Name muss strikt der Schreibweise „ `“ (mit Bindestrichen) entsprechen
+     (z. B. „` “), da es sonst zu Fehlern kommt, wenn der KI-Assistent die
+     Wissensdatenbank erstellt.
 
-   - Der Name muss sein einmalig, andernfalls willst du Überbrückung
-     #existierend Kenntnis Basis!
+   - Der Name muss eindeutig sein, da Sie sonst die vorhandene Wissensdatenbank
+     überschreiben!
 
-2. Alle Dateien legst du innerhalb die Reißverschluss Datei muss eine Text Datei
-   sein (Typ `.txt`). AI Assistent wollen anderen Datei Typen auslassen #wann
-   lesend Inhalt zu schaffen Kenntnis Basis.
+2. Alle Dateien, die Sie in die ZIP-Datei einfügen, müssen Textdateien sein (Typ
+   `.txt`). AI Assistant überspringt andere Dateitypen beim Lesen von Inhalten,
+   um eine Wissensdatenbank zu erstellen.
 
-3. Vektor Vorräte geschafft bei #Axon Efeu ist vorangestellt mit
-   `#Axon-Efeu-Vektor-Vorrat` gefolgt #bei dem Namen von #hochladen Datei.
-   Beispielsweise, ob du #hochladen eine Datei geheißen
-   `Kundin-unterstütz.Reißverschluss`, der resultierend Vektor lagert ID will
-   sein `#Axon-Efeu-Vektor-Vorrat-Kundin-Unterstützung`.
+3. Von Axon Ivy erstellte Vektorspeicher haben das Präfix
+   `axon-ivy-vector-store`, gefolgt vom Namen der hochgeladenen Datei. Wenn Sie
+   beispielsweise eine Datei mit dem Namen `customer-support.zip` hochladen,
+   lautet die resultierende Vektorspeicher-ID
+   `axon-ivy-vector-store-customer-support`.
 
-#Nachdem #hochladen die Reißverschluss Datei, bitte warten auf einige Minuten
-bis zu das das #Hochladen Diskussionsrunde geschlossen. Es darf einige Minuten
-nehmen weil nimmt es Zeit für AI Assistenten zu tun den Beruf.
+Nachdem Sie die ZIP-Datei hochgeladen haben, warten Sie bitte einige Minuten,
+bis das Hochladen-Fenster geschlossen wird. Dies kann einige Minuten dauern, da
+der KI-Assistent einige Zeit benötigt, um die Aufgabe auszuführen.
 
-### Entwickler Fremdenführer
+### Entwicklerhandbuch
 
-#### Stellvertretende Vorlagen
+#### Assistent-Vorlagen
 
-AI Assistenten versehen ein Konzept für Entwickler zu predefine Vorlagen für AI
-Assistenten. Zu verbessern diese Vorlagen, du brauchst zu modifizieren die JSON
-Datei für die Efeu Variable`Variable.AiAssistant.AssistantTemplates.json`
-Lokalisierte in den Motor Ordner an `<engine
-folder="">/Konfiguration/Anträge/<application
-folder="">`.</application></engine>
+KI-Assistenten bieten Entwicklern die Möglichkeit, Vorlagen für KI-Assistenten
+vorab zu definieren. Um diese Vorlagen zu aktualisieren, müssen Sie die
+JSON-Datei für die Ivy-Variable`variable.AiAssistant.AssistantTemplates.json`
+ändern, die sich im Engine-Ordner unter `/configuration/applications/` befindet.
 
-Hier ist ein Beispiel von ein AI stellvertretende Vorlage:
+Hier ist ein Beispiel für eine Vorlage für einen KI-Assistenten:
 
 ```json
 [
@@ -429,93 +442,92 @@ Hier ist ein Beispiel von ein AI stellvertretende Vorlage:
 ]
 ```
 
-Misst bei von ein AI stellvertretende Vorlage:
+Eigenschaften einer KI-Assistentenvorlage:
 
-- `id`: Das einmaliges ID von der Vorlage
-- `Version`: Die Vorlage Version. Es muss die Version passen von die AI
-  Assistenten
-- `Name`: Der Name von dem Assistenten. Wann diese Vorlage ist #auswählen,
-  dieser Wert will sein gesetzt da dem #voreingestellt Namen für den Assistenten
-- `info`: Definiert wie willst du das AI Assistent zu verhalten #wann zu Nutzer
-  erwidern, #einschließen Persönlichkeit, Rolle, und der dienstliche
-  Kreisausschnitt sollte es fokussieren weiter
-- `ethicalRules`: Ethische Prinzipe/Prinzipien die AI Assistent muss strikt
-  folgen
-- `contactEmail`: Die Kontakt #Email die AI Assistent kann zu Nutzer versehen
-  #erforderlichenfalls
-- `contactWebsite`: Die Website die AI Assistent kann zu Nutzer versehen
-  #erforderlichenfalls
-- `Tools`: IDs Von das AI funktioniert den Assistenten benutzend diese Vorlage
-  können zugreifen
-- `Steckbrief`: Ein kurzer Steckbrief von der Vorlage. Dieses Attribut will
-  nicht den AssistentenBenehmen angehen
+- `id`: die eindeutige ID der Vorlage
+- `Version`: Die Vorlagenversion. Sie muss mit der Version des KI-Assistenten
+  übereinstimmen.
+- `name`: Der Name des Assistenten. Wenn diese Vorlage ausgewählt wird, wird
+  dieser Wert als Standardname für den Assistenten festgelegt.
+- `Info-`: Legt fest, wie sich der KI-Assistent bei der Beantwortung von
+  Nutzeranfragen verhalten soll, einschließlich Persönlichkeit, Rolle und dem
+  Geschäftsbereich, auf den er sich konzentrieren soll.
+- `ethicalRules`: ethische Grundsätze, die der KI-Assistent strikt befolgen muss
+- `contactEmail`: Die Kontakt-E-Mail-Adresse, die der KI-Assistent den Benutzern
+  bei Bedarf zur Verfügung stellen kann.
+- `KontaktWebsite`: Die Website, die der KI-Assistent den Benutzern bei Bedarf
+  zur Verfügung stellen kann.
+- `Tools`: IDs der KI-Funktionen, auf die der Assistent mit dieser Vorlage
+  zugreifen kann.
+- `Beschreibung`: Eine kurze Beschreibung der Vorlage. Dieses Attribut hat
+  keinen Einfluss auf das Verhalten des Assistenten.
 
-Bei #voreingestellt, das AI Assistent versieht vier Vorlagen:
+Standardmäßig bietet der KI-Assistent vier Vorlagen an:
 
-- **Portal Assistent**: Eine Vorlage für den #Axon Efeu Portal Assistent, mit
-  Aufgaben zu interagieren mit den #Axon Efeu System, wie finden Tasks, Fälle,
-  und Arbeitsgänge, und #zugreifen eine Kenntnis Basis von den #Axon Efeu Portal
+- **Portal Assistant**: Eine Vorlage für den Axon Ivy Portal Assistant mit
+  Funktionen zur Interaktion mit dem Axon Ivy-System, z. B. zum Suchen von
+  Aufgaben, Fällen und Prozessen sowie zum Zugriff auf eine Wissensdatenbank zum
+  Axon Ivy Portal.
 
-- **STUNDE Assistent**: Eine Vorlage gestaltet für AI Assistenten in den
-  Menschlichen Ressourcen Kreisausschnitt. Diese Vorlage #einschließen nicht
-  irgendwelche Tools aber bieten klare Auskunft und eine kräftige ethische Regel
-  Apparat geschneidert für STUNDE
+- **HR-Assistent**: Eine Vorlage für KI-Assistenten im Personalwesen. Diese
+  Vorlage enthält keine Tools, sondern klare Informationen und strenge ethische
+  Regeln, die speziell auf das Personalwesen zugeschnitten sind.
 
-- **Vertriebsassistent**: Eine Vorlage für AI Assistenten jene Unterstützung
-  Verkäufe Mannschaften. Wie den STUNDE Assistenten, es #einschließen nicht
-  Tools aber bieten an klare Auskunft und eine kräftige ethische Regel Apparat
+- **Vertriebsassistent**: Eine Vorlage für KI-Assistenten, die Vertriebsteams
+  unterstützen. Wie der HR-Assistent enthält sie keine Tools, sondern bietet
+  klare Informationen und strenge ethische Regeln.
 
-- **ICT Assistent**: Eine Vorlage für AI Assistenten benutzten zu troubleshoot
-  IT gibt heraus in dem rückwärtigen Büro. Diese Vorlage #einschließen nicht
-  auch irgendwelche Tools
+- **ICT Assistant**: Eine Vorlage für KI-Assistenten, die zur Fehlerbehebung bei
+  IT-Problemen im Backoffice verwendet wird. Diese Vorlage enthält ebenfalls
+  keine Tools.
 
-#### AI Strömung
+#### AI Flow
 
-##### Ermächtigend Intelligente Task Automatisierung
+##### Intelligente Aufgabenautomatisierung
 
-Zu aktivieren AI Assistenten zu bedienen vielschichtige Tasks mit komplex Logik,
-#Axon Efeu hereingebracht **AI Strömung** - ein fortgeschrittenes AI workflow
-Fachwerk gestaltet zu #windschlüpfig machen wie AI verarbeitet und operiert.
+Damit KI-Assistenten komplexe Aufgaben mit ausgefeilter Logik bewältigen können,
+hat Axon Ivy „ **” AI Flow** eingeführt – ein fortschrittliches
+KI-Workflow-Framework, das die Verarbeitung und Funktionsweise von KI optimiert.
 
-**AI Strömung** erlaubt Nutzer zu:
+**Mit AI Flow** können Benutzer:
 
-- #Bruchlos #interagieren mit das Efeu System, sichernd leistungsstarke
-  Integration.
-- Genau finde heraus, deute, und Henkel Nutzer Bitten.
-- Erhalte aufrecht #während Einfachheit #anbieten flexible Aufsicht und leichte
-  #Erweiterbarkeit für entwickeln Notwendigkeiten.
-- Bring fertig Zugang zu AI Aufgaben
-- Dieses Fachwerk ist gebaut zu ermächtigen Nutzer zu gestalten und
-  fertigbringen AI workflows effektiv, aktivierend ein pfiffigeres,
-  anpassungsfähiger AI Erfahrung.
+- Nahtlose Interaktion mit dem Ivy-System für eine effiziente Integration.
+- Erkennen, interpretieren und bearbeiten Sie Benutzeranfragen präzise.
+- Behalten Sie die Einfachheit bei und bieten Sie gleichzeitig flexible
+  Steuerung und einfache Erweiterbarkeit für sich entwickelnde Anforderungen.
+- Verwalten Sie den Zugriff auf KI-Funktionen
+- Dieses Framework wurde entwickelt, um Benutzern die Möglichkeit zu geben,
+  KI-Workflows effektiv zu entwerfen und zu verwalten, wodurch eine
+  intelligentere und anpassungsfähigere KI-Erfahrung ermöglicht wird.
 
-##### Reales Welt Problem
+##### Problem aus der Praxis
 
-Stell vor dir möchtest entfalten einen Charakterzug jener erlaubt STUNDE
-Angestellte zu sicher finden Auskunft von Lehrkörper gegründet auf Kriterien
-gleichnamigen Namen, Datum von Geburt, Zweig, oder Stelle.
+Stellen Sie sich vor, Sie möchten eine Funktion entwickeln, mit der Mitarbeiter
+der Personalabteilung anhand von Kriterien wie Name, Geburtsdatum, Niederlassung
+oder Position leicht Informationen über Mitarbeiter finden können.
 
-Ehemals, dies wollte bedürfen bauen eine Suche Seite mit mehrfach Filter (#z.B.,
-Name, Datum von Geburt), manuell #wo STUNDE Angestellte filtern aus die
-gewünscht Auskunft von einen #Daten Tisch.
+In der Vergangenheit hätte dies die Erstellung einer Suchseite mit mehreren
+Filtern (z. B. Name, Geburtsdatum) erfordert, auf der die Mitarbeiter der
+Personalabteilung die gewünschten Informationen manuell aus einer Datentabelle
+herausgefiltert hätten.
 
-Indes, herein das AI Ära, du willst eine pfiffigere Lösung. Ein AI-#ausrüsten
-Aufgabe kann helfen STUNDE Angestellte aufführen diese Tasks #mehr genügend
-benutzend naturale Sprache Anfragen gleichnamige "Liste alle Web Entwickler in
-Boston" oder "finden das info von Sandig, wer hat einen Geburtstag diesen
-Donnerstag."
+Im Zeitalter der KI wünschen Sie sich jedoch eine intelligentere Lösung. Eine
+KI-gestützte Funktion kann HR-Mitarbeitern dabei helfen, diese Aufgaben
+effizienter zu erledigen, indem sie natürliche Sprache wie „Liste aller
+Webentwickler in Boston“ oder „Finde die Informationen zu Sandy, die diesen
+Donnerstag Geburtstag hat“ verwenden.
 
-Jener ist #wo AI Strömung kommt herein. Es nicht einzige Geschwindigkeiten oben
-den Suche Arbeitsgang aber auch Hilfen mit Tasks wie #verbessernd typos und
-validierend #unlogisch #Daten, wie verhindern #suchen Angestellte mit künftig
-Geburtstage!
+Hier kommt AI Flow ins Spiel. Es beschleunigt nicht nur den Suchprozess, sondern
+hilft auch bei Aufgaben wie der Korrektur von Tippfehlern und der Validierung
+unlogischer Daten, z. B. indem es die Suche nach Mitarbeitern mit zukünftigen
+Geburtstagen verhindert!
 
-##### Wie es arbeitet
-AI Strömung operiert da eine workflow Fachwerk in der Form von JSON. Es besteht
-von mehrfach AI Stufen, #jede von #welche ist verbunden miteinander auf Nutzer
-gegründet-#abgesteckt Konfigurationen.
+##### So funktioniert es
+AI Flow fungiert als Workflow-Framework in Form von JSON. Es besteht aus
+mehreren AI-Schritten, die jeweils auf der Grundlage benutzerdefinierter
+Konfigurationen miteinander verknüpft sind.
 
-Einfache Attribute von #ein AI Strömung:
+Grundlegende Eigenschaften eines AI-Flows:
 
 ``` json
 {
@@ -530,104 +542,106 @@ Einfache Attribute von #ein AI Strömung:
 }
 ```
 
-- **Version**: Präzisiert die Version von die AI Strömung, #welche müssen
-  abstimmen mit die Efeu Version.
+- **version**: Gibt die Version des AI Flow an, die mit der Ivy-Version
+  übereinstimmen muss.
 
-- **id**: Die einmalige Bezeichnung für die AI Strömung.
+- **id**: Die eindeutige Kennung für den AI Flow.
 
-- **Name**: Der Name von der AI Münde.
+- **name**: Der Name des AI-Flows.
 
-- **Typ**: Immer gesetzt zu "MÜNDEN". Das AI Assistent können verschiedene Tools
-  gleichnamig Efeu Tools zugreifen, Kenntnis Basis Tools, und AI Münden. Mal
-  definieren den Typ da "MÜNDE", du deutest hin dass dieses Tool ist ein AI
-  Münde, erlaubend das AI Assistenten zu benutzen ihm richtig.
+- **Typ „** “: Immer auf „FLOW“ setzen. Der KI-Assistent kann auf verschiedene
+  Tools wie Ivy-Tools, Knowledge-Base-Tools und KI-Flows zugreifen. Durch die
+  Definition des Typs als „FLOW“ geben Sie an, dass es sich bei diesem Tool um
+  einen KI-Flow handelt, sodass der KI-Assistent es korrekt verwenden kann.
 
-- **Erlaubnisse**: Definiert die Rollen oder Benutzernamen von Nutzer
-  autorisierten zu benutzen diese AI Mündet.
+- **Berechtigungen**: Definiert die Rollen oder Benutzernamen der Benutzer, die
+  zur Verwendung dieses AI-Flows berechtigt sind.
 
-- **Steckbrief**: Eine detaillierte Erklärung von die AI Münde. Die More
-  eingehend der Steckbrief, das besseres der AI kann verstehen wie zu benutzen
-  der AI Münde.
+- **Beschreibung**: Eine detaillierte Erklärung des AI-Flows. Je ausführlicher
+  die Beschreibung, desto besser kann die KI verstehen, wie der AI-Flow zu
+  verwenden ist.
 
-- **Gebrauch**: Präzisiert #wann zu benutzen das AI Münde. Eine klarere
-  Erklärung sichert die AI kann genau auswählen die #angemessenen Strömung zu
-  #nachkommen Nutzer Bitten.
+- **Verwendung**: Legt fest, wann der KI-Flow verwendet werden soll. Eine
+  klarere Erklärung stellt sicher, dass die KI den geeigneten Flow auswählen
+  kann, um die Anforderungen der Benutzer zu erfüllen.
 
-- **Stufen**: Listet das AI Stufen dass die AI Strömung sollte exekutieren zu
-  bedienen den NutzersBitte. Verfügbare Stufe Typen:
+- **Schritte**: Listet die AI-Schritte auf, die der AI-Flow ausführen soll, um
+  die Anfrage des Benutzers zu bearbeiten. Verfügbare Schritttypen:
 
-   - **Schalter**: Entscheid-machend Element jenen Fremdenführer AI in
-     #auswählen die #angemessenen nächste Aktion gegründet auf spezifisch
-     Zustände.
+   - **Switch-**: Entscheidungselement, das die KI bei der Auswahl der
+     geeigneten nächsten Aktion auf der Grundlage spezifischer Bedingungen
+     leitet.
 
-   - **Efeu Tool**: Leitet AI zu benutzen spezifische Efeu Tools (#Ivy callable)
-     in seinem Entscheid-machend Arbeitsgang.
+   - **Ivy-Tool-**: Weist die KI an, bestimmte Ivy-Tools (Ivy-Callable) in ihrem
+     Entscheidungsprozess zu verwenden.
 
-   - **Text**: Zeig oder generieren Text-basisbezogenen Inhalt für Nutzer
-     Interaktion.
+   - **Text-**: Zeigen oder generieren Sie textbasierten Inhalt für die
+     Benutzerinteraktion.
 
-   - **Re-#Frasieren**: Hilf AI frischt Nutzer Input vor exekutieren spezifische
-     Aktionen oder benutzend Tools.
+   - ****: Helfen Sie der KI dabei, Benutzereingaben zu verfeinern, bevor
+     bestimmte Aktionen ausgeführt oder Tools verwendet werden.
 
-   - **#Auslösen #Münden**: Läuft an #innerhalb eine neue Strömung die AI
-     verarbeite, auch mal abspielen einen spezifischen Auslöser Meldung oder
-     benutzend das Resultat von einer vorausgehenden Stufe. Dies erlaubt für
-     nahtlos Wechsel zwischen verschieden workflows und die Fähigkeit zu
-     abspielen #relevant #Daten zwischen jene.
+   - **Trigger Flow**: Initiiert einen neuen Ablauf innerhalb des KI-Prozesses,
+     entweder durch Übermittlung einer bestimmten Trigger-Nachricht oder durch
+     Verwendung des Ergebnisses eines vorherigen Schritts. Dies ermöglicht
+     nahtlose Übergänge zwischen verschiedenen Arbeitsabläufen und die
+     Möglichkeit, relevante Daten zwischen ihnen weiterzugeben.
 
-> [!#EIN TRINKGELD GEBEN] Zu lernen #mehr etwa das AI Stufen, bitte übergeben zu
-> [AI Stufe](#ai-step)
+> [!TIP] Weitere Informationen zu den KI-Schritten finden Sie unter
+> [KI-Schritt](#ai-step).
 
-> [!#EIN TRINKGELD GEBEN] Zu lernen wie eure eigenes zu schaffen AI Strömung,
-> bitte übergeben zu [AI Strömung Demo](#create-your-own-ai-flow)
+> [!TIP] Informationen zum Erstellen Ihres eigenen KI-Flows finden Sie unter
+> [KI-Flow-Demo](#create-your-own-ai-flow).
 
-##### AI Stufe
+##### KI-Schritt
 
 ###### Attribute
 
-- **stepType**: Typ von schreite. Gültige Werte:
-   - #IVY_TOOL: [Efeu Tool Stufe](#ivy-tool-step).
-   - SCHALTER: [#Schalten #schreiten](#switch-step).
-   - TEXT: [Text Stufe](#text-step).
-   - RE_PHRASE: [Rephrase Stufe](#re-phrase-step).
-   - #AUSLÖSEN_#MÜNDEN: [#Auslösen #münden schreite](#trigger-flow-step).
-   - KENNTNIS_BASIS: [Kenntnis Basis Stufe](#knowledge-base-step)
+- **stepType**: Typ des Schritts. Gültige Werte:
+   - IVY_TOOL: [Ivy-Tool-Schritt](#ivy-tool-step).
+   - SWITCH: [Switch-Schritt](#switch-step).
+   - TEXT: [Text Schritt](#text-step).
+   - RE_PHRASE: [Schritt umformulieren](#re-phrase-step).
+   - TRIGGER_FLOW: [Trigger-Flow-Schritt](#trigger-flow-step).
+   - KNOWLEDGE_BASE: [Wissensdatenbank Schritt](#knowledge-base-step)
 
-- **stepNo**: Nummer von eintreten die Strömung.
+- **stepNo**: Nummer des Schritts im Ablauf.
 
-- **Resultat**: Resultat von einer Stufe (Übergibt [AI Resultiert
-  DTO](#ai-result-dto) ).
+- **Ergebnis**: Ergebnis eines Schritts (siehe [AI Result DTO](#ai-result-dto)
+  ).
 
-- **onSuccess**: Die Stufe will jener sein exekutieren ob diese Stufe ist
-  gerannt erfolgreich.
+- **onSuccess**: Der Schritt, der ausgeführt wird, wenn dieser Schritt
+  erfolgreich ausgeführt wurde.
 
-- **onError**: Die Stufe will jener sein exekutieren ob wir bekamen #wann Kummer
-  rennend diese Stufe.
+- **onError**: Der Schritt, der ausgeführt wird, wenn bei der Ausführung dieses
+  Schritts ein Problem auftritt.
 
-- **useConversationMemory**: Apparat zu wahr zu einschließen alle Schwatz
-  Meldungen von der Unterhaltung rennend #wann die Stufe. Andernfalls das AI
-  schreiten nur Schwatz Meldungen einschließen von dem Laufen AI Strömung.
+- **useConversationMemory**: Setzen Sie diesen Wert auf „true“, um alle
+  Chat-Nachrichten der Konversation bei der Ausführung des Schritts
+  einzubeziehen. Andernfalls umfasst der KI-Schritt nur Chat-Nachrichten des
+  laufenden KI-Ablaufs.
 
-- **saveToHistory**: Apparat zu falsch zu herausnehmen die Meldung von
-  Unterhaltung Geschichte, nur speichern zu dem Gedächtnis.
+- **saveToHistory**: Setzen Sie diesen Wert auf „false“, um die Nachricht aus
+  dem Konversationsverlauf auszuschließen und nur im Speicher zu speichern.
 
-- **customInstruction**: Weisung für eine spezifische Forderung für AI.
+- **customInstruction**: Anweisung für eine bestimmte Anforderung an die KI.
 
-##### #Schalten #schreiten
+##### Schritt wechseln
 
-Das **Schalter Stufe** ist ein Entscheid-machend Element gestaltet zu steuern AI
-in #auswählen die #angemessenen nächste Aktion gegründet auf spezifisch
-Zustände. Es funktioniert mal eine Liste auswerten von #vordefiniert Fälle,
-#jede vertretend ein potentielles Szenario das AI darf begegnen. Gegründet auf
-dem Fall jene Wettkämpfe die gängige Situation, die AI wählt aus die
-#entsprechend Aktion zu nehmen.
+Der Schritt „ **” (Entscheidung treffen)** ist ein Entscheidungselement, das die
+KI dabei unterstützt, anhand bestimmter Bedingungen die geeignete nächste Aktion
+auszuwählen. Dabei wird eine Liste vordefinierter Fälle ausgewertet, die jeweils
+ein potenzielles Szenario darstellen, mit dem die KI konfrontiert werden könnte.
+Basierend auf dem Fall, der der aktuellen Situation entspricht, wählt die KI die
+entsprechende Aktion aus.
 
-In der #versehen Struktur, der AI prüft die Fall Steckbriefe innerhalb die Liste
-und weist zu die richtige Aktion Nummer zu verfahren. Dies erlaubt das AI zu
-#dynamisch anpassen sein Benehmen gegründet auf verschieden Ergebnisse oder
-Staaten, sichernd #ein geschneidert Antwort für verschiedene Umstände.
+In der vorgegebenen Struktur untersucht die KI die Fallbeschreibungen innerhalb
+der Liste und weist die richtige Aktion zu, um weiterzumachen. Auf diese Weise
+kann die KI ihr Verhalten dynamisch an unterschiedliche Ergebnisse oder Zustände
+anpassen und so eine maßgeschneiderte Reaktion auf verschiedene Umstände
+gewährleisten.
 
-- **Fälle**: Eine Liste von möglich Szenarios mit #entsprechend Aktionen.
+- **Fälle**: Eine Liste möglicher Szenarien mit entsprechenden Aktionen.
 
 ```json
 {
@@ -641,19 +655,19 @@ Staaten, sichernd #ein geschneidert Antwort für verschiedene Umstände.
 }
 ```
 
-##### #Ivy Tool Stufe
+##### Ivy-Tool-Schritt
 
-Das **Efeu Tool Stufe** ist eine spezialisiert Weisung Mechanismus jener leitet
-AI zu benutzen spezifische Tools oder Aufgaben in seinem Entscheid-machend
-Arbeitsgang. Diese Stufe sichert dass die AI interagiert mit #vordefiniert Tools
-(übergeben zu mal ihr toolId) und exekutiert Tasks gemäß den #abgesteckt
-Zuständen und #benutzerdefiniert Weisungen. Es aktiviert das AI zu aufführen
-spezialisierte Aktionen und versehen Flexibilität durch optional Parameter wie
-Erfolg, Fehler Handing, und #benutzerdefiniert Weisungen.
+Der Schritt „ **” des Ivy-Tools** ist ein spezieller Befehlsmechanismus, der die
+KI anweist, bestimmte Tools oder Funktionen in ihrem Entscheidungsprozess zu
+verwenden. Dieser Schritt stellt sicher, dass die KI mit vordefinierten Tools
+(bezeichnet durch ihre toolId) interagiert und Aufgaben gemäß den definierten
+Bedingungen und benutzerdefinierten Anweisungen ausführt. Er ermöglicht der KI
+die Ausführung spezieller Aktionen und bietet Flexibilität durch optionale
+Parameter wie Erfolg, Fehlerbehandlung und benutzerdefinierte Anweisungen.
 
-- **toolId**: Übergibt zu das ID von einem Tool von der Liste von verfügbar AI
-  Aufgaben (da beschrieben in das variables AiFunctions), wie
-  "finden-beschäftigen" oder "finden-Web-Entwickler".
+- **toolId**: Bezieht sich auf die ID eines Tools aus der Liste der verfügbaren
+  KI-Funktionen (wie in der Variablen AiFunctions beschrieben), z. B.
+  „find-tasks” oder „find-web-developer”.
 
 ```json
 {
@@ -664,9 +678,9 @@ Erfolg, Fehler Handing, und #benutzerdefiniert Weisungen.
 }
 ```
 
-- **customInstruction**: Versieht spezifische Weisungen für die AI zu folgen in
-  exekutieren das Tool. Für Instanz, die AI darf sein geleitet zu "Finden
-  Angestellte wer haben die Rolle 'WEB_ENTWICKLER'".
+- **customInstruction**: Enthält spezifische Anweisungen, die die KI bei der
+  Ausführung des Tools befolgen soll. Beispielsweise könnte die KI angewiesen
+  werden, „Mitarbeiter mit der Rolle ‚WEB_DEVELOPER‘ zu finden“.
 
 ```json
 {
@@ -680,25 +694,26 @@ Erfolg, Fehler Handing, und #benutzerdefiniert Weisungen.
 }
 ```
 
-##### Text Stufe
+##### Text Schritt
 
-Das **Text Stufe** ist herein eine unerlässliche Komponente AI workflows
-gestaltet zu zeigen oder generieren Text-basisbezogenen Inhalt für Nutzer
-Interaktion. #Abhängen auf seiner Konfiguration, die Text Stufe kann feste
-Meldungen zeigen, AI-generiert Inhalt, Resultate von vorherig Stufen, oder
-gleichmäßige unsichtbare Meldungen für innerparteilich AI Verarbeitung. Diese
-Flexibilität aktiviert die AI zu kommunizieren #während effektiv mit Nutzer
-steuernd Entscheid-machend Arbeitsgänge.
+Der Text-Schritt „ **“** ist eine wichtige Komponente in KI-Workflows, die dazu
+dient, textbasierten Inhalt für die Benutzerinteraktion anzuzeigen oder zu
+generieren. Je nach Konfiguration kann der Text-Schritt feste Meldungen,
+KI-generierte Inhalte, Ergebnisse vorheriger Schritte oder sogar versteckte
+Meldungen für die interne KI-Verarbeitung anzeigen. Diese Flexibilität
+ermöglicht es der KI, effektiv mit Benutzern zu kommunizieren und gleichzeitig
+Entscheidungsprozesse zu steuern.
 
 **Fester Text**
 
-- **Text**: Der feste Text zu sein gezeigt weiter der UI.
+- **Text**: Der feste Text, der auf der Benutzeroberfläche angezeigt werden
+  soll.
 
-- **showResultOfStep**: Option zu zeigen das Resultat von einer vorausgehenden
-  Stufe #referenzieren mal seine Nummer.
+- **showResultOfStep**: Option zum Anzeigen des Ergebnisses eines vorherigen
+  Schritts durch Verweisen auf dessen Nummer.
 
-- **onSuccess**: Definiert als die nächste Stufe den Nutzer versieht Input nach
-  lesen den Text.
+- **onSuccess**: Legt den nächsten Schritt fest, wenn der Benutzer nach dem
+  Lesen des Textes eine Eingabe macht.
 
 ```json
 {
@@ -710,15 +725,16 @@ steuernd Entscheid-machend Arbeitsgänge.
 }
 ```
 
-**AI Generiert**
+**KI-generiert**
 
-- **useAI**: Gesetzt zu wahr zu erlauben AI zu generieren #dynamisch
-  #einverstanden, wie Übersichten oder Berichte.
+- **useAI-**: Setzen Sie diesen Wert auf „true“, damit die KI Inhalte wie
+  Zusammenfassungen oder Berichte dynamisch generieren kann.
 
-- **customInstruction**: Ein steuernd Weisung zu helfen die AI generiert
-  #angemessenen Text gegründet auf Kontext oder Nutzer Inputs
+- **customInstruction**: Eine Anleitung, die der KI hilft, anhand des Kontexts
+  oder der Benutzereingaben einen geeigneten Text zu generieren.
 
-- **onSuccess**: Die nächste Stufe zu exekutieren #nachdem Nutzer Interaktion.
+- **onSuccess**: Der nächste Schritt, der nach der Benutzerinteraktion
+  ausgeführt wird.
 
 ```json
 {
@@ -730,9 +746,9 @@ steuernd Entscheid-machend Arbeitsgänge.
 },
 ```
 
-**Vorstellung Resultat von anderen Stufe**
+**Ergebnis eines anderen Schritts anzeigen**
 
-- **showResultOfStep**: Zeigt das Resultat von ein vorher exekutiert Stufe.
+- **showResultOfStep**: Zeigt das Ergebnis eines zuvor ausgeführten Schritts an.
 
 ```json
 {
@@ -755,12 +771,12 @@ steuernd Entscheid-machend Arbeitsgänge.
 }
 ```
 
-**Unsichtbare Text Stufe**
+**Schritt „Versteckter Text”**
 
-- **isHidden**: Gesetzt zu wahr zu verstecken den Text von dem Nutzer aber
-  erlauben dem AI zu lesen und verarbeiten ihm. Dies ist #wann nützlich
-  generierend #einverstanden dass das AI Notwendigkeiten für ferner Verarbeitung
-  ohne zeigen ihm weiter die UI.
+- **isHidden**: Setzen Sie diesen Wert auf „true“, um den Text für den Benutzer
+  zu verbergen, aber der KI zu erlauben, ihn zu lesen und zu verarbeiten. Dies
+  ist nützlich, wenn Sie Inhalte generieren, die die KI für die weitere
+  Verarbeitung benötigt, ohne sie auf der Benutzeroberfläche anzuzeigen.
 
 ```json
 {
@@ -781,43 +797,45 @@ steuernd Entscheid-machend Arbeitsgänge.
 }
 ```
 
-##### Re-#Frasieren #schreiten
+##### Schritt umformulieren
 
-Das **Rephrase Stufe** ist gestaltet zu helfen AI frischt Nutzer Input vor
-exekutieren spezifische Aktionen oder benutzend Tools. Dies ist #genauer
-nützlich als ist der NutzersMeldung vag, unvollständig, oder nicht strukturiert
-in einem Weg dass dem AI kann sofort verarbeiten. Mal rephrasing der Input, der
-AI sichert dass die Auskunft ist More präzis, machend ihm leichter zu benutzen
-mit Soll Tools oder Aufgaben.
+Der Schritt „ **” (Umformulierung)** soll der KI dabei helfen, Benutzereingaben
+zu verfeinern, bevor bestimmte Aktionen ausgeführt oder Tools verwendet werden.
+Dies ist besonders nützlich, wenn die Nachricht des Benutzers vage,
+unvollständig oder nicht so strukturiert ist, dass die KI sie sofort verarbeiten
+kann. Durch die Umformulierung der Eingabe stellt die KI sicher, dass die
+Informationen präziser sind, wodurch sie mit den Ziel-Tools oder -Funktionen
+leichter zu verwenden sind.
 
-- **toolId**: Übergibt zu dem Tool dem AI will benutzen da das Soll. AI Sollten
-  benutzen JSON Schema von dem #entsprechend Tool zu rephrase die Meldung. Mal
-  definieren dieses Attribut, du sicherst dass das rephrased Input ist vereinbar
-  mit das ToolsForderungen.
+- **toolId**: Bezieht sich auf das Tool, das die KI als Ziel verwenden wird. Die
+  KI sollte das JSON-Schema des entsprechenden Tools verwenden, um die Nachricht
+  umzuformulieren. Durch die Definition dieses Attributs stellen Sie sicher,
+  dass die umformulierte Eingabe die Anforderungen des Tools erfüllt.
     - Beispiel:
-        - Nutzer Input “findet meinen üblen Abschied Task”
-        - Du hast ein Tool zu finden #namhaft Task, Steckbrief, Vorrang,… aber
-          Nutzer erzählte nicht dir dass #welche #auffangen er möchte benutzen.
-          Deswegen solltest du rephrase die Meldung benutzen bevor ihm mit das
-          Efeu Tool.
-        - → Finde Task mit heißt ‘üblen Abschied'
+        - Benutzereingabe „Meine Krankmeldung suchen”
+        - Sie haben ein Tool, um Aufgaben nach Name, Beschreibung, Priorität
+          usw. zu suchen, aber der Benutzer hat Ihnen nicht mitgeteilt, welches
+          Feld er verwenden möchte. Daher sollten Sie die Nachricht
+          umformulieren, bevor Sie sie mit dem Ivy-Tool verwenden.
+        - → Aufgabe mit dem Namen „Krankheitsurlaub” suchen
 
-- **customInstruction**: Versieht spezifische Leitfäden für wie die AI sollten
-  rephrase die Meldung. Diese Hilfen die AI Henkel speziell Fälle wie abstrakt
-  Trimester oder Daten, #formatieren jene hinein #mehr #nützlich #Daten.
+- **customInstruction**: Enthält spezifische Richtlinien dafür, wie die KI die
+  Nachricht umformulieren soll. Dies hilft der KI dabei, bestimmte Fälle wie
+  abstrakte Begriffe oder Datumsangaben zu verarbeiten und sie in nützlichere
+  Daten umzuwandeln.
 
-- **onRephrase**: Definiert die nächste Stufe zu exekutieren ob die AI ermittelt
-  jener es braucht zu rephrase die Meldung.
+- **onRephrase**: Legt den nächsten Schritt fest, der ausgeführt werden soll,
+  wenn die KI feststellt, dass die Nachricht umformuliert werden muss.
 
-- **onSuccess**: Präzisiert die Stufe zu rennen ob die AI braucht nicht zu
-  rephrase die Meldung.
+- **onSuccess**: Gibt den Schritt an, der ausgeführt werden soll, wenn die KI
+  die Nachricht nicht umformulieren muss.
 
-- **Beispiele**: Eine Liste von #vordefiniert Beispiele jener Fremdenführer der
-  AI herein #begreifend wie zu rephrase Nutzer Meldungen. Jedes Beispiel besteht
-  von:
-    - **#Vor**: Das Original, unstructured Meldung von dem Nutzer.
-    - **#Nachdem**: Das rephrased Meldung dass die AI wollte generieren für
-      besser Klarheit und actionability
+- **Beispiele**: Eine Liste vordefinierter Beispiele, die der KI dabei helfen,
+  zu verstehen, wie Benutzernachrichten umformuliert werden können. Jedes
+  Beispiel besteht aus:
+    - **vor**: Die ursprüngliche, unstrukturierte Nachricht des Benutzers.
+    - **Nach „** “: Die umformulierte Nachricht, die die KI für mehr Klarheit
+      und Aktion generieren würde.
 
 ```json
 {
@@ -845,20 +863,20 @@ mit Soll Tools oder Aufgaben.
 }
 ```
 
-##### Auslöser Strömung Stufe
+##### Trigger-Flow-Schritt
 
-Das **Auslöser Strömung Stufe** Eingeweihte eine neue Strömung #innerhalb die AI
-Arbeitsgang, entweder mal abspielen einen spezifischen Auslöser Meldung oder
-benutzend das Resultat von einer vorausgehenden Stufe. Dies erlaubt für nahtlos
-Wechsel zwischen verschieden workflows und die Fähigkeit zu abspielen #relevant
-#Daten zwischen ihnen.
+Der Trigger-Flow-Schritt „ **“** initiiert einen neuen Flow innerhalb des
+KI-Prozesses, entweder durch Weitergabe einer bestimmten Trigger-Nachricht oder
+durch Verwendung des Ergebnisses eines vorherigen Schritts. Dies ermöglicht
+nahtlose Übergänge zwischen verschiedenen Workflows und die Weitergabe
+relevanter Daten zwischen diesen.
 
-- **flowId**: ID Von der Strömung mögen du auslösen
+- **flowId**: ID des Flows, den Sie auslösen möchten
 
-**Auslöser mit Auslöser Meldung**
+**Auslöser mit Auslösermeldung**
 
-- **triggerMessage**: Die #benutzerdefiniert Meldung serviert jener da #einlesen
-  zu der neuen Strömung, steuernd der AI auf was zu tun #nächste.
+- **triggerMessage**: Die benutzerdefinierte Nachricht, die als Eingabe für den
+  neuen Ablauf dient und die KI anleitet, was als Nächstes zu tun ist.
 
 ```json
 {
@@ -869,12 +887,13 @@ Wechsel zwischen verschieden workflows und die Fähigkeit zu abspielen #relevant
 }
 ```
 
-**Auslöser mit Resultat von anderen Stufe**
+**Auslöser mit Ergebnis eines anderen Schritts**
 
-- **showResultOfStep**: Spielt ab das Resultat von einem #Spezifikum #vorangehen
-  Stufe da die Auslöser Meldung für die neue Strömung. Diese Option ist nützlich
-  als mögen du abspielen Resultat von einer Strömung zu anderer, oder die
-  Meldung mögen du abspielen zu der neuen Stufe ist bekommt von dem System.
+- **showResultOfStep**: Übergibt das Ergebnis eines bestimmten vorhergehenden
+  Schritts als Auslösungsnachricht für den neuen Ablauf. Diese Option ist
+  nützlich, wenn Sie das Ergebnis eines Ablaufs an einen anderen übergeben
+  möchten oder wenn die Nachricht, die Sie an den neuen Schritt übergeben
+  möchten, vom System abgerufen wird.
 
 ```json
 {
@@ -885,16 +904,16 @@ Wechsel zwischen verschieden workflows und die Fähigkeit zu abspielen #relevant
     "useConversationMemory": false
 }
 ```
-##### Kenntnis Basis Stufe
+##### Wissensdatenbank-Schritt
 
-Wann arbeiten auf einer Stufe, Nutzer dürfen Fragen haben jene sind nicht direkt
-erzählt zu die workflow. Für Instanz, ob ein Nutzer ist unfähig zu abordnen ein
-Task, sie dürfen mögen kennen wieso Delegation ist nicht möglich. Das **Kenntnis
-Basis** #schreiten ist gestaltet zu helfen schnell Nutzer finden Antworten zu
-solchen Fragen.
+Bei der Bearbeitung eines Schritts können Nutzer Fragen haben, die nicht direkt
+mit dem Workflow zusammenhängen. Wenn ein Nutzer beispielsweise eine Aufgabe
+nicht delegieren kann, möchte er vielleicht wissen, warum eine Delegierung nicht
+möglich ist. Der Schritt „ **“ (Wissensdatenbank** ) soll Nutzern helfen,
+schnell Antworten auf solche Fragen zu finden.
 
-- **toolId**: Übergibt zu dem Tool von Typ `RETTUNG_QA` dass die AI will
-  benutzen da die Kenntnis Basis zu versehen Antworten.
+- **toolId**: Bezieht sich auf das Tool vom Typ `RETRIEVAL_QA`, das die KI als
+  Wissensbasis für die Bereitstellung von Antworten verwendet.
 
 ```json
 {
@@ -906,63 +925,63 @@ solchen Fragen.
 }
 ```
 
-##### AI Resultat DTO
+##### KI-Ergebnis DTO
 
 ###### Einführung
 
-Das Resultat DTO sichert dass das AI Assistenten versieht zuverlässige und
-konstante Resultate bei #anhaften zu einer normgerechten Struktur für alle
-Ausgaben, fördernd darüber Effizienz und Klarheit AI Interaktionen.
+Das Ergebnis-DTO stellt sicher, dass der KI-Assistent zuverlässige und
+konsistente Ergebnisse liefert, indem es eine standardisierte Struktur für alle
+Ausgaben einhält und so die Effizienz und Klarheit bei allen KI-Interaktionen
+fördert.
 
-- Projekt: Portal-Komponente
-- Klasse: com.axonivy.Portal.Komponenten.dto.AiResultDTO
+- Projekt: portal-component
+- Klasse: com.axonivy.portal.components.dto.AiResultDTO
 
 **Attribute**
 
-| Name        | Typ                                          | Decription                             |
-| ----------- | -------------------------------------------- | -------------------------------------- |
-| Resultat    | Schnur                                       | Resultat zu zeigen für Nutzer          |
-| resultForAI | Schnur                                       | Resultat für AI Model                  |
-| Staat       | com.axonivy.Portal.Komponenten.enums.AIState | Staat von dem Resultat (GETAN, FEHLER) |
+| Name        | Typ                                         | Beschreibung                              |
+| ----------- | ------------------------------------------- | ----------------------------------------- |
+| Ergebnis    | Zeichenfolge                                | Ergebnis, das dem Benutzer angezeigt wird |
+| resultForAI | Zeichenfolge                                | Ergebnis für KI-Modell                    |
+| Zustand     | com.axonivy.portal.components.enums.AIState | Status des Ergebnisses (FERTIG, FEHLER)   |
 
-#### Schaff eure eigenes AI Strömung
+#### Erstellen Sie Ihren eigenen KI-Flow
 
-In dieser Sektion, wir wollen erklären wie eure eigenes zu entfalten AI Strömung
-benutzend die [Reales Welt Problem](#real-world-problem) da einen Nutzung Fall.
+In diesem Abschnitt erklären wir Ihnen, wie Sie Ihren eigenen KI-Flow anhand des
+[Real world problem](#real-world-problem) als Anwendungsfall entwickeln können.
 
-> [!BEACHTE] Herein das [Compex Demo](#complex-demo), wir implementiert haben
-> eine Aufgabe zu finden Angestellte Auskunft. Deswegen, es ist hoch nicht
-> weiterempfohlen zu benutzen gemeinsam jene Demo mit diesem Fremdenführer.
+> [!HINWEIS] In der [Compex-Demo](#complex-demo) haben wir eine Funktion zum
+> Auffinden von Mitarbeiterinformationen implementiert. Daher wird dringend
+> empfohlen, diese Demo nicht in Verbindung mit dieser Anleitung zu verwenden.
 
-1. Schaff einen Efeu projiziert jenen hängt ab weiter den `Portal-Komponenten`
-   Projekt
+1. Erstellen Sie ein Ivy-Projekt, das vom Projekt „ `” (portal-components` )
+   abhängt.
 
-2. Schaff einen Efeu Callable Arbeitsgang mit Input Parameter vertretend die
-   Kriterien für finden Angestellte mit der Unterschrift
-   `findEmployeesInfo(Schnur,Schnur,Schnur,Schnur)`
+2. Erstellen Sie einen Ivy Callable-Prozess mit Eingabeparametern, die die
+   Kriterien für die Suche nach Mitarbeitern mit der Signatur
+   `findEmployeesInfo(String,String,String,String) darstellen.`
 
-| Name         | Typ    | Decription                                                 |
-| ------------ | ------ | ---------------------------------------------------------- |
-| `Name`       | Schnur | Name von der Angestellter                                  |
-| `Geburtstag` | Schnur | Angestellter Datum von Geburt                              |
-| `Zweig`      | Schnur | Gesellschaft verzweigt #welche die Angestellte arbeiten an |
-| `Stelle`     | Schnur | Stelle von der Angestellter in der Gesellschaft            |
+| Name         | Typ          | Beschreibung                                        |
+| ------------ | ------------ | --------------------------------------------------- |
+| `Name`       | Zeichenfolge | Name des Mitarbeiters                               |
+| `Geburtstag` | Zeichenfolge | Geburtsdatum des Mitarbeiters                       |
+| `Zweig`      | Zeichenfolge | Unternehmenszweig, in dem der Mitarbeiter tätig ist |
+| `Position`   | Zeichenfolge | Position des Mitarbeiters im Unternehmen            |
 
-Das Ausgabe Resultat von dem Efeu Callable Arbeitsgang muss ein Objekt sein hat
-Namen `Resultat`, und Typ [AI Resultat DTO](#ai-result-dto).
+Das Ergebnis des Ivy Callable-Prozesses muss ein Objekt mit dem Namen „ `”, dem
+Ergebnis „` ” und dem Typ [AI Result DTO](#ai-result-dto) sein.
 
-| Name       | Typ                                            | Decription                    |
-| ---------- | ---------------------------------------------- | ----------------------------- |
-| `Resultat` | com.axonivy.Portal.Komponenten.dto.AiResultDTO | Resultat für das AI Assistent |
+| Name       | Typ                                           | Beschreibung                    |
+| ---------- | --------------------------------------------- | ------------------------------- |
+| `Ergebnis` | com.axonivy.portal.components.dto.AiResultDTO | Ergebnis für den KI-Assistenten |
 
-> [!#EIN TRINKGELD GEBEN] Du willst brauchen zu implementieren die Logik zu
-> finden Angestellte #du. Für Verweis, du kannst den Code prüfen herein den
-> [Vielschichtige Demo](#complex-demo) #innerhalb die **ai-Assistenten-Demo**
-> Efeu projiziert.
+> [!TIP] Sie müssen die Logik zum Auffinden von Mitarbeitern selbst
+> implementieren. Als Referenz können Sie den Code in der [Complex
+> Demo](#complex-demo) im Ivy-Projekt „ **” ai-assistant-demo** untersuchen.
 
-3. In der variablen Datei **AiFunctions.json** Fügt zu ein Efeu Tool #welche
-   will interagieren mit das callable Arbeitsgang zu #abfragen droben für Liste
-   von Angestellte
+3. Fügen Sie in der Variablendatei **AiFunctions.json** ein Ivy-Tool hinzu, das
+   mit dem oben genannten aufrufbaren Prozess interagiert, um die Liste der
+   Mitarbeiter abzufragen.
 
 ```json
 {
@@ -995,28 +1014,29 @@ Namen `Resultat`, und Typ [AI Resultat DTO](#ai-result-dto).
 }
 ```
 
-> [!WICHTIG] Bitte Unterhalt in pass auf:
-> - Der Name von den Attributen müssen sein gleich da Name von Parameter von die
->   callable Arbeitsgang droben.
-> - `Unterschrift` misst bei herein die JSON Objekt ist die Unterschrift von die
->   callable Arbeitsgang.
+> [!WICHTIG] Bitte beachten Sie:
+> - Der Name der Attribute muss mit dem Namen der Parameter des oben genannten
+>   aufrufbaren Prozesses übereinstimmen.
+> - `Das Attribut „signature` ” im JSON-Objekt ist die Signatur des aufrufbaren
+>   Prozesses.
 
-4. In der variablen Datei **AiFunctions.json** Fügen zu ein AI Strömung zu
-   bedienen die Bitte zu finden Angestellte von Nutzer.
+4. Fügen Sie in der Variablendatei **AiFunctions.json** einen AI Flow hinzu, um
+   die Anfrage des Benutzers nach Mitarbeitern zu bearbeiten.
 
-Dies ist ein Beispiel von ein simples AI Strömung mit 4 schreitet:
-- Stufe 0: Rephrase Die Bitte Nutzer zu machen ihm abstimmen mit das Efeu Tool
-  `findet-Angestellte-info`
-- Stufe 1: Ruf das Efeu Tool, benutzend das rephrased Bitte an **Stufe 0** da
-  #einlesen
-    - Ob hat Fehler oder kann nicht finden irgendwelche Angestellte passte die
-      Bitte, zeig einen Fehler (**Stufe 2**)
-    - Ob Erfolg: Zeig das Resultat (**Stufe 3**)
-- Stufe 2: Zeig eine Meldung zu Nutzer enden dann die Strömung.
-- Stufe 3: Vorstellung Auskunft von gründen Angestellte in einer
-  Kuhle-#gegliedert Format enden dann die Strömung.
+Dies ist ein Beispiel für einen einfachen KI-Ablauf mit 4 Schritten:
+- Schritt 0: Formulieren Sie die Anfrage des Benutzers um, damit sie mit dem
+  Ivy-Tool übereinstimmt `find-employees-info`
+- Schritt 1: Rufen Sie das Ivy-Tool auf und verwenden Sie die umformulierte
+  Anfrage unter **Schritt 0** als Eingabe.
+    - Wenn ein Fehler auftritt oder kein Mitarbeiter gefunden wird, der der
+      Anfrage entspricht, wird eine Fehlermeldung angezeigt (**Schritt 2**).
+    - Bei Erfolg: Zeigen Sie das Ergebnis an (**Schritt 3**).
+- Schritt 2: Zeigen Sie dem Benutzer eine Meldung an und beenden Sie dann den
+  Ablauf.
+- Schritt 3: Zeigen Sie die Informationen zu den gefundenen Mitarbeitern in
+  einem übersichtlichen Format an und beenden Sie dann den Ablauf.
 
-Und dies ist das AI Strömung:
+Und dies ist der KI-Ablauf:
 
 ```json
 {
@@ -1070,9 +1090,10 @@ Und dies ist das AI Strömung:
 }
 ```
 
-5. Offen die variable Datei **Assistenten.json** Und zufügen das ID von das AI
-   Strömung `Findet Angestellte Auskunft` zu die `Tools` Attribut von eure AI
-   Assistenten gezeigt da in dem Beispiel mit dem AI Assistenten `Alex` unten.
+5. Öffnen Sie die Variablendatei **Assistants.json** und fügen Sie die ID des
+   KI-Flows `Find employee information` zum Attribut `tools` Ihres
+   KI-Assistenten hinzu, wie im Beispiel mit dem KI-Assistenten `Alex` unten
+   gezeigt.
 
 ```json
 [
@@ -1103,47 +1124,48 @@ Und dies ist das AI Strömung:
 ]
 ```
 
-6. Das AI Assistent `Alex` jetzt hat die Funktionalität zu #suchen Angestellte
-   Auskunft. Du kannst das Schwatz Armaturenbrett öffnen und probieren #hinaus
-   dies neu AI Charakterzug.
+6. Der KI-Assistent `Alex` verfügt nun über die Funktion, nach
+   Mitarbeiterinformationen zu suchen. Sie können das Chat-Dashboard öffnen und
+   diese neue KI-Funktion ausprobieren.
 
-Dies ist wie ein Beispiel die Unterhaltung #aussehen als benutzend Nutzer den
-`findet-Angestellte-Strömung` mit dem Assistenten `Alex`:
+Dies ist ein Beispiel dafür, wie die Konversation aussieht, wenn ein Benutzer
+den `find-employees-flow` mit dem Assistenten `Alex` verwendet:
 
 **Legenden:**
 
-😄: Nutzer Meldung
+😄: Benutzer-Nachricht
 
-🐼: Die Meldung dass AI Vorstellung auf dem Screen
+🐼: Die Meldung, die die KI auf dem Bildschirm anzeigt
 
-✨: Die Meldung dass AI reden zu #sich und zeigt nicht zu Nutzer
+✨: Die Meldung, dass die KI mit sich selbst spricht und dem Benutzer nicht
+angezeigt wird.
 
-**Unterhaltung:**
+**Konversation:**
 
 😄: Hallo Alex
 
-🐼: Hi Nutzer
+🐼: Hallo Benutzer
 
-😄: Ich möchte #Sandy finden, sie arbeitet für ein Web Entwickler unser München
-Büro
+😄: Ich möchte Sandy finden, sie ist Webentwicklerin und arbeitet für unser Büro
+in München.
 
-✨ `Findet Angestellte hat Namen ‘#Sandy', Stelle ‘Web Entwickler', und Arbeit an
-Zweig ‘München'`
+✨ `findet Mitarbeiter mit dem Namen „Sandy”, der Position „Webentwickler” und
+der Niederlassung „München”.`
 
-✨: `
+✨: ``
 
-✨: `[ {“Heiß”: “#Sandy Williams“, “Zweig”: “munich”,”Stelle”: “Web Entwickler”,
-“Rang”:“#Dienstälter”, “#Email”: “sandyw@localhost.com”}]`
+✨: `[ {„name“: „Sandy Williams“, „branch“: „munich“, „position“: „Web
+Developer“, „rank“: „Senior“, „email“: „sandyw@localhost.com“}]`
 
-✨: `[ {“Heiß”: “#Sandy Braun“, “Zweig”: “munich”,”Stelle”: “Web Entwickler”,
-“Rang”:“#Junior”, “#Email”: “sandyb@localhost.com”}]`
+✨: `[ {„name“: „Sandy Brown“, „branch“: „munich“, „position“: „Web Developer“,
+„rank“: „Junior“, „email“: „sandyb@localhost.com“}]`
 
-🐼: Ich fand 2 Angestellte passten eure Bitte:
+🐼: Ich habe 2 Mitarbeiter gefunden, die Ihrer Anfrage entsprechen:
 
-🐼: #Sandy Williams: #Dienstälter Web Entwickler, #Email: sandyw@localhost.com,
-Zweig: München
+🐼: Sandy Williams: Senior Webentwickler, E-Mail: sandyw@localhost.com,
+Niederlassung: München
 
-🐼: #Sandy Braun: #Junior Web Entwickler, #Email: sandyb@localhost.com, Zweig:
-München.
+🐼: Sandy Brown: Junior-Webentwickler, E-Mail: sandyb@localhost.com,
+Niederlassung: München.
 
-✨: `<end the="" flow="">`</end>
+✨: ``
