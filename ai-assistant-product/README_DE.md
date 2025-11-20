@@ -35,7 +35,7 @@ Aufgabenmanagement.
 - Portal-Support: Der KI-Assistent kennt die Axon Ivy-Dokumentation.
 - Aufgaben- und Prozessmanagement: Der KI-Assistent kann Aufgaben und Prozesse
   initiieren.
-- Suchen und Filter: Es kann Aufgaben und Fälle suchen und filtern.
+- Suchen und Filtern: Es kann Aufgaben und Fälle suchen und filtern.
 - Mehrsprachige Unterstützung: Es bietet Unterstützung in mehreren Sprachen.
 - Anpassbare Assistenten: Erstellen Sie themenbasierte und personalisierte
   Assistenten.
@@ -86,7 +86,7 @@ indem er Informationen in einem strukturierten Format organisiert. Er kann:
    den ursprünglichen KI-Assistenten durch den **Complex Demo Assistant zu
    ersetzen.**
 
-2. Öffnen Sie die AI Assistant-App auf dem Portal „ **“**.
+2. Öffnen Sie die AI Assistant-App auf dem Portal „ **“ (**).
 
 3. Jetzt können Sie den Assistenten verwenden, um ein Softwareprojekt zu planen
    und zu erstellen, indem Sie die Details des Projekts und möglicherweise die
@@ -94,7 +94,7 @@ indem er Informationen in einem strukturierten Format organisiert. Er kann:
 
 Beispiel:
 
-`Das Webentwicklungsprojekt von XYZ Lösungen zielt darauf ab, eine hochmoderne
+`Das Webentwicklungsprojekt von XYZ Solutions zielt darauf ab, eine hochmoderne
 Webanwendung zu entwickeln, die die Benutzererfahrung verbessert und die
 Wachstumsziele des Unternehmens unterstützt. Das Projekt nutzt hauptsächlich
 grundlegende Webtechnologien wie HTML und CSS und wird eine sichere, skalierbare
@@ -116,7 +116,7 @@ Fehler richtig zu behandeln.
    erstellen und den ursprünglichen KI-Assistenten durch den **Error Handling
    Demo Assistant zu ersetzen.**
 
-2. Öffnen Sie die AI Assistant-App auf dem Portal „ **“**.
+2. Öffnen Sie die AI Assistant-App auf dem Portal „ **“ (**).
 
 3. Jetzt können Sie die Demo ausführen, indem Sie Informationen zu einem
    bestimmten Raum anfordern unter **Fehlerbehandlungs-Demo-Assistent**.
@@ -185,8 +185,8 @@ Es gibt einige Einstellungen, die Sie ändern können:
   verwendet (weitere Informationen finden Sie unter [KI-Modelle
   konfigurieren](#configure-ai-models)).
 - `Avatar-`: Der Avatar des KI-Assistenten. Es werden nur die folgenden
-  Bilddateitypen akzeptiert: `*.png`, `*.jpg`, `*.jpeg`. Standardmäßig wird das
-  KI-Assistent-Logo als Avatar verwendet.
+  Bilddateiformate akzeptiert: `*.png`, `*.jpg`, `*.jpeg`. Standardmäßig wird
+  das KI-Assistenten-Logo als Avatar verwendet.
 - `Kontakt-E-Mail-`: Die Kontakt-E-Mail-Adresse, die der KI-Assistent den
   Benutzern bei Bedarf zur Verfügung stellen kann.
 - `Kontakt-Website-`: Die E-Mail-Adresse der Website, die der KI-Assistent den
@@ -204,7 +204,7 @@ Richtlinien zu gewährleisten, haben wir erweiterte Einstellungen eingeführt:
 Standardmäßig sind diese Einstellungen schreibgeschützt, um Fehler zu vermeiden,
 die zu falschen Antworten führen könnten. KI-Ingenieure können jedoch neue
 Vorlagen entwickeln, die Informationen und ethische Regeln für Assistenten
-bereitstellen. Informationen dazu finden Sie unter
+bereitstellen. Wie das geht, erfahren Sie unter
 [Assistentenvorlagen](#assistant-templates).
 
 ###### Vorlage verwenden
@@ -294,7 +294,7 @@ maßgeschneiderte Optionen, die getestet und einsatzbereit sind:
       [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
 Wenn Sie auf einen Modellpunkt in der Liste der KI-Modelle klicken, werden Sie
-zur Detailseite dieses Modells weitergeleitet. Dort finden Sie Mehr
+zur Detailseite dieses Modells weitergeleitet. Dort finden Sie weitere
 Informationen zum Modell und können den API-Schlüssel für die OpenAI-Plattform
 ändern. Ihr API-Schlüssel ist verschlüsselt und vollständig gesichert.
 
@@ -356,18 +356,18 @@ werden können.
 ![Abschnitt „Wissensdatenbank erstellen“
 erstellen](doc/img/create-knowledge-page-ui.png)
 
-Derzeit können Sie Wissensdatenbanken für zwei Typen erstellen: Portal-Support
+Derzeit können Sie Wissensdatenbanken für zwei Arten erstellen: Portal-Support
 und Sonstiges.
 
 ##### Wissensdatenbank: Portal-Support
 
-Der KI-Assistent enthält ein integriertes Tool namens „ `-Portal-Support“ (` ),
-das Fragen zum Axon Ivy-Portal beantworten kann.
+Der KI-Assistent verfügt über ein integriertes Tool namens „ `-Portal-Support“
+(` ), das Fragen zum Axon Ivy-Portal beantworten kann.
 
 Um die Wissensdatenbank für diese Funktion zu erstellen, besuchen Sie bitte die
 [Portal-Download-Seite](https://market.axonivy.com/portal) auf dem Axon Ivy
-Marktplatz und laden Sie das neueste Dokument herunter, wie in der Abbildung
-unten gezeigt.
+Market und laden Sie das neueste Dokument herunter, wie in der Abbildung unten
+gezeigt.
 
 ![Download Portal Document](doc/img/download-portal-doc.png)
 
@@ -375,8 +375,8 @@ Laden Sie dann einfach die heruntergeladene Datei hoch, wie oben unter
 [Erstellen von Wissensdatenbanken](#create-knowledge-bases) beschrieben.
 
 Nachdem Sie die ZIP-Datei hochgeladen haben, warten Sie bitte einige Minuten,
-bis das Hochladen-Fenster geschlossen wird. Dies kann einige Minuten dauern, da
-der KI-Assistent einige Zeit benötigt, um die Aufgabe auszuführen.
+bis das Upload-Fenster geschlossen wird. Dies kann einige Minuten dauern, da der
+KI-Assistent einige Zeit benötigt, um die Aufgabe zu erledigen.
 
 ##### Wissensdatenbank: Sonstiges
 
@@ -386,7 +386,7 @@ Bevor Sie weitere Wissensdatenbanken hochladen, beachten Sie bitte Folgendes:
    daher:
 
    - Der Name muss strikt der Schreibweise „ `“ (mit Bindestrichen) entsprechen
-     (z. B. „` “), da es sonst zu Fehlern kommt, wenn der KI-Assistent die
+     (z. B. „` “), da sonst Fehler auftreten, wenn der KI-Assistent die
      Wissensdatenbank erstellt.
 
    - Der Name muss eindeutig sein, da Sie sonst die vorhandene Wissensdatenbank
@@ -403,8 +403,8 @@ Bevor Sie weitere Wissensdatenbanken hochladen, beachten Sie bitte Folgendes:
    `axon-ivy-vector-store-customer-support`.
 
 Nachdem Sie die ZIP-Datei hochgeladen haben, warten Sie bitte einige Minuten,
-bis das Hochladen-Fenster geschlossen wird. Dies kann einige Minuten dauern, da
-der KI-Assistent einige Zeit benötigt, um die Aufgabe auszuführen.
+bis das Upload-Fenster geschlossen wird. Dies kann einige Minuten dauern, da der
+KI-Assistent einige Zeit benötigt, um die Aufgabe zu erledigen.
 
 ### Entwicklerhandbuch
 
@@ -509,11 +509,11 @@ oder Position leicht Informationen über Mitarbeiter finden können.
 In der Vergangenheit hätte dies die Erstellung einer Suchseite mit mehreren
 Filtern (z. B. Name, Geburtsdatum) erfordert, auf der die Mitarbeiter der
 Personalabteilung die gewünschten Informationen manuell aus einer Datentabelle
-herausgefiltert hätten.
+herausfiltern mussten.
 
 Im Zeitalter der KI wünschen Sie sich jedoch eine intelligentere Lösung. Eine
 KI-gestützte Funktion kann HR-Mitarbeitern dabei helfen, diese Aufgaben
-effizienter zu erledigen, indem sie natürliche Sprache wie „Liste aller
+effizienter zu erledigen, indem sie natürliche Sprachbefehle wie „Liste aller
 Webentwickler in Boston“ oder „Finde die Informationen zu Sandy, die diesen
 Donnerstag Geburtstag hat“ verwenden.
 
@@ -555,7 +555,7 @@ Grundlegende Eigenschaften eines AI-Flows:
   einen KI-Flow handelt, sodass der KI-Assistent es korrekt verwenden kann.
 
 - **Berechtigungen**: Definiert die Rollen oder Benutzernamen der Benutzer, die
-  zur Verwendung dieses AI-Flows berechtigt sind.
+  zur Verwendung dieses KI-Flows berechtigt sind.
 
 - **Beschreibung**: Eine detaillierte Erklärung des AI-Flows. Je ausführlicher
   die Beschreibung, desto besser kann die KI verstehen, wie der AI-Flow zu
@@ -569,13 +569,12 @@ Grundlegende Eigenschaften eines AI-Flows:
   die Anfrage des Benutzers zu bearbeiten. Verfügbare Schritttypen:
 
    - **Switch-**: Entscheidungselement, das die KI bei der Auswahl der
-     geeigneten nächsten Aktion auf der Grundlage spezifischer Bedingungen
-     leitet.
+     geeigneten nächsten Aktion auf der Grundlage bestimmter Bedingungen leitet.
 
    - **Ivy-Tool-**: Weist die KI an, bestimmte Ivy-Tools (Ivy-Callable) in ihrem
      Entscheidungsprozess zu verwenden.
 
-   - **Text-**: Zeigen oder generieren Sie textbasierten Inhalt für die
+   - **Text-**: Zeigen oder generieren Sie textbasierte Inhalte für die
      Benutzerinteraktion.
 
    - ****: Helfen Sie der KI dabei, Benutzereingaben zu verfeinern, bevor
@@ -585,7 +584,7 @@ Grundlegende Eigenschaften eines AI-Flows:
      entweder durch Übermittlung einer bestimmten Trigger-Nachricht oder durch
      Verwendung des Ergebnisses eines vorherigen Schritts. Dies ermöglicht
      nahtlose Übergänge zwischen verschiedenen Arbeitsabläufen und die
-     Möglichkeit, relevante Daten zwischen ihnen weiterzugeben.
+     Möglichkeit, relevante Daten zwischen ihnen zu übertragen.
 
 > [!TIP] Weitere Informationen zu den KI-Schritten finden Sie unter
 > [KI-Schritt](#ai-step).
@@ -597,7 +596,7 @@ Grundlegende Eigenschaften eines AI-Flows:
 
 ###### Attribute
 
-- **stepType**: Typ des Schritts. Gültige Werte:
+- **stepType**: Art des Schritts. Gültige Werte:
    - IVY_TOOL: [Ivy-Tool-Schritt](#ivy-tool-step).
    - SWITCH: [Switch-Schritt](#switch-step).
    - TEXT: [Text Schritt](#text-step).
@@ -629,19 +628,19 @@ Grundlegende Eigenschaften eines AI-Flows:
 ##### Schritt wechseln
 
 Der Schritt „ **” (Entscheidung treffen)** ist ein Entscheidungselement, das die
-KI dabei unterstützt, anhand bestimmter Bedingungen die geeignete nächste Aktion
-auszuwählen. Dabei wird eine Liste vordefinierter Fälle ausgewertet, die jeweils
-ein potenzielles Szenario darstellen, mit dem die KI konfrontiert werden könnte.
-Basierend auf dem Fall, der der aktuellen Situation entspricht, wählt die KI die
-entsprechende Aktion aus.
+KI dabei unterstützt, auf der Grundlage bestimmter Bedingungen die geeignete
+nächste Aktion auszuwählen. Er bewertet eine Liste vordefinierter Fälle, die
+jeweils ein potenzielles Szenario darstellen, mit dem die KI konfrontiert werden
+könnte. Auf der Grundlage des Falls, der der aktuellen Situation entspricht,
+wählt die KI die entsprechende Aktion aus.
 
-In der vorgegebenen Struktur untersucht die KI die Fallbeschreibungen innerhalb
-der Liste und weist die richtige Aktion zu, um weiterzumachen. Auf diese Weise
-kann die KI ihr Verhalten dynamisch an unterschiedliche Ergebnisse oder Zustände
-anpassen und so eine maßgeschneiderte Reaktion auf verschiedene Umstände
-gewährleisten.
+In der bereitgestellten Struktur untersucht die KI die Fallbeschreibungen
+innerhalb der Liste und weist die richtige Aktionsnummer zu, um fortzufahren.
+Auf diese Weise kann die KI ihr Verhalten dynamisch an unterschiedliche
+Ergebnisse oder Zustände anpassen und so eine maßgeschneiderte Reaktion auf
+verschiedene Umstände gewährleisten.
 
-- **Fälle**: Eine Liste möglicher Szenarien mit entsprechenden Aktionen.
+- **Fälle**: Eine Liste möglicher Szenarien mit entsprechenden Maßnahmen.
 
 ```json
 {
@@ -697,9 +696,9 @@ Parameter wie Erfolg, Fehlerbehandlung und benutzerdefinierte Anweisungen.
 ##### Text Schritt
 
 Der Text-Schritt „ **“** ist eine wichtige Komponente in KI-Workflows, die dazu
-dient, textbasierten Inhalt für die Benutzerinteraktion anzuzeigen oder zu
+dient, textbasierte Inhalte für die Benutzerinteraktion anzuzeigen oder zu
 generieren. Je nach Konfiguration kann der Text-Schritt feste Meldungen,
-KI-generierte Inhalte, Ergebnisse vorheriger Schritte oder sogar versteckte
+KI-generierte Inhalte, Ergebnisse früherer Schritte oder sogar versteckte
 Meldungen für die interne KI-Verarbeitung anzeigen. Diese Flexibilität
 ermöglicht es der KI, effektiv mit Benutzern zu kommunizieren und gleichzeitig
 Entscheidungsprozesse zu steuern.
@@ -746,7 +745,7 @@ Entscheidungsprozesse zu steuern.
 },
 ```
 
-**Ergebnis eines anderen Schritts anzeigen**
+**Ergebnis des anderen Schritts anzeigen**
 
 - **showResultOfStep**: Zeigt das Ergebnis eines zuvor ausgeführten Schritts an.
 
@@ -810,7 +809,7 @@ leichter zu verwenden sind.
 - **toolId**: Bezieht sich auf das Tool, das die KI als Ziel verwenden wird. Die
   KI sollte das JSON-Schema des entsprechenden Tools verwenden, um die Nachricht
   umzuformulieren. Durch die Definition dieses Attributs stellen Sie sicher,
-  dass die umformulierte Eingabe die Anforderungen des Tools erfüllt.
+  dass die umformulierte Eingabe mit den Anforderungen des Tools kompatibel ist.
     - Beispiel:
         - Benutzereingabe „Meine Krankmeldung suchen”
         - Sie haben ein Tool, um Aufgaben nach Name, Beschreibung, Priorität
@@ -835,7 +834,7 @@ leichter zu verwenden sind.
   Beispiel besteht aus:
     - **vor**: Die ursprüngliche, unstrukturierte Nachricht des Benutzers.
     - **Nach „** “: Die umformulierte Nachricht, die die KI für mehr Klarheit
-      und Aktion generieren würde.
+      und Umsetzbarkeit generieren würde.
 
 ```json
 {
@@ -1091,7 +1090,7 @@ Und dies ist der KI-Ablauf:
 ```
 
 5. Öffnen Sie die Variablendatei **Assistants.json** und fügen Sie die ID des
-   KI-Flows `Find employee information` zum Attribut `tools` Ihres
+   KI-Flows `Find employees information` zum Attribut `tools` Ihres
    KI-Assistenten hinzu, wie im Beispiel mit dem KI-Assistenten `Alex` unten
    gezeigt.
 
