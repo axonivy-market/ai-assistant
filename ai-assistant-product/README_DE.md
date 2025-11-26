@@ -125,7 +125,7 @@ Beispiel:
 
 `Ich möchte den Besprechungsraum C finden.`
 
-## Einrichtung
+## Setup
 
 1. Stellen Sie das Artefakt „ **” ai-assistant** in derselben Anwendung wie
    **Portal** bereit.
