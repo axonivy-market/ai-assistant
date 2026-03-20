@@ -1,1 +1,1 @@
-aiassistant
+aiassistant, nonstartable, dismissable, scrolltop, assitants, portalkit

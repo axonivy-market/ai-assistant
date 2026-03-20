@@ -209,7 +209,7 @@ You can delete the AI function completely from the AI Assistant by clicking the 
 
 ![Delete AI Function](doc/img/delete-ai-function.png)
 
-Please read the confirmation carefully before delete the AI function. The AI function could be using by some AI assitants, and once you delete it, the AI assistants cannot work on the functions any more, or worser, some errors may arise.
+Please read the confirmation carefully before delete the AI function. The AI function could be using by some AI assitants, and once you delete it, the AI assistant cannot work on the functions any more, or worser, some errors may arise.
 
 #### Create knowledge bases
 
@@ -487,7 +487,7 @@ The **Text Step** is a crucial component in AI workflows designed to display or 
     "stepNo": 1,
     "type": "TEXT",
     "useAI": true,
-    "customInstruction": "Use the conversation above to summarize information of the planned project in a structured format. If user didn't provide a name for the project generete the project name based on description of the project. Example: '**Project name:** ProjectA\n**Project description:** description of projectA\n**Technologies:** tech stack\n**Members:** show member information'. Then add a line to ask if need some update",
+    "customInstruction": "Use the conversation above to summarize information of the planned project in a structured format. If user didn't provide a name for the project, generate the project name based on description of the project. Example: '**Project name:** ProjectA\n**Project description:** description of projectA\n**Technologies:** tech stack\n**Members:** show member information'. Then add a line to ask if need some update",
     "onSuccess": 2
 },
 ```
@@ -656,7 +656,7 @@ The Result DTO ensures that the AI Assistant provides reliable and consistent re
 In this section, we will explain how to develop your own AI Flow using the [Real world problem](#real-world-problem) as a use case.
 
 > [!NOTE]
-> In the [Compex demo](#complex-demo), we have implemented a function to find employee information. Therefore, it is highly recommended not to use that demo in conjunction with this guide.
+> In the [Complex demo](#complex-demo), we have implemented a function to find employee information. Therefore, it is highly recommended not to use that demo in conjunction with this guide.
 
 1. Create an Ivy project that depends on the `portal-components` project
 
