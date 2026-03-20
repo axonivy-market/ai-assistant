@@ -6,7 +6,7 @@ Dialogs:
           demo:
             MeetingInvitation:
               Agenda: Agenda
-              IniviationNotice: Sie werden zu einem Kick-off-Meeting für ein Projekt eingeladen
+              InvitationNotice: Sie werden zu einem Kick-off-Meeting für ein Projekt eingeladen
               Meeting: Treffen
               Members: Mitglieder
               Proceed: Fortfahren

@@ -6,7 +6,7 @@ Dialogs:
           demo:
             MeetingInvitation:
               Agenda: Orden del día
-              IniviationNotice: Estás invitado a una reunión de lanzamiento de un proyecto.
+              InvitationNotice: Estás invitado a una reunión de lanzamiento de un proyecto.
               Meeting: Reunión
               Members: Miembros
               Proceed: Proceder

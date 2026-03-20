@@ -3,7 +3,7 @@
 The AI Assistant is a powerful tool designed to streamline your daily work within the portal. Acting as your personal assistant, it provides seamless support for a wide range of tasks, from navigating documentation to launching processes and managing tasks and cases. With the AI Assistant at your side, you can work more efficiently and effectively, freeing up valuable time for what truly matters.
 Engage in a more interactive and intuitive workflow by conversing with the assistant about your processes instead of merely executing them. This dynamic interaction enhances your experience, allowing you to explore options and gain insights as you work. With multilingual capabilities, the AI Assistant communicates effortlessly in English, German, Spanish, and more, ensuring you receive support in your preferred language.
 
-![Chat Dashboad](doc/img/chat-dashboard.png)
+![Chat Dashboard](doc/img/chat-dashboard.png)
 
 Beyond providing immediate assistance, the AI Assistant empowers you to create and manage custom models and assistants tailored to your unique needs. With the management overview feature, designing, configuring, and organizing these models is a breeze. You can craft personalized assistants, assign specific behaviors, or leverage predefined templates to guide their actions. This level of customization ensures that your AI Assistant aligns perfectly with your preferences and work style.
 Embrace the future of work with the AI Assistant, your personalized companion for enhanced productivity and seamless task management.
@@ -58,7 +58,7 @@ Example:
 
 `The XYZ Solutions Web Development Project aims to build a state-of-the-art web application that enhances user experience and supports the company's growth objectives. Mainly use basic web technologies such as HTML and CSS, the project will deliver a secure, scalable, and efficient platform that aligns with industry standards and best practices. We need 3 engineer, 1 web designer and 2 tester for it.`
 
-#### Eror Handling Demo
+#### Error Handling Demo
 
 **Use case**
 
