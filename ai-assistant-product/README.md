@@ -645,7 +645,7 @@ The Result DTO ensures that the AI Assistant provides reliable and consistent re
 
 **Attributes**
 
-| Name | Type | Decription |
+| Name | Type | Description |
 | --- | --- | --- |
 | result | String | result to show for user |
 | resultForAI | String | result for AI model |
