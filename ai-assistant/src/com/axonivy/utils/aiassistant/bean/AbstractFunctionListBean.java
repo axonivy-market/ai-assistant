@@ -59,7 +59,7 @@ public abstract class AbstractFunctionListBean implements Serializable {
     return !nonStartables.contains(function);
   }
 
-  public String generatePermisisonForDisplay(AiFunction tool) {
+  public String generatePermissionForDisplay(AiFunction tool) {
     return Optional.ofNullable(tool).map(AiFunction::getPermissions)
         .filter(permisison -> CollectionUtils.isNotEmpty(permisison))
         .isPresent()

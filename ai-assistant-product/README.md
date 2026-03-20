@@ -161,7 +161,7 @@ To apply all the changes you've made to the AI assistant details, please click t
 
 As time goes by, an AI assistant may become obsoleted and you may want to delete it and create a new AI assistant. To do that, please click the **Delete** button placed on the bottom left corner of the AI assistant details page.
 
-A confim dialog will appear, you can delete the AI assistant completely by clicking the **Remove** button on that dialog.
+A confirm dialog will appear, you can delete the AI assistant completely by clicking the **Remove** button on that dialog.
 
 ![Delete AI Assistant dialog](doc/img/assistant-details-delete.png)
 
@@ -183,7 +183,7 @@ The AI Assistant need 2 AI models to works: a GPT model, and a text embedding mo
     - GPT model: [GPT-4o mini](https://platform.openai.com/docs/models/gpt-4o-mini)
     - Text embedding model: [text-embedding-3-large](https://platform.openai.com/docs/guides/embeddings)
 
-When you clicking on a model item in the AI Models list, you will be redirected to the details page of that model. There you can find more model informations and change the API Key to the OpenAI platform. Your API Key is encrypted and completely secured.
+When you clicking on a model item in the AI Models list, you will be redirected to the details page of that model. There you can find more model information and change the API Key to the OpenAI platform. Your API Key is encrypted and completely secured.
 
 Furthermore, you can test to connection to OpenAI platform by clicking the button **Test Connection**. If something went wrong, we will show the details error
 
@@ -197,7 +197,7 @@ All AI functions that the logged in user can access are listed in the **AI Funct
 
 - `Ivy Tool` function: disabled by default because it's only be used by `Ivy Flow` functions
 - `Ivy Flow` function: disabled when system detected that there could be an error when running the flow. For example: a required Ivy callable process could not be found
-- `Knowkedge Base` function: disabled when the system cannot find the corresponding vector store
+- `Knowledge Base` function: disabled when the system cannot find the corresponding vector store
 
 ![AI Function list](doc/img/all-ai-functions-list.png)
 
@@ -571,7 +571,7 @@ The **Rephrase step** is designed to help AI refine user input before executing 
     "customInstruction": "If in the message has an abstract date such as today, tomorrow,..., please format it. Example: today = 31, July 2024",
     "examples": [
         {
-            "before": "find leve request process",
+            "before": "find leave request process",
             "after": "find process that help creating leave request"
         },
         {
@@ -662,7 +662,7 @@ In this section, we will explain how to develop your own AI Flow using the [Real
 
 2. Create an Ivy Callable process with input parameters representing the criteria for finding employees with the signature `findEmployeesInfo(String,String,String,String)`
 
-| Name | Type | Decription |
+| Name | Type | Description |
 | --- | --- | --- |
 | `name` | String | Name of the employee |
 | `birthday` | String | Employee's date of birth |
@@ -671,7 +671,7 @@ In this section, we will explain how to develop your own AI Flow using the [Real
 
 The output result of the Ivy Callable process must be an object has name `result`, and type [AI Result DTO](#ai-result-dto).
 
-| Name | Type | Decription |
+| Name | Type | Description |
 | --- | --- | --- |
 | `result` | com.axonivy.portal.components.dto.AiResultDTO | Result for the AI Assistant |
 

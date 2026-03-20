@@ -59,9 +59,9 @@
     </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Permissions')}" width="15%"
       rendered="#{managedBean.assistant eq null}"
-      sortable="true" sortBy="#{managedBean.generatePermisisonForDisplay(function)}"
-      filterable="true" filterMatchMode="contains" filterBy="#{managedBean.generatePermisisonForDisplay(function)}">
-      <h:outputText value="#{managedBean.generatePermisisonForDisplay(function)}" />
+      sortable="true" sortBy="#{managedBean.generatePermissionForDisplay(function)}"
+      filterable="true" filterMatchMode="contains" filterBy="#{managedBean.generatePermissionForDisplay(function)}">
+      <h:outputText value="#{managedBean.generatePermissionForDisplay(function)}" />
     </p:column>
     <p:column headerText="#{ivy.cms.co('/Labels/common/Description')}"
       sortable="true" sortBy="#{function.description}"
@@ -104,7 +104,7 @@
           <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Permissions')}" />
         </div>
         <div class="ui-g-10">
-          <h:outputText value="#{managedBean.generatePermisisonForDisplay(function)}" />
+          <h:outputText value="#{managedBean.generatePermissionForDisplay(function)}" />
         </div>
         <div class="ui-g-2">
           <h:outputText styleClass="assistant-label" value="#{ivy.cms.co('/Labels/common/Description')}" />
