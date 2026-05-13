@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
   "id" : "1919CEDEF7828B77",
   "config" : {
     "data" : "com.axonivy.utils.aiassistant.demo.Data"
@@ -92,7 +92,9 @@
         "triggerable" : true,
         "task" : {
           "responsible" : {
-            "activator" : "SYSTEM"
+            "roles" : [
+              "SYSTEM"
+            ]
           }
         }
       },
@@ -188,7 +190,7 @@
           "description" : "<%= in.taskDescription %>",
           "responsible" : {
             "type" : "USER_FROM_ATTRIBUTE",
-            "activator" : "in.employeeName"
+            "script" : "in.employeeName"
           },
           "code" : [
             "import ch.ivyteam.ivy.security.IUser;",
