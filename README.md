@@ -1,5 +1,10 @@
 # AI Assistant
 
+> [!CAUTION]
+> ## Deprecated
+> These connectors are deprecated and will no longer be maintained or supported. It will be removed in Release 13.
+>
+
 [![CI Build](https://github.com/axonivy-market/ai-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/ai-assistant/actions/workflows/ci.yml)
 
 The AI Assistant is a powerful tool designed to streamline your daily work within the portal. Acting as your personal assistant, it provides seamless support for a wide range of tasks, from navigating documentation to launching processes and managing tasks and cases. With the AI Assistant at your side, you can work more efficiently and effectively, freeing up valuable time for what truly matters.
